@@ -1,2 +1,2 @@
-# BearWitness
+# Bear Witness
 game!
