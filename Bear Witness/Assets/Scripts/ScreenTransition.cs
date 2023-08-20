@@ -8,6 +8,7 @@ public class ScreenTransition : MonoBehaviour
     {
         if (collision.collider.tag == "Player")
         {
+            collision.collider.GetComponent<PlayerController>().Freeze();
             FindObjectOfType<LevelLoader>().LoadNextLevel(sceneDestination);
         }
     }

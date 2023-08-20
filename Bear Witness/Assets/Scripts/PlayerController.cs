@@ -23,8 +23,13 @@ using UnityEngine;
         private bool stayCrouched;
         public Transform crouchCheck;
 
+        public Transform attackPoint;
+
         public BoxCollider2D standbox;
         public BoxCollider2D crouchbox;
+
+        public int maxHealth = 5;
+        private int currentHealth = 5;
 
         private Rigidbody2D rigidbody;
         private Animator animator;
@@ -38,6 +43,8 @@ using UnityEngine;
             rigidbody = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
             gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+            maxHealth = gameManager.playerMaxHealth;
+            currentHealth = gameManager.playerCurrentHealth;
         }
 
     private void Awake()
@@ -138,6 +145,12 @@ using UnityEngine;
                     }
                 }
             }
+            if (Input.GetMouseButton(0))
+            {
+                Debug.Log("attack");
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPoint.transform.position, 0.5f, 6);
+                Debug.Log("hit " + colliders[0].name);
+            }
             if (facingRight == false && moveInput > 0)
             {
                 Flip();
@@ -212,4 +225,20 @@ using UnityEngine;
                 deathState = false;
             }
         }
+    public void Damage(int damage, float sourcePositionX)
+    {
+        Debug.Log("YEEEEEOOUUUUCHHHH!");
+        FindObjectOfType<GameUI_Controller>().DecreaseHP(damage);
+        if (currentHealth <= 0)
+        {
+            Perish();
+            return;
+        }
+        float impactSide = Mathf.Sign(sourcePositionX - transform.position.x);
+        rigidbody.AddForce(transform.up * 3 + transform.right * -1 * (impactSide), ForceMode2D.Impulse);
+    }
+    public void Perish()
+    {
+        Debug.Log("Perished");
+    }
     }

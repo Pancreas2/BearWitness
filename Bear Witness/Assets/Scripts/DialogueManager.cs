@@ -11,6 +11,9 @@ public class DialogueManager : MonoBehaviour
     public Image faceDisplay;
     public Animator animator;
 
+    private bool dialogueRunning = false;
+    private int frameDelay = 8;
+
     private Queue<string> sentences;
     private Queue<string> names;
     private Queue<Sprite> faces;
@@ -22,28 +25,45 @@ public class DialogueManager : MonoBehaviour
         faces = new Queue<Sprite>();
     }
 
+    void Update()
+    {
+        if (frameDelay > 0)
+        {
+            frameDelay -= 1;
+        }
+        else if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S)) && dialogueRunning)
+        {
+            DisplayNextSentence();
+        }
+    }
+
     public void StartDialogue(Dialogue dialogue)
     {
-        FindObjectOfType<PlayerController>().Freeze();
-        animator.SetBool("IsOpen", true);
-
-        sentences.Clear();
-        names.Clear();
-        faces.Clear();
-
-        foreach (string sentence in dialogue.sentences) {
-            sentences.Enqueue(sentence);
-        }
-        foreach (string name in dialogue.names)
+        if (!dialogueRunning)
         {
-            names.Enqueue(name);
-        }
-        foreach (Sprite face in dialogue.faces)
-        {
-            faces.Enqueue(face);
-        }
+            FindObjectOfType<PlayerController>().Freeze();
+            animator.SetBool("IsOpen", true);
 
-        DisplayNextSentence();
+            sentences.Clear();
+            names.Clear();
+            faces.Clear();
+
+            foreach (string sentence in dialogue.sentences)
+            {
+                sentences.Enqueue(sentence);
+            }
+            foreach (string name in dialogue.names)
+            {
+                names.Enqueue(name);
+            }
+            foreach (Sprite face in dialogue.faces)
+            {
+                faces.Enqueue(face);
+            }
+
+            DisplayNextSentence();
+            dialogueRunning = true;
+        }
     }
 
     public void DisplayNextSentence()
@@ -74,7 +94,14 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        FindObjectOfType<PlayerController>().Unfreeze();
+        StartCoroutine(DialogueEndDelay());
         animator.SetBool("IsOpen", false);
+    }
+
+    IEnumerator DialogueEndDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        dialogueRunning = false;
+        FindObjectOfType<PlayerController>().Unfreeze();
     }
 }

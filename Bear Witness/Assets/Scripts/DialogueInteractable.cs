@@ -9,7 +9,6 @@ public class DialogueInteractable : MonoBehaviour
     {
         if (collision.collider.tag == "Player" && Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)) 
         {
-            Debug.Log("start");
             dialogueTrigger.TriggerDialogue();
         }
     }

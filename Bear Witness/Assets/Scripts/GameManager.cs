@@ -21,5 +21,7 @@ using UnityEngine.UI;
         }
 
         public string previousLevel = "Start";
+        public int playerMaxHealth = 5;
+        public int playerCurrentHealth = 5;
     }
 
