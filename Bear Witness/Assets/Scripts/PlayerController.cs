@@ -260,6 +260,19 @@ public class PlayerController : MonoBehaviour
 		attackTime = Time.time + 0.2f;
 		if (useSpecial) attackTime += 0.2f;
 		animator.SetTrigger("attack");
+		if (useSpecial)
+        {
+			if (!(gameManager.currentItem.name != "Ice Pick"))
+            {
+				animator.SetInteger("attackType", 2);
+			} else
+            {
+				animator.SetInteger("attackType", 1);
+			}
+        } else
+        {
+			animator.SetInteger("attackType", 0);
+        }
 		attacking = !useSpecial;
 		specialing = useSpecial;
 	}
@@ -270,7 +283,6 @@ public class PlayerController : MonoBehaviour
 		{
 			if (gameManager.currentItem.name == "Ice Pick")
 			{
-				animator.SetInteger("attackType", 1);
 				Vector3 boxAttackPoint = m_AttackPoint.position + Vector3.up * 0.4f;
 				Vector2 boxRange = Vector2.down * 0.7f + Vector2.right * attackRange;
 				Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(boxAttackPoint, boxRange, enemyLayers);
@@ -287,14 +299,10 @@ public class PlayerController : MonoBehaviour
 					m_HasAirAttack = true;
 					attackTime = 0f;
 				}
-			} else
-            {
-				Debug.Log("no special");
-            }
+			}
 		}
 		else
 		{
-			animator.SetInteger("attackType", 0);
 			Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(m_AttackPoint.position, attackRange, enemyLayers);
 			foreach (Collider2D enemy in hitEnemies)
 			{
