@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -12,13 +13,14 @@ public class DialogueManager : MonoBehaviour
     public Animator animator;
 
     private bool dialogueRunning = false;
-    private int frameDelay = 8;
+    private int frameDelay = 20;
 
     private Queue<string> sentences;
     private Queue<string> names;
     private Queue<Sprite> faces;
-    // Start is called before the first frame update
-    void Start()
+
+    private UnityEvent DialogueEndEvent;
+    void Awake()
     {
         sentences = new Queue<string>();
         names = new Queue<string>();
@@ -39,14 +41,17 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        frameDelay = 20;
         if (!dialogueRunning)
         {
-            FindObjectOfType<PlayerController>().Freeze();
+            FindObjectOfType<PlayerMovement>().frozen = true;
             animator.SetBool("IsOpen", true);
 
             sentences.Clear();
             names.Clear();
             faces.Clear();
+
+            DialogueEndEvent = dialogue.DialogueEndEvent;
 
             foreach (string sentence in dialogue.sentences)
             {
@@ -94,6 +99,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
+        DialogueEndEvent.Invoke();
         StartCoroutine(DialogueEndDelay());
         animator.SetBool("IsOpen", false);
     }
@@ -102,6 +108,6 @@ public class DialogueManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         dialogueRunning = false;
-        FindObjectOfType<PlayerController>().Unfreeze();
+        FindObjectOfType<PlayerMovement>().frozen = false;
     }
 }

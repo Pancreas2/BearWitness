@@ -14,14 +14,18 @@ public class GameUI_Controller : MonoBehaviour
     public Sprite fullIcon;
     public Sprite bonusIcon;
     private Vector3 hpBasePos = Vector3.up * 185 + Vector3.left * 275;
+
+    public Image toolSlot;
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
         maxHealth = gameManager.playerMaxHealth;
         currentHealth = gameManager.playerCurrentHealth;
+
     }
     void Start()
     {
+        if (gameManager.currentItem != null) DisplayHeldItem(gameManager.currentItem);
         hpDisplay = new Image[maxHealth];
         for (int i = 0; i < maxHealth; i++)
         {
@@ -34,7 +38,7 @@ public class GameUI_Controller : MonoBehaviour
 
     public void DecreaseHP(int damage)
     {
-        for (int i = currentHealth; i > currentHealth - damage; i--)
+        for (int i = gameManager.playerCurrentHealth; i > gameManager.playerCurrentHealth - damage; i--)
         {
             hpDisplay[i - 1].sprite = emptyIcon;
         }
@@ -61,5 +65,10 @@ public class GameUI_Controller : MonoBehaviour
             hpDisplay.SetValue(newHPImg.GetComponent<Image>(), i);
             hpDisplay[i].sprite = bonusIcon;
         }
+    }
+
+    public void DisplayHeldItem(CollectableItem item)
+    {
+        if (item.icon != null) toolSlot.sprite = item.icon;
     }
 }

@@ -1,244 +1,314 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-    public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour
+{
+	[SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
+	[SerializeField] private float m_CrouchSpeed = 1.5f;          // Amount of maxSpeed applied to rolling movement. 1 = 100%
+	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
+	[SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
+	[SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
+	[SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
+	[SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
+	[SerializeField] private Transform m_AttackPoint; 
+	[SerializeField] private Collider2D m_CrouchDisableCollider;     // A collider that will be disabled when rolling
+	[SerializeField] private Animator animator;
+
+	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
+	private bool m_Grounded;            // Whether or not the player is grounded.
+	const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
+	private Rigidbody2D m_Rigidbody2D;
+	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+	private Vector3 m_Velocity = Vector3.zero;
+
+	private GameManager gameManager;
+	private float attackTime = 0f;
+	public float attackRange = 0.4f;
+	public LayerMask enemyLayers;
+	private bool attacking = false;
+	private bool specialing = false;
+	private bool m_HasAirAttack = true;
+
+	private bool m_wallClingState = false;
+
+	[Header("Events")]
+	[Space]
+
+	public UnityEvent OnLandEvent;
+
+	[System.Serializable]
+	public class BoolEvent : UnityEvent<bool> { }
+
+	public BoolEvent OnCrouchEvent;
+	private bool m_wasCrouching = false;
+
+	private void Awake()
+	{
+		m_Rigidbody2D = GetComponent<Rigidbody2D>();
+
+		if (OnLandEvent == null)
+			OnLandEvent = new UnityEvent();
+
+		if (OnCrouchEvent == null)
+			OnCrouchEvent = new BoolEvent();
+	}
+
+    private void Start()
     {
-        private bool isFrozen = false;
-        public string entersFromRoom;
-
-        public float movingSpeed;
-        public float jumpForce;
-        public float leapForce;
-        public float boundForce;
-        private float moveInput;
-
-        private bool facingRight = true;
-        [HideInInspector]
-        public bool deathState = false;
-
-        private bool isGrounded;
-        public Transform groundCheck;
-
-        private bool stayCrouched;
-        public Transform crouchCheck;
-
-        public Transform attackPoint;
-
-        public BoxCollider2D standbox;
-        public BoxCollider2D crouchbox;
-
-        public int maxHealth = 5;
-        private int currentHealth = 5;
-
-        private Rigidbody2D rigidbody;
-        private Animator animator;
-        private int setPlayerState = 0;
-        private bool isRunning = false;
-        private bool isRolling = false;
-        private GameManager gameManager;
-
-        void Start()
-        {
-            rigidbody = GetComponent<Rigidbody2D>();
-            animator = GetComponent<Animator>();
-            gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-            maxHealth = gameManager.playerMaxHealth;
-            currentHealth = gameManager.playerCurrentHealth;
-        }
-
-    private void Awake()
-    {
-        if (entersFromRoom != FindObjectOfType<GameManager>().previousLevel)
-        {
-            Destroy(gameObject);
-        }
+		gameManager = FindFirstObjectByType<GameManager>();
     }
 
     private void FixedUpdate()
-        {
-            CheckGround();
-        }
+	{
+		bool wasGrounded = m_Grounded;
+		m_Grounded = false;
 
-        void Update()
-        {
-        if (!isFrozen)
-        {
-            if (stayCrouched)
-            {
-                RollState();
-            }
-            if (Input.GetButton("Horizontal"))
-            {
-                moveInput = Input.GetAxis("Horizontal");
-                Vector3 direction = transform.right * moveInput;
-                if (Input.GetKey(KeyCode.LeftShift) && isGrounded)
-                {
-                    transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, movingSpeed * Time.deltaTime * 2);
-                    if (setPlayerState < 7 || setPlayerState == 6 && isGrounded)
-                    {
-                        setPlayerState = 2;
-                    }
-                    isRunning = true;
-                }
-                else if ((isRunning || isRolling) && isGrounded)
-                {
-                    RollState();
-                    transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, movingSpeed * Time.deltaTime * 1.5f);
-                }
-                else
-                {
-                    transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, movingSpeed * Time.deltaTime);
-                    if (setPlayerState < 7 || setPlayerState == 6 && isGrounded)
-                    {
-                        setPlayerState = 1;
-                    }
-                }
-            }
-            else
-            {
-                if (isGrounded && !stayCrouched && setPlayerState < 7) setPlayerState = 0; // Turn on idle animation
-                isRunning = false;
-                isRolling = false;
-            }
-            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-            {
-                if (isRolling)
-                {
-                    rigidbody.AddForce((transform.up + transform.right * moveInput / 1.5f) * boundForce, ForceMode2D.Impulse);
-                    setPlayerState = 7;
-                }
-                else if (isRunning)
-                {
-                    rigidbody.AddForce(transform.up * leapForce / 2 + transform.right * moveInput * leapForce, ForceMode2D.Impulse);
-                    setPlayerState = 8;
-                }
-                else
-                {
-                    rigidbody.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
-                }
-            }
-            if (!isGrounded)
-            {
-                isRunning = false;
-                isRolling = false;
-                if (stayCrouched)
-                {
-                    CheckCeiling();
-                }
-                if (rigidbody.velocity.y > 0)
-                {
-                    if (setPlayerState < 7)
-                    {
-                        setPlayerState = 3; // Turn on jump animation
-                    }
-                }
-                else
-                {
-                    if (setPlayerState == 6 || setPlayerState == 8)
-                    {
-                        setPlayerState = 6; // turn on leap fall animation
-                    }
-                    else
-                    {
-                        setPlayerState = 4; // Turn on fall animation
-                    }
-                }
-            }
-            if (Input.GetMouseButton(0))
-            {
-                Debug.Log("attack");
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(attackPoint.transform.position, 0.5f, 6);
-                Debug.Log("hit " + colliders[0].name);
-            }
-            if (facingRight == false && moveInput > 0)
-            {
-                Flip();
-            }
-            else if (facingRight == true && moveInput < 0)
-            {
-                Flip();
-            }
-            if (!isRolling && !stayCrouched)
-            {
-                standbox.enabled = true;
-                crouchbox.enabled = false;
-            }
-            animator.SetInteger("playerState", setPlayerState);
-        }
-        }
+		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
+		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+		for (int i = 0; i < colliders.Length; i++)
+		{
+			if (colliders[i].gameObject != gameObject)
+			{
+				m_Grounded = true;
+				if (!wasGrounded)
+				{
+					m_HasAirAttack = true;
+					OnLandEvent.Invoke();
+				}
+			}
+		}
+	}
 
-        private void Flip()
-        {
-            facingRight = !facingRight;
-            Vector3 Scaler = transform.localScale;
-            Scaler.x *= -1;
-            transform.localScale = Scaler;
-        }
-
-        private void CheckGround()
-        {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(groundCheck.transform.position, 0.2f);
-            isGrounded = colliders.Length > 1;
-        }
-
-        private void CheckCeiling()
-        {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(crouchCheck.transform.position, 0.2f);
-            stayCrouched = colliders.Length > 1;
-        }
-
-        private void RollState()
-        {
-            crouchbox.enabled = true;
-            standbox.enabled = false;
-            isRolling = true;
-            CheckCeiling();
-            if (setPlayerState != 7)
-            {
-                setPlayerState = 5; // Turn on roll animation
-            }
-        }
-
-        public void Freeze()
-        {
-            isFrozen = true;
-            setPlayerState = 0;
-            animator.SetBool("dialogueEscape", true);
-            isRolling = false;
-            isRunning = false;
-        }
-        public void Unfreeze()
-        {
-            animator.SetBool("dialogueEscape", false);
-            isFrozen = false;
-        }
-
-        private void OnCollisionEnter2D(Collision2D other)
-        {
-            if (other.gameObject.tag == "Enemy")
-            {
-                deathState = true; // Say to GameManager that player is dead
-            }
-            else
-            {
-                deathState = false;
-            }
-        }
-    public void Damage(int damage, float sourcePositionX)
+    private void Update()
     {
-        Debug.Log("YEEEEEOOUUUUCHHHH!");
-        FindObjectOfType<GameUI_Controller>().DecreaseHP(damage);
-        if (currentHealth <= 0)
+        if (!gameManager) gameManager = FindObjectOfType<GameManager>();
+	}
+
+
+    public void Move(float move, bool jump, bool run, bool roll)
+	{
+		animator.SetBool("run", run);
+		// If rolling, check to see if the character can stand up
+		if (!roll)
+		{
+			// If the character has a ceiling preventing them from standing up, keep them rolling
+			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
+			{
+				roll = true;
+			}
+		}
+
+		animator.SetBool("roll", roll);
+
+		//only control the player if grounded or airControl is turned on
+		if ((m_Grounded || m_AirControl))
+		{
+			// If rolling
+			if (roll)
+			{
+				if (!m_wasCrouching)
+				{
+					m_wasCrouching = true;
+					OnCrouchEvent.Invoke(true);
+				}
+
+				// Reduce the speed by the rollSpeed multiplier
+				move *= m_CrouchSpeed;
+
+				// Disable one of the colliders when rolling
+				if (m_CrouchDisableCollider != null)
+					m_CrouchDisableCollider.enabled = false;
+			}
+			else
+			{
+				// Enable the collider when not rolling
+				if (m_CrouchDisableCollider != null)
+					m_CrouchDisableCollider.enabled = true;
+
+				if (m_wasCrouching)
+				{
+					m_wasCrouching = false;
+					OnCrouchEvent.Invoke(false);
+				}
+			}
+
+			Vector3 targetVelocity;
+
+			if (attacking || specialing)
+            {
+				if (m_HasAirAttack)
+                {
+					// Move the character by finding the target velocity
+					targetVelocity = Vector2.zero;
+				} else
+                {
+					// Move the character by finding the target velocity
+					targetVelocity = new Vector2(0f, m_Rigidbody2D.velocity.y);
+				}
+			} else
+            {
+				// Move the character by finding the target velocity
+				targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
+			}
+
+			if (!m_wallClingState)
+            {
+				// And then smoothing it out and applying it to the character
+				m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+			} else if (m_Rigidbody2D.IsAwake())
+            {
+				m_Rigidbody2D.Sleep();
+            } 
+
+			animator.SetInteger("xSpeed", Mathf.RoundToInt(Mathf.Abs(m_Rigidbody2D.velocity.x)));
+			animator.SetFloat("ySpeed", m_Rigidbody2D.velocity.y);
+
+			// If the input is moving the player right and the player is facing left...
+			if (move > 0 && !m_FacingRight)
+			{
+				// ... flip the player.
+				Flip();
+			}
+			// Otherwise if the input is moving the player left and the player is facing right...
+			else if (move < 0 && m_FacingRight)
+			{
+				// ... flip the player.
+				Flip();
+			}
+		}
+
+
+		if (attacking || specialing)
+		{
+			if (attackTime >= Time.time)
+			{
+				AttackHitboxes(specialing);
+			}
+			else
+			{
+				attacking = false;
+				specialing = false;
+				if (!m_Grounded)
+                {
+					m_HasAirAttack = false;
+				}
+			}
+		}
+
+		// If the player should jump...
+		if (m_Grounded && jump)
+		{
+			if (roll)
+			{
+				// bound
+				m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce * 1.2f));
+			} else if (run)
+            {
+				// leap
+				m_Rigidbody2D.AddForce(new Vector2(10f * move, m_JumpForce / 1.5f));
+			} else
+            {
+				// jump
+				m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+			}
+			m_Grounded = false;
+		} else if (m_wallClingState && jump)
         {
-            Perish();
-            return;
-        }
-        float impactSide = Mathf.Sign(sourcePositionX - transform.position.x);
-        rigidbody.AddForce(transform.up * 3 + transform.right * -1 * (impactSide), ForceMode2D.Impulse);
-    }
-    public void Perish()
+			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce / 1.2f));
+			m_Rigidbody2D.WakeUp();
+			m_wallClingState = false;
+		}
+		animator.SetBool("grounded", m_Grounded);
+		animator.SetBool("wallCling", m_wallClingState);
+	}
+
+
+	private void Flip()
+	{
+		// Switch the way the player is labelled as facing.
+		m_FacingRight = !m_FacingRight;
+		if (m_wallClingState)
+		{
+			m_Rigidbody2D.WakeUp();
+			m_wallClingState = false;
+		}
+
+		// Multiply the player's x local scale by -1.
+		Vector3 theScale = transform.localScale;
+		theScale.x *= -1;
+		transform.localScale = theScale;
+	}
+
+	public void Damage(int damage, float sourcePositionX)
+	{
+		FindObjectOfType<GameUI_Controller>().DecreaseHP(damage);
+		if (gameManager.playerCurrentHealth <= 0)
+		{
+			Perish();
+			return;
+		}
+		float impactSide = Mathf.Sign(sourcePositionX - transform.position.x);
+		m_Rigidbody2D.AddForce(transform.up * 3f + transform.right * -10f * (impactSide), ForceMode2D.Impulse);
+	}
+	public void Perish()
+	{
+		Debug.Log("Perished");
+	}
+	public void Attack(bool useSpecial)
+	{
+		attackTime = Time.time + 0.2f;
+		if (useSpecial) attackTime += 0.2f;
+		animator.SetTrigger("attack");
+		attacking = !useSpecial;
+		specialing = useSpecial;
+	}
+
+	private void AttackHitboxes(bool useSpecial)
     {
-        Debug.Log("Perished");
-    }
-    }
+		if (useSpecial)
+		{
+			if (gameManager.currentItem.name == "Ice Pick")
+			{
+				animator.SetInteger("attackType", 1);
+				Vector3 boxAttackPoint = m_AttackPoint.position + Vector3.up * 0.4f;
+				Vector2 boxRange = Vector2.down * 0.7f + Vector2.right * attackRange;
+				Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(boxAttackPoint, boxRange, enemyLayers);
+				Collider2D[] hitWall = Physics2D.OverlapBoxAll(boxAttackPoint, boxRange, 0, m_WhatIsGround);
+				foreach (Collider2D enemy in hitEnemies)
+				{
+					enemy.TryGetComponent(out Breakable_Wall wall);
+					if (wall) wall.Damage(2);
+				}
+				if (hitWall.Length > 0 && !m_Grounded)
+				{
+					m_Rigidbody2D.Sleep();
+					m_wallClingState = true;
+					m_HasAirAttack = true;
+					attackTime = 0f;
+				}
+			} else
+            {
+				Debug.Log("no special");
+            }
+		}
+		else
+		{
+			animator.SetInteger("attackType", 0);
+			Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(m_AttackPoint.position, attackRange, enemyLayers);
+			foreach (Collider2D enemy in hitEnemies)
+			{
+				enemy.TryGetComponent(out Breakable_Wall wall);
+				if (wall) wall.Damage(1);
+			}
+		}
+	}
+
+	private void OnDrawGizmosSelected()
+	{
+		if (m_AttackPoint != null)
+		{
+			Gizmos.DrawWireSphere(m_AttackPoint.position, attackRange);
+		}
+	}
+}
