@@ -24,9 +24,16 @@ public class CutsceneTrigger : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if (triggerOnColliderEnter && collision.collider.CompareTag("Player"))
+        {
+            if (!gameManager.playedCutscenes.Contains(cutscene_ID))
+            {
+                Debug.Log("debug.hog");
+                OnCutsceneStart.Invoke();
+                gameManager.playedCutscenes.Add(cutscene_ID);
+            }
+        }
     }
 }

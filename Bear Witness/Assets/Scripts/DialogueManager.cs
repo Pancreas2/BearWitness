@@ -44,7 +44,6 @@ public class DialogueManager : MonoBehaviour
         frameDelay = 20;
         if (!dialogueRunning)
         {
-            FindObjectOfType<PlayerMovement>().frozen = true;
             animator.SetBool("IsOpen", true);
 
             sentences.Clear();
@@ -99,7 +98,6 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        DialogueEndEvent.Invoke();
         StartCoroutine(DialogueEndDelay());
         animator.SetBool("IsOpen", false);
     }
@@ -109,5 +107,6 @@ public class DialogueManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         dialogueRunning = false;
         FindObjectOfType<PlayerMovement>().frozen = false;
+        DialogueEndEvent.Invoke();
     }
 }

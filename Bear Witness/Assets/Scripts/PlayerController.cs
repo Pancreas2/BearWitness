@@ -259,7 +259,6 @@ public class PlayerController : MonoBehaviour
 	{
 		attackTime = Time.time + 0.2f;
 		if (useSpecial) attackTime += 0.2f;
-		animator.SetTrigger("attack");
 		if (useSpecial)
         {
 			if (!(gameManager.currentItem.name != "Ice Pick"))
@@ -273,6 +272,7 @@ public class PlayerController : MonoBehaviour
         {
 			animator.SetInteger("attackType", 0);
         }
+		animator.SetTrigger("attack");
 		attacking = !useSpecial;
 		specialing = useSpecial;
 	}

@@ -47,6 +47,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(destination);
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public string previousLevel = "Start";
         public int playerMaxHealth = 5;
         public int playerCurrentHealth = 5;

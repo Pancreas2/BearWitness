@@ -13,9 +13,24 @@ public class PlayerMovement : MonoBehaviour
     bool roll = false;
     bool special = false;
     public bool frozen = false;
+    bool wasFrozen = false;
     bool attacking = false;
     float attackRate = 2f;
     float attackDelay = 0;
+    public float moveTime = 0f;
+
+    public void DialogueMove(float distance)
+    {
+        float hMove = Mathf.Abs(distance);
+        float time = distance / moveSpeed;
+        horizontalMove = hMove * moveSpeed;
+        moveTime = Time.time + time;
+    }
+
+    public void Perish()
+    {
+        Debug.Log("Perished");
+    }
 
     // Update is called once per frame
     void Update()
@@ -62,6 +77,21 @@ public class PlayerMovement : MonoBehaviour
                     run = false;
                     attackDelay = Time.time + (1f / attackRate);
                 }
+            }
+            wasFrozen = false;
+        } else if (!wasFrozen)
+        {
+            wasFrozen = true;
+            horizontalMove = 0;
+            run = false;
+            roll = false;
+            attacking = false;
+            jump = false;
+        } else
+        {
+            if (moveTime <= Time.time)
+            {
+                horizontalMove = 0f;
             }
         }
     }

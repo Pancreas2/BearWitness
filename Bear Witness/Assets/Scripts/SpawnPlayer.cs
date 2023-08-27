@@ -6,12 +6,13 @@ public class SpawnPlayer : MonoBehaviour
 {
     public string entersFromRoom;
     public Vector2 forceOnSpawn = Vector2.zero;
+    public bool spawnOnLoad = true;
     private void Start()
     {
         if (entersFromRoom != FindFirstObjectByType<GameManager>().previousLevel)
         {
             Destroy(gameObject);
-        } else
+        } else if (spawnOnLoad)
         {
             Spawn();
         }

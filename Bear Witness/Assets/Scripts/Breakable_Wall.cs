@@ -29,22 +29,25 @@ public class Breakable_Wall : MonoBehaviour
     {
         if (Time.time >= invTime || skipInvTime)
         {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("animation_done"))
+            {
+                if (wallState == 2)
+                {
+                    Destroy(stateOne);
+                }
+                else if (wallState == 1)
+                {
+                    Destroy(stateTwo);
+                }
+                if (currentHealth <= 0)
+                {
+                    Die();
+                }
+            }
             animator.SetTrigger("Hit");
             currentHealth -= damage;
             wallState = Mathf.CeilToInt(currentHealth * 3 / maxHealth);
-            if (wallState == 2)
-            {
-                Destroy(stateOne);
-            }
-            else if (wallState == 1)
-            {
-                Destroy(stateTwo);
-            }
-            if (currentHealth <= 0)
-            {
-                Die();
-            }
-            invTime = Time.time + 0.5f;
+            invTime = Time.time + 1f;
         }
     }
     public void Die()
