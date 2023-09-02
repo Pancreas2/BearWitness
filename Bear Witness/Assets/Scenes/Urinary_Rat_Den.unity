@@ -541,6 +541,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
       propertyPath: dialogue.faces.Array.data[0]
       value: 
       objectReference: {fileID: 21300000, guid: e7bec980d0b02104994ee1450b7f7e99, type: 3}
@@ -579,6 +583,22 @@ PrefabInstance:
     - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
       propertyPath: dialogue.sentences.Array.data[2]
       value: ...
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[0].face
+      value: 
+      objectReference: {fileID: 21300000, guid: b7452261b74abd34cac3883054444585, type: 3}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[0].name
+      value: Piss Rat
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[0].condition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[0].sentenceText
+      value: ee hee hee
       objectReference: {fileID: 0}
     - target: {fileID: 8906276247966024263, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
       propertyPath: m_FlipX

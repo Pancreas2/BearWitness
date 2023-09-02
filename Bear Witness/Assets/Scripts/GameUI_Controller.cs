@@ -31,7 +31,6 @@ public class GameUI_Controller : MonoBehaviour
             GameObject newHPImg = Instantiate(hpimg);
             newHPImg.transform.parent = gameObject.transform;
             newHPImg.transform.SetLocalPositionAndRotation((hpBasePos + Vector3.right * i * 50), Quaternion.identity);
-            Debug.Log("created hpimg at " + (hpBasePos + Vector3.right * i * 50).ToString());
             if (currentHealth <= i)
             {
                 newHPImg.GetComponent<Image>().sprite = emptyIcon;

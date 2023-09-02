@@ -31,6 +31,9 @@ public class PlayerController : MonoBehaviour
 
 	private bool m_wallClingState = false;
 
+	public bool inWater = false;
+	[SerializeField] private LayerMask m_WhatIsWater;
+
 	[Header("Events")]
 	[Space]
 
@@ -78,6 +81,8 @@ public class PlayerController : MonoBehaviour
 				}
 			}
 		}
+
+		CheckWater();
 	}
 
     private void Update()
@@ -85,6 +90,36 @@ public class PlayerController : MonoBehaviour
         if (!gameManager) gameManager = FindObjectOfType<GameManager>();
 	}
 
+	public void Swim(float hmove, float vmove, bool jump)
+    {
+		bool atSurface = CheckAtSurface();
+		Vector2 targetVelocity = new Vector2(hmove * 10f, vmove * 10f);
+		if (atSurface)
+        {
+			targetVelocity.y = Mathf.Min(targetVelocity.y, 0f);
+        }
+		m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+		if (jump && atSurface)
+        {
+			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+			m_Grounded = false;
+		}
+
+		animator.SetInteger("swimSpeed", Mathf.RoundToInt(Mathf.Abs(m_Rigidbody2D.velocity.x) + Mathf.Abs(m_Rigidbody2D.velocity.y)));
+
+		// If the input is moving the player right and the player is facing left...
+		if (hmove > 0 && !m_FacingRight)
+		{
+			// ... flip the player.
+			Flip();
+		}
+		// Otherwise if the input is moving the player left and the player is facing right...
+		else if (hmove < 0 && m_FacingRight)
+		{
+			// ... flip the player.
+			Flip();
+		}
+	}
 
     public void Move(float move, bool jump, bool run, bool roll)
 	{
@@ -319,4 +354,32 @@ public class PlayerController : MonoBehaviour
 			Gizmos.DrawWireSphere(m_AttackPoint.position, attackRange);
 		}
 	}
+
+	private void CheckWater()
+    {
+		bool wasInWater = inWater;
+		inWater = false;
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.1f, m_WhatIsWater);
+		if (colliders.Length > 0)
+        {
+			inWater = true;
+			if (!wasInWater)
+            {
+				animator.SetBool("inWater", true);
+				m_Rigidbody2D.gravityScale = 0;
+				m_Rigidbody2D.velocity = Vector3.zero;
+			}
+        }
+		if (wasInWater && !inWater)
+        {
+			animator.SetBool("inWater", false);
+			m_Rigidbody2D.gravityScale = 1;
+		}
+    }
+
+	private bool CheckAtSurface()
+    {
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.01f, m_WhatIsWater);
+		return colliders.Length == 0;
+    }
 }

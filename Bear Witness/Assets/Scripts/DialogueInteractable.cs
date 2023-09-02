@@ -10,6 +10,8 @@ public class DialogueInteractable : MonoBehaviour
     public TextMeshProUGUI text;
     public string interactText = "LOOK";
 
+    private float cooldown;
+
     private void Start()
     {
         text.text = interactText;
@@ -19,8 +21,9 @@ public class DialogueInteractable : MonoBehaviour
         if (collision.collider.tag == "Player") 
         {
             animator.SetBool("playerInRange", true);
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+            if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)) && Time.time >= cooldown)
             {
+                cooldown = Time.time + 2f;
                 dialogueTrigger.TriggerDialogue();
             }
         }

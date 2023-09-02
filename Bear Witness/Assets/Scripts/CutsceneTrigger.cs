@@ -30,7 +30,6 @@ public class CutsceneTrigger : MonoBehaviour
         {
             if (!gameManager.playedCutscenes.Contains(cutscene_ID))
             {
-                Debug.Log("debug.hog");
                 OnCutsceneStart.Invoke();
                 gameManager.playedCutscenes.Add(cutscene_ID);
             }

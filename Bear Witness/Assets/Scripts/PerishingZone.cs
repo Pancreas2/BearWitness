@@ -23,6 +23,7 @@ public class PerishingZone : MonoBehaviour
         {
             if (!respawn) respawn = FindObjectOfType<SpawnPlayer>();
             respawn.Spawn();
+            player.Damage(1, player.transform.position.x);
         }
     }
 }

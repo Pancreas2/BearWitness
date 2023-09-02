@@ -26,8 +26,7 @@ public class TooltipFade : MonoBehaviour
         }
         if (AnyKeyPressed(keyCodes))
         {
-            animator.SetBool("visible", false);
-            active = false;
+            ForceFadeOut();
         }
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("(nothing)") && !active)
         {
@@ -41,5 +40,11 @@ public class TooltipFade : MonoBehaviour
             if (Input.GetKey(key)) return true;
         }
         return false;
+    }
+
+    public void ForceFadeOut()
+    {
+        animator.SetBool("visible", false);
+        active = false;
     }
 }

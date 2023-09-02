@@ -9,22 +9,25 @@ public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
+    public TextMeshProUGUI choiceA;
+    public TextMeshProUGUI choiceB;
     public Image faceDisplay;
     public Animator animator;
 
     private bool dialogueRunning = false;
     private int frameDelay = 20;
 
-    private Queue<string> sentences;
-    private Queue<string> names;
-    private Queue<Sprite> faces;
+    private Queue<DialogueSentence> sentences;
+
+    private float choiceSelected = 0;
+    private DialogueSentence currentSentence;
+    private GameManager gameManager;
 
     private UnityEvent DialogueEndEvent;
     void Awake()
     {
-        sentences = new Queue<string>();
-        names = new Queue<string>();
-        faces = new Queue<Sprite>();
+        sentences = new Queue<DialogueSentence>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void Update()
@@ -35,34 +38,37 @@ public class DialogueManager : MonoBehaviour
         }
         else if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S)) && dialogueRunning)
         {
+            if (currentSentence.isChoice)
+            {
+                if (choiceSelected == 0) currentSentence.ChooseAEvent.Invoke();
+                if (choiceSelected == 1) currentSentence.ChooseBEvent.Invoke();
+            }
             DisplayNextSentence();
+        } else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A))
+        {
+            choiceSelected += Input.GetAxisRaw("Horizontal");
+            choiceSelected = Mathf.Abs(choiceSelected % 2);
+            HighlightSelection();
         }
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
+        choiceA.text = "";
+        choiceB.text = "";
+        dialogueText.text = "";
+        DialogueSentence[] dialogueElements = dialogue.elements;
         frameDelay = 20;
         if (!dialogueRunning)
         {
             animator.SetBool("IsOpen", true);
 
             sentences.Clear();
-            names.Clear();
-            faces.Clear();
 
             DialogueEndEvent = dialogue.DialogueEndEvent;
-
-            foreach (string sentence in dialogue.sentences)
+            foreach (DialogueSentence element in dialogueElements)
             {
-                sentences.Enqueue(sentence);
-            }
-            foreach (string name in dialogue.names)
-            {
-                names.Enqueue(name);
-            }
-            foreach (Sprite face in dialogue.faces)
-            {
-                faces.Enqueue(face);
+                sentences.Enqueue(element);
             }
 
             DisplayNextSentence();
@@ -77,21 +83,59 @@ public class DialogueManager : MonoBehaviour
             EndDialogue();
             return;
         }
-        Sprite face = faces.Dequeue();
-        string name = names.Dequeue();
-        string sentence = sentences.Dequeue();
-        faceDisplay.sprite = face;
-        nameText.text = name;
-        StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
+        currentSentence = sentences.Dequeue();
+        if ((!currentSentence.hasCondition || currentSentence.condition.Evaluate(gameManager)) && (!gameManager.playedLines.Contains(currentSentence.lineId) || !currentSentence.singleUse))
+        {
+            if (currentSentence.singleUse) gameManager.playedLines.Add(currentSentence.lineId);
+            WriteToDialogueBox();
+        } else 
+        {
+            DisplayNextSentence();
+        }
     }
 
-    IEnumerator TypeSentence(string sentence)
+    void WriteToDialogueBox()
     {
-        dialogueText.text = "";
+        Sprite face = currentSentence.face;
+        string name = currentSentence.name;
+        string sentence = currentSentence.sentenceText;
+        StopAllCoroutines();
+        if (currentSentence.isChoice)
+        {
+            string choiceAtext = currentSentence.choiceTextA;
+            string choiceBtext = currentSentence.choiceTextB;
+            StartCoroutine(TypeSentence(choiceAtext, choiceA));
+            StartCoroutine(TypeSentence(choiceBtext, choiceB));
+        }
+        else
+        {
+            choiceA.text = "";
+            choiceB.text = "";
+        }
+        faceDisplay.sprite = face;
+        nameText.text = name;
+        StartCoroutine(TypeSentence(sentence, dialogueText));
+    }
+
+    public void HighlightSelection()
+    {
+        if (choiceSelected == 0)
+        {
+            choiceA.color = Color.yellow;
+            choiceB.color = Color.white;
+        } else if (choiceSelected == 1)
+        {
+            choiceA.color = Color.white;
+            choiceB.color = Color.yellow;
+        }
+    }
+
+    IEnumerator TypeSentence(string sentence, TextMeshProUGUI destination)
+    {
+        destination.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
-            dialogueText.text += letter;
+            destination.text += letter;
             yield return new WaitForSeconds(0.05f);
         }
     }

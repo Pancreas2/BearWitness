@@ -151,6 +151,9 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
+  m_WhatIsWater:
+    serializedVersion: 2
+    m_Bits: 16
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -196,7 +199,7 @@ BoxCollider2D:
   m_Material: {fileID: 6200000, guid: b226f0ca9b6a38841899e73eba526bf0, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -311,6 +314,7 @@ MonoBehaviour:
   moveSpeed: 10
   runMultiplier: 2
   frozen: 0
+  moveTime: 0
 --- !u!1 &7409420977155738715
 GameObject:
   m_ObjectHideFlags: 0

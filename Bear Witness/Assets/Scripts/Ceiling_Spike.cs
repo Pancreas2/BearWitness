@@ -23,6 +23,7 @@ public class Ceiling_Spike : MonoBehaviour
             }
         } else if (collision.collider.CompareTag("Ground") && collision.otherCollider == hurtbox)
         {
+            Debug.Log("hit " + collision.collider.name);
             Destroy(gameObject);
         }
     }

@@ -23415,7 +23415,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 587560550}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.31876707, y: -0.06949009, z: -10}
+  m_LocalPosition: {x: 0.31166267, y: -0.06949009, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23925,6 +23925,10 @@ PrefabInstance:
       value: Seal Pile
       objectReference: {fileID: 0}
     - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
       propertyPath: dialogue.faces.Array.data[1]
       value: 
       objectReference: {fileID: 21300000, guid: a1b1249edbe1dea48bd7c9a6da450331, type: 3}
@@ -23963,6 +23967,82 @@ PrefabInstance:
     - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
       propertyPath: dialogue.sentences.Array.data[3]
       value: I don't know if I want to eat that anymore.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[0].face
+      value: 
+      objectReference: {fileID: 21300000, guid: 38cae003e48319240b05a555b7ff9d68, type: 3}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[0].name
+      value: Callisto
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[1].face
+      value: 
+      objectReference: {fileID: 21300000, guid: a1b1249edbe1dea48bd7c9a6da450331, type: 3}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[1].name
+      value: Callisto
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[2].face
+      value: 
+      objectReference: {fileID: -2102445581, guid: 911b1c16d904c4a4590127550728c839, type: 3}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[2].name
+      value: Dessicated Seal Corpse
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[3].face
+      value: 
+      objectReference: {fileID: 21300000, guid: a1b1249edbe1dea48bd7c9a6da450331, type: 3}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[3].name
+      value: Callisto
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[0].lineId
+      value: sealpile0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[1].lineId
+      value: sealpile1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[2].lineId
+      value: sealpile2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[3].lineId
+      value: sealpile3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[0].singleUse
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[1].singleUse
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[2].singleUse
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[0].sentenceText
+      value: Here's my old food stockpile!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[1].sentenceText
+      value: Looks a bit... rotten.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[2].sentenceText
+      value: ...
+      objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue.elements.Array.data[3].sentenceText
+      value: I don't want to look at this anymore.
       objectReference: {fileID: 0}
     - target: {fileID: 8906276247966024263, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
       propertyPath: m_Sprite
@@ -24557,6 +24637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entersFromRoom: Arktis_Cave_Tunnel
   forceOnSpawn: {x: 0, y: 300}
+  spawnOnLoad: 1
 --- !u!4 &1978597773
 Transform:
   m_ObjectHideFlags: 0

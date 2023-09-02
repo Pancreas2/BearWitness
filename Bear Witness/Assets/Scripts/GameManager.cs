@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Cinemachine;
+using System.Dynamic;
 
 public class GameManager : MonoBehaviour
     {
@@ -58,6 +59,9 @@ public class GameManager : MonoBehaviour
         public CollectableItem currentItem;
         public CollectableItem[] inventory;
     public int inventoryNextSpace = 0;
-    public List<string> playedCutscenes = new List<string>();
-    }
+    public List<string> playedCutscenes = new();
+    public List<string> playedLines = new();
+
+    public List<NPCData> npcMemory = new();
+}
 
