@@ -12,7 +12,6 @@ public class DialogueCondition
 
     public bool Evaluate(GameManager gameManager)
     {
-        Debug.Log("evaluating");
         if (type == "kindness")
         {
             NPCData nPCData = gameManager.npcMemory[npcId];

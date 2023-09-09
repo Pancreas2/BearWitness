@@ -14,7 +14,9 @@ public class DialogueSentence {
     [TextArea(3, 10)]
     public string sentenceText;
     public bool isChoice;
+    [TextArea(3, 10)]
     public string choiceTextA;
+    [TextArea(3, 10)]
     public string choiceTextB;
 
     public UnityEvent ChooseAEvent;

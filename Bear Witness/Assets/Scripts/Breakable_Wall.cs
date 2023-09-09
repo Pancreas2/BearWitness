@@ -9,7 +9,7 @@ public class Breakable_Wall : MonoBehaviour
     public Animator animator;
     private int wallState = 3;
     private float invTime = 0f;
-    float maxHealth = 3f;
+    readonly float maxHealth = 9f;
     float currentHealth;
 
     public UnityEvent OnBreakEvent;
@@ -29,25 +29,23 @@ public class Breakable_Wall : MonoBehaviour
     {
         if (Time.time >= invTime || skipInvTime)
         {
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("animation_done"))
+            if (wallState <= 2)
             {
-                if (wallState == 2)
-                {
-                    Destroy(stateOne);
-                }
-                else if (wallState == 1)
-                {
-                    Destroy(stateTwo);
-                }
-                if (currentHealth <= 0)
-                {
-                    Die();
-                }
+                Destroy(stateOne);
+            }
+            if (wallState <= 1)
+            {
+                Destroy(stateTwo);
+            }
+            if (currentHealth <= 0)
+            {
+                Die();
             }
             animator.SetTrigger("Hit");
             currentHealth -= damage;
             wallState = Mathf.CeilToInt(currentHealth * 3 / maxHealth);
-            invTime = Time.time + 1f;
+            invTime = Time.time + 0.1f;
+            Debug.Log(currentHealth);
         }
     }
     public void Die()

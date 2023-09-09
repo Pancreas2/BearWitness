@@ -11,11 +11,11 @@ public class GameManager : MonoBehaviour
         void Awake()
         {
         inventory = new CollectableItem[16];
-            if (FindObjectsOfType<GameManager>().Length > 1)
-            {
-                Destroy(gameObject);
-            }
-            DontDestroyOnLoad(this);
+        if (FindObjectsOfType<GameManager>().Length > 1)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(this);
         }
 
         private void ReloadLevel()

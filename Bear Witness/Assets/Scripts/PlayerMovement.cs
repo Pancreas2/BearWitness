@@ -16,9 +16,10 @@ public class PlayerMovement : MonoBehaviour
     public bool frozen = false;
     bool wasFrozen = false;
     bool attacking = false;
-    float attackRate = 2f;
+    float attackRate = 4f;
     float attackDelay = 0;
     public float moveTime = 0f;
+    private Animator animator;
 
     public void DialogueMove(float distance)
     {
@@ -33,7 +34,10 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Perished");
     }
 
-    // Update is called once per frame
+    private void Start()
+    {
+        animator = controller.GetComponent<Animator>();
+    }
     void Update()
     {
         if (!frozen)
@@ -78,9 +82,9 @@ public class PlayerMovement : MonoBehaviour
                     attacking = true;
                     roll = false;
                     run = false;
-                    attackDelay = Time.time + (1f / attackRate);
+                    attackDelay = Time.time + (2f / attackRate);
                 }
-                else if (Input.GetMouseButtonDown(0))
+                else if (Input.GetMouseButton(0))
                 {
                     special = false;
                     attacking = true;
@@ -89,6 +93,8 @@ public class PlayerMovement : MonoBehaviour
                     attackDelay = Time.time + (1f / attackRate);
                 }
             }
+
+            if (Input.GetButtonUp("Special")) animator.SetTrigger("attackEnd");
 
             wasFrozen = false;
         }

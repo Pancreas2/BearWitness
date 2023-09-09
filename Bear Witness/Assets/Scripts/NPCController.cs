@@ -10,16 +10,13 @@ public class NPCController : DialogueInteractable
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-        gameManager.npcMemory.Insert(data.id, data);
-        Debug.Log("added data for " + data.name);
+        if (gameManager.npcMemory.Capacity <= data.id || gameManager.npcMemory[data.id].name != data.name) gameManager.npcMemory.Insert(data.id, data);
     }
 
     public void UpdateKindness(int effect)
     {
-        Debug.Log("Kindness time");
         int index = gameManager.npcMemory.IndexOf(data);
         data.kindness += effect;
         gameManager.npcMemory[index].kindness = data.kindness;
-        Debug.Log(data.name + " kindness updated to " + data.kindness);
     }
 }

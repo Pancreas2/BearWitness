@@ -28,8 +28,7 @@ public class GameUI_Controller : MonoBehaviour
         hpDisplay = new Image[maxHealth];
         for (int i = 0; i < maxHealth; i++)
         {
-            GameObject newHPImg = Instantiate(hpimg);
-            newHPImg.transform.parent = gameObject.transform;
+            GameObject newHPImg = Instantiate(hpimg, gameObject.transform);
             newHPImg.transform.SetLocalPositionAndRotation((hpBasePos + Vector3.right * i * 50), Quaternion.identity);
             if (currentHealth <= i)
             {
@@ -41,11 +40,21 @@ public class GameUI_Controller : MonoBehaviour
 
     public void DecreaseHP(int damage)
     {
-        for (int i = gameManager.playerCurrentHealth; i > gameManager.playerCurrentHealth - damage; i--)
+        if (gameManager.playerCurrentHealth - damage < 0)
         {
-            hpDisplay[i - 1].sprite = emptyIcon;
+            for (int i = gameManager.playerCurrentHealth; i > 0; i--)
+            {
+                hpDisplay[i - 1].sprite = emptyIcon;
+            }
+            gameManager.playerCurrentHealth = 0;
+        } else
+        {
+            for (int i = gameManager.playerCurrentHealth; i > gameManager.playerCurrentHealth - damage; i--)
+            {
+                hpDisplay[i - 1].sprite = emptyIcon;
+            }
+            gameManager.playerCurrentHealth -= damage;
         }
-        gameManager.playerCurrentHealth -= damage;
     }
 
     public void IncreaseHP(int heal)

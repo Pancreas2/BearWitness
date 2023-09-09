@@ -14,9 +14,9 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private Collider2D m_CrouchDisableCollider;     // A collider that will be disabled when rolling
 	[SerializeField] private Animator animator;
 
-	const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
+	const float k_GroundedRadius = .1f; // Radius of the overlap circle to determine if grounded
 	private bool m_Grounded;            // Whether or not the player is grounded.
-	const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
+	const float k_CeilingRadius = .1f; // Radius of the overlap circle to determine if the player can stand up
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
@@ -28,8 +28,10 @@ public class PlayerController : MonoBehaviour
 	private bool attacking = false;
 	private bool specialing = false;
 	private bool m_HasAirAttack = true;
+	private float invTime = 0f;
 
 	private bool m_wallClingState = false;
+	private bool startWallClingHitbox = false;
 
 	public bool inWater = false;
 	[SerializeField] private LayerMask m_WhatIsWater;
@@ -175,7 +177,7 @@ public class PlayerController : MonoBehaviour
 				if (m_HasAirAttack)
                 {
 					// Move the character by finding the target velocity
-					targetVelocity = Vector2.zero;
+					targetVelocity = new Vector2(0f, Mathf.Max(m_Rigidbody2D.velocity.y, 0f));
 				} else
                 {
 					// Move the character by finding the target velocity
@@ -216,11 +218,7 @@ public class PlayerController : MonoBehaviour
 
 		if (attacking || specialing)
 		{
-			if (attackTime >= Time.time)
-			{
-				AttackHitboxes(specialing);
-			}
-			else
+			if (attackTime <= Time.time)
 			{
 				attacking = false;
 				specialing = false;
@@ -231,9 +229,31 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 
-		// If the player should jump...
-		if (m_Grounded && jump)
+		if (startWallClingHitbox)
 		{
+			// check for wall-grabs (so it occurs during the duration of the swing)
+			Vector3 boxAttackPoint = m_AttackPoint.position + Vector3.up * 0.4f;
+			Vector2 boxRange = Vector2.down * 0.7f + Vector2.right * attackRange;
+			if (Physics2D.OverlapBoxAll(boxAttackPoint, boxRange, 0, m_WhatIsGround).Length > 0)
+			{
+				if (!m_wallClingState) animator.SetTrigger("attack");
+				m_Rigidbody2D.Sleep();
+				m_wallClingState = true;
+				m_HasAirAttack = true;
+				attackTime = 0f;
+			}
+
+			if (attackTime + 0.2f <= Time.time) startWallClingHitbox = false;
+		}
+
+		// If the player should jump...
+		if (m_wallClingState && jump)
+		{
+			ForceWallJump();
+		}
+		else if (m_Grounded && jump)
+		{
+			m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, Mathf.Max(0f, m_Rigidbody2D.velocity.y));
 			if (roll)
 			{
 				// bound
@@ -248,11 +268,6 @@ public class PlayerController : MonoBehaviour
 				m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
 			}
 			m_Grounded = false;
-		} else if (m_wallClingState && jump)
-        {
-			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce / 1.2f));
-			m_Rigidbody2D.WakeUp();
-			m_wallClingState = false;
 		}
 		animator.SetBool("grounded", m_Grounded);
 		animator.SetBool("wallCling", m_wallClingState);
@@ -277,14 +292,18 @@ public class PlayerController : MonoBehaviour
 
 	public void Damage(int damage, float sourcePositionX)
 	{
-		FindObjectOfType<GameUI_Controller>().DecreaseHP(damage);
-		if (gameManager.playerCurrentHealth <= 0)
-		{
-			Perish();
-			return;
+		if (invTime <= Time.time)
+        {
+			invTime = Time.time + 0.5f;
+			FindObjectOfType<GameUI_Controller>().DecreaseHP(damage);
+			if (gameManager.playerCurrentHealth <= 0)
+			{
+				Perish();
+				return;
+			}
+			float impactSide = Mathf.Sign(sourcePositionX - transform.position.x);
+			m_Rigidbody2D.AddForce(transform.up * 3f + transform.right * -10f * (impactSide), ForceMode2D.Impulse);
 		}
-		float impactSide = Mathf.Sign(sourcePositionX - transform.position.x);
-		m_Rigidbody2D.AddForce(transform.up * 3f + transform.right * -10f * (impactSide), ForceMode2D.Impulse);
 	}
 	public void Perish()
 	{
@@ -298,8 +317,12 @@ public class PlayerController : MonoBehaviour
         {
 			if (!(gameManager.currentItem.name != "Ice Pick"))
             {
+				if (m_wallClingState) ForceWallJump();
 				animator.SetInteger("attackType", 2);
-			} else
+			} else if (!(gameManager.currentItem.name != "Shield"))
+            {
+				animator.SetInteger("attackType", 3);
+            } else
             {
 				animator.SetInteger("attackType", 1);
 			}
@@ -307,32 +330,27 @@ public class PlayerController : MonoBehaviour
         {
 			animator.SetInteger("attackType", 0);
         }
-		animator.SetTrigger("attack");
+		if (!m_wallClingState)
+		{
+			animator.SetTrigger("attack");
+		}
 		attacking = !useSpecial;
 		specialing = useSpecial;
 	}
 
-	private void AttackHitboxes(bool useSpecial)
+	public void AttackHitboxes()
     {
-		if (useSpecial)
+		if (specialing)
 		{
 			if (gameManager.currentItem.name == "Ice Pick")
 			{
-				Vector3 boxAttackPoint = m_AttackPoint.position + Vector3.up * 0.4f;
-				Vector2 boxRange = Vector2.down * 0.7f + Vector2.right * attackRange;
+				Vector3 boxAttackPoint = m_AttackPoint.position + Vector3.right * 0.5f * attackRange;
+				Vector3 boxRange = Vector3.down * 0.7f + Vector3.right * attackRange;
 				Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(boxAttackPoint, boxRange, enemyLayers);
-				Collider2D[] hitWall = Physics2D.OverlapBoxAll(boxAttackPoint, boxRange, 0, m_WhatIsGround);
 				foreach (Collider2D enemy in hitEnemies)
 				{
 					enemy.TryGetComponent(out Breakable_Wall wall);
-					if (wall) wall.Damage(2);
-				}
-				if (hitWall.Length > 0 && !m_Grounded)
-				{
-					m_Rigidbody2D.Sleep();
-					m_wallClingState = true;
-					m_HasAirAttack = true;
-					attackTime = 0f;
+					if (wall) wall.Damage(5);
 				}
 			}
 		}
@@ -382,4 +400,16 @@ public class PlayerController : MonoBehaviour
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.01f, m_WhatIsWater);
 		return colliders.Length == 0;
     }
+
+	public void StartWallClingHitbox()
+    {
+		startWallClingHitbox = true;
+    }
+
+	private void ForceWallJump()
+    {
+		m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+		m_Rigidbody2D.WakeUp();
+		m_wallClingState = false;
+	}
 }
