@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameUI_Controller : MonoBehaviour
 {
     public GameObject hpimg;
+    [SerializeField] private GameObject hpBar;
     private GameManager gameManager;
     private int maxHealth;
     private int currentHealth;
@@ -13,7 +14,8 @@ public class GameUI_Controller : MonoBehaviour
     public Sprite emptyIcon;
     public Sprite fullIcon;
     public Sprite bonusIcon;
-    private Vector3 hpBasePos = Vector3.up * 185 + Vector3.left * 275;
+    [SerializeField] private Sprite emptyToolSlot;
+    private Vector3 hpBasePos = Vector3.up * 150 + Vector3.left * 225;
 
     public Image toolSlot;
     private void Awake()
@@ -28,8 +30,8 @@ public class GameUI_Controller : MonoBehaviour
         hpDisplay = new Image[maxHealth];
         for (int i = 0; i < maxHealth; i++)
         {
-            GameObject newHPImg = Instantiate(hpimg, gameObject.transform);
-            newHPImg.transform.SetLocalPositionAndRotation((hpBasePos + Vector3.right * i * 50), Quaternion.identity);
+            GameObject newHPImg = Instantiate(hpimg, hpBar.transform);
+            newHPImg.transform.SetLocalPositionAndRotation((hpBasePos + Vector3.right * i * 30f), Quaternion.identity);
             if (currentHealth <= i)
             {
                 newHPImg.GetComponent<Image>().sprite = emptyIcon;
@@ -73,7 +75,7 @@ public class GameUI_Controller : MonoBehaviour
         {
             GameObject newHPImg = Instantiate(hpimg);
             newHPImg.transform.parent = gameObject.transform;
-            newHPImg.transform.SetLocalPositionAndRotation((hpBasePos + Vector3.right * (i + maxHealth) * 50), Quaternion.identity);
+            newHPImg.transform.SetLocalPositionAndRotation((hpBasePos + Vector3.right * (i + maxHealth) * 30f), Quaternion.identity);
             hpDisplay.SetValue(newHPImg.GetComponent<Image>(), i);
             hpDisplay[i].sprite = bonusIcon;
         }
@@ -81,6 +83,12 @@ public class GameUI_Controller : MonoBehaviour
 
     public void DisplayHeldItem(CollectableItem item)
     {
-        if (item.icon != null) toolSlot.sprite = item.icon;
+        if (item.icon == null) 
+        {
+            toolSlot.sprite = emptyToolSlot;
+        } else
+        {
+            toolSlot.sprite = item.icon;
+        }
     }
 }

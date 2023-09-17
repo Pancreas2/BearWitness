@@ -141,7 +141,7 @@ MonoBehaviour:
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 2304
   m_GroundCheck: {fileID: 7095922652977946549}
   m_CeilingCheck: {fileID: 8844873092894323580}
   m_AttackPoint: {fileID: 2392716053199083457}
@@ -207,10 +207,10 @@ BoxCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 2368
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 2368
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -252,10 +252,10 @@ BoxCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 2368
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 320
+    m_Bits: 2368
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295

@@ -13355,7 +13355,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377324827}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.4067097, y: -0.07948995, z: -10}
+  m_LocalPosition: {x: 3.4016967, y: -0.07948995, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14697,6 +14697,10 @@ PrefabInstance:
     - target: {fileID: 3017564269617326928, guid: df673ed35d193cb4987cb7fa6fc5a500, type: 3}
       propertyPath: dialogue.elements.Array.data[1].ChooseAEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3057263807685769175, guid: df673ed35d193cb4987cb7fa6fc5a500, type: 3}
+      propertyPath: id
+      value: icepick
       objectReference: {fileID: 0}
     - target: {fileID: 4919298664795680551, guid: df673ed35d193cb4987cb7fa6fc5a500, type: 3}
       propertyPath: m_Name

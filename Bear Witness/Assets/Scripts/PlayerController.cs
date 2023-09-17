@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
+	private int coyotePoints = 5;
 
 	private GameManager gameManager;
 	private float attackTime = 0f;
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
 	private bool specialing = false;
 	private bool m_HasAirAttack = true;
 	private float invTime = 0f;
+	private bool shielded = false;
 
 	private bool m_wallClingState = false;
 	private bool startWallClingHitbox = false;
@@ -75,6 +77,7 @@ public class PlayerController : MonoBehaviour
 		{
 			if (colliders[i].gameObject != gameObject)
 			{
+				coyotePoints = 5;
 				m_Grounded = true;
 				if (!wasGrounded)
 				{
@@ -83,6 +86,12 @@ public class PlayerController : MonoBehaviour
 				}
 			}
 		}
+
+		if (!m_Grounded && coyotePoints > 0)
+        {
+			coyotePoints--;
+			m_Grounded = true;
+        }
 
 		CheckWater();
 	}
@@ -292,7 +301,15 @@ public class PlayerController : MonoBehaviour
 
 	public void Damage(int damage, float sourcePositionX)
 	{
-		if (invTime <= Time.time)
+		if (shielded && (transform.position.x - sourcePositionX > 0 ^ m_FacingRight))
+        {
+			Vector2 knockbackForce = new(200f, 0f);
+			if (m_FacingRight)
+            {
+				knockbackForce *= -1f;
+            }
+			m_Rigidbody2D.AddForce(knockbackForce);
+        } else if (invTime <= Time.time)
         {
 			invTime = Time.time + 0.5f;
 			FindObjectOfType<GameUI_Controller>().DecreaseHP(damage);
@@ -315,11 +332,12 @@ public class PlayerController : MonoBehaviour
 		if (useSpecial) attackTime += 0.2f;
 		if (useSpecial)
         {
-			if (!(gameManager.currentItem.name != "Ice Pick"))
+			string toolName = gameManager.currentItem.name;
+			if (toolName == "Ice Pick")
             {
 				if (m_wallClingState) ForceWallJump();
 				animator.SetInteger("attackType", 2);
-			} else if (!(gameManager.currentItem.name != "Shield"))
+			} else if (toolName == "Shield")
             {
 				animator.SetInteger("attackType", 3);
             } else
@@ -342,7 +360,8 @@ public class PlayerController : MonoBehaviour
     {
 		if (specialing)
 		{
-			if (gameManager.currentItem.name == "Ice Pick")
+			string currentItem = gameManager.currentItem.name;
+			if (currentItem == "Ice Pick")
 			{
 				Vector3 boxAttackPoint = m_AttackPoint.position + Vector3.right * 0.5f * attackRange;
 				Vector3 boxRange = Vector3.down * 0.7f + Vector3.right * attackRange;
@@ -351,8 +370,13 @@ public class PlayerController : MonoBehaviour
 				{
 					enemy.TryGetComponent(out Breakable_Wall wall);
 					if (wall) wall.Damage(5);
+					enemy.TryGetComponent(out BaseEnemy baseEnemy);
+					if (baseEnemy) baseEnemy.Damage(5, transform.position.x);
 				}
-			}
+			} else if (currentItem == "Shield")
+            {
+				shielded = true;
+            }
 		}
 		else
 		{
@@ -361,6 +385,8 @@ public class PlayerController : MonoBehaviour
 			{
 				enemy.TryGetComponent(out Breakable_Wall wall);
 				if (wall) wall.Damage(1);
+				enemy.TryGetComponent(out BaseEnemy baseEnemy);
+				if (baseEnemy) baseEnemy.Damage(1, transform.position.x);
 			}
 		}
 	}
@@ -395,7 +421,12 @@ public class PlayerController : MonoBehaviour
 		}
     }
 
-	private bool CheckAtSurface()
+	public void AttackEnd() 
+    {
+		animator.SetTrigger("attackEnd");
+		shielded = false;
+    }
+    private bool CheckAtSurface()
     {
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.01f, m_WhatIsWater);
 		return colliders.Length == 0;

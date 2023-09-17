@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     {
         void Awake()
         {
-        inventory = new CollectableItem[16];
+        inventory = new CollectableItem[9];
         if (FindObjectsOfType<GameManager>().Length > 1)
         {
             Destroy(gameObject);
@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour
             FindObjectOfType<GameUI_Controller>().DisplayHeldItem(item);
         }
         inventory[inventoryNextSpace] = item;
+        FindNextOpenInventorySlot();
+    }
+
+    public void FindNextOpenInventorySlot()
+    {
         for (int i = 0; i < inventory.Length - 1; i++)
         {
             if (inventory[i] == null)
@@ -39,7 +44,6 @@ public class GameManager : MonoBehaviour
                 inventoryNextSpace = i;
                 return;
             }
-            Debug.Log(i + " slot full");
         }
     }
 
@@ -54,13 +58,15 @@ public class GameManager : MonoBehaviour
     }
 
     public string previousLevel = "Start";
-        public int playerMaxHealth = 5;
-        public int playerCurrentHealth = 5;
-        public CollectableItem currentItem;
-        public CollectableItem[] inventory;
+    public int playerMaxHealth = 5;
+    public int playerCurrentHealth = 5;
+    public CollectableItem currentItem;
+    public CollectableItem[] inventory;
     public int inventoryNextSpace = 0;
     public List<string> playedCutscenes = new();
     public List<string> playedLines = new();
+    public List<string> foundItems = new();
+    public List<string> permanentFoundItems = new();
 
     public List<NPCData> npcMemory = new();
 }

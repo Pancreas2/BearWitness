@@ -16,8 +16,9 @@ public class PlayerMovement : MonoBehaviour
     public bool frozen = false;
     bool wasFrozen = false;
     bool attacking = false;
-    float attackRate = 4f;
+    readonly float attackRate = 6f;
     float attackDelay = 0;
+    bool attackEnd = false;
     public float moveTime = 0f;
     private Animator animator;
 
@@ -94,7 +95,9 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if (Input.GetButtonUp("Special")) animator.SetTrigger("attackEnd");
+            if (Input.GetButtonUp("Special")) {
+                attackEnd = true;
+            }
 
             wasFrozen = false;
         }
@@ -128,5 +131,7 @@ public class PlayerMovement : MonoBehaviour
         jump = false;
         if (attacking) controller.Attack(special);
         attacking = false;
+        if (attackEnd) controller.AttackEnd();
+        attackEnd = false;
     }
 }
