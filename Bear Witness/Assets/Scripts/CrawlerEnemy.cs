@@ -16,11 +16,11 @@ public class CrawlerEnemy : MonoBehaviour
     private Animator animator;
     private PlayerController player;
 
-    public void Initialize()
+    private void Start()
     {
         m_Rigidbody2D = baseEnemy.m_Rigidbody2D;
         animator = baseEnemy.animator;
-        player = baseEnemy.player;
+        player = FindObjectOfType<PlayerController>();
     }
 
     void FixedUpdate()
@@ -38,19 +38,6 @@ public class CrawlerEnemy : MonoBehaviour
                 theScale.x *= -1;
                 transform.localScale = theScale;
             }
-        }
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            if (doesContactDamage && !collision.otherCollider.CompareTag("Ground"))
-            {
-                player.Damage(1, transform.position.x);
-            }
-
-            Retreat();
         }
     }
 

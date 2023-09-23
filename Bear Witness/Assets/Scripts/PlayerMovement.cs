@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public bool frozen = false;
     bool wasFrozen = false;
     bool attacking = false;
-    readonly float attackRate = 6f;
+    readonly float attackRate = 3f;
     float attackDelay = 0;
     bool attackEnd = false;
     public float moveTime = 0f;

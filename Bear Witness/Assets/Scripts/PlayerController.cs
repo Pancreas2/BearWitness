@@ -186,7 +186,7 @@ public class PlayerController : MonoBehaviour
 				if (m_HasAirAttack)
                 {
 					// Move the character by finding the target velocity
-					targetVelocity = new Vector2(0f, Mathf.Max(m_Rigidbody2D.velocity.y, 0f));
+					targetVelocity = new Vector2(move, Mathf.Max(m_Rigidbody2D.velocity.y, 0f));
 				} else
                 {
 					// Move the character by finding the target velocity
@@ -303,12 +303,7 @@ public class PlayerController : MonoBehaviour
 	{
 		if (shielded && (transform.position.x - sourcePositionX > 0 ^ m_FacingRight))
         {
-			Vector2 knockbackForce = new(200f, 0f);
-			if (m_FacingRight)
-            {
-				knockbackForce *= -1f;
-            }
-			m_Rigidbody2D.AddForce(knockbackForce);
+			Knockback(200f);
         } else if (invTime <= Time.time)
         {
 			invTime = Time.time + 0.5f;
@@ -319,7 +314,9 @@ public class PlayerController : MonoBehaviour
 				return;
 			}
 			float impactSide = Mathf.Sign(sourcePositionX - transform.position.x);
-			m_Rigidbody2D.AddForce(transform.up * 3f + transform.right * -10f * (impactSide), ForceMode2D.Impulse);
+			Vector2 knockbackForce = transform.up * 3f + transform.right * -10f * (impactSide);
+			m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0f);
+			m_Rigidbody2D.AddForce(knockbackForce, ForceMode2D.Impulse);
 		}
 	}
 	public void Perish()
@@ -328,8 +325,8 @@ public class PlayerController : MonoBehaviour
 	}
 	public void Attack(bool useSpecial)
 	{
-		attackTime = Time.time + 0.2f;
-		if (useSpecial) attackTime += 0.2f;
+		attackTime = Time.time + 0.3f;
+		if (useSpecial) attackTime += 0.3f;
 		if (useSpecial)
         {
 			string toolName = gameManager.currentItem.name;
@@ -373,6 +370,10 @@ public class PlayerController : MonoBehaviour
 					enemy.TryGetComponent(out BaseEnemy baseEnemy);
 					if (baseEnemy) baseEnemy.Damage(5, transform.position.x);
 				}
+				if (hitEnemies.Length > 0)
+                {
+					Knockback(100f);
+				}
 			} else if (currentItem == "Shield")
             {
 				shielded = true;
@@ -387,6 +388,10 @@ public class PlayerController : MonoBehaviour
 				if (wall) wall.Damage(1);
 				enemy.TryGetComponent(out BaseEnemy baseEnemy);
 				if (baseEnemy) baseEnemy.Damage(1, transform.position.x);
+			}
+			if (hitEnemies.Length > 0)
+			{
+				Knockback(100f);
 			}
 		}
 	}
@@ -442,5 +447,15 @@ public class PlayerController : MonoBehaviour
 		m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
 		m_Rigidbody2D.WakeUp();
 		m_wallClingState = false;
+	}
+
+	private void Knockback(float force)
+    {
+		Vector2 knockbackForce = new(force, 0f);
+		if (m_FacingRight)
+		{
+			knockbackForce *= -1f;
+		}
+		m_Rigidbody2D.AddForce(knockbackForce);
 	}
 }

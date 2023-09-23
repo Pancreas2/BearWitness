@@ -7,21 +7,21 @@ using Cinemachine;
 using System.Dynamic;
 
 public class GameManager : MonoBehaviour
+{
+    void Awake()
     {
-        void Awake()
-        {
         inventory = new CollectableItem[9];
         if (FindObjectsOfType<GameManager>().Length > 1)
         {
             Destroy(gameObject);
         }
         DontDestroyOnLoad(this);
-        }
+    }
 
-        private void ReloadLevel()
-        {
+    private void ReloadLevel()
+    {
             SceneManager.LoadScene(SceneManager.GetActiveScene().ToString());
-        }
+    }
 
     public void PickupItem(CollectableItem item)
     {

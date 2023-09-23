@@ -24,6 +24,7 @@ public class DialogueManager : MonoBehaviour
     private GameManager gameManager;
 
     private UnityEvent DialogueEndEvent;
+
     void Awake()
     {
         sentences = new Queue<DialogueSentence>();
@@ -136,7 +137,15 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in sentence.ToCharArray())
         {
             destination.text += letter;
-            yield return new WaitForSeconds(0.02f);
+            float timeDelay = 0.02f;
+            if (letter == '.' || letter == '?' || letter == '!' || letter == ';')
+            {
+                timeDelay = 0.25f;
+            } else if (letter == ',' || letter == ':')
+            {
+                timeDelay = 0.125f;
+            }
+            yield return new WaitForSeconds(timeDelay);
         }
     }
 

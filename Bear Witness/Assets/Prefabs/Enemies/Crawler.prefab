@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 2360809654214112352}
   - component: {fileID: 5597091675176647841}
   - component: {fileID: 6128216905586141880}
+  - component: {fileID: 2939758464131533279}
   m_Layer: 10
   m_Name: Crawler
   m_TagString: Untagged
@@ -286,6 +287,7 @@ MonoBehaviour:
   player: {fileID: 0}
   animator: {fileID: 6128216905586141880}
   doKnockback: 1
+  knockback: {x: 60, y: 100}
   m_Rigidbody2D: {fileID: 1814933614013531042}
   OnHurt:
     m_PersistentCalls:
@@ -356,3 +358,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2939758464131533279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8361398663350503010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6554445df3786542af74c8535a085a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 1
+  OnDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5597091675176647841}
+        m_TargetAssemblyTypeName: CrawlerEnemy, Assembly-CSharp
+        m_MethodName: Retreat
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

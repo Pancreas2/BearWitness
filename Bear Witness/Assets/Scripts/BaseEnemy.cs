@@ -5,11 +5,11 @@ using UnityEngine.Events;
 
 public class BaseEnemy : MonoBehaviour
 {
-    private readonly int maxHealth = 50;
+    [SerializeField] private int maxHealth = 50;
     private int currentHealth;
-    public PlayerController player;
     public Animator animator;
     [SerializeField] private bool doKnockback = true;
+    [SerializeField] private Vector2 knockback;
     public Rigidbody2D m_Rigidbody2D;
 
     public UnityEvent OnHurt;
@@ -18,7 +18,6 @@ public class BaseEnemy : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
-        player = FindObjectOfType<PlayerController>();
         OnStart.Invoke();
     }
 
@@ -31,7 +30,7 @@ public class BaseEnemy : MonoBehaviour
         }
         OnHurt.Invoke();
         m_Rigidbody2D.velocity = Vector2.zero;
-        Vector2 knockbackForce = new((transform.position.x - sourcePosX) * 20f, 100f);
+        Vector2 knockbackForce = new((transform.position.x - sourcePosX) * knockback.x, knockback.y);
         m_Rigidbody2D.AddForce(knockbackForce);
     }
 
