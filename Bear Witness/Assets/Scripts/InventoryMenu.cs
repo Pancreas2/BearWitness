@@ -8,7 +8,8 @@ public class InventoryMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject resumeMenuUI;
-    public InventorySlot[] inventorySlots = new InventorySlot[9];
+    public InventorySlot[] toolSlots = new InventorySlot[12];
+    public InventorySlot[] itemSlots = new InventorySlot[24];
     private GameManager gameManager;
     public InventorySlot lastSelectedSlot = new();
 
@@ -50,7 +51,6 @@ public class InventoryMenu : MonoBehaviour
         Time.timeScale = 1f;
         GameIsPaused = false;
         resumeMenuUI.GetComponentInParent<GameUI_Controller>().DisplayHeldItem(gameManager.currentItem);
-        gameManager.FindNextOpenInventorySlot();
     }
 
     public void Pause()
@@ -58,32 +58,47 @@ public class InventoryMenu : MonoBehaviour
         resumeMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
-        foreach (InventorySlot slot in inventorySlots)
+        foreach (InventorySlot slot in toolSlots)
         {
             if (slot)
             {
-                slot.heldItem = gameManager.inventory[slot.index];
+                slot.heldItem = gameManager.tools[slot.index];
+                slot.ReloadImage();
+            }
+        }
+        foreach (InventorySlot slot in itemSlots)
+        {
+            if (slot)
+            {
+                slot.heldItem = gameManager.items[slot.index];
                 slot.ReloadImage();
             }
         }
     }
 
-    public void SwapInventoryPosition(int a, int b)
+    public void SwapInventoryPosition(int a, int b, bool tool)
     {
-        CollectableItem itemHolder = gameManager.inventory[a];
-        gameManager.inventory[a] = gameManager.inventory[b];
-        gameManager.inventory[b] = itemHolder;
-        if (a == 0 || b == 0)
+        if (tool)
         {
-            if (gameManager.inventory[0] != null)
+            Item itemHolder = gameManager.tools[a];
+            gameManager.tools[a] = gameManager.tools[b];
+            gameManager.tools[b] = itemHolder;
+            if (a == 0 || b == 0)
             {
-                gameManager.currentItem = gameManager.inventory[0];
-            } else
-            {
-                gameManager.currentItem = new();
+                if (gameManager.tools[0] != null)
+                {
+                    gameManager.currentItem = gameManager.tools[0];
+                }
+                else
+                {
+                    gameManager.currentItem = new();
+                }
             }
+        } else
+        {
+            Item itemHolder = gameManager.items[a];
+            gameManager.items[a] = gameManager.items[b];
+            gameManager.items[b] = itemHolder;
         }
     }
-
-
 }

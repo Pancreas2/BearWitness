@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemInteractable : MonoBehaviour
+public class ItemInteractable : Interactable
 {
-    public CollectableItem item;
+    public Item item;
     [SerializeField] private bool renewsOnSave = false;
     private GameManager gameManager;
     [SerializeField] private string id;
@@ -26,7 +26,7 @@ public class ItemInteractable : MonoBehaviour
             }
         }
     }
-    public void CollectItem()
+    override public void OnInteract()
     {
         gameManager.PickupItem(item);
         if (renewsOnSave)

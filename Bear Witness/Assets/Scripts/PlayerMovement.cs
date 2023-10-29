@@ -20,12 +20,15 @@ public class PlayerMovement : MonoBehaviour
     float attackDelay = 0;
     bool attackEnd = false;
     public float moveTime = 0f;
-    private Animator animator;
+    private bool cutsceneMove = false;
 
     public void DialogueMove(float distance)
     {
-        float hMove = Mathf.Abs(distance);
-        float time = distance / moveSpeed;
+        cutsceneMove = true;
+        wasFrozen = true;
+        frozen = true;
+        float hMove = Mathf.Sign(distance);
+        float time = Mathf.Abs(distance) / 2f;
         horizontalMove = hMove * moveSpeed;
         moveTime = Time.time + time;
     }
@@ -35,17 +38,13 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Perished");
     }
 
-    private void Start()
-    {
-        animator = controller.GetComponent<Animator>();
-    }
     void Update()
     {
         if (!frozen)
         {
             horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed;
 
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") && !wasFrozen)
             {
                 jump = true;
             }
@@ -77,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (Time.time >= attackDelay)
             {
-                if (Input.GetButtonDown("Special"))
+                if (Input.GetButton("Special"))
                 {
                     special = true;
                     attacking = true;
@@ -112,9 +111,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (moveTime <= Time.time)
+            if (cutsceneMove && moveTime <= Time.time)
             {
                 horizontalMove = 0f;
+                frozen = false;
+                cutsceneMove = false;
             }
         }
     }

@@ -44,6 +44,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d255ee49c2be2343b958ec319cdf534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fileName: 
+  fileTime: 0
+  fileCompletion: 0
+  pauseGameTime: 0
+  gameTime: 0
   previousLevel: Start
   playerMaxHealth: 5
   playerCurrentHealth: 5
+  currentItem:
+    name: 
+    icon: {fileID: 0}
+    desc: 
+  inventory: []
+  inventoryNextSpace: 0
+  playedCutscenes: []
+  playedLines: []
+  foundItems: []
+  permanentFoundItems: []
+  money: 0
+  npcMemory: []

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd7d77579bf29c4881f7de8d85dec35, type: 3}
+  m_Name: Seal
+  m_EditorClassIdentifier: 
+  name: Seal
+  trust: 0
+  dialogueFaces:
+  - emotion: happy
+    face: {fileID: 268277563, guid: 911b1c16d904c4a4590127550728c839, type: 3}
+  - emotion: neutral
+    face: {fileID: -806963672, guid: 911b1c16d904c4a4590127550728c839, type: 3}
+  - emotion: dessicated
+    face: {fileID: -2102445581, guid: 911b1c16d904c4a4590127550728c839, type: 3}
+  - emotion: rotting
+    face: {fileID: -709035237, guid: 911b1c16d904c4a4590127550728c839, type: 3}
+  neutralFace:
+    emotion: neutral
+    face: {fileID: -806963672, guid: 911b1c16d904c4a4590127550728c839, type: 3}

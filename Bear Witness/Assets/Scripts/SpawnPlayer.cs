@@ -7,14 +7,18 @@ public class SpawnPlayer : MonoBehaviour
     public string entersFromRoom;
     public Vector2 forceOnSpawn = Vector2.zero;
     public bool spawnOnLoad = true;
+
     private void Start()
     {
-        if (entersFromRoom != FindFirstObjectByType<GameManager>().previousLevel)
-        {
-            Destroy(gameObject);
-        } else if (spawnOnLoad)
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        Debug.Log(gameManager.previousLevel);
+        if (entersFromRoom == gameManager.previousLevel && spawnOnLoad)
         {
             Spawn();
+        } else if (spawnOnLoad)
+        {
+            Debug.Log("Destroying spawn point for entry from " + entersFromRoom);
+            Destroy(gameObject);
         }
     }
 

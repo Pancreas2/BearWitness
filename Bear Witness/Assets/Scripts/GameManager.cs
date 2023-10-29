@@ -8,14 +8,25 @@ using System.Dynamic;
 
 public class GameManager : MonoBehaviour
 {
+
+    public static GameManager instance;
     void Awake()
     {
-        inventory = new CollectableItem[9];
-        if (FindObjectsOfType<GameManager>().Length > 1)
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
         {
             Destroy(gameObject);
+            gameObject.SetActive(false);
+            return;
         }
-        DontDestroyOnLoad(this);
+
+        DontDestroyOnLoad(gameObject);
+
+        tools = new Item[12];
+        items = new Item[24];
     }
 
     private void ReloadLevel()
@@ -23,32 +34,37 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().ToString());
     }
 
-    public void PickupItem(CollectableItem item)
+    public void PickupItem(Item item)
     {
-        Debug.Log(inventory.Length);
-        if (inventoryNextSpace == 0)
+        if (item.type == Item.ItemType.Tool)
         {
-            currentItem = item;
-            FindObjectOfType<GameUI_Controller>().DisplayHeldItem(item);
+            if (!currentItem)
+            {
+                currentItem = item;
+                FindObjectOfType<GameUI_Controller>().DisplayHeldItem(item);
+            }
+            tools[FindNextOpenInventorySlot(tools)] = item;
+        } else
+        {
+            items[FindNextOpenInventorySlot(items)] = item;
         }
-        inventory[inventoryNextSpace] = item;
-        FindNextOpenInventorySlot();
     }
 
-    public void FindNextOpenInventorySlot()
+    public int FindNextOpenInventorySlot(Item[] array)
     {
-        for (int i = 0; i < inventory.Length - 1; i++)
+        for (int i = 0; i < array.Length - 1; i++)
         {
-            if (inventory[i] == null)
+            if (array[i] == null)
             {
-                inventoryNextSpace = i;
-                return;
+                return i;
             }
         }
+        return 0;
     }
 
     public void ChangeScene(string destination)
     {
+        fileTime += Time.timeSinceLevelLoad;
         SceneManager.LoadScene(destination);
     }
 
@@ -57,16 +73,56 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    public string previousLevel = "Start";
+    public int GetActiveSceneID()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
+    }
+
+    public void SavePlayerData(int slot)
+    {
+        previousLevel = SceneManager.GetActiveScene().name;
+        SaveSystem.SavePlayer(this, slot);
+    }
+
+    public void LoadPlayerData(int slot)
+    {
+        string newData = SaveSystem.LoadPlayer(slot);
+
+        // change all the things
+        JsonUtility.FromJsonOverwrite(newData, this);
+    }
+
+    private void Update()
+    {
+        if (!pauseGameTime)
+            gameTime += Time.deltaTime * 2f / 3f;
+
+        if (gameTime > 10080f)
+        {
+            Debug.Log("Kablooie");
+        }
+    }
+
+    public int fileNumber;
+    public string fileName;
+    public float fileTime;
+    public int fileCompletion;
+
+    public bool pauseGameTime = false;
+    public float gameTime;
+
+    public string previousLevel;
     public int playerMaxHealth = 5;
     public int playerCurrentHealth = 5;
-    public CollectableItem currentItem;
-    public CollectableItem[] inventory;
-    public int inventoryNextSpace = 0;
+    public Item currentItem;
+    public Item[] tools;
+    public Item[] items;
     public List<string> playedCutscenes = new();
     public List<string> playedLines = new();
     public List<string> foundItems = new();
     public List<string> permanentFoundItems = new();
+
+    public int money = 30;
 
     public List<NPCData> npcMemory = new();
 }

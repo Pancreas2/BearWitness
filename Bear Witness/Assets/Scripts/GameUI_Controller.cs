@@ -18,14 +18,12 @@ public class GameUI_Controller : MonoBehaviour
     private Vector3 hpBasePos = Vector3.up * 150 + Vector3.left * 225;
 
     public Image toolSlot;
-    private void Awake()
+
+    void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         maxHealth = gameManager.playerMaxHealth;
         currentHealth = gameManager.playerCurrentHealth;
-    }
-    void Start()
-    {
         if (gameManager.currentItem != null) DisplayHeldItem(gameManager.currentItem);
         hpDisplay = new Image[maxHealth];
         for (int i = 0; i < maxHealth; i++)
@@ -81,14 +79,14 @@ public class GameUI_Controller : MonoBehaviour
         }
     }
 
-    public void DisplayHeldItem(CollectableItem item)
+    public void DisplayHeldItem(Item item)
     {
-        if (item.icon == null) 
+        if (item.image == null) 
         {
             toolSlot.sprite = emptyToolSlot;
         } else
         {
-            toolSlot.sprite = item.icon;
+            toolSlot.sprite = item.image;
         }
     }
 }

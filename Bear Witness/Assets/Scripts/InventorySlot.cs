@@ -6,7 +6,15 @@ using UnityEngine.EventSystems;
 
 public class InventorySlot : MonoBehaviour
 {
-    public CollectableItem heldItem = new();
+    public enum SlotType
+    {
+        Tool,
+        Item,
+        Armor
+    }
+
+    public SlotType slotType;
+    public Item heldItem;
     [SerializeField] private Image imageIcon;
     private InventoryMenu inventoryManager;
     public int index;
@@ -15,17 +23,20 @@ public class InventorySlot : MonoBehaviour
     private void Start()
     {
         inventoryManager = FindObjectOfType<InventoryMenu>();
-        inventoryManager.inventorySlots[index] = this;
+        if (slotType == SlotType.Tool)
+            inventoryManager.toolSlots[index] = this;
+        else
+            inventoryManager.itemSlots[index] = this;
     }
 
     public void ReloadImage()
     {
-        if (heldItem == null || heldItem.icon == null)
+        if (heldItem == null || heldItem.image == null)
         {
             imageIcon.sprite = defaultSprite;
         } else
         {
-            imageIcon.sprite = heldItem.icon;
+            imageIcon.sprite = heldItem.image;
         }
     }
 
@@ -34,14 +45,14 @@ public class InventorySlot : MonoBehaviour
         heldItem = null;
     }
 
-    public void SetItem(CollectableItem newItem)
+    public void SetItem(Item newItem)
     {
         heldItem = newItem;
     }
 
-    public CollectableItem SwitchItem(CollectableItem newItem)
+    public Item SwitchItem(Item newItem)
     {
-        CollectableItem oldItem = heldItem;
+        Item oldItem = heldItem;
         heldItem = newItem;
         return oldItem;
     }
@@ -52,12 +63,18 @@ public class InventorySlot : MonoBehaviour
         InventorySlot activeSlot = inventoryManager.lastSelectedSlot;
         if (!activeSlot) return;
 
+        // if the active slot and new slot are in different inventories, return
+        if (activeSlot.slotType != slotType) {
+            inventoryManager.lastSelectedSlot = this;
+            return;
+        }
+
         // switch which item is held in each slot
-        CollectableItem currentItem = SwitchItem(activeSlot.heldItem);
+        Item currentItem = SwitchItem(activeSlot.heldItem);
         activeSlot.SetItem(currentItem);
 
         // switch the positions of the items in the game data
-        inventoryManager.SwapInventoryPosition(activeSlot.index, index);
+        inventoryManager.SwapInventoryPosition(activeSlot.index, index, slotType == SlotType.Tool);
 
         // show the change
         activeSlot.ReloadImage();

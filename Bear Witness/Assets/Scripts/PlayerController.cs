@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
 	private bool m_wallClingState = false;
 	private bool startWallClingHitbox = false;
 
+	private PlayerMovement playerMovement;
+
 	public bool inWater = false;
 	[SerializeField] private LayerMask m_WhatIsWater;
 
@@ -58,6 +60,8 @@ public class PlayerController : MonoBehaviour
 
 		if (OnCrouchEvent == null)
 			OnCrouchEvent = new BoolEvent();
+
+		playerMovement = GetComponent<PlayerMovement>();
 	}
 
     private void Start()
@@ -329,18 +333,22 @@ public class PlayerController : MonoBehaviour
 		if (useSpecial) attackTime += 0.3f;
 		if (useSpecial)
         {
-			string toolName = gameManager.currentItem.name;
-			if (toolName == "Ice Pick")
+			Item tool = gameManager.currentItem;
+			if (!tool) animator.SetInteger("attackType", 1);
+			else
             {
-				if (m_wallClingState) ForceWallJump();
-				animator.SetInteger("attackType", 2);
-			} else if (toolName == "Shield")
-            {
-				animator.SetInteger("attackType", 3);
-            } else
-            {
-				animator.SetInteger("attackType", 1);
-			}
+				switch (tool.name)
+                {
+					case "Ice Pick":
+						if (m_wallClingState) ForceWallJump();
+						animator.SetInteger("attackType", 2);
+						break;
+
+					case "Shield":
+						animator.SetInteger("attackType", 3);
+						break;
+				}
+            }
         } else
         {
 			animator.SetInteger("attackType", 0);
@@ -357,8 +365,8 @@ public class PlayerController : MonoBehaviour
     {
 		if (specialing)
 		{
-			string currentItem = gameManager.currentItem.name;
-			if (currentItem == "Ice Pick")
+			Item currentItem = gameManager.currentItem;
+			if (currentItem.name == "Ice Pick")
 			{
 				Vector3 boxAttackPoint = m_AttackPoint.position + Vector3.right * 0.5f * attackRange;
 				Vector3 boxRange = Vector3.down * 0.7f + Vector3.right * attackRange;
@@ -374,7 +382,7 @@ public class PlayerController : MonoBehaviour
                 {
 					Knockback(100f);
 				}
-			} else if (currentItem == "Shield")
+			} else if (currentItem.name == "Shield")
             {
 				shielded = true;
             }
@@ -447,6 +455,7 @@ public class PlayerController : MonoBehaviour
 		m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
 		m_Rigidbody2D.WakeUp();
 		m_wallClingState = false;
+		playerMovement.frozen = false;
 	}
 
 	private void Knockback(float force)

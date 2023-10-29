@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
     {
         public Animator transition;
         public float transitionTime = 0.5f;
+        public string levelMusic;
 
         public void LoadNextLevel(string levelName)
         {

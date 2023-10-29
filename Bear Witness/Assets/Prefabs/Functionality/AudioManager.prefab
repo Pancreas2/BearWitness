@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6696568062319255677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2467542024787477896}
+  - component: {fileID: 8160726984739113400}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2467542024787477896
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6696568062319255677}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.5841913, y: 4.123317, z: -0.76549363}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8160726984739113400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6696568062319255677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf8050dca04412747814c7169d55caab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Select
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 62d4723b2543a0e45af01e3ebd198097, type: 3}
+    volume: 0.798
+    pitch: 1
+    loop: 0
+  - name: Talk
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 4193874c9ba0d554896e9873f9259ff0, type: 3}
+    volume: 0.706
+    pitch: 1
+    loop: 0
+  - name: Forge
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9251c3d8f71eb5b4ca88b6387a82894a, type: 3}
+    volume: 0.509
+    pitch: 0.61
+    loop: 0
+  - name: Arktis
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 77a6ed27bf8ee5a4092a399c98670112, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: Blacksmith
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: f047abff9fc026744bb58cfc5c1f7e49, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: Golden_City
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 170b7914e6b80d642a2c31009248cfb7, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: Walrus
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: c835dc51d54925446bcfd825b62aaed1, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: Swing1
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 134ec2e1b38569e4a99e2a3f7a77fff0, type: 3}
+    volume: 0.199
+    pitch: 1
+    loop: 0
+  - name: Swing2
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: b5d0dda7b307f8345889ae9aad04c735, type: 3}
+    volume: 0.199
+    pitch: 1
+    loop: 0
+  - name: MetalPipe
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 0ea4c6265abf08b4382205f7b1436df4, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0

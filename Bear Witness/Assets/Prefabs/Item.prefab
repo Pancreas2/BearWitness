@@ -211,8 +211,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7382712958352623238}
   - component: {fileID: 2957090655504863249}
-  - component: {fileID: 4450017777511263542}
-  - component: {fileID: 3017564269617326928}
   - component: {fileID: 3127124676992115352}
   - component: {fileID: 3057263807685769175}
   m_Layer: 9
@@ -236,7 +234,7 @@ Transform:
   m_Children:
   - {fileID: 2228331572486673331}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2957090655504863249
 SpriteRenderer:
@@ -290,62 +288,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4450017777511263542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4919298664795680551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 955cb9b142dcdf54aabac88839af162b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueTrigger: {fileID: 3017564269617326928}
-  animator: {fileID: 9010853466338901254}
-  text: {fileID: 5663947378803635042}
-  interactText: TAKE
---- !u!114 &3017564269617326928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4919298664795680551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb2ed9e0f60f2224791b5328225a7037, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogue:
-    names:
-    - Callisto
-    - Callisto
-    - Callisto
-    faces:
-    - {fileID: 21300000, guid: e7bec980d0b02104994ee1450b7f7e99, type: 3}
-    - {fileID: 21300000, guid: 38cae003e48319240b05a555b7ff9d68, type: 3}
-    - {fileID: 21300000, guid: a1b1249edbe1dea48bd7c9a6da450331, type: 3}
-    sentences:
-    - What's this now? An ice pick?
-    - Maybe I can use this to get to Arcas.
-    - If I can get out of the cave...
-    DialogueEndEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 3057263807685769175}
-          m_TargetAssemblyTypeName: ItemInteractable, Assembly-CSharp
-          m_MethodName: CollectItem
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 1
 --- !u!61 &3127124676992115352
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -403,10 +345,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cf097fedb4e88744ae248a6bcdff5d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 9010853466338901254}
+  text: {fileID: 5663947378803635042}
+  interactText: TAKE
   item:
     name: Ice Pick
-    icon: {fileID: 21300000, guid: 727f8df7a6a14154393ee7d98f6035c1, type: 3}
+    iconID: 0
     desc: mine diamonds
+  renewsOnSave: 0
+  id: 
 --- !u!1 &5577948878046976972
 GameObject:
   m_ObjectHideFlags: 0
