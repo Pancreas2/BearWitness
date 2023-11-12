@@ -10,13 +10,15 @@ public class ContactDamage : MonoBehaviour
     public UnityEvent OnDamage;
     public bool active = true;
 
+    public Collider2D collider;
+
     private void Start()
     {
         player = FindObjectOfType<PlayerController>();
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (active && collision.collider.CompareTag("Player"))
+        if (active && collision.collider.CompareTag("Player") && collision.otherCollider.Equals(collider))
         {
             player.Damage(damageAmount, transform.position.x);
             OnDamage.Invoke();

@@ -19,10 +19,7 @@ public class DialogueSentence {
     
     public bool isChoice;
     [TextArea(3, 10)]
-    public string choiceTextA;
-    [TextArea(3, 10)]
-    public string choiceTextB;
-    public bool showChoiceC;
-    [TextArea(3, 10)]
-    public string choiceTextC;
+    public string[] choices;
+
+    public bool isHub;
 }

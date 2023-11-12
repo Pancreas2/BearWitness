@@ -17,7 +17,10 @@ public class DialogueBranch : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        animator.ResetTrigger("Choose");
+        animator.SetInteger("Choice", -1);
         base.OnStateEnter(animator, stateInfo, layerIndex);
+        dialogueManager.dialogueRunning = false;
         dialogueManager.currentDialogueStateMachine = animator;
         dialogueManager.StartDialogue(dialogueSegment);
     }
@@ -31,7 +34,7 @@ public class DialogueBranch : StateMachineBehaviour
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
+    { 
         animator.SetTrigger(triggerOnEnd);
         if (lastState)
         {

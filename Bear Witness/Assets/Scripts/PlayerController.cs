@@ -287,7 +287,7 @@ public class PlayerController : MonoBehaviour
 	}
 
 
-	private void Flip()
+	public void Flip()
 	{
 		// Switch the way the player is labelled as facing.
 		m_FacingRight = !m_FacingRight;
@@ -334,7 +334,7 @@ public class PlayerController : MonoBehaviour
 		if (useSpecial)
         {
 			Item tool = gameManager.currentItem;
-			if (!tool) animator.SetInteger("attackType", 1);
+			if (!tool || tool.name == null) animator.SetInteger("attackType", 1);
 			else
             {
 				switch (tool.name)
@@ -393,9 +393,9 @@ public class PlayerController : MonoBehaviour
 			foreach (Collider2D enemy in hitEnemies)
 			{
 				enemy.TryGetComponent(out Breakable_Wall wall);
-				if (wall) wall.Damage(1);
+				if (wall) wall.Damage(3);
 				enemy.TryGetComponent(out BaseEnemy baseEnemy);
-				if (baseEnemy) baseEnemy.Damage(1, transform.position.x);
+				if (baseEnemy) baseEnemy.Damage(3, transform.position.x);
 			}
 			if (hitEnemies.Length > 0)
 			{

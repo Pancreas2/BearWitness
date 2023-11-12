@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8160726984739113400
 MonoBehaviour:
@@ -84,6 +84,18 @@ MonoBehaviour:
   - name: Walrus
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: c835dc51d54925446bcfd825b62aaed1, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: Intemperance_Intro
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 2343e648fbf2f644abe942d94ac1d954, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: Intemperance
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 352ddd549d3e047408653a7227695d24, type: 3}
     volume: 1
     pitch: 1
     loop: 1

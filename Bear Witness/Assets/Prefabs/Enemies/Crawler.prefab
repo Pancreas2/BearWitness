@@ -307,6 +307,9 @@ MonoBehaviour:
   OnStart:
     m_PersistentCalls:
       m_Calls: []
+  OnPerish:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5597091675176647841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,3 +377,5 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  active: 1
+  collider: {fileID: 9074617389714343509}

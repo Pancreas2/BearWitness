@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
 
+    private List<Sound> playingSounds = new();
+
     public static AudioManager instance;
 
     private string currentBGMusic;
@@ -56,24 +58,53 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void Play(string name)
+    public void Play(string name, float startTime = 0f, float fadeTime = 1f)
     {
         Sound sound = Array.Find(sounds, sound => sound.name == name);
         if (sound == null) return;
+        sound.source.volume = 0;
         sound.source.Play();
+        StartCoroutine(FadeIn(sound, fadeTime));
+        sound.source.time = startTime;
+        playingSounds.Add(sound);
     }
 
-    public void Stop(string name)
+    public void Stop(string name, float fadeTime = 1f)
     {
-        Sound sound = Array.Find(sounds, sound => sound.name == name);
+        Sound sound = playingSounds.Find(sound => sound.name == name);
         if (sound == null) return;
+        StartCoroutine(FadeOut(sound, fadeTime));
+    }
+
+    public void StopAll(float fadeTime = 1f)
+    {
+        foreach (Sound sound in playingSounds) {
+            StartCoroutine(FadeOut(sound, fadeTime));
+        }
+    }
+
+    private IEnumerator FadeOut(Sound sound, float time)
+    {
+        float initialVolume = sound.volume;
+
+        for (int i = 9; i >= 0; i--)
+        {
+            sound.source.volume = i * initialVolume / 10;
+            yield return new WaitForSeconds(time / 10f);
+        }
+
+        playingSounds.Remove(sound);
         sound.source.Stop();
     }
 
-    public void StopAll()
+    private IEnumerator FadeIn(Sound sound, float time)
     {
-        foreach (Sound sound in sounds) {
-            sound.source.Stop();
+        float initialVolume = sound.volume;
+
+        for (int i = 1; i <= 10; i++)
+        {
+            sound.source.volume = i * initialVolume / 10;
+            yield return new WaitForSeconds(time / 10f);
         }
     }
 }

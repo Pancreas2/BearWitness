@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd7d77579bf29c4881f7de8d85dec35, type: 3}
+  m_Name: Silica
+  m_EditorClassIdentifier: 
+  name: Silica
+  trust: 0
+  dialogueFaces:
+  - emotion: neutral
+    face: {fileID: -1576687511, guid: d07cd096524f2034c9db434e812eb05d, type: 3}
+  - emotion: regretful
+    face: {fileID: -1554031538, guid: d07cd096524f2034c9db434e812eb05d, type: 3}
+  - emotion: embarrassed
+    face: {fileID: -1490337606, guid: d07cd096524f2034c9db434e812eb05d, type: 3}
+  - emotion: happy
+    face: {fileID: -1656227048, guid: d07cd096524f2034c9db434e812eb05d, type: 3}
+  - emotion: closed_eyes
+    face: {fileID: -537195550, guid: d07cd096524f2034c9db434e812eb05d, type: 3}
+  - emotion: angry
+    face: {fileID: -735135795, guid: d07cd096524f2034c9db434e812eb05d, type: 3}
+  - emotion: sad
+    face: {fileID: -1997592134, guid: d07cd096524f2034c9db434e812eb05d, type: 3}
+  - emotion: skeptical
+    face: {fileID: -1837781749, guid: d07cd096524f2034c9db434e812eb05d, type: 3}
+  - emotion: concerned
+    face: {fileID: -969742290, guid: d07cd096524f2034c9db434e812eb05d, type: 3}
+  neutralFace:
+    emotion: neutral
+    face: {fileID: -894457865, guid: f53219d2d7330614b8e3d8963569464c, type: 3}

@@ -19,6 +19,9 @@ public class GameUI_Controller : MonoBehaviour
 
     public Image toolSlot;
 
+    [SerializeField] private GameObject inventoryMenuRoot;
+    [SerializeField] private GameObject giveMenuRoot;
+
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -36,6 +39,9 @@ public class GameUI_Controller : MonoBehaviour
             }
             hpDisplay.SetValue(newHPImg.GetComponent<Image>(), i);
         }
+
+        inventoryMenuRoot.SetActive(false);
+        giveMenuRoot.SetActive(false);
     }
 
     public void DecreaseHP(int damage)
@@ -81,7 +87,7 @@ public class GameUI_Controller : MonoBehaviour
 
     public void DisplayHeldItem(Item item)
     {
-        if (item.image == null) 
+        if (!item || item.image == null) 
         {
             toolSlot.sprite = emptyToolSlot;
         } else

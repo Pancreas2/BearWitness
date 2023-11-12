@@ -23,10 +23,27 @@ public class InventorySlot : MonoBehaviour
     private void Start()
     {
         inventoryManager = FindObjectOfType<InventoryMenu>();
+
+        FindItem();
+
         if (slotType == SlotType.Tool)
             inventoryManager.toolSlots[index] = this;
         else
             inventoryManager.itemSlots[index] = this;
+        
+    }
+
+    public void FindItem()
+    {
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        if (slotType == SlotType.Tool)
+        {
+            heldItem = gameManager.tools[index];
+        }
+        else if (slotType == SlotType.Item)
+        {
+            heldItem = gameManager.items[index];
+        }
     }
 
     public void ReloadImage()

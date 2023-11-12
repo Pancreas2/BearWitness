@@ -55,9 +55,6 @@ public class InventoryMenu : MonoBehaviour
 
     public void Pause()
     {
-        resumeMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
         foreach (InventorySlot slot in toolSlots)
         {
             if (slot)
@@ -74,6 +71,9 @@ public class InventoryMenu : MonoBehaviour
                 slot.ReloadImage();
             }
         }
+        resumeMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
     }
 
     public void SwapInventoryPosition(int a, int b, bool tool)

@@ -4,19 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.Events;
 
 public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
-    public TextMeshProUGUI choiceA;
-    public TextMeshProUGUI choiceB;
-    public TextMeshProUGUI choiceC;
+
+    public GameObject choiceTexts;
+    private List<TextMeshProUGUI> choices = new();
+
+    [SerializeField] private GameObject templateChoice;
+
     public Image faceDisplay;
     public Animator animator;
 
+    public DialogueButtons buttons;
+
     private AudioManager audioManager;
-    private bool dialogueRunning = false;
+    [HideInInspector] public bool dialogueRunning = false;
     private int frameDelay = 20;
 
     private Queue<DialogueSentence> sentences;
@@ -26,11 +32,20 @@ public class DialogueManager : MonoBehaviour
 
     public Animator currentDialogueStateMachine;
 
+    public UnityEvent OnDialogueEnd;
+
     void Start()
     {
         sentences = new Queue<DialogueSentence>();
         gameManager = FindObjectOfType<GameManager>();
         audioManager = FindObjectOfType<AudioManager>();
+
+        for (int i = 0; i < 6; i++)
+        {
+            GameObject newChoice = Instantiate(templateChoice, choiceTexts.transform, false);
+            newChoice.transform.localPosition = new Vector3(Mathf.Floor(i / 3) * 0.5f, i % 3 * -0.25f, 0);
+            choices.Add(newChoice.GetComponent<TextMeshProUGUI>());
+        }
     }
 
     void Update()
@@ -41,25 +56,27 @@ public class DialogueManager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space) && dialogueRunning)
         {
+
+            if (currentSentence.isHub)
+            {
+                currentDialogueStateMachine.SetInteger("Choice", buttons.GetButtonCommand());
+            }
+
             if (currentSentence.isChoice)
             {
                 GameObject selected = EventSystem.current.currentSelectedGameObject;
                 if (currentDialogueStateMachine != null)
                 {
-                    if (selected == choiceA.gameObject)
+                    for (int i = 0; i < choices.Count; i++)
                     {
-                        currentDialogueStateMachine.SetInteger("Choice", 0);
-                    } else if (selected == choiceB.gameObject)
-                    {
-                        currentDialogueStateMachine.SetInteger("Choice", 1);
-                    } else if (selected == choiceC.gameObject)
-                    {
-                        currentDialogueStateMachine.SetInteger("Choice", 2);
+                        if (choices[i].gameObject == selected)
+                        {
+                            currentDialogueStateMachine.SetInteger("Choice", 4 + i);
+                        }
                     }
                 }
-
-                EventSystem.current.SetSelectedGameObject(choiceA.gameObject);
             }
+
             DisplayNextSentence();
         }
     }
@@ -70,9 +87,11 @@ public class DialogueManager : MonoBehaviour
         frameDelay = 20;
         if (!dialogueRunning)
         {
-            choiceA.text = "";
-            choiceB.text = "";
-            choiceC.text = "";
+            foreach (TextMeshProUGUI choice in choices)
+            {
+                choice.text = "";
+            }
+
             dialogueText.text = "";
             animator.SetBool("IsOpen", true);
 
@@ -92,21 +111,35 @@ public class DialogueManager : MonoBehaviour
     {
         if (sentences.Count == 0)
         {
-            dialogueRunning = false;
-            if (currentDialogueStateMachine != null)
-                currentDialogueStateMachine.SetTrigger("Choose");
-            else EndDialogue();
-            return;
-        }
-        currentSentence = sentences.Dequeue();
-        if ((!currentSentence.hasCondition || currentSentence.condition.Evaluate(gameManager)) && (!gameManager.playedLines.Contains(currentSentence.lineId) || !currentSentence.singleUse))
+            if (!currentDialogueStateMachine) EndDialogue();
+            else currentDialogueStateMachine.SetTrigger("Choose");
+        } else
         {
-            if (currentSentence.singleUse) gameManager.playedLines.Add(currentSentence.lineId);
-            audioManager.Play("Select");
-            WriteToDialogueBox();
-        } else 
-        {
-            DisplayNextSentence();
+            currentSentence = sentences.Dequeue();
+
+            if (currentSentence.isHub)
+            {
+                buttons.SetButtonsActive(true);
+                EventSystem.current.SetSelectedGameObject(buttons.talkButton.gameObject);
+            }
+            else
+            {
+                buttons.SetButtonsActive(false);
+                if (currentSentence.isChoice)
+                {
+                    EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
+                }
+            }
+
+            if ((!currentSentence.hasCondition || currentSentence.condition.Evaluate(gameManager)) && (!gameManager.playedLines.Contains(currentSentence.lineId) || !currentSentence.singleUse))
+            {
+                if (currentSentence.singleUse) gameManager.playedLines.Add(currentSentence.lineId);
+                audioManager.Play("Select");
+                WriteToDialogueBox();
+            } else 
+            {
+                DisplayNextSentence();
+            }
         }
     }
 
@@ -120,18 +153,25 @@ public class DialogueManager : MonoBehaviour
         {
             nameText.text = "";
             dialogueText.text = "";
-            string choiceAtext = currentSentence.choiceTextA;
-            string choiceBtext = currentSentence.choiceTextB;
-            string choiceCtext = currentSentence.choiceTextC;
-            StartCoroutine(TypeSentence(choiceAtext, choiceA));
-            StartCoroutine(TypeSentence(choiceBtext, choiceB));
-            StartCoroutine(TypeSentence(choiceCtext, choiceC));
+
+            for (int i = 0; i < choices.Count; i++)
+            {
+                if (i < currentSentence.choices.Length)
+                {
+                    choices[i].gameObject.SetActive(true);
+                    StartCoroutine(TypeSentence(currentSentence.choices[i], choices[i]));
+                }
+                else choices[i].gameObject.SetActive(false);
+            }
         }
         else
         {
-            choiceA.text = "";
-            choiceB.text = "";
-            choiceC.text = "";
+            foreach (TextMeshProUGUI choice in choices)
+            {
+                choice.text = "";
+                choice.gameObject.SetActive(false);
+            }
+
             nameText.text = name;
             StartCoroutine(TypeSentence(sentence, dialogueText));
         }
@@ -147,10 +187,10 @@ public class DialogueManager : MonoBehaviour
             float timeDelay = 0.02f;
             if (letter == '.' || letter == '?' || letter == '!' || letter == ';')
             {
-                timeDelay = 1f;
+                timeDelay = 0.5f;
             } else if (letter == ',' || letter == ':')
             {
-                timeDelay = 0.5f;
+                timeDelay = 0.25f;
             }
             yield return new WaitForSeconds(timeDelay);
         }
@@ -160,7 +200,9 @@ public class DialogueManager : MonoBehaviour
     {
         animator.SetBool("IsOpen", false);
         dialogueRunning = false;
-        if (currentDialogueStateMachine == null)
+        if (!currentDialogueStateMachine)
             FindObjectOfType<PlayerMovement>().frozen = false;
+        if (OnDialogueEnd != null)
+            OnDialogueEnd.Invoke();
     }
 }

@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
 
     public void PickupItem(Item item)
     {
+        InventoryMenu invManager = FindObjectOfType<InventoryMenu>();
+
         if (item.type == Item.ItemType.Tool)
         {
             if (!currentItem)
@@ -43,10 +45,19 @@ public class GameManager : MonoBehaviour
                 currentItem = item;
                 FindObjectOfType<GameUI_Controller>().DisplayHeldItem(item);
             }
-            tools[FindNextOpenInventorySlot(tools)] = item;
+
+            int index = FindNextOpenInventorySlot(tools);
+            tools[index] = item;
+
+            // render in menu
+            invManager.toolSlots[index].FindItem();
         } else
         {
-            items[FindNextOpenInventorySlot(items)] = item;
+            int index = FindNextOpenInventorySlot(items);
+            items[index] = item;
+
+            // render in menu
+            invManager.itemSlots[index].FindItem();
         }
     }
 
