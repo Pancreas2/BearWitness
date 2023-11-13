@@ -125,10 +125,6 @@ public class DialogueManager : MonoBehaviour
             else
             {
                 buttons.SetButtonsActive(false);
-                if (currentSentence.isChoice)
-                {
-                    EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
-                }
             }
 
             if ((!currentSentence.hasCondition || currentSentence.condition.Evaluate(gameManager)) && (!gameManager.playedLines.Contains(currentSentence.lineId) || !currentSentence.singleUse))
@@ -152,13 +148,19 @@ public class DialogueManager : MonoBehaviour
         if (currentSentence.isChoice)
         {
             nameText.text = "";
-            dialogueText.text = "";
+            StartCoroutine(TypeSentence(sentence, dialogueText));
 
+            bool chosenInitialSelected = false;
             for (int i = 0; i < choices.Count; i++)
             {
-                if (i < currentSentence.choices.Length)
+                if (i < currentSentence.choices.Length && currentSentence.choices[i] != "")
                 {
                     choices[i].gameObject.SetActive(true);
+                    if (!chosenInitialSelected)
+                    {
+                        chosenInitialSelected = true;
+                        EventSystem.current.SetSelectedGameObject(choices[i].gameObject);
+                    }
                     StartCoroutine(TypeSentence(currentSentence.choices[i], choices[i]));
                 }
                 else choices[i].gameObject.SetActive(false);

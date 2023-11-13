@@ -7,7 +7,7 @@ public class PlayerData
 {
     public int playerMaxHealth = 5;
     public Item currentItem;
-    public Item[] inventory;
+    public List<Item> inventory;
     public int inventoryNextSpace = 0;
     public List<string> playedCutscenes = new();
     public List<string> playedLines = new();

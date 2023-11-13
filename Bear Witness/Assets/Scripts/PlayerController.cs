@@ -81,10 +81,10 @@ public class PlayerController : MonoBehaviour
 		{
 			if (colliders[i].gameObject != gameObject)
 			{
-				coyotePoints = 5;
 				m_Grounded = true;
-				if (!wasGrounded)
+				if (!wasGrounded && m_Rigidbody2D.velocity.y < 0)
 				{
+					coyotePoints = 5;
 					m_HasAirAttack = true;
 					OnLandEvent.Invoke();
 				}
@@ -260,28 +260,38 @@ public class PlayerController : MonoBehaviour
 		}
 
 		// If the player should jump...
-		if (m_wallClingState && jump)
-		{
-			ForceWallJump();
-		}
-		else if (m_Grounded && jump)
-		{
-			m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, Mathf.Max(0f, m_Rigidbody2D.velocity.y));
-			if (roll)
+		if (jump)
+        {
+			// prevent further jumps
+			coyotePoints = 0;
+
+			if (m_wallClingState)
 			{
-				// bound
-				m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce * 1.2f));
-			} else if (run)
-            {
-				// leap
-				m_Rigidbody2D.AddForce(new Vector2(10f * move, m_JumpForce / 1.5f));
-			} else
-            {
-				// jump
-				m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+				ForceWallJump();
 			}
-			m_Grounded = false;
-		}
+			else if (m_Grounded)
+			{
+				m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, Mathf.Max(0f, m_Rigidbody2D.velocity.y));
+				if (roll)
+				{
+					// bound
+					m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce * 1.2f));
+				}
+				else if (run)
+				{
+					// leap
+					m_Rigidbody2D.AddForce(new Vector2(10f * move, m_JumpForce / 1.5f));
+				}
+				else
+				{
+					// jump
+					m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+				}
+
+				m_Grounded = false;
+			}
+        }
+
 		animator.SetBool("grounded", m_Grounded);
 		animator.SetBool("wallCling", m_wallClingState);
 	}

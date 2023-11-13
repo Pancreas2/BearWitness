@@ -55,11 +55,12 @@ public class InventoryMenu : MonoBehaviour
 
     public void Pause()
     {
+        resumeMenuUI.SetActive(true);
         foreach (InventorySlot slot in toolSlots)
         {
             if (slot)
             {
-                slot.heldItem = gameManager.tools[slot.index];
+                slot.FindItem();
                 slot.ReloadImage();
             }
         }
@@ -67,11 +68,10 @@ public class InventoryMenu : MonoBehaviour
         {
             if (slot)
             {
-                slot.heldItem = gameManager.items[slot.index];
+                slot.FindItem();
                 slot.ReloadImage();
             }
         }
-        resumeMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
     }

@@ -23,7 +23,6 @@ public class InventorySlot : MonoBehaviour
     private void Start()
     {
         inventoryManager = FindObjectOfType<InventoryMenu>();
-
         FindItem();
 
         if (slotType == SlotType.Tool)
@@ -38,11 +37,15 @@ public class InventorySlot : MonoBehaviour
         GameManager gameManager = FindObjectOfType<GameManager>();
         if (slotType == SlotType.Tool)
         {
-            heldItem = gameManager.tools[index];
+            if (index < gameManager.tools.Count)
+                heldItem = gameManager.tools[index];
+            else heldItem = null;
         }
         else if (slotType == SlotType.Item)
         {
-            heldItem = gameManager.items[index];
+            if (index < gameManager.items.Count)
+                heldItem = gameManager.items[index];
+            else heldItem = null;
         }
     }
 

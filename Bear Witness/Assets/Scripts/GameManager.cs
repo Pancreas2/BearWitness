@@ -25,8 +25,13 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        tools = new Item[12];
-        items = new Item[24];
+        tools = new(12);
+        items = new(24);
+
+        for (int i = 0; i < 20; i++)
+        {
+            doorStates.Add(false);
+        }
     }
 
     private void ReloadLevel()
@@ -46,31 +51,23 @@ public class GameManager : MonoBehaviour
                 FindObjectOfType<GameUI_Controller>().DisplayHeldItem(item);
             }
 
-            int index = FindNextOpenInventorySlot(tools);
-            tools[index] = item;
+            tools.Add(item);
 
             // render in menu
-            invManager.toolSlots[index].FindItem();
+            foreach (InventorySlot toolSlot in invManager.toolSlots)
+            {
+                toolSlot.FindItem();
+            }
         } else
         {
-            int index = FindNextOpenInventorySlot(items);
-            items[index] = item;
+            items.Add(item);
 
             // render in menu
-            invManager.itemSlots[index].FindItem();
-        }
-    }
-
-    public int FindNextOpenInventorySlot(Item[] array)
-    {
-        for (int i = 0; i < array.Length - 1; i++)
-        {
-            if (array[i] == null)
+            foreach (InventorySlot itemSlot in invManager.itemSlots)
             {
-                return i;
+                itemSlot.FindItem();
             }
         }
-        return 0;
     }
 
     public void ChangeScene(string destination)
@@ -106,7 +103,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (!pauseGameTime)
-            gameTime += Time.deltaTime * 2f / 3f;
+            gameTime += Time.deltaTime * 200f / 3f;
 
         if (gameTime > 10080f)
         {
@@ -126,12 +123,13 @@ public class GameManager : MonoBehaviour
     public int playerMaxHealth = 5;
     public int playerCurrentHealth = 5;
     public Item currentItem;
-    public Item[] tools;
-    public Item[] items;
+    public List<Item> tools;
+    public List<Item> items;
     public List<string> playedCutscenes = new();
     public List<string> playedLines = new();
     public List<string> foundItems = new();
     public List<string> permanentFoundItems = new();
+    public List<bool> doorStates = new();
 
     public int money = 30;
 

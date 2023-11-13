@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     float attackDelay = 0;
     bool attackEnd = false;
 
+    public bool onPassThroughPlatform = false;
 
     public float moveTarget = 0f;
     private bool cutsceneMove = false;
@@ -42,67 +43,69 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-            horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed;
+        horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed;
 
-            if (Input.GetButtonDown("Jump") && !wasFrozen)
+        // was Input.GetButtonDown("Jump") && !wasFrozen
+        if (Input.GetButtonDown("Jump") && !(onPassThroughPlatform && Input.GetAxisRaw("Vertical") < 0))
+        {
+            jump = true;
+        }
+
+        if (controller.inWater)
+        {
+            verticalMove = Input.GetAxisRaw("Vertical") * moveSpeed;
+        }
+        else
+        {
+
+            if (Input.GetButton("Run"))
             {
-                jump = true;
+                run = true;
+                roll = false;
+                horizontalMove *= runMultiplier;
             }
-
-            if (controller.inWater)
+            else if ((run || roll) && horizontalMove != 0)
             {
-                verticalMove = Input.GetAxisRaw("Vertical") * moveSpeed;
+                roll = true;
             }
             else
             {
-
-                if (Input.GetButton("Run"))
-                {
-                    run = true;
-                    roll = false;
-                    horizontalMove *= runMultiplier;
-                }
-                else if ((run || roll) && horizontalMove != 0)
-                {
-                    roll = true;
-                }
-                else
-                {
-                    run = false;
-                    roll = false;
-                }
-
+                run = false;
+                roll = false;
             }
 
-            if (Time.time >= attackDelay)
+        }
+
+        if (Time.time >= attackDelay)
+        {
+            if (Input.GetButton("Special"))
             {
-                if (Input.GetButton("Special"))
-                {
-                    special = true;
-                    attacking = true;
-                    roll = false;
-                    run = false;
-                    attackDelay = Time.time + (2f / attackRate);
-                }
-                else if (Input.GetMouseButton(0))
-                {
-                    special = false;
-                    attacking = true;
-                    roll = false;
-                    run = false;
-                    attackDelay = Time.time + (1f / attackRate);
-                }
+                special = true;
+                attacking = true;
+                roll = false;
+                run = false;
+                attackDelay = Time.time + (2f / attackRate);
             }
-
-            if (Input.GetButtonUp("Special")) {
-                attackEnd = true;
+            else if (Input.GetMouseButton(0))
+            {
+                special = false;
+                attacking = true;
+                roll = false;
+                run = false;
+                attackDelay = Time.time + (1f / attackRate);
             }
+        }
 
-            wasFrozen = false;
+        if (Input.GetButtonUp("Special"))
+        {
+            attackEnd = true;
+        }
+
+        wasFrozen = false;
     }
 
     private void FixedUpdate()
-{
+    {
         if (!frozen)
         {
             if (controller.inWater)
@@ -119,7 +122,8 @@ public class PlayerMovement : MonoBehaviour
             if (attackEnd) controller.AttackEnd();
             attackEnd = false;
         }
-        else {
+        else
+        {
             if (!wasFrozen)
             {
                 wasFrozen = true;
@@ -141,11 +145,13 @@ public class PlayerMovement : MonoBehaviour
                     {
                         controller.Flip();
                     }
-                } else
+                }
+                else
                 {
                     controller.Move(direction * moveSpeed * Time.fixedDeltaTime, false, false, false);
                 }
-            } else
+            }
+            else
             {
                 controller.Move(0, false, false, false);
             }

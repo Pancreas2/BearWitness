@@ -9,18 +9,22 @@ public class DialogueCondition
     {
         TrustLevel,
         PreviousLinePlayed, 
-        Money
+        Money,
+        HasItem
     }
     public ConditionType type;
     [Header("Trust Level")]
     public int upperBound;
     public int lowerBound;
     public int npcId;
-    [Header("PreviousLinePlayed")]
+    [Header("Previous Line Played")]
     public string lineId;
     [Header("Money")]
     public int threshold;
     public bool greaterThan;
+    [Header("Has Item")]
+    public Item item;
+    public bool invert;
     
 
     public bool Evaluate(GameManager gameManager)
@@ -40,6 +44,9 @@ public class DialogueCondition
         } else if (type == ConditionType.Money)
         {
             return gameManager.money < threshold ^ greaterThan;
+        } else if (type == ConditionType.HasItem)
+        {
+            return gameManager.items.Contains(item) ^ invert;
         }
         return false;
     }
