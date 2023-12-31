@@ -32,6 +32,11 @@ public class GameManager : MonoBehaviour
         {
             doorStates.Add(false);
         }
+
+        for (int i = 0; i < 20; i++)
+        {
+            uniqueEnemies.Add(false);
+        }
     }
 
     private void ReloadLevel()
@@ -100,10 +105,20 @@ public class GameManager : MonoBehaviour
         JsonUtility.FromJsonOverwrite(newData, this);
     }
 
+    public void RespawnPlayer()
+    {
+        currentRespawnPoint.Spawn();
+    }
+
+    public void ChangeSpawnPoint(SpawnPlayer newSpawn)
+    {
+        currentRespawnPoint = newSpawn;
+    }
+
     private void Update()
     {
         if (!pauseGameTime)
-            gameTime += Time.deltaTime * 200f / 3f;
+            gameTime += Time.deltaTime * 2f / 3f;
 
         if (gameTime > 10080f)
         {
@@ -134,5 +149,10 @@ public class GameManager : MonoBehaviour
     public int money = 30;
 
     public List<NPCData> npcMemory = new();
+
+    private SpawnPlayer currentRespawnPoint;
+
+    public List<bool> uniqueEnemies = new();
+    public SlainEnemies slainEnemies;
 }
 

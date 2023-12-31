@@ -6,14 +6,21 @@ using UnityEngine.Events;
 public class BasicTrigger : MonoBehaviour
 {
     public UnityEvent OnTrigger;
+    [SerializeField] private float deadTime = 0.5f;
+    private float isActiveTime = 0f;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("collide");
-        if (collision.collider.CompareTag("Player"))
+        if (isActiveTime <= Time.time)
         {
-            Debug.Log("invoke");
-            OnTrigger.Invoke();
+            Debug.Log("collide");
+            if (collision.collider.CompareTag("Player"))
+            {
+                isActiveTime = Time.time + deadTime;
+                Debug.Log("invoke");
+                OnTrigger.Invoke();
+            }
         }
+
     }
 }

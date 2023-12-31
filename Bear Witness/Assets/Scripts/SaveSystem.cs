@@ -36,4 +36,16 @@ public static class SaveSystem
             return null;
         }
     }
+
+    public static void DeleteSave(int slot)
+    {
+        string path = Application.persistentDataPath + "/player_data_" + slot + ".pancreas";
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        } else
+        {
+            Debug.LogError("Save file not found in " + path);
+        }
+    }
 }

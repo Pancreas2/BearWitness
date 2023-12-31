@@ -10,7 +10,7 @@ public class LookForPlayer : MonoBehaviour
     [SerializeField] private float noticeDistance = 4f;
     [SerializeField] private LayerMask raycastLayers;
     [SerializeField] private Transform eyePoint;
-    private bool seesPlayer = false;
+    public bool seesPlayer = false;
     Vector3 visibleDirection;
 
     [SerializeField] private float limitingAngle = 90f;
@@ -39,14 +39,15 @@ public class LookForPlayer : MonoBehaviour
         {
             if (seesPlayer)
             {
+                seesPlayer = false;
                 OnNotSee.Invoke();
                 animator.SetBool("playerInRange", false);
             } else
             {
+                seesPlayer = true;
                 OnSee.Invoke();
                 animator.SetBool("playerInRange", true);
             }
-            seesPlayer = !seesPlayer;
         }
     }
 

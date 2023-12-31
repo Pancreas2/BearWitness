@@ -21,13 +21,10 @@ public class GameEvent : StateMachineBehaviour
     [Header("Open Door")]
     public int doorId;
 
-    private void Awake()
-    {
-        gameManager = FindObjectOfType<GameManager>();
-    }
-
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (!gameManager) gameManager = FindObjectOfType<GameManager>();
+
         base.OnStateEnter(animator, stateInfo, layerIndex);
         switch (eventType)
         {

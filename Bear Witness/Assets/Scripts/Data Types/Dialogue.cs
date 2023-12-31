@@ -5,5 +5,5 @@ using UnityEngine;
 [System.Serializable]
 public class Dialogue
 {
-    public DialogueSentence[] elements;
+    public List<DialogueSentence> elements = new();
 }

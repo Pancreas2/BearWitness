@@ -34,6 +34,8 @@ public class DialogueManager : MonoBehaviour
 
     public UnityEvent OnDialogueEnd;
 
+    private bool writingDialogueCommand;
+
     void Start()
     {
         sentences = new Queue<DialogueSentence>();
@@ -83,7 +85,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
-        DialogueSentence[] dialogueElements = dialogue.elements;
+        List<DialogueSentence> dialogueElements = dialogue.elements;
         frameDelay = 20;
         if (!dialogueRunning)
         {
@@ -153,7 +155,7 @@ public class DialogueManager : MonoBehaviour
             bool chosenInitialSelected = false;
             for (int i = 0; i < choices.Count; i++)
             {
-                if (i < currentSentence.choices.Length && currentSentence.choices[i] != "")
+                if (i < currentSentence.choices.Count && currentSentence.choices[i] != "")
                 {
                     choices[i].gameObject.SetActive(true);
                     if (!chosenInitialSelected)
@@ -185,15 +187,31 @@ public class DialogueManager : MonoBehaviour
         destination.text = "";
         foreach (char letter in sentence.ToCharArray())
         {
-            destination.text += letter;
             float timeDelay = 0.02f;
-            if (letter == '.' || letter == '?' || letter == '!' || letter == ';')
+
+            if (letter == '|')
             {
-                timeDelay = 0.5f;
-            } else if (letter == ',' || letter == ':')
+                Debug.Log("commandStart");
+                writingDialogueCommand = true;
+                timeDelay = 0f;
+            } else if (writingDialogueCommand)
             {
-                timeDelay = 0.25f;
+                switch (letter)
+                {
+                    case '0':
+                        timeDelay = 0.25f;
+                        break;
+                    case '1':
+                        timeDelay = 0.5f;
+                        break;
+                }
+                writingDialogueCommand = false;
+                Debug.Log(letter);
+            } else
+            {
+                destination.text += letter;
             }
+
             yield return new WaitForSeconds(timeDelay);
         }
     }

@@ -6,13 +6,16 @@ using UnityEngine.Events;
 public class DialogueBranch : StateMachineBehaviour
 {
     private DialogueManager dialogueManager;
+    private GameManager gameManager;
     public Dialogue dialogueSegment;
     public bool lastState = false;
     public string triggerOnEnd;
+    public Item consumeOnEnd;
 
     private void Awake()
     {
         dialogueManager = FindObjectOfType<DialogueManager>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -36,6 +39,12 @@ public class DialogueBranch : StateMachineBehaviour
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     { 
         animator.SetTrigger(triggerOnEnd);
+
+        if (consumeOnEnd && gameManager.items.Contains(consumeOnEnd))
+        {
+            gameManager.items.Remove(consumeOnEnd);
+        }
+
         if (lastState)
         {
             dialogueManager.EndDialogue();

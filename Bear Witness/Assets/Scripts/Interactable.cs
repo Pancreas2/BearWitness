@@ -20,7 +20,7 @@ public class Interactable : MonoBehaviour
         if (collision.collider.CompareTag("Player")) 
         {
             animator.SetBool("playerInRange", true);
-            if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)) && Time.time >= cooldown)
+            if (Input.GetAxisRaw("Vertical") != 0 && Time.time >= cooldown)
             {
                 cooldown = Time.time + 2f;
                 OnInteract();

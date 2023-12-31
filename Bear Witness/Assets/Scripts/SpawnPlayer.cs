@@ -8,12 +8,15 @@ public class SpawnPlayer : MonoBehaviour
     public Vector2 forceOnSpawn = Vector2.zero;
     public bool spawnOnLoad = true;
 
+    private GameManager gameManager;
+
     private void Start()
     {
-        GameManager gameManager = FindObjectOfType<GameManager>();
+        gameManager = FindObjectOfType<GameManager>();
         Debug.Log(gameManager.previousLevel);
         if (entersFromRoom == gameManager.previousLevel && spawnOnLoad)
         {
+            AssignAsSpawn();
             Spawn();
         } else if (spawnOnLoad)
         {
@@ -27,5 +30,10 @@ public class SpawnPlayer : MonoBehaviour
         PlayerController player = FindObjectOfType<PlayerController>();
         player.transform.position = transform.position;
         player.GetComponent<Rigidbody2D>().AddForce(forceOnSpawn);
+    }
+
+    public void AssignAsSpawn()
+    {
+        gameManager.ChangeSpawnPoint(this);
     }
 }

@@ -20,7 +20,6 @@ public class GameUI_Controller : MonoBehaviour
     public Image toolSlot;
 
     [SerializeField] private GameObject inventoryMenuRoot;
-    [SerializeField] private GameObject giveMenuRoot;
 
     void Start()
     {
@@ -41,7 +40,24 @@ public class GameUI_Controller : MonoBehaviour
         }
 
         inventoryMenuRoot.SetActive(false);
-        giveMenuRoot.SetActive(false);
+    }
+
+    public void Reload()
+    {
+        maxHealth = gameManager.playerMaxHealth;
+        currentHealth = gameManager.playerCurrentHealth;
+        if (gameManager.currentItem != null) DisplayHeldItem(gameManager.currentItem);
+        hpDisplay = new Image[maxHealth];
+        for (int i = 0; i < maxHealth; i++)
+        {
+            GameObject newHPImg = Instantiate(hpimg, hpBar.transform);
+            newHPImg.transform.SetLocalPositionAndRotation((hpBasePos + Vector3.right * i * 30f), Quaternion.identity);
+            if (currentHealth <= i)
+            {
+                newHPImg.GetComponent<Image>().sprite = emptyIcon;
+            }
+            hpDisplay.SetValue(newHPImg.GetComponent<Image>(), i);
+        }
     }
 
     public void DecreaseHP(int damage)

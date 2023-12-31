@@ -8,16 +8,17 @@ public class PlayerMovement : MonoBehaviour
 
     float horizontalMove = 0f;
     float verticalMove = 0f;
-    public float moveSpeed = 10f;
-    public float runMultiplier = 2f;
+    public float moveSpeed = 15f;
+    public float runMultiplier = 1.5f;
     bool jump = false;
+    float jumpTime = 0f;
     bool run = false;
     bool roll = false;
     bool special = false;
     public bool frozen = false;
     bool wasFrozen = false;
     bool attacking = false;
-    readonly float attackRate = 3f;
+    readonly float attackRate = 3.5f;
     float attackDelay = 0;
     bool attackEnd = false;
 
@@ -54,26 +55,45 @@ public class PlayerMovement : MonoBehaviour
         if (controller.inWater)
         {
             verticalMove = Input.GetAxisRaw("Vertical") * moveSpeed;
+            run = false;
+            roll = false;
         }
         else
         {
+            if (controller.m_Grounded)
+            {
+                if (Input.GetButton("Run") || Input.GetAxisRaw("RightTrigger") > 0.25f)
+                {
+                    run = true;
+                    roll = false;
+                }
+                else if ((run || roll) && horizontalMove != 0)
+                {
+                    roll = true;
+                }
+                else
+                {
+                    run = false;
+                    roll = false;
+                }
 
-            if (Input.GetButton("Run"))
+                if (horizontalMove == 0) run = false;
+            } else if (roll && horizontalMove == 0)
             {
-                run = true;
                 roll = false;
-                horizontalMove *= runMultiplier;
-            }
-            else if ((run || roll) && horizontalMove != 0)
-            {
-                roll = true;
-            }
-            else
-            {
                 run = false;
-                roll = false;
             }
 
+            if (run)
+            {
+                if (roll)
+                {
+                    horizontalMove *= 1.25f;
+                } else
+                {
+                    horizontalMove *= runMultiplier;
+                }
+            }
         }
 
         if (Time.time >= attackDelay)
@@ -86,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
                 run = false;
                 attackDelay = Time.time + (2f / attackRate);
             }
-            else if (Input.GetMouseButton(0))
+            else if (Input.GetButton("Attack"))
             {
                 special = false;
                 attacking = true;
@@ -115,11 +135,11 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 controller.Move(horizontalMove * Time.fixedDeltaTime, jump, run, roll);
+                if (attacking) controller.Attack(special);
+                if (attackEnd) controller.AttackEnd();
             }
             jump = false;
-            if (attacking) controller.Attack(special);
             attacking = false;
-            if (attackEnd) controller.AttackEnd();
             attackEnd = false;
         }
         else

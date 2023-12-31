@@ -19,7 +19,7 @@ public class DialogueSentence {
     
     public bool isChoice;
     [TextArea(3, 10)]
-    public string[] choices;
+    public List<string> choices = new();
 
     public bool isHub;
 }

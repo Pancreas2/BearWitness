@@ -26,6 +26,8 @@ public class PlayerData
 
     public string previousLevel;
 
+    public SlainEnemies slainEnemies;
+
     public PlayerData(GameManager gameManager)
     {
         playerMaxHealth = gameManager.playerMaxHealth;
@@ -42,5 +44,6 @@ public class PlayerData
         gameTime = gameManager.gameTime;
         money = gameManager.money;
         previousLevel = gameManager.previousLevel;
+        slainEnemies = gameManager.slainEnemies;
     }
 }

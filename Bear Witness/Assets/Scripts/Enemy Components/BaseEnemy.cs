@@ -11,8 +11,10 @@ public class BaseEnemy : MonoBehaviour
     [SerializeField] private bool doKnockback = true;
     [SerializeField] private Vector2 knockback;
     public Rigidbody2D m_Rigidbody2D;
+    public bool invulnerable = false;
 
     public UnityEvent OnHurt;
+    public UnityEvent OnHurtInvulnerable;
     public UnityEvent OnStart;
     public UnityEvent OnPerish;
 
@@ -24,15 +26,31 @@ public class BaseEnemy : MonoBehaviour
 
     public void Damage(int damageValue, float sourcePosX)
     {
-        currentHealth -= damageValue;
-        if (currentHealth <= 0)
+        if (!invulnerable)
         {
-            Perish();
+            if (currentHealth > 0)
+            {
+                currentHealth -= damageValue;
+                if (currentHealth <= 0)
+                {
+                    Perish();
+                } else
+                {
+                    OnHurt.Invoke();
+                }
+            }
+        } else
+        {
+            OnHurtInvulnerable.Invoke();
         }
-        OnHurt.Invoke();
-        m_Rigidbody2D.velocity = Vector2.zero;
-        Vector2 knockbackForce = new((transform.position.x - sourcePosX) * knockback.x, knockback.y);
-        m_Rigidbody2D.AddForce(knockbackForce);
+
+        if (currentHealth > 0)
+        {
+            m_Rigidbody2D.velocity = Vector2.zero;
+            Vector2 knockbackForce = new((transform.position.x - sourcePosX) * knockback.x, knockback.y);
+            m_Rigidbody2D.AddForce(knockbackForce);
+        }
+
     }
 
     private void Perish() 

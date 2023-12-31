@@ -706,14 +706,13 @@ MonoBehaviour:
         lineId: 
         threshold: 0
         greaterThan: 0
+        item: {fileID: 0}
+        invert: 0
       speaker: {fileID: 11400000, guid: 2f972c77d827af94087c691fa562650e, type: 2}
       emotion: annoyed
       sentenceText: You again.
       isChoice: 0
-      choiceTextA: 
-      choiceTextB: 
-      showChoiceC: 0
-      choiceTextC: 
+      choices: []
       isHub: 0
     - lineId: calix_arena_greet_1
       singleUse: 0
@@ -726,15 +725,14 @@ MonoBehaviour:
         lineId: 
         threshold: 0
         greaterThan: 0
+        item: {fileID: 0}
+        invert: 0
       speaker: {fileID: 11400000, guid: 2f972c77d827af94087c691fa562650e, type: 2}
       emotion: annoyed
       sentenceText: You just can't keep your fat white nose out of other people's
         business.
       isChoice: 0
-      choiceTextA: 
-      choiceTextB: 
-      showChoiceC: 0
-      choiceTextC: 
+      choices: []
       isHub: 0
     - lineId: calix_arena_greet_2
       singleUse: 0
@@ -747,14 +745,13 @@ MonoBehaviour:
         lineId: 
         threshold: 0
         greaterThan: 0
+        item: {fileID: 0}
+        invert: 0
       speaker: {fileID: 11400000, guid: 2f972c77d827af94087c691fa562650e, type: 2}
       emotion: angry
       sentenceText: Well, I've had enough.
       isChoice: 0
-      choiceTextA: 
-      choiceTextB: 
-      showChoiceC: 0
-      choiceTextC: 
+      choices: []
       isHub: 0
     - lineId: calix_arena_greet_3
       singleUse: 0
@@ -767,14 +764,13 @@ MonoBehaviour:
         lineId: 
         threshold: 0
         greaterThan: 0
+        item: {fileID: 0}
+        invert: 0
       speaker: {fileID: 11400000, guid: 2f972c77d827af94087c691fa562650e, type: 2}
       emotion: angry
       sentenceText: I won't stand idly by while you tear down my life's work.
       isChoice: 0
-      choiceTextA: 
-      choiceTextB: 
-      showChoiceC: 0
-      choiceTextC: 
+      choices: []
       isHub: 0
     - lineId: calix_arena_greet_4
       singleUse: 0
@@ -787,14 +783,13 @@ MonoBehaviour:
         lineId: 
         threshold: 0
         greaterThan: 0
+        item: {fileID: 0}
+        invert: 0
       speaker: {fileID: 11400000, guid: 2f972c77d827af94087c691fa562650e, type: 2}
       emotion: angry
       sentenceText: Say your prayers, "chosen one".
       isChoice: 0
-      choiceTextA: 
-      choiceTextB: 
-      showChoiceC: 0
-      choiceTextC: 
+      choices: []
       isHub: 0
   lastState: 1
   triggerOnEnd: StartFight
@@ -871,6 +866,9 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 1
     m_ConditionEvent: playerInRange
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: grounded
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4041236683195988698}

@@ -3,8 +3,8 @@ using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
+	[SerializeField] private float m_DefaultGravity = 1.75f;
 	[SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
-	[SerializeField] private float m_CrouchSpeed = 1.5f;          // Amount of maxSpeed applied to rolling movement. 1 = 100%
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
 	[SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
 	[SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
@@ -15,12 +15,12 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private Animator animator;
 
 	const float k_GroundedRadius = .1f; // Radius of the overlap circle to determine if grounded
-	private bool m_Grounded;            // Whether or not the player is grounded.
+	public bool m_Grounded = true;            // Whether or not the player is grounded.
 	const float k_CeilingRadius = .1f; // Radius of the overlap circle to determine if the player can stand up
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
-	private int coyotePoints = 5;
+	private int coyotePoints = 8;
 
 	private GameManager gameManager;
 	private float attackTime = 0f;
@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
 	private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
+		m_Rigidbody2D.gravityScale = m_DefaultGravity;
 
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
@@ -84,7 +85,7 @@ public class PlayerController : MonoBehaviour
 				m_Grounded = true;
 				if (!wasGrounded && m_Rigidbody2D.velocity.y < 0)
 				{
-					coyotePoints = 5;
+					coyotePoints = 8;
 					m_HasAirAttack = true;
 					OnLandEvent.Invoke();
 				}
@@ -116,7 +117,7 @@ public class PlayerController : MonoBehaviour
 		m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 		if (jump && atSurface)
         {
-			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce * 1.2f));
 			m_Grounded = false;
 		}
 
@@ -140,7 +141,7 @@ public class PlayerController : MonoBehaviour
 	{
 		animator.SetBool("run", run);
 		// If rolling, check to see if the character can stand up
-		if (!roll)
+		if (!roll && animator.GetCurrentAnimatorStateInfo(0).IsName("roll"))
 		{
 			// If the character has a ceiling preventing them from standing up, keep them rolling
 			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
@@ -162,9 +163,6 @@ public class PlayerController : MonoBehaviour
 					m_wasCrouching = true;
 					OnCrouchEvent.Invoke(true);
 				}
-
-				// Reduce the speed by the rollSpeed multiplier
-				move *= m_CrouchSpeed;
 
 				// Disable one of the colliders when rolling
 				if (m_CrouchDisableCollider != null)
@@ -275,16 +273,15 @@ public class PlayerController : MonoBehaviour
 				if (roll)
 				{
 					// bound
-					m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce * 1.2f));
+					m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce * 1.1f));
 				}
 				else if (run)
 				{
 					// leap
-					m_Rigidbody2D.AddForce(new Vector2(10f * move, m_JumpForce / 1.5f));
+					m_Rigidbody2D.AddForce(new Vector2(10f * move, m_JumpForce / 1.3f));
 				}
 				else
 				{
-					// jump
 					m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
 				}
 
@@ -313,11 +310,12 @@ public class PlayerController : MonoBehaviour
 		transform.localScale = theScale;
 	}
 
-	public void Damage(int damage, float sourcePositionX)
+	public void Damage(int damage, float sourcePositionX, bool doKnockback = true)
 	{
 		if (shielded && (transform.position.x - sourcePositionX > 0 ^ m_FacingRight))
         {
-			Knockback(200f);
+			if (doKnockback)
+				Knockback(200f);
         } else if (invTime <= Time.time)
         {
 			invTime = Time.time + 0.5f;
@@ -327,10 +325,15 @@ public class PlayerController : MonoBehaviour
 				Perish();
 				return;
 			}
-			float impactSide = Mathf.Sign(sourcePositionX - transform.position.x);
-			Vector2 knockbackForce = transform.up * 3f + transform.right * -10f * (impactSide);
-			m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0f);
-			m_Rigidbody2D.AddForce(knockbackForce, ForceMode2D.Impulse);
+
+			if (doKnockback)
+            {
+				float impactSide = Mathf.Sign(sourcePositionX - transform.position.x);
+				Vector2 knockbackForce = transform.up * 3f + transform.right * -10f * (impactSide);
+				m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0f);
+				m_Rigidbody2D.AddForce(knockbackForce, ForceMode2D.Impulse);
+            }
+
 		}
 	}
 	public void Perish()
@@ -339,8 +342,8 @@ public class PlayerController : MonoBehaviour
 	}
 	public void Attack(bool useSpecial)
 	{
-		attackTime = Time.time + 0.3f;
-		if (useSpecial) attackTime += 0.3f;
+		attackTime = Time.time + 0.15f;
+		if (useSpecial) attackTime += 0.15f;
 		if (useSpecial)
         {
 			Item tool = gameManager.currentItem;
@@ -387,6 +390,8 @@ public class PlayerController : MonoBehaviour
 					if (wall) wall.Damage(5);
 					enemy.TryGetComponent(out BaseEnemy baseEnemy);
 					if (baseEnemy) baseEnemy.Damage(5, transform.position.x);
+					enemy.TryGetComponent(out Lever lever);
+					if (lever) lever.FlickLever();
 				}
 				if (hitEnemies.Length > 0)
                 {
@@ -406,6 +411,8 @@ public class PlayerController : MonoBehaviour
 				if (wall) wall.Damage(3);
 				enemy.TryGetComponent(out BaseEnemy baseEnemy);
 				if (baseEnemy) baseEnemy.Damage(3, transform.position.x);
+				enemy.TryGetComponent(out Lever lever);
+				if (lever) lever.FlickLever();
 			}
 			if (hitEnemies.Length > 0)
 			{
@@ -440,7 +447,7 @@ public class PlayerController : MonoBehaviour
 		if (wasInWater && !inWater)
         {
 			animator.SetBool("inWater", false);
-			m_Rigidbody2D.gravityScale = 1;
+			m_Rigidbody2D.gravityScale = m_DefaultGravity;
 		}
     }
 
@@ -451,7 +458,7 @@ public class PlayerController : MonoBehaviour
     }
     private bool CheckAtSurface()
     {
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.01f, m_WhatIsWater);
+		Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position + new Vector3(0f, 0.05f, 0f), 0.01f, m_WhatIsWater);
 		return colliders.Length == 0;
     }
 

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2847981253067460266}
   - component: {fileID: 2807794599300136875}
   - component: {fileID: 2288270057334839341}
+  - component: {fileID: 3125946436972417957}
   m_Layer: 8
   m_Name: PassThroughGround
   m_TagString: Ground
@@ -31,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!68 &2807794599300136875
 EdgeCollider2D:
@@ -68,8 +69,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.5, y: 0}
-  - {x: 0, y: 0}
+  - {x: -0.25, y: 0}
+  - {x: 0.5, y: 0}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -93,3 +94,15 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &3125946436972417957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2313106852057166364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6346142c7ab1884ea0ec6593e49e0fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
