@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8160726984739113400
 MonoBehaviour:
@@ -45,24 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: Select
-    source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 62d4723b2543a0e45af01e3ebd198097, type: 3}
-    volume: 0.798
-    pitch: 1
-    loop: 0
-  - name: Talk
-    source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 4193874c9ba0d554896e9873f9259ff0, type: 3}
-    volume: 0.706
-    pitch: 1
-    loop: 0
-  - name: Forge
-    source: {fileID: 0}
-    clip: {fileID: 8300000, guid: 9251c3d8f71eb5b4ca88b6387a82894a, type: 3}
-    volume: 0.509
-    pitch: 0.61
-    loop: 0
   - name: Arktis
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 77a6ed27bf8ee5a4092a399c98670112, type: 3}
@@ -81,12 +63,6 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 1
-  - name: Walrus
-    source: {fileID: 0}
-    clip: {fileID: 8300000, guid: c835dc51d54925446bcfd825b62aaed1, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 1
   - name: Intemperance_Intro
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 2343e648fbf2f644abe942d94ac1d954, type: 3}
@@ -99,11 +75,47 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 1
+  - name: Lighthouse
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 7ed9539a130a73342ac3c079c4619859, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
   - name: Shores
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 0a81fbf71ddf44d41bb9c3f52ec16dfc, type: 3}
     volume: 1
     pitch: 1
+    loop: 1
+  - name: Village
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 4fd6d0023336d374e957561c44fe0122, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: Walrus
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: c835dc51d54925446bcfd825b62aaed1, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: Select
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 62d4723b2543a0e45af01e3ebd198097, type: 3}
+    volume: 0.798
+    pitch: 1
+    loop: 0
+  - name: Talk
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 4193874c9ba0d554896e9873f9259ff0, type: 3}
+    volume: 0.706
+    pitch: 1
+    loop: 0
+  - name: Forge
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9251c3d8f71eb5b4ca88b6387a82894a, type: 3}
+    volume: 0.509
+    pitch: 0.61
     loop: 0
   - name: Swing1
     source: {fileID: 0}

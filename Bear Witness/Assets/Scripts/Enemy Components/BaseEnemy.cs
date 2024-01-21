@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class BaseEnemy : MonoBehaviour
+public class BaseEnemy : ReceiveDamage
 {
-    [SerializeField] private int maxHealth = 50;
-    private int currentHealth;
+    public int maxHealth = 50;
+    public int currentHealth;
     public Animator animator;
     [SerializeField] private bool doKnockback = true;
     [SerializeField] private Vector2 knockback;
@@ -24,7 +24,7 @@ public class BaseEnemy : MonoBehaviour
         OnStart.Invoke();
     }
 
-    public void Damage(int damageValue, float sourcePosX)
+    public override void Damage(int damageValue, float sourcePosX)
     {
         if (!invulnerable)
         {

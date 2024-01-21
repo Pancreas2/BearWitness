@@ -7,7 +7,6 @@ using UnityEngine;
 public class NPC : ScriptableObject
 {
     public string name;
-    public int trust;
     public DialogueFace[] dialogueFaces;
     public DialogueFace neutralFace;
 

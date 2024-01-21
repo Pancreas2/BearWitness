@@ -5,6 +5,23 @@ using UnityEngine.UI;
 
 public class GameUI_Controller : MonoBehaviour
 {
+    public static GameUI_Controller instance;
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            gameObject.SetActive(false);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
+
     public GameObject hpimg;
     [SerializeField] private GameObject hpBar;
     private GameManager gameManager;

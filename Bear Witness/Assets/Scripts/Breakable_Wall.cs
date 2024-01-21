@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Breakable_Wall : MonoBehaviour
+public class Breakable_Wall : ReceiveDamage
 {
     public GameObject stateOne;
     public GameObject stateTwo;
@@ -25,9 +25,9 @@ public class Breakable_Wall : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void Damage(int damage, bool skipInvTime = false)
+    public override void Damage(int damage, float sourceX = 0f)
     {
-        if (Time.time >= invTime || skipInvTime)
+        if (Time.time >= invTime)
         {
             if (wallState <= 2)
             {

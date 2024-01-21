@@ -9,12 +9,14 @@ public class BasicTrigger : MonoBehaviour
     [SerializeField] private float deadTime = 0.5f;
     private float isActiveTime = 0f;
 
+    [SerializeField] private string contactTag = "Player";
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (isActiveTime <= Time.time)
         {
             Debug.Log("collide");
-            if (collision.collider.CompareTag("Player"))
+            if (collision.collider.CompareTag(contactTag))
             {
                 isActiveTime = Time.time + deadTime;
                 Debug.Log("invoke");

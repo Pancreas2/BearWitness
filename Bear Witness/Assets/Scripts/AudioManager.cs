@@ -6,13 +6,15 @@ using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
-    public Sound[] sounds;
+    public List<Sound> sounds;
 
     private List<Sound> playingSounds = new();
 
     public static AudioManager instance;
 
     private string currentBGMusic;
+    private string prevBGMusic;
+    private float prevBGMusicTime;
 
     private LevelLoader levelLoader;
 
@@ -52,21 +54,41 @@ public class AudioManager : MonoBehaviour
         levelLoader = FindObjectOfType<LevelLoader>();
         if (currentBGMusic != levelLoader.levelMusic)
         {
+
+            if (prevBGMusic == levelLoader.levelMusic)
+            {
+                KeepTimePlay(levelLoader.levelMusic, 1f);
+            } else
+            {
+                Play(levelLoader.levelMusic, 1f);
+            }
+
+            prevBGMusicTime = GetSoundTime(currentBGMusic);
             Stop(currentBGMusic);
+
+            prevBGMusic = currentBGMusic;
             currentBGMusic = levelLoader.levelMusic;
-            Play(currentBGMusic);
+        } else
+        {
+            prevBGMusicTime = GetSoundTime(currentBGMusic);
         }
     }
 
     public void Play(string name, float startTime = 0f, float fadeTime = 1f)
     {
-        Sound sound = Array.Find(sounds, sound => sound.name == name);
+        Sound sound = sounds.Find(sound => sound.name == name);
         if (sound == null) return;
         sound.source.volume = 0;
         sound.source.Play();
         StartCoroutine(FadeIn(sound, fadeTime));
         sound.source.time = startTime;
         playingSounds.Add(sound);
+    }
+
+    public void KeepTimePlay(string name, float offset)
+    {
+        float time = prevBGMusicTime + offset;
+        Play(name, time);
     }
 
     public void Stop(string name, float fadeTime = 1f)
@@ -106,5 +128,13 @@ public class AudioManager : MonoBehaviour
             sound.source.volume = i * initialVolume / 10;
             yield return new WaitForSeconds(time / 10f);
         }
+    }
+
+    private float GetSoundTime(string name)
+    {
+        Sound sound = sounds.Find(sound => sound.name == name);
+        Debug.Log(sound);
+        if (sound == null) return 0f;
+        else return sound.source.time;
     }
 }

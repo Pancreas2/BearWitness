@@ -10,13 +10,20 @@ public class NPCController : DialogueInteractable
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-        if (gameManager.npcMemory.Capacity <= data.id || gameManager.npcMemory[data.id].name != data.name) gameManager.npcMemory.Insert(data.id, data);
-    }
 
-    public void UpdateKindness(int effect)
-    {
-        int index = gameManager.npcMemory.IndexOf(data);
-        data.kindness += effect;
-        gameManager.npcMemory[index].kindness = data.kindness;
+        bool containsNPC = false;
+        foreach (NPCData npcData in gameManager.npcMemory)
+        {
+            if (npcData.npc.name == data.npc.name)
+            {
+                containsNPC = true;
+                break;
+            }
+        }
+        
+        if (!containsNPC)
+        {
+            gameManager.npcMemory.Add(data);
+        }
     }
 }

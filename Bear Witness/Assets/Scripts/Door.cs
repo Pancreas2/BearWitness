@@ -9,18 +9,6 @@ public class Door : MonoBehaviour
     public bool isFrontDoor = false;
     [SerializeField] private string destination;
     [SerializeField] private Animator interactText;
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            animator.SetBool("open", true);
-            if (isFrontDoor)
-            {
-                interactText.SetBool("playerInRange", true);
-            }
-
-        }
-    }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -28,6 +16,19 @@ public class Door : MonoBehaviour
         {
             FindObjectOfType<PlayerMovement>().frozen = true;
             FindObjectOfType<LevelLoader>().LoadNextLevel(destination);
+        }
+
+        if (active)
+        {
+            if (collision.collider.CompareTag("Player"))
+            {
+                animator.SetBool("open", true);
+                if (isFrontDoor)
+                {
+                    interactText.SetBool("playerInRange", true);
+                }
+
+            }
         }
     }
 

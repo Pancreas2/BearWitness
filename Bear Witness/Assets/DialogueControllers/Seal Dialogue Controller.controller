@@ -1,5 +1,313 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9133290790320632294
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38ac78cad3040342bb73320141bd3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSegment:
+    elements:
+    - lineId: seal_trust_0
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+        invert: 0
+      speaker: {fileID: 11400000, guid: 62d778196f7be3d47ac8a2c89abef8a6, type: 2}
+      emotion: happy
+      sentenceText: Yay!
+      isChoice: 0
+      choices: []
+      isHub: 0
+    - lineId: seal_trust_1
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+        invert: 0
+      speaker: {fileID: 11400000, guid: 62d778196f7be3d47ac8a2c89abef8a6, type: 2}
+      emotion: happy
+      sentenceText: I hope they don't find us!
+      isChoice: 0
+      choices: []
+      isHub: 0
+  lastState: 1
+  triggerOnEnd: 
+  consumeOnEnd: {fileID: 0}
+--- !u!114 &-8484627546730127090
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38ac78cad3040342bb73320141bd3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSegment:
+    elements:
+    - lineId: seal_greet_untrusted
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+        invert: 0
+      speaker: {fileID: 11400000, guid: 62d778196f7be3d47ac8a2c89abef8a6, type: 2}
+      emotion: happy
+      sentenceText: I sure am lucky you haven't found me yet!
+      isChoice: 0
+      choices: []
+      isHub: 0
+  lastState: 1
+  triggerOnEnd: 
+  consumeOnEnd: {fileID: 0}
+--- !u!114 &-7641246553204540530
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5013325c0c41fe4e91ee51f03ce37cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetNPC: {fileID: 11400000, guid: 62d778196f7be3d47ac8a2c89abef8a6, type: 2}
+  modifier: 1
+--- !u!114 &-7566378497188105796
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5013325c0c41fe4e91ee51f03ce37cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetNPC: {fileID: 11400000, guid: 62d778196f7be3d47ac8a2c89abef8a6, type: 2}
+  modifier: -1
+--- !u!1101 &-7419999173486916783
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 0}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 1
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &-7121315101343251909
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 6
+    m_ConditionEvent: Choice
+    m_EventTreshold: 5
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 4780730460685535388}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &-7074152228192844365
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: Choice
+    m_EventTreshold: 4
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 746454525396702744}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &-6135606690121983213
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 0}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 1
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &-5298419959029744918
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 4
+    m_ConditionEvent: Trust
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: StartDialogue
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -1082746261598468107}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!114 &-4775989011275846351
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38ac78cad3040342bb73320141bd3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSegment:
+    elements:
+    - lineId: seal_untrust_0
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+        invert: 0
+      speaker: {fileID: 11400000, guid: 62d778196f7be3d47ac8a2c89abef8a6, type: 2}
+      emotion: neutral
+      sentenceText: Oh no!
+      isChoice: 0
+      choices: []
+      isHub: 0
+    - lineId: seal_untrust_1
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+        invert: 0
+      speaker: {fileID: 11400000, guid: 62d778196f7be3d47ac8a2c89abef8a6, type: 2}
+      emotion: neutral
+      sentenceText: I hope you don't find me!
+      isChoice: 0
+      choices: []
+      isHub: 0
+  lastState: 1
+  triggerOnEnd: 
+  consumeOnEnd: {fileID: 0}
 --- !u!1107 &-3432807043718791800
 AnimatorStateMachine:
   serializedVersion: 6
@@ -36,20 +344,26 @@ AnimatorStateMachine:
     m_Position: {x: 230, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1254738011931586812}
-    m_Position: {x: 80, y: 210, z: 0}
+    m_Position: {x: -120, y: 210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7425420801215048487}
-    m_Position: {x: 300, y: 210, z: 0}
+    m_Position: {x: 400, y: 210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 746454525396702744}
-    m_Position: {x: 300, y: 310, z: 0}
+    m_Position: {x: 330, y: 300, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 4780730460685535388}
+    m_Position: {x: 350, y: 410, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -1082746261598468107}
+    m_Position: {x: 150, y: 210, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_EntryPosition: {x: 250, y: 40, z: 0}
   m_ExitPosition: {x: 100, y: 310, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 5462497742043548096}
@@ -73,7 +387,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 7400000, guid: a9b166f5dd06f2c4cb687eb3b8386a9c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -93,6 +407,34 @@ AnimatorState:
   - {fileID: 6145627424227969008}
   m_StateMachineBehaviours:
   - {fileID: 5952293319678324623}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1102 &-1082746261598468107
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: greet_untrusted
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -7419999173486916783}
+  m_StateMachineBehaviours:
+  - {fileID: -8484627546730127090}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -157,7 +499,13 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: Choose
-    m_Type: 1
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: Choice
+    m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -194,11 +542,81 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New State
+  m_Name: gain_trust
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_Transitions:
+  - {fileID: -6135606690121983213}
+  m_StateMachineBehaviours:
+  - {fileID: -9133290790320632294}
+  - {fileID: -7641246553204540530}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!114 &2812373627776992645
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 632399c5ac0bcce4b994dee03ddcca5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetNPC: {fileID: 11400000, guid: 62d778196f7be3d47ac8a2c89abef8a6, type: 2}
+--- !u!1101 &3932956204147729645
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 0}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 1
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1102 &4780730460685535388
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: lose_trust
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 3932956204147729645}
+  m_StateMachineBehaviours:
+  - {fileID: -4775989011275846351}
+  - {fileID: -7566378497188105796}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -226,7 +644,9 @@ AnimatorState:
   m_Transitions:
   - {fileID: -1066071532785592209}
   - {fileID: 9169730969027122555}
-  m_StateMachineBehaviours: []
+  - {fileID: -5298419959029744918}
+  m_StateMachineBehaviours:
+  - {fileID: 2812373627776992645}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -266,14 +686,17 @@ MonoBehaviour:
         lineId: 
         threshold: 0
         greaterThan: 0
+        item: {fileID: 0}
+        invert: 0
       speaker: {fileID: 11400000, guid: 62d778196f7be3d47ac8a2c89abef8a6, type: 2}
       emotion: happy
       sentenceText: Be careful out there, the bear might find you!
       isChoice: 0
       choices: []
       isHub: 0
-  lastState: 0
+  lastState: 1
   triggerOnEnd: 
+  consumeOnEnd: {fileID: 0}
 --- !u!1101 &6145627424227969008
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -282,7 +705,7 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 3
+  - m_ConditionMode: 1
     m_ConditionEvent: Choose
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
@@ -309,7 +732,9 @@ AnimatorState:
   m_Name: greet_unknown
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
+  m_Transitions:
+  - {fileID: -7074152228192844365}
+  - {fileID: -7121315101343251909}
   m_StateMachineBehaviours:
   - {fileID: 8592010772929902967}
   m_Position: {x: 50, y: 50, z: 0}
@@ -351,6 +776,8 @@ MonoBehaviour:
         lineId: 
         threshold: 0
         greaterThan: 0
+        item: {fileID: 0}
+        invert: 0
       speaker: {fileID: 11400000, guid: 62d778196f7be3d47ac8a2c89abef8a6, type: 2}
       emotion: happy
       sentenceText: I'm hiding from the bear!
@@ -368,6 +795,8 @@ MonoBehaviour:
         lineId: 
         threshold: 0
         greaterThan: 0
+        item: {fileID: 0}
+        invert: 0
       speaker: {fileID: 11400000, guid: 62d778196f7be3d47ac8a2c89abef8a6, type: 2}
       emotion: happy
       sentenceText: Want to hide with me?
@@ -385,6 +814,8 @@ MonoBehaviour:
         lineId: 
         threshold: 0
         greaterThan: 0
+        item: {fileID: 0}
+        invert: 0
       speaker: {fileID: 11400000, guid: efdb59ff3054d144b9c7bc667042552a, type: 2}
       emotion: skeptical
       sentenceText: 
@@ -395,6 +826,7 @@ MonoBehaviour:
       isHub: 0
   lastState: 0
   triggerOnEnd: 
+  consumeOnEnd: {fileID: 0}
 --- !u!1101 &9169730969027122555
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

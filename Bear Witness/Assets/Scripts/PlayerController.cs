@@ -386,12 +386,8 @@ public class PlayerController : MonoBehaviour
 				Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(boxAttackPoint, boxRange, enemyLayers);
 				foreach (Collider2D enemy in hitEnemies)
 				{
-					enemy.TryGetComponent(out Breakable_Wall wall);
-					if (wall) wall.Damage(5);
-					enemy.TryGetComponent(out BaseEnemy baseEnemy);
-					if (baseEnemy) baseEnemy.Damage(5, transform.position.x);
-					enemy.TryGetComponent(out Lever lever);
-					if (lever) lever.FlickLever();
+					enemy.TryGetComponent(out ReceiveDamage hitbox);
+					if (hitbox) hitbox.Damage(5, transform.position.x);
 				}
 				if (hitEnemies.Length > 0)
                 {
@@ -407,12 +403,8 @@ public class PlayerController : MonoBehaviour
 			Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(m_AttackPoint.position, attackRange, enemyLayers);
 			foreach (Collider2D enemy in hitEnemies)
 			{
-				enemy.TryGetComponent(out Breakable_Wall wall);
-				if (wall) wall.Damage(3);
-				enemy.TryGetComponent(out BaseEnemy baseEnemy);
-				if (baseEnemy) baseEnemy.Damage(3, transform.position.x);
-				enemy.TryGetComponent(out Lever lever);
-				if (lever) lever.FlickLever();
+				enemy.TryGetComponent(out ReceiveDamage hitbox);
+				if (hitbox) hitbox.Damage(3, transform.position.x);
 			}
 			if (hitEnemies.Length > 0)
 			{

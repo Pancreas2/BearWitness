@@ -33,7 +33,7 @@ public class DialogueCondition
         {
             NPCData nPCData = gameManager.npcMemory[npcId];
             if (nPCData == null) return false;
-            int comparedValue = nPCData.kindness;
+            int comparedValue = nPCData.trust;
             if (upperBound >= comparedValue && lowerBound <= comparedValue)
             {
                 return true;

@@ -52,6 +52,7 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
+
         if (frameDelay > 0)
         {
             frameDelay -= 1;
@@ -95,6 +96,7 @@ public class DialogueManager : MonoBehaviour
             }
 
             dialogueText.text = "";
+
             animator.SetBool("IsOpen", true);
 
             sentences.Clear();

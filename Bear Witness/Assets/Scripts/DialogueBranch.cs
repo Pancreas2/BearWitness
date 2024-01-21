@@ -12,14 +12,10 @@ public class DialogueBranch : StateMachineBehaviour
     public string triggerOnEnd;
     public Item consumeOnEnd;
 
-    private void Awake()
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         dialogueManager = FindObjectOfType<DialogueManager>();
         gameManager = FindObjectOfType<GameManager>();
-    }
-
-    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
         animator.ResetTrigger("Choose");
         animator.SetInteger("Choice", -1);
         base.OnStateEnter(animator, stateInfo, layerIndex);
