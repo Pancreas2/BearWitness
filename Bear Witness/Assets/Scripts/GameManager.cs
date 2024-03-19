@@ -61,7 +61,8 @@ public class GameManager : MonoBehaviour
             // render in menu
             foreach (InventorySlot toolSlot in invManager.toolSlots)
             {
-                toolSlot.FindItem();
+                if (toolSlot)
+                    toolSlot.FindItem();
             }
         } else
         {

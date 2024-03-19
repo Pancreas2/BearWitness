@@ -13,6 +13,7 @@ public class DialogueCondition
         HasItem
     }
     public ConditionType type;
+    public bool invert;
     [Header("Trust Level")]
     public int upperBound;
     public int lowerBound;
@@ -24,7 +25,6 @@ public class DialogueCondition
     public bool greaterThan;
     [Header("Has Item")]
     public Item item;
-    public bool invert;
     
 
     public bool Evaluate(GameManager gameManager)
@@ -36,14 +36,14 @@ public class DialogueCondition
             int comparedValue = nPCData.trust;
             if (upperBound >= comparedValue && lowerBound <= comparedValue)
             {
-                return true;
+                return true ^ invert;
             }
         } else if (type == ConditionType.PreviousLinePlayed)
         {
-            return gameManager.playedLines.Contains(lineId);
+            return gameManager.playedLines.Contains(lineId) ^ invert;
         } else if (type == ConditionType.Money)
         {
-            return gameManager.money < threshold ^ greaterThan;
+            return (gameManager.money < threshold ^ greaterThan) ^ invert;
         } else if (type == ConditionType.HasItem)
         {
             return gameManager.items.Contains(item) ^ invert;

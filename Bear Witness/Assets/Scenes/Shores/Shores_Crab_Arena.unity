@@ -16597,7 +16597,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377324827}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.986453, y: 7.39741, z: -10}
+  m_LocalPosition: {x: 1.9832408, y: 7.89741, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16847,6 +16847,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6781188519599201545, guid: 618cb014893df74499cd83f68869d5b5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 7552426552394127084, guid: 618cb014893df74499cd83f68869d5b5, type: 3}
       propertyPath: m_Name
       value: GameUI
@@ -17001,7 +17005,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.41530657}
+  m_Offset: {x: 0, y: 0.29030672}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -17012,7 +17016,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.1}
+  m_Size: {x: 1, y: 0.34999973}
   m_EdgeRadius: 0
 --- !u!1001 &596226557
 PrefabInstance:
@@ -17086,7 +17090,6 @@ GameObject:
   - component: {fileID: 673047771}
   - component: {fileID: 673047772}
   - component: {fileID: 673047773}
-  - component: {fileID: 673047775}
   - component: {fileID: 673047774}
   - component: {fileID: 673047776}
   m_Layer: 10
@@ -17147,7 +17150,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d58eddd2b2d5bb04a918080c2c5515b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseEnemy: {fileID: 673047775}
+  passDamageTo: {fileID: 0}
+  maxHealth: 120
+  currentHealth: 0
+  animator: {fileID: 673047772}
+  doKnockback: 0
+  knockback: {x: 0, y: 0}
+  m_Rigidbody2D: {fileID: 673047774}
+  invulnerable: 0
+  OnHurt:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHurtInvulnerable:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 673047773}
+        m_TargetAssemblyTypeName: BossEnemy, Assembly-CSharp
+        m_MethodName: UpdateHealth
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPerish:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 673047776}
+        m_TargetAssemblyTypeName: DoorOpener, Assembly-CSharp
+        m_MethodName: SetDoorState
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 673047769}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  bossMusic: Crab
 --- !u!50 &673047774
 Rigidbody2D:
   serializedVersion: 4
@@ -17175,86 +17234,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &673047775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673047769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f47d008aa9ae0947972e056738d55d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  passDamageTo: {fileID: 0}
-  maxHealth: 120
-  currentHealth: 0
-  animator: {fileID: 673047772}
-  doKnockback: 0
-  knockback: {x: 0, y: 0}
-  m_Rigidbody2D: {fileID: 673047774}
-  invulnerable: 0
-  OnHurt:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 673047773}
-        m_TargetAssemblyTypeName: BossEnemy, Assembly-CSharp
-        m_MethodName: DecreaseOnHurt
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnHurtInvulnerable:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStart:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPerish:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 673047773}
-        m_TargetAssemblyTypeName: BossEnemy, Assembly-CSharp
-        m_MethodName: DecreaseOnHurt
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 673047776}
-        m_TargetAssemblyTypeName: DoorOpener, Assembly-CSharp
-        m_MethodName: SetDoorState
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 673047769}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &673047776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17431,7 +17410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e870f3924179d4a9bc8efff831e4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passDamageTo: {fileID: 673047775}
+  passDamageTo: {fileID: 673047773}
 --- !u!1001 &715368926
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17693,7 +17672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e870f3924179d4a9bc8efff831e4cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passDamageTo: {fileID: 673047775}
+  passDamageTo: {fileID: 673047773}
 --- !u!1 &868199351
 GameObject:
   m_ObjectHideFlags: 0
@@ -17778,7 +17757,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.41530657}
+  m_Offset: {x: 0, y: 0.29030672}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -17789,7 +17768,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.1}
+  m_Size: {x: 1, y: 0.34999973}
   m_EdgeRadius: 0
 --- !u!1001 &1067291519
 PrefabInstance:
@@ -17821,7 +17800,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7857786011467424883, guid: b72da7dcc3855964ead7db92f475ce0c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.3974175
+      value: 7.8974175
       objectReference: {fileID: 0}
     - target: {fileID: 7857786011467424883, guid: b72da7dcc3855964ead7db92f475ce0c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17975,7 +17954,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
+  m_Offset: {x: -0.125, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -17986,7 +17965,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.5, y: 3.5}
+  m_Size: {x: 4.25, y: 3.5}
   m_EdgeRadius: 0
 --- !u!4 &1082953974
 Transform:

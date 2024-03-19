@@ -63,7 +63,6 @@ GameObject:
   - component: {fileID: 8279770248531069704}
   - component: {fileID: 337212179402641495}
   - component: {fileID: 8877980581421603731}
-  - component: {fileID: 2369366625792956083}
   m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
@@ -84,7 +83,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4083294355443786437}
-  m_Father: {fileID: 3716810019271681247}
+  m_Father: {fileID: 3706458991263480860}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -155,17 +154,50 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!95 &2369366625792956083
+--- !u!1 &5788672973892329895
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3706458991263480860}
+  - component: {fileID: 453954141704602764}
+  m_Layer: 9
+  m_Name: HoverTextAnimator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3706458991263480860
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5788672973892329895}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 474729453628508891}
+  m_Father: {fileID: 3716810019271681247}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &453954141704602764
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4535152309505718634}
+  m_GameObject: {fileID: 5788672973892329895}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 001546f1c6a934549b62b0f7faff75bb, type: 2}
+  m_Controller: {fileID: 9100000, guid: a57fe3e0ac4153a4f9bd519bd87f8161, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -285,7 +317,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 474729453628508891}
+  - {fileID: 3706458991263480860}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -419,15 +451,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38bfd6212f80afe47acfa8aa2c846ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 2369366625792956083}
+  animator: {fileID: 453954141704602764}
   text: {fileID: 4268877018062586493}
   interactText: TALK
   dialogueStateMachine: {fileID: 6396896698851613258}
   dialogueTrigger: {fileID: 0}
+  OnDialogueEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  talkOffset: 0.8
+  playerFacesRight: 0
   data:
-    name: Calix
-    id: 0
-    kindness: 0
+    npc: {fileID: 11400000, guid: 2f972c77d827af94087c691fa562650e, type: 2}
+    trust: 0
 --- !u!114 &1065866692044324486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,8 +544,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: TALK
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 061d9165ea3d145449a02d928fbeace2, type: 2}
-  m_sharedMaterial: {fileID: 7158729944502270015, guid: 061d9165ea3d145449a02d928fbeace2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a9fb72be6ace34d498ed50ac868d27a4, type: 2}
+  m_sharedMaterial: {fileID: -537264018963296980, guid: a9fb72be6ace34d498ed50ac868d27a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

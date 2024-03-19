@@ -70,7 +70,7 @@ Transform:
   - {fileID: 7095922652977946549}
   - {fileID: 2392716053199083457}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5840534560780819748
 SpriteRenderer:
@@ -314,9 +314,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 2072089859071907103}
+  animator: {fileID: 6733450766372703335}
   moveSpeed: 10
   runMultiplier: 2
   frozen: 0
+  climbing: 0
   onPassThroughPlatform: 0
   moveTarget: 0
   cutsceneFaceRight: 0

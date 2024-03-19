@@ -5,14 +5,18 @@ using UnityEngine;
 public class SaveInteractable : Interactable
 {
     private GameManager gameManager;
+    private GameUI_Controller guic;
 
     private PlayerMovement player;
     private float freezeDelay = 0;
     private bool playerIsFrozen;
 
+    [SerializeField] private AudioSource audioSource;
+
     private void Awake()
     {
         gameManager = FindObjectOfType<GameManager>();
+        guic = FindObjectOfType<GameUI_Controller>();
         player = FindObjectOfType<PlayerMovement>();
     }
 
@@ -27,9 +31,12 @@ public class SaveInteractable : Interactable
 
     override public void OnInteract()
     {
+        audioSource.PlayDelayed(0.2f);
         playerIsFrozen = true;
         player.frozen = true;
-        freezeDelay = Time.time + 0.5f;
+        player.PlayAnimation("spin");
+        freezeDelay = Time.time + 1f;
+        guic.IncreaseHP(gameManager.playerMaxHealth);
         gameManager.SavePlayerData(gameManager.fileNumber);
     }
 }

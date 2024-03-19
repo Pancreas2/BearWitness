@@ -7,4 +7,5 @@ public class NPCData
 {
     public NPC npc;
     public int trust = 0;
+    public bool met = false;
 }

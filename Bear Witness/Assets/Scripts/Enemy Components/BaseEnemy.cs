@@ -24,20 +24,18 @@ public class BaseEnemy : ReceiveDamage
         OnStart.Invoke();
     }
 
+    private void FixedUpdate()
+    {
+
+    }
+
     public override void Damage(int damageValue, float sourcePosX)
     {
         if (!invulnerable)
         {
             if (currentHealth > 0)
             {
-                currentHealth -= damageValue;
-                if (currentHealth <= 0)
-                {
-                    Perish();
-                } else
-                {
-                    OnHurt.Invoke();
-                }
+                DecreaseHealth(damageValue);
             }
         } else
         {
@@ -53,7 +51,20 @@ public class BaseEnemy : ReceiveDamage
 
     }
 
-    private void Perish() 
+    virtual public void DecreaseHealth(int damageValue)
+    {
+        currentHealth -= damageValue;
+        if (currentHealth <= 0)
+        {
+            Perish();
+        }
+        else
+        {
+            OnHurt.Invoke();
+        }
+    }
+
+    virtual public void Perish() 
     {
         OnPerish.Invoke();
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public PlayerController controller;
+    [SerializeField] private Animator animator;
 
     float horizontalMove = 0f;
     float verticalMove = 0f;
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     readonly float attackRate = 3.5f;
     float attackDelay = 0;
     bool attackEnd = false;
+    public bool climbing = false;
 
     public bool onPassThroughPlatform = false;
 
@@ -44,15 +46,19 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed;
+        if (!climbing)
+        {
+            horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed;
+        }
 
         // was Input.GetButtonDown("Jump") && !wasFrozen
         if (Input.GetButtonDown("Jump") && !(onPassThroughPlatform && Input.GetAxisRaw("Vertical") < 0))
         {
             jump = true;
+            climbing = false;
         }
 
-        if (controller.inWater)
+        if (controller.inWater || climbing)
         {
             verticalMove = Input.GetAxisRaw("Vertical") * moveSpeed;
             run = false;
@@ -126,13 +132,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        animator.SetBool("climbing", climbing);
         if (!frozen)
         {
             if (controller.inWater)
             {
                 controller.Swim(horizontalMove * Time.fixedDeltaTime, verticalMove * Time.fixedDeltaTime, jump);
             }
-            else
+            else if (climbing)
+            {
+                controller.Climb(verticalMove * Time.fixedDeltaTime);
+            } else
             {
                 controller.Move(horizontalMove * Time.fixedDeltaTime, jump, run, roll);
                 if (attacking) controller.Attack(special);
@@ -176,5 +186,10 @@ public class PlayerMovement : MonoBehaviour
                 controller.Move(0, false, false, false);
             }
         }
+    }
+
+    public void PlayAnimation(string name)
+    {
+        animator.Play(name, 5);
     }
 }

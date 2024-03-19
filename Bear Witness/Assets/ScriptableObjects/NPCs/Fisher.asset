@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd7d77579bf29c4881f7de8d85dec35, type: 3}
+  m_Name: Fisher
+  m_EditorClassIdentifier: 
+  name: Fisher
+  dialogueFaces:
+  - emotion: sad
+    face: {fileID: 1907527645, guid: 36609eae80014bc47abe42245bc8b253, type: 3}
+  - emotion: angry
+    face: {fileID: -1162789028, guid: 36609eae80014bc47abe42245bc8b253, type: 3}
+  - emotion: happy
+    face: {fileID: 2050674013, guid: 36609eae80014bc47abe42245bc8b253, type: 3}
+  - emotion: proud
+    face: {fileID: -1532623526, guid: 36609eae80014bc47abe42245bc8b253, type: 3}
+  - emotion: skeptical
+    face: {fileID: 21300000, guid: eea9858216fc2254a9e05ab311242f4f, type: 3}
+  neutralFace:
+    emotion: neutral
+    face: {fileID: -1054311416, guid: 36609eae80014bc47abe42245bc8b253, type: 3}

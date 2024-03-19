@@ -18,6 +18,7 @@ public class InitializeDialogue : StateMachineBehaviour
         }
 
         animator.SetInteger("Trust", npcData.trust);
+        animator.SetBool("Met", npcData.met);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

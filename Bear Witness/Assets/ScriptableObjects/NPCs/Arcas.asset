@@ -13,24 +13,37 @@ MonoBehaviour:
   m_Name: Arcas
   m_EditorClassIdentifier: 
   name: Arcas
-  trust: 0
   dialogueFaces:
   - emotion: angry
-    face: {fileID: 21300000, guid: dbfa437b7cc17c340ab747a788d1cf44, type: 3}
+    face: {fileID: -613310086, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}
   - emotion: annoyed
-    face: {fileID: 21300000, guid: 0a1e38fea506b5d46914af5244af7c0d, type: 3}
+    face: {fileID: -837198130, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}
   - emotion: concerned
-    face: {fileID: 21300000, guid: a1b1249edbe1dea48bd7c9a6da450331, type: 3}
+    face: {fileID: 2070060656, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}
   - emotion: disdainful
-    face: {fileID: 21300000, guid: 7cdf50f36769d3d49a3b9d84f7aba78f, type: 3}
-  - emotion: embarrassed
-    face: {fileID: 21300000, guid: 96c20a63acaae3a4b91a36e6118bdb24, type: 3}
+    face: {fileID: 1095839835, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}
+  - emotion: laughing
+    face: {fileID: 1602085932, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}
   - emotion: happy
-    face: {fileID: 21300000, guid: 38cae003e48319240b05a555b7ff9d68, type: 3}
+    face: {fileID: 2003180527, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}
   - emotion: sad
-    face: {fileID: 21300000, guid: 138487af8d88c2f4f86a599548181a83, type: 3}
+    face: {fileID: -1468070596, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}
   - emotion: skeptical
-    face: {fileID: 21300000, guid: e7bec980d0b02104994ee1450b7f7e99, type: 3}
+    face: {fileID: -1862997504, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}
+  - emotion: nervous
+    face: {fileID: 41785798, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}
+  - emotion: sincere
+    face: {fileID: -710866037, guid: 604d62e77da79f842aba7fd1fc2467f5, type: 3}
+  - emotion: embarrassed
+    face: {fileID: -924462513, guid: 604d62e77da79f842aba7fd1fc2467f5, type: 3}
+  - emotion: shameful
+    face: {fileID: -55131629, guid: 604d62e77da79f842aba7fd1fc2467f5, type: 3}
+  - emotion: guilty
+    face: {fileID: -342917110, guid: 604d62e77da79f842aba7fd1fc2467f5, type: 3}
+  - emotion: puzzled
+    face: {fileID: -1287278833, guid: 604d62e77da79f842aba7fd1fc2467f5, type: 3}
+  - emotion: upset
+    face: {fileID: 1664947537, guid: 604d62e77da79f842aba7fd1fc2467f5, type: 3}
   neutralFace:
     emotion: neutral
-    face: {fileID: 21300000, guid: 4868e6926e3ecbf4bb01bc11b6a34d31, type: 3}
+    face: {fileID: 1058084819, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}

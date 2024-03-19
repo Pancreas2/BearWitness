@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
 	private bool m_wallClingState = false;
 	private bool startWallClingHitbox = false;
 
+	private bool wasClimbing = false;
+
 	private PlayerMovement playerMovement;
 
 	public bool inWater = false;
@@ -83,11 +85,15 @@ public class PlayerController : MonoBehaviour
 			if (colliders[i].gameObject != gameObject)
 			{
 				m_Grounded = true;
-				if (!wasGrounded && m_Rigidbody2D.velocity.y < 0)
+				if (m_Rigidbody2D.velocity.y < 0)
 				{
-					coyotePoints = 8;
-					m_HasAirAttack = true;
-					OnLandEvent.Invoke();
+					playerMovement.climbing = false;
+					if (!wasGrounded)
+                    {
+						coyotePoints = 8;
+						m_HasAirAttack = true;
+						OnLandEvent.Invoke();
+                    }
 				}
 			}
 		}
@@ -99,6 +105,12 @@ public class PlayerController : MonoBehaviour
         }
 
 		CheckWater();
+
+		if (wasClimbing && !playerMovement.climbing)
+        {
+			wasClimbing = false;
+			m_Rigidbody2D.gravityScale = m_DefaultGravity;
+        }
 	}
 
     private void Update()
@@ -324,7 +336,10 @@ public class PlayerController : MonoBehaviour
 			{
 				Perish();
 				return;
-			}
+			} else
+            {
+				playerMovement.PlayAnimation("hurt");
+            }
 
 			if (doKnockback)
             {
@@ -338,6 +353,7 @@ public class PlayerController : MonoBehaviour
 	}
 	public void Perish()
 	{
+		playerMovement.PlayAnimation("die");
 		Debug.Log("Perished");
 	}
 	public void Attack(bool useSpecial)
@@ -475,5 +491,14 @@ public class PlayerController : MonoBehaviour
 			knockbackForce *= -1f;
 		}
 		m_Rigidbody2D.AddForce(knockbackForce);
+	}
+
+	public void Climb(float vMove)
+    {
+		m_Rigidbody2D.gravityScale = 0f;
+		Vector3 targetVelocity = new Vector2(0f, 5f * vMove);
+		m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+		wasClimbing = true;
+		animator.SetFloat("ySpeed", m_Rigidbody2D.velocity.y);
 	}
 }

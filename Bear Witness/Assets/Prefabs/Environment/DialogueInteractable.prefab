@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5430635377435292112}
   - component: {fileID: 4401386307235031695}
   - component: {fileID: 4795829456588153163}
-  - component: {fileID: 1827185270789237867}
   m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
@@ -104,27 +103,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!95 &1827185270789237867
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 525445377442743218}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 001546f1c6a934549b62b0f7faff75bb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4248156156918175623
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,8 +222,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: LOOK
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 061d9165ea3d145449a02d928fbeace2, type: 2}
-  m_sharedMaterial: {fileID: 7158729944502270015, guid: 061d9165ea3d145449a02d928fbeace2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a9fb72be6ace34d498ed50ac868d27a4, type: 2}
+  m_sharedMaterial: {fileID: -537264018963296980, guid: a9fb72be6ace34d498ed50ac868d27a4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -400,6 +378,7 @@ GameObject:
   - component: {fileID: 1049516454634095233}
   - component: {fileID: 8838085657771519567}
   - component: {fileID: 2107673399963597427}
+  - component: {fileID: 8430701396050110974}
   m_Layer: 9
   m_Name: DialogueInteractable
   m_TagString: Untagged
@@ -487,11 +466,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 955cb9b142dcdf54aabac88839af162b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueStateMachine: {fileID: 0}
-  dialogueTrigger: {fileID: 8838085657771519567}
-  animator: {fileID: 1827185270789237867}
+  animator: {fileID: 8430701396050110974}
   text: {fileID: 181481205685483685}
   interactText: LOOK
+  dialogueStateMachine: {fileID: 0}
+  dialogueTrigger: {fileID: 8838085657771519567}
+  OnDialogueEnd:
+    m_PersistentCalls:
+      m_Calls: []
+  talkOffset: 0
+  playerFacesRight: 0
 --- !u!114 &8838085657771519567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,3 +535,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &8430701396050110974
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7910373345985330870}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a57fe3e0ac4153a4f9bd519bd87f8161, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

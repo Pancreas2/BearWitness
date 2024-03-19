@@ -45,7 +45,7 @@ public class DialogueManager : MonoBehaviour
         for (int i = 0; i < 6; i++)
         {
             GameObject newChoice = Instantiate(templateChoice, choiceTexts.transform, false);
-            newChoice.transform.localPosition = new Vector3(Mathf.Floor(i / 3) * 0.5f, i % 3 * -0.25f, 0);
+            newChoice.transform.localPosition = new Vector3(Mathf.Floor(i / 3) * 0.5f, i % 3 * -0.3f, 0);
             choices.Add(newChoice.GetComponent<TextMeshProUGUI>());
         }
     }

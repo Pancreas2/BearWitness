@@ -6,10 +6,13 @@ public class FallThroughPlatform : MonoBehaviour
 {
     bool playerOnPlatform = false;
     Collider2D collider;
+    PlayerMovement player;
+    bool playerWasClimbing = false;
 
     void Start()
     {
         collider = GetComponent<Collider2D>();
+        player = FindObjectOfType<PlayerMovement>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -24,7 +27,6 @@ public class FallThroughPlatform : MonoBehaviour
 
     private void SetOnPlatform(Collider2D otherCollider, bool value)
     {
-        PlayerMovement player = otherCollider.gameObject.GetComponent<PlayerMovement>();
         if (player != null)
         {
             playerOnPlatform = value;
@@ -37,6 +39,16 @@ public class FallThroughPlatform : MonoBehaviour
         if (playerOnPlatform && Input.GetButtonDown("Jump"))
         {
             StartCoroutine(EnableCollider());
+        }
+
+        if (player.climbing)
+        {
+            collider.enabled = false;
+            playerWasClimbing = true;
+        } else if (playerWasClimbing)
+        {
+            playerWasClimbing = false;
+            collider.enabled = true;
         }
     }
 

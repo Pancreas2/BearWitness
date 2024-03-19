@@ -29,7 +29,7 @@ public class InventoryDescription : MonoBehaviour
                     Debug.Log(slot);
                     nameText.color = Color.white;
                     descText.color = Color.white;
-                    if (icon.sprite && slot.heldItem.image) {
+                    if (slot.heldItem.image) {
                         icon.enabled = true;
                         icon.sprite = slot.heldItem.image;
                     }

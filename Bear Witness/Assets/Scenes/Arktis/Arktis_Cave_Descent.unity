@@ -30590,6 +30590,46 @@ PrefabInstance:
       propertyPath: m_Tiles.Array.data[47].second.m_TileSpriteIndex
       value: 63
       objectReference: {fileID: 0}
+    - target: {fileID: 5205251265503385724, guid: ce8c1d595093b764fad91dd8faa59a85, type: 3}
+      propertyPath: OnBreakEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5205251265503385724, guid: ce8c1d595093b764fad91dd8faa59a85, type: 3}
+      propertyPath: OnBreakEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5205251265503385724, guid: ce8c1d595093b764fad91dd8faa59a85, type: 3}
+      propertyPath: OnBreakEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 231510614}
+    - target: {fileID: 5205251265503385724, guid: ce8c1d595093b764fad91dd8faa59a85, type: 3}
+      propertyPath: OnBreakEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5205251265503385724, guid: ce8c1d595093b764fad91dd8faa59a85, type: 3}
+      propertyPath: OnBreakEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: set_Priority
+      objectReference: {fileID: 0}
+    - target: {fileID: 5205251265503385724, guid: ce8c1d595093b764fad91dd8faa59a85, type: 3}
+      propertyPath: OnBreakEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Cinemachine.CinemachineVirtualCameraBase, Cinemachine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5205251265503385724, guid: ce8c1d595093b764fad91dd8faa59a85, type: 3}
+      propertyPath: OnBreakEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5205251265503385724, guid: ce8c1d595093b764fad91dd8faa59a85, type: 3}
+      propertyPath: OnBreakEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6132233951996843267, guid: ce8c1d595093b764fad91dd8faa59a85, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6132233951996843267, guid: ce8c1d595093b764fad91dd8faa59a85, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 6643215656573430214, guid: ce8c1d595093b764fad91dd8faa59a85, type: 3}
       propertyPath: m_Tiles.Array.size
       value: 32
@@ -32233,6 +32273,7 @@ GameObject:
   - component: {fileID: 587560552}
   - component: {fileID: 587560551}
   - component: {fileID: 587560554}
+  - component: {fileID: 587560555}
   m_Layer: 7
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -32307,7 +32348,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 587560550}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.48644876, y: 0, z: -10}
+  m_LocalPosition: {x: 0.48996067, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32348,6 +32389,50 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &587560555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587560550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!60 &626927271 stripped
 PolygonCollider2D:
   m_CorrespondingSourceObject: {fileID: 8857484990270114392, guid: b124ad1c7333eba428bfb702bcd3cca6, type: 3}
@@ -32623,6 +32708,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1049516454634095233, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1312510955}
     - target: {fileID: 2107673399963597427, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -32742,7 +32831,7 @@ PrefabInstance:
     - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
       propertyPath: dialogue.elements.Array.data[0].speaker
       value: 
-      objectReference: {fileID: 11400000, guid: efdb59ff3054d144b9c7bc667042552a, type: 2}
+      objectReference: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
     - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
       propertyPath: dialogue.elements.Array.data[1].emotion
       value: concern
@@ -32750,7 +32839,7 @@ PrefabInstance:
     - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
       propertyPath: dialogue.elements.Array.data[1].speaker
       value: 
-      objectReference: {fileID: 11400000, guid: efdb59ff3054d144b9c7bc667042552a, type: 2}
+      objectReference: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
     - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
       propertyPath: dialogue.elements.Array.data[2].emotion
       value: rotting
@@ -32766,7 +32855,7 @@ PrefabInstance:
     - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
       propertyPath: dialogue.elements.Array.data[3].speaker
       value: 
-      objectReference: {fileID: 11400000, guid: efdb59ff3054d144b9c7bc667042552a, type: 2}
+      objectReference: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
     - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
       propertyPath: dialogue.elements.Array.data[0].singleUse
       value: 1
@@ -32904,6 +32993,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1312510955 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8430701396050110974, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+  m_PrefabInstance: {fileID: 1257346070}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1316389745
 PrefabInstance:
   m_ObjectHideFlags: 0

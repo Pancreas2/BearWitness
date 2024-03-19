@@ -98,7 +98,7 @@ public class GameUI_Controller : MonoBehaviour
 
     public void IncreaseHP(int heal)
     {
-        for (int i = currentHealth; i < Mathf.Min(currentHealth + heal, maxHealth); i--)
+        for (int i = gameManager.playerCurrentHealth; i < Mathf.Min(gameManager.playerCurrentHealth + heal, maxHealth); i++)
         {
             hpDisplay[i].sprite = fullIcon;
         }
