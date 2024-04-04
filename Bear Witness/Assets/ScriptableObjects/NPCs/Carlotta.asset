@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd7d77579bf29c4881f7de8d85dec35, type: 3}
+  m_Name: Carlotta
+  m_EditorClassIdentifier: 
+  name: Captain
+  dialogueFaces:
+  - emotion: surprised
+    face: {fileID: 1167928008, guid: 719ca78c6f9b5f44f8f7722fc946d30a, type: 3}
+  - emotion: annoyed
+    face: {fileID: 1106652578, guid: 719ca78c6f9b5f44f8f7722fc946d30a, type: 3}
+  - emotion: determined
+    face: {fileID: -950715014, guid: 719ca78c6f9b5f44f8f7722fc946d30a, type: 3}
+  - emotion: disdainful
+    face: {fileID: 1677665336, guid: 719ca78c6f9b5f44f8f7722fc946d30a, type: 3}
+  - emotion: skeptical
+    face: {fileID: -1798819166, guid: 719ca78c6f9b5f44f8f7722fc946d30a, type: 3}
+  - emotion: shocked
+    face: {fileID: 421407703, guid: 719ca78c6f9b5f44f8f7722fc946d30a, type: 3}
+  neutralFace:
+    emotion: neutral
+    face: {fileID: -1999292401, guid: 719ca78c6f9b5f44f8f7722fc946d30a, type: 3}

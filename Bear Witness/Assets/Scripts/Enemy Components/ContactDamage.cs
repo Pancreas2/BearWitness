@@ -29,4 +29,9 @@ public class ContactDamage : MonoBehaviour
     {
         active = value;
     }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
+    }
 }

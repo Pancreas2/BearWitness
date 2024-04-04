@@ -18,7 +18,9 @@ public class UniqueEnemy : MonoBehaviour
 
     public enum UniqueEnemyName
     {
-        ArmouredMollusk
+        ArmouredMollusk,
+        CaptainCarlotta,
+        RockCrab
     }
 
     public UniqueEnemyName name;

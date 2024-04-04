@@ -10,6 +10,9 @@ public class BossEnemy : BaseEnemy
     private AudioManager audioManager;
 
     [SerializeField] private string bossMusic;
+    [SerializeField] private Sprite bossPortrait;
+
+    [SerializeField] private UniqueEnemy uniqueEnemy;
 
     void Start()
     {
@@ -26,6 +29,7 @@ public class BossEnemy : BaseEnemy
     {
         hpBar.SetMaxHP(maxHealth);
         hpBar.SetHPValue(currentHealth);
+        hpBar.SetPortrait(bossPortrait);
         hpBar.SetVisibility(true);
     }
 
@@ -42,6 +46,7 @@ public class BossEnemy : BaseEnemy
     override public void Perish()
     {
         base.Perish();
+        uniqueEnemy.UniqueEnemySlain();
         audioManager.Stop(bossMusic, 1f);
         hpBar.SetVisibility(false);
     }

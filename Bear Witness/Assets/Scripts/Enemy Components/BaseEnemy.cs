@@ -45,7 +45,7 @@ public class BaseEnemy : ReceiveDamage
         if (currentHealth > 0)
         {
             m_Rigidbody2D.velocity = Vector2.zero;
-            Vector2 knockbackForce = new((transform.position.x - sourcePosX) * knockback.x, knockback.y);
+            Vector2 knockbackForce = new(Mathf.Sign(transform.position.x - sourcePosX) * knockback.x, knockback.y);
             m_Rigidbody2D.AddForce(knockbackForce);
         }
 

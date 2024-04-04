@@ -2556,7 +2556,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377324827}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7593749, y: 1.2394899, z: -10}
+  m_LocalPosition: {x: 0.7635377, y: 1.2394899, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2687,6 +2687,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5936301375132725725, guid: 618cb014893df74499cd83f68869d5b5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731383248662725989, guid: 618cb014893df74499cd83f68869d5b5, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6731383248662725989, guid: 618cb014893df74499cd83f68869d5b5, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7552426552394127084, guid: 618cb014893df74499cd83f68869d5b5, type: 3}
@@ -2856,44 +2864,6 @@ MonoBehaviour:
   m_Rigidbody2D: {fileID: 971125464}
   facingRight: 0
   autoRun: 0
---- !u!114 &971125466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 276887563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f47d008aa9ae0947972e056738d55d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  animator: {fileID: 971125458}
-  doKnockback: 1
-  knockback: {x: 200, y: 100}
-  m_Rigidbody2D: {fileID: 971125464}
-  OnHurt:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 971125465}
-        m_TargetAssemblyTypeName: RunningEnemy, Assembly-CSharp
-        m_MethodName: DelayRun
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0.2
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnStart:
-    m_PersistentCalls:
-      m_Calls: []
-  OnPerish:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &971125467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2924,7 +2894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a978159770c264d43af3ae0806c84e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseEnemy: {fileID: 971125466}
+  baseEnemy: {fileID: 971125472}
   runningEnemy: {fileID: 971125465}
   contactDamage: {fileID: 971125467}
   animator: {fileID: 971125458}
@@ -2938,6 +2908,64 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 7766265874202468186, guid: 61ba62e4b5418b94e956b058f9629137, type: 3}
   m_PrefabInstance: {fileID: 1039743082499373786}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &971125472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276887563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58eddd2b2d5bb04a918080c2c5515b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passDamageTo: {fileID: 0}
+  maxHealth: 100
+  currentHealth: 0
+  animator: {fileID: 971125458}
+  doKnockback: 1
+  knockback: {x: 200, y: 100}
+  m_Rigidbody2D: {fileID: 971125464}
+  invulnerable: 0
+  OnHurt:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 971125465}
+        m_TargetAssemblyTypeName: RunningEnemy, Assembly-CSharp
+        m_MethodName: DelayRun
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.2
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnHurtInvulnerable:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 971125472}
+        m_TargetAssemblyTypeName: BossEnemy, Assembly-CSharp
+        m_MethodName: UpdateHealth
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPerish:
+    m_PersistentCalls:
+      m_Calls: []
+  bossMusic: Intemperance
+  bossPortrait: {fileID: 1139031528, guid: 78d69f84cdb6b1241bd813e083cda3e7, type: 3}
 --- !u!1001 &1067291519
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2972,7 +3000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7857786011467424883, guid: b72da7dcc3855964ead7db92f475ce0c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.6474174
+      value: 1.1474174
       objectReference: {fileID: 0}
     - target: {fileID: 7857786011467424883, guid: b72da7dcc3855964ead7db92f475ce0c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3478,9 +3506,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4958052279185630185, guid: 61ba62e4b5418b94e956b058f9629137, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 971125466}
-    - targetCorrespondingSourceObject: {fileID: 4958052279185630185, guid: 61ba62e4b5418b94e956b058f9629137, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 971125465}
     - targetCorrespondingSourceObject: {fileID: 4958052279185630185, guid: 61ba62e4b5418b94e956b058f9629137, type: 3}
       insertIndex: -1
@@ -3488,6 +3513,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4958052279185630185, guid: 61ba62e4b5418b94e956b058f9629137, type: 3}
       insertIndex: -1
       addedObject: {fileID: 971125468}
+    - targetCorrespondingSourceObject: {fileID: 4958052279185630185, guid: 61ba62e4b5418b94e956b058f9629137, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 971125472}
   m_SourcePrefab: {fileID: 100100000, guid: 61ba62e4b5418b94e956b058f9629137, type: 3}
 --- !u!1001 &6790977703647589928
 PrefabInstance:

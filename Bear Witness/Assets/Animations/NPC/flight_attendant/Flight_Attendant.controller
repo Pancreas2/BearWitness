@@ -133,6 +133,19 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-7873107078132635327
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 632399c5ac0bcce4b994dee03ddcca5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetNPC: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
 --- !u!1101 &-7774537931640246414
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -330,6 +343,31 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &-6964520535807263125
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 6308332276298846622}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1107 &-6826098614407100179
 AnimatorStateMachine:
   serializedVersion: 6
@@ -362,10 +400,10 @@ AnimatorStateMachine:
     m_Position: {x: 30, y: 710, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4416132470189112936}
-    m_Position: {x: 580, y: 450, z: 0}
+    m_Position: {x: 510, y: 380, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3965726881040667842}
-    m_Position: {x: 510, y: 530, z: 0}
+    m_Position: {x: 580, y: 450, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2485483693452915431}
     m_Position: {x: 250, y: 550, z: 0}
@@ -411,6 +449,21 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -4184410962668765986}
     m_Position: {x: -480, y: 780, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 6308332276298846622}
+    m_Position: {x: 580, y: 510, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -6460239094028544496}
+    m_Position: {x: 580, y: 570, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 2046259584634231051}
+    m_Position: {x: 360, y: 320, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -1606514917432752791}
+    m_Position: {x: 510, y: 270, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -4483757946096241924}
+    m_Position: {x: 660, y: 320, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -457,6 +510,35 @@ MonoBehaviour:
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+--- !u!1102 &-6460239094028544496
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: introduce_self_2
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 2781764718584201152}
+  m_StateMachineBehaviours:
+  - {fileID: -3881619947822768101}
+  - {fileID: 8715569901523229560}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &-6297825108138218761
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -513,6 +595,20 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-5830622166592294730
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c3f9d126b7f37b48a3dd5415a8a13e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetNPC: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+  newName: Door
 --- !u!1101 &-5638542025570641450
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -589,13 +685,76 @@ MonoBehaviour:
         item: {fileID: 0}
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: skeptical
-      sentenceText: And for that matter, what does topiary have to do with airships?
+      sentenceText: And for that matter, what do topiaries have to do with airships?
+      isChoice: 0
+      choices: []
+      isHub: 0
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        invert: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: worried
+      sentenceText: I... I honestly have no idea. It's a little silly, isn't it?
+      isChoice: 0
+      choices: []
+      isHub: 0
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        invert: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: happy
+      sentenceText: I suppose I can't really complain, though. My mom named me 'Door'.
       isChoice: 0
       choices: []
       isHub: 0
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+--- !u!1101 &-5249602250845164221
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -6460239094028544496}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!114 &-5170488663856569171
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -632,6 +791,128 @@ MonoBehaviour:
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+--- !u!114 &-4501643818374102638
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38ac78cad3040342bb73320141bd3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSegment:
+    elements:
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        invert: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+      emotion: skeptical
+      sentenceText: Why would you want to work somewhere you're clearly not invested
+        in?
+      isChoice: 0
+      choices: []
+      isHub: 0
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        invert: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: concerned
+      sentenceText: Hey, not everyone has the money to do whatever they want.
+      isChoice: 0
+      choices: []
+      isHub: 0
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        invert: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+      emotion: guilty
+      sentenceText: I guess I didn't really think of that. Sorry.
+      isChoice: 0
+      choices: []
+      isHub: 0
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        invert: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: happy
+      sentenceText: No harm done.
+      isChoice: 0
+      choices: []
+      isHub: 0
+  lastState: 0
+  triggerOnEnd: 
+  consumeOnEnd: {fileID: 0}
+--- !u!1102 &-4483757946096241924
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: boredom_threaten
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 8227416461993949948}
+  m_StateMachineBehaviours:
+  - {fileID: -2152673562846410013}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!114 &-4325606418166778959
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -801,6 +1082,48 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-3881619947822768101
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c3f9d126b7f37b48a3dd5415a8a13e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetNPC: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+  newName: Dorothy
+--- !u!1101 &-3703780033347865741
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: Choice
+    m_EventTreshold: 4
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 2046259584634231051}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-3434565727161507266
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -838,7 +1161,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1203837541644838910}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -7873107078132635327}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1026,6 +1350,137 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-2152673562846410013
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38ac78cad3040342bb73320141bd3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSegment:
+    elements:
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        invert: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+      emotion: disdainful
+      sentenceText: Your boss will, in fact, be hearing about this.
+      isChoice: 0
+      choices: []
+      isHub: 0
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        invert: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+      emotion: disdainful
+      sentenceText: In fact, I'm here to evaluate your performance.
+      isChoice: 0
+      choices: []
+      isHub: 0
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        invert: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: worried
+      sentenceText: What? No! Please, I really need this job!
+      isChoice: 0
+      choices: []
+      isHub: 0
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        invert: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+      emotion: disdainful
+      sentenceText: 'Tell it to the boss. '
+      isChoice: 0
+      choices: []
+      isHub: 0
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        invert: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: angry
+      sentenceText: 'Ugh! Screw it, I''m out of here. '
+      isChoice: 0
+      choices: []
+      isHub: 0
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        invert: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: angry
+      sentenceText: You're a horrible person, you know that?
+      isChoice: 0
+      choices: []
+      isHub: 0
+  lastState: 0
+  triggerOnEnd: 
+  consumeOnEnd: {fileID: 0}
 --- !u!1102 &-2097303457646682777
 AnimatorState:
   serializedVersion: 6
@@ -1070,6 +1525,62 @@ AnimatorState:
   - {fileID: 6069990394300050396}
   m_StateMachineBehaviours:
   - {fileID: -9203689809248254192}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1101 &-1917071634635765039
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: Choice
+    m_EventTreshold: 5
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -1606514917432752791}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1102 &-1606514917432752791
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: boredom_press
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 1585259248488146960}
+  m_StateMachineBehaviours:
+  - {fileID: -4501643818374102638}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1344,6 +1855,20 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!114 &8386872420897822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5013325c0c41fe4e91ee51f03ce37cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetNPC: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+  modifier: 1
 --- !u!114 &152758078461175526
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1489,6 +2014,101 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &798465895437793470
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38ac78cad3040342bb73320141bd3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSegment:
+    elements:
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        invert: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+      emotion: sincere
+      sentenceText: I don't even know who your boss is. But I won't tell anyone,
+        just to be safe.
+      isChoice: 0
+      choices: []
+      isHub: 0
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        invert: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: happy
+      sentenceText: Ha! Yeah, I guess I shouldn't be so worried.
+      isChoice: 0
+      choices: []
+      isHub: 0
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        invert: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: neutral
+      sentenceText: I never really wanted to work here. I just need the money, you
+        know?
+      isChoice: 0
+      choices: []
+      isHub: 0
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        invert: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: happy
+      sentenceText: At least until I become a rich and famous author!
+      isChoice: 0
+      choices: []
+      isHub: 0
+  lastState: 0
+  triggerOnEnd: 
+  consumeOnEnd: {fileID: 0}
 --- !u!1102 &864411111494136319
 AnimatorState:
   serializedVersion: 6
@@ -1631,6 +2251,31 @@ AnimatorStateTransition:
     m_EventTreshold: 5
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1684650222827453272}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &1585259248488146960
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 5147622464124431767}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -1817,6 +2462,35 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &2046259584634231051
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: boredom_trust
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 4101158000902302611}
+  m_StateMachineBehaviours:
+  - {fileID: 798465895437793470}
+  - {fileID: 8386872420897822}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!114 &2303209747464165667
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2003,8 +2677,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueSegment:
     elements:
-    - lineId: 
-      singleUse: 0
+    - lineId: fa_info0
+      singleUse: 1
       hasCondition: 0
       condition:
         type: 0
@@ -2022,8 +2696,8 @@ MonoBehaviour:
       isChoice: 0
       choices: []
       isHub: 0
-    - lineId: 
-      singleUse: 0
+    - lineId: fa_info1
+      singleUse: 1
       hasCondition: 0
       condition:
         type: 0
@@ -2148,6 +2822,31 @@ MonoBehaviour:
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+--- !u!1101 &2781764718584201152
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 2485483693452915431}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &2802758486526643610
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2240,6 +2939,34 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &3869913019651802422
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: Choice
+    m_EventTreshold: 6
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -4483757946096241924}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &3915845217758296981
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2278,7 +3005,8 @@ AnimatorState:
   m_Name: ship_name
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
+  m_Transitions:
+  - {fileID: -6964520535807263125}
   m_StateMachineBehaviours:
   - {fileID: -5292697965765338221}
   m_Position: {x: 50, y: 50, z: 0}
@@ -2295,6 +3023,31 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1101 &4101158000902302611
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 0}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 1
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &4170800874225803014
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2358,7 +3111,10 @@ AnimatorState:
   m_Name: question_boredom
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
+  m_Transitions:
+  - {fileID: -3703780033347865741}
+  - {fileID: -1917071634635765039}
+  - {fileID: 3869913019651802422}
   m_StateMachineBehaviours:
   - {fileID: 5985710830233052872}
   m_Position: {x: 50, y: 50, z: 0}
@@ -2671,9 +3427,31 @@ MonoBehaviour:
         item: {fileID: 0}
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: worried
-      sentenceText: Please don't tell my boss.
+      sentenceText: 'Please don''t tell my boss. '
       isChoice: 0
       choices: []
+      isHub: 0
+    - lineId: fa_bored4
+      singleUse: 1
+      hasCondition: 0
+      condition:
+        type: 0
+        invert: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+      emotion: 
+      sentenceText: 
+      isChoice: 1
+      choices:
+      - Of course not.
+      - Why work here if you don't like it?
+      - I'm here on behalf of your boss.
       isHub: 0
   lastState: 0
   triggerOnEnd: 
@@ -2773,6 +3551,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetNPC: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
   modifier: -5
+--- !u!1102 &6308332276298846622
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: introduce_self
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -5249602250845164221}
+  m_StateMachineBehaviours:
+  - {fileID: -5830622166592294730}
+  - {fileID: 8563872370332878634}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!114 &6380509560456935685
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3211,6 +4018,31 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &8227416461993949948
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 0}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 1
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!114 &8534704895457853989
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3260,6 +4092,78 @@ MonoBehaviour:
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: happy
       sentenceText: (Sigh...) Okay. That's probably for the best. Thank you.
+      isChoice: 0
+      choices: []
+      isHub: 0
+  lastState: 0
+  triggerOnEnd: 
+  consumeOnEnd: {fileID: 0}
+--- !u!114 &8563872370332878634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38ac78cad3040342bb73320141bd3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSegment:
+    elements:
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        invert: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: neutral
+      sentenceText: I like to pretend it's short for Dorothy.
+      isChoice: 0
+      choices: []
+      isHub: 0
+  lastState: 0
+  triggerOnEnd: 
+  consumeOnEnd: {fileID: 0}
+--- !u!114 &8715569901523229560
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38ac78cad3040342bb73320141bd3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSegment:
+    elements:
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      condition:
+        type: 0
+        invert: 0
+        upperBound: 0
+        lowerBound: 0
+        npcId: 0
+        lineId: 
+        threshold: 0
+        greaterThan: 0
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+      emotion: concerned
+      sentenceText: I don't blame you.
       isChoice: 0
       choices: []
       isHub: 0

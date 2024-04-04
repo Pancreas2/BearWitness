@@ -300,12 +300,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 7871321476919860296}
   dialogueText: {fileID: 3574102905038512758}
-  choiceA: {fileID: 6386714940971689985}
-  choiceB: {fileID: 7301115863159245899}
-  choiceC: {fileID: 4285892976922101382}
+  choiceTexts: {fileID: 0}
+  templateChoice: {fileID: 0}
   faceDisplay: {fileID: 5217839881092156540}
   animator: {fileID: 1437607990715761669}
+  buttons: {fileID: 0}
+  dialogueRunning: 0
   currentDialogueStateMachine: {fileID: 0}
+  OnDialogueEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3687118836750216455
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,7 +452,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 98ea3336e91ad5444a6dfbfc83005651, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

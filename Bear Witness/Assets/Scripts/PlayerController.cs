@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 	const float k_GroundedRadius = .1f; // Radius of the overlap circle to determine if grounded
 	public bool m_Grounded = true;            // Whether or not the player is grounded.
 	const float k_CeilingRadius = .1f; // Radius of the overlap circle to determine if the player can stand up
-	private Rigidbody2D m_Rigidbody2D;
+	public Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
 	private int coyotePoints = 8;
@@ -344,9 +344,9 @@ public class PlayerController : MonoBehaviour
 			if (doKnockback)
             {
 				float impactSide = Mathf.Sign(sourcePositionX - transform.position.x);
-				Vector2 knockbackForce = transform.up * 3f + transform.right * -10f * (impactSide);
-				m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0f);
-				m_Rigidbody2D.AddForce(knockbackForce, ForceMode2D.Impulse);
+				Vector2 knockbackForce = transform.up * 100f + transform.right * -250f * (impactSide);
+				m_Rigidbody2D.velocity = Vector3.zero;
+				m_Rigidbody2D.AddForce(knockbackForce);
             }
 
 		}
@@ -490,6 +490,7 @@ public class PlayerController : MonoBehaviour
 		{
 			knockbackForce *= -1f;
 		}
+		m_Rigidbody2D.velocity = Vector3.zero;
 		m_Rigidbody2D.AddForce(knockbackForce);
 	}
 

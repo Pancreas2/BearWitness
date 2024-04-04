@@ -146,7 +146,20 @@ public class DialogueManager : MonoBehaviour
     void WriteToDialogueBox()
     {
         Sprite face = currentSentence.speaker.GetDialogueFace(currentSentence.emotion).face;
-        string name = currentSentence.speaker.name;
+        NPCData speaker = gameManager.npcMemory.Find(npcData => npcData.npc.name == currentSentence.speaker.name);
+        string name = "";
+        if (speaker != null)
+        {
+            if (speaker.displayName == "")
+            {
+                speaker.displayName = speaker.npc.name;
+            }
+            name = speaker.displayName;
+        }
+        else
+        {
+
+        }
         string sentence = currentSentence.sentenceText;
         StopAllCoroutines();
         if (currentSentence.isChoice)

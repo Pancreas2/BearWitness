@@ -14,7 +14,12 @@ public class InitializeDialogue : StateMachineBehaviour
         NPCData npcData = gameManager.npcMemory.Find(npcData => npcData.npc.name == targetNPC.name);
         if (npcData == null)
         {
-            Debug.LogAssertion("NPC " + targetNPC.name + " not found");
+            Debug.Log("Adding NPC data for " + targetNPC.name);
+            NPCData newData = new();
+            newData.npc = targetNPC;
+            newData.displayName = targetNPC.name;
+            newData.trust = 0;
+            gameManager.npcMemory.Add(newData);
         }
 
         animator.SetInteger("Trust", npcData.trust);

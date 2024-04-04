@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d255ee49c2be2343b958ec319cdf534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fileNumber: 0
   fileName: 
   fileTime: 0
   fileCompletion: 0
@@ -52,15 +53,21 @@ MonoBehaviour:
   previousLevel: Start
   playerMaxHealth: 5
   playerCurrentHealth: 5
-  currentItem:
-    name: 
-    icon: {fileID: 0}
-    desc: 
-  inventory: []
-  inventoryNextSpace: 0
+  currentItem: {fileID: 0}
+  tools: []
+  items: []
   playedCutscenes: []
   playedLines: []
   foundItems: []
   permanentFoundItems: []
+  doorStates: 
   money: 0
-  npcMemory: []
+  npcMemory:
+  - npc: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+    displayName: Arcas
+    trust: 0
+    met: 0
+  uniqueEnemies: 
+  slainEnemies:
+    armouredMollusk: 0
+    mollusk: 0

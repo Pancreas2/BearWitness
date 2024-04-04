@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameEvent : StateMachineBehaviour
 {
@@ -20,6 +21,7 @@ public class GameEvent : StateMachineBehaviour
 
     [Header("Open Door")]
     public int doorId;
+
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

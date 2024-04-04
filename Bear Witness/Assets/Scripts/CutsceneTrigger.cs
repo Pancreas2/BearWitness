@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public class CutsceneTrigger : MonoBehaviour
 {
+    public bool faceRight = true;
+    public Transform playerPosition;
     public bool reuseable = false;
     public bool triggerOnFirstLoad;
     public bool triggerOnColliderEnter;
@@ -15,14 +17,19 @@ public class CutsceneTrigger : MonoBehaviour
     private float cutsceneStartTime = -5f;
     private bool used = false;
 
+    private PlayerMovement player;
+
     public UnityEvent OnCutsceneStart;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-        if (triggerOnFirstLoad && reuseable || !gameManager.playedCutscenes.Contains(cutscene_ID))
+        player = FindObjectOfType<PlayerMovement>();
+        if (triggerOnFirstLoad && (reuseable || !gameManager.playedCutscenes.Contains(cutscene_ID)))
         {
+            player.cutsceneFaceRight = faceRight;
+            player.WalkToPoint(playerPosition.position.x);
             cutsceneStartTime = Time.time + delay;
         }
     }
@@ -40,6 +47,8 @@ public class CutsceneTrigger : MonoBehaviour
     {
         if (triggerOnColliderEnter && collision.collider.CompareTag("Player") && reuseable || !gameManager.playedCutscenes.Contains(cutscene_ID))
         {
+            player.cutsceneFaceRight = faceRight;
+            player.WalkToPoint(playerPosition.position.x);
             cutsceneStartTime = Time.time + delay;
         }
     }

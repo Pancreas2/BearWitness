@@ -6,6 +6,7 @@ public class BossHealthBar : MonoBehaviour
 {
     public Slider slider;
     public GameObject bar;
+    public Image portrait;
 
     public void SetHPValue(int health)
     {
@@ -20,6 +21,14 @@ public class BossHealthBar : MonoBehaviour
     public void SetVisibility(bool active)
     {
         bar.SetActive(active);
+    }
+
+    public void SetPortrait(Sprite image)
+    {
+        if (image)
+            portrait.sprite = image;
+        else
+            Debug.LogWarning("No boss portrait found");
     }
 
     private void Start()
