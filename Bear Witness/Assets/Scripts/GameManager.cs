@@ -39,21 +39,32 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        guic = FindObjectOfType<GameUI_Controller>();
+
+        // temporary!!
+        StartRun();
+    }
+
     private void ReloadLevel()
     {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().ToString());
+        SceneManager.LoadScene(SceneManager.GetActiveScene().ToString());
     }
 
     public void PickupItem(Item item)
     {
         InventoryMenu invManager = FindObjectOfType<InventoryMenu>();
 
+        if (!guic) guic = FindObjectOfType<GameUI_Controller>();
+        guic.itemPopup.QueueItem(item);
+
         if (item.type == Item.ItemType.Tool)
         {
             if (!currentItem)
             {
                 currentItem = item;
-                FindObjectOfType<GameUI_Controller>().DisplayHeldItem(item);
+                guic.DisplayHeldItem(item);
             }
 
             tools.Add(item);
@@ -116,14 +127,37 @@ public class GameManager : MonoBehaviour
         currentRespawnPoint = newSpawn;
     }
 
+    public void DamagePlayer(float damage)
+    {
+        hourglassFill -= damage * 10f;
+        guic.hourglass.DamageFlash(damage);
+    }
+
+    public void HealPlayer(float heal)
+    {
+        hourglassFill = Mathf.Min(hourglassCapacity, hourglassFill + heal);
+    }
+
+    public void StartRun()
+    {
+        inArktis = false;
+    }
+
     private void Update()
     {
         if (!pauseGameTime)
+        {
             gameTime += Time.deltaTime * 2f / 3f;
 
-        if (gameTime > 10080f)
+            if (!inArktis)
+            {
+                hourglassFill -= Time.deltaTime;
+            }
+        }
+
+        if (hourglassFill < 0f)
         {
-            Debug.Log("Kablooie");
+            Debug.Log("Run Ends Here!!");
         }
     }
 
@@ -138,6 +172,12 @@ public class GameManager : MonoBehaviour
     public string previousLevel;
     public int playerMaxHealth = 5;
     public int playerCurrentHealth = 5;
+
+    public float hourglassFill = 300f;
+    public float hourglassCapacity = 300f;
+
+    public bool inArktis = true;
+
     public Item currentItem;
     public List<Item> tools;
     public List<Item> items;
@@ -150,10 +190,13 @@ public class GameManager : MonoBehaviour
     public int money = 30;
 
     public List<NPCData> npcMemory = new();
+    public List<ShopData> shopMemory = new();
 
     private SpawnPlayer currentRespawnPoint;
 
     public List<bool> uniqueEnemies = new();
     public SlainEnemies slainEnemies;
+
+    private GameUI_Controller guic;
 }
 

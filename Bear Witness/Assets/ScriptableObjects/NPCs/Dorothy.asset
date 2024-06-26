@@ -13,19 +13,12 @@ MonoBehaviour:
   m_Name: Dorothy
   m_EditorClassIdentifier: 
   name: Flight Attendant
-  dialogueFaces:
-  - emotion: neutral
-    face: {fileID: 378430945, guid: ac777315c5a61234abc1fac9432536ec, type: 3}
-  - emotion: worried
-    face: {fileID: -1972397875, guid: ac777315c5a61234abc1fac9432536ec, type: 3}
-  - emotion: embarrassed
-    face: {fileID: 1745176678, guid: ac777315c5a61234abc1fac9432536ec, type: 3}
-  - emotion: concerned
-    face: {fileID: 1581952749, guid: ac777315c5a61234abc1fac9432536ec, type: 3}
-  - emotion: happy
-    face: {fileID: 654527002, guid: ac777315c5a61234abc1fac9432536ec, type: 3}
-  - emotion: bored
-    face: {fileID: 1214197430, guid: ac777315c5a61234abc1fac9432536ec, type: 3}
-  neutralFace:
-    emotion: neutral
-    face: {fileID: 378430945, guid: ac777315c5a61234abc1fac9432536ec, type: 3}
+  faceAnimations: {fileID: 9100000, guid: a3adf1bbff655614591abc87bdbed827, type: 2}
+  emotionReference:
+  - neutral
+  - bored
+  - worried
+  - concerned
+  - happy
+  - embarrassed
+  neutralFace: {fileID: -413572260, guid: 6afc00c345ebe754cb980a7929c63793, type: 3}

@@ -13,37 +13,21 @@ MonoBehaviour:
   m_Name: Arcas
   m_EditorClassIdentifier: 
   name: Arcas
-  dialogueFaces:
-  - emotion: angry
-    face: {fileID: -613310086, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}
-  - emotion: annoyed
-    face: {fileID: -837198130, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}
-  - emotion: concerned
-    face: {fileID: 2070060656, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}
-  - emotion: disdainful
-    face: {fileID: 1095839835, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}
-  - emotion: laughing
-    face: {fileID: 1602085932, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}
-  - emotion: happy
-    face: {fileID: 2003180527, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}
-  - emotion: sad
-    face: {fileID: -1468070596, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}
-  - emotion: skeptical
-    face: {fileID: -1862997504, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}
-  - emotion: nervous
-    face: {fileID: 41785798, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}
-  - emotion: sincere
-    face: {fileID: -710866037, guid: 604d62e77da79f842aba7fd1fc2467f5, type: 3}
-  - emotion: embarrassed
-    face: {fileID: -924462513, guid: 604d62e77da79f842aba7fd1fc2467f5, type: 3}
-  - emotion: shameful
-    face: {fileID: -55131629, guid: 604d62e77da79f842aba7fd1fc2467f5, type: 3}
-  - emotion: guilty
-    face: {fileID: -342917110, guid: 604d62e77da79f842aba7fd1fc2467f5, type: 3}
-  - emotion: puzzled
-    face: {fileID: -1287278833, guid: 604d62e77da79f842aba7fd1fc2467f5, type: 3}
-  - emotion: upset
-    face: {fileID: 1664947537, guid: 604d62e77da79f842aba7fd1fc2467f5, type: 3}
-  neutralFace:
-    emotion: neutral
-    face: {fileID: 1058084819, guid: 666ab4c92f831524e9f3828ab937f43f, type: 3}
+  faceAnimations: {fileID: 9100000, guid: 9715cf06e71a6d04fa4447968f1db3c7, type: 2}
+  emotionReference:
+  - neutral
+  - happy
+  - thrilled
+  - skeptical
+  - disdainful
+  - hurt
+  - crying
+  - guilty
+  - embarrassed
+  - straightforward
+  - worried
+  - sad
+  - concerned
+  - angry
+  - evil
+  neutralFace: {fileID: 193549858, guid: e67ff7e9ba3b48e4eb3e14bfcda3845d, type: 3}

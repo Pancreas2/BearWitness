@@ -32,7 +32,7 @@ public class InventoryMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetButtonDown("Inventory"))
         {
             if (GameIsPaused)
             {
@@ -55,6 +55,7 @@ public class InventoryMenu : MonoBehaviour
 
     public void Pause()
     {
+        if (PauseMenu.GameIsPaused) FindObjectOfType<PauseMenu>().Resume();
         resumeMenuUI.SetActive(true);
         foreach (InventorySlot slot in toolSlots)
         {

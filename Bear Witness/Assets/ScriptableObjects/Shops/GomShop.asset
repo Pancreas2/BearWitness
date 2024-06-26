@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfbfbbf2bb515264db81a3ff901c506f, type: 3}
+  m_Name: GomShop
+  m_EditorClassIdentifier: 
+  name: Gom Shop
+  backgroundDialogue:
+    elements: []
+  startingStock:
+  - name: a friend
+    item: {fileID: 11400000, guid: 1940c3d985667d947aec2b8341cb3cc4, type: 2}
+    price: 12
+    finiteStock: 1
+    stock: 1
+  - name: quality propeller
+    item: {fileID: 11400000, guid: 57ebe50d55ab77f478371dde7941ae85, type: 2}
+    price: 250
+    finiteStock: 1
+    stock: 1
+  - name: blessing
+    item: {fileID: 11400000, guid: cd3348a1a7035484fba8c5ad77a4ba6d, type: 2}
+    price: 300
+    finiteStock: 1
+    stock: 1

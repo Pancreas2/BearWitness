@@ -13,7 +13,7 @@ public class SaveInteractable : Interactable
 
     [SerializeField] private AudioSource audioSource;
 
-    private void Awake()
+    private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         guic = FindObjectOfType<GameUI_Controller>();
@@ -36,7 +36,6 @@ public class SaveInteractable : Interactable
         player.frozen = true;
         player.PlayAnimation("spin");
         freezeDelay = Time.time + 1f;
-        guic.IncreaseHP(gameManager.playerMaxHealth);
         gameManager.SavePlayerData(gameManager.fileNumber);
     }
 }

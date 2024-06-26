@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 6651387511359207095}
   - component: {fileID: 6044148262277639355}
   - component: {fileID: 5097489894099378585}
+  - component: {fileID: 4789005042286325274}
   m_Layer: 10
   m_Name: Mollusk
   m_TagString: Untagged
@@ -101,7 +102,7 @@ Transform:
   - {fileID: 605438379161689479}
   - {fileID: 1588415033401127312}
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1769722434398929637
 SpriteRenderer:
@@ -143,7 +144,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 751825023, guid: 3c12e929928f64442a839fa538d89314, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -214,7 +215,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f47d008aa9ae0947972e056738d55d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  passDamageTo: {fileID: 0}
   maxHealth: 15
+  currentHealth: 0
   animator: {fileID: 6044148262277639355}
   doKnockback: 1
   knockback: {x: 100, y: 80}
@@ -276,6 +279,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: die
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4789005042286325274}
+        m_TargetAssemblyTypeName: CoinShower, Assembly-CSharp
+        m_MethodName: SpawnCoins
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: die
           m_BoolArgument: 0
@@ -354,6 +369,21 @@ CircleCollider2D:
   m_Offset: {x: -0.0625, y: -0.05}
   serializedVersion: 2
   m_Radius: 0.225
+--- !u!114 &4789005042286325274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6437615573983491461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25584e5204af85049917cc80c3eba9c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bigCoin: {fileID: 571788386667076984, guid: f925691b533213d438f686d7a57850fd, type: 3}
+  mediumCoin: {fileID: 2643579888471910234, guid: a5be1d9064bafa54d9849917bd45e03f, type: 3}
+  smallCoin: {fileID: 3521268495908571157, guid: fb0c264f257140f448f00cea837b599a, type: 3}
 --- !u!1 &7561892824307047822
 GameObject:
   m_ObjectHideFlags: 0

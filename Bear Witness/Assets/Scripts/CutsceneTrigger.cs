@@ -45,7 +45,7 @@ public class CutsceneTrigger : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (triggerOnColliderEnter && collision.collider.CompareTag("Player") && reuseable || !gameManager.playedCutscenes.Contains(cutscene_ID))
+        if (triggerOnColliderEnter && collision.collider.CompareTag("Player") && (reuseable || !gameManager.playedCutscenes.Contains(cutscene_ID)))
         {
             player.cutsceneFaceRight = faceRight;
             player.WalkToPoint(playerPosition.position.x);

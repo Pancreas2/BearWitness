@@ -115,7 +115,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 4
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8449605476925207410}
   m_Solo: 0
@@ -190,7 +190,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 6
+    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3325413768067708380}
   m_Solo: 0
@@ -293,7 +293,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 4
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7135173900822598327}
   m_Solo: 0
@@ -346,7 +346,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 5
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3213886926745735292}
   m_Solo: 0
@@ -403,7 +403,7 @@ AnimatorStateMachine:
     m_Position: {x: 30, y: 160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3688331203443239652}
-    m_Position: {x: 30, y: 240, z: 0}
+    m_Position: {x: 10, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8449605476925207410}
     m_Position: {x: -130, y: 310, z: 0}
@@ -472,61 +472,31 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: disdainful
       sentenceText: You must have made a mistake. I'm not a Witness.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: skeptical
       sentenceText: Hmm. Well, if you see one, mind, tell them to check the iceberg
         to the west for an ice pick.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: neutral
       sentenceText: Good day.
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -642,159 +612,79 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: neutral
       sentenceText: I had no idea there were legends about Witnesses. We were always
         told to stay as hidden as possible.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: proud
       sentenceText: Give us some credit! It's pretty easy to spot a huge white bear,
         even when they're trying to be sneaky.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: happy
       sentenceText: 'My father was fascinated by your ways, and he told me all sorts
         of tales when I fished with him. '
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: embarrassed
       sentenceText: I suppose I'll have to be more careful.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: happy
       sentenceText: 'For what it''s worth, your secret is safe with me. '
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: proud
       sentenceText: Say, if you come by later this evening, I'll tell you such a
         tale.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: happy
       sentenceText: Thanks! I'd like that.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: neutral
       sentenceText: By the way, you haven't seen an ice pick anywhere, have you?
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -815,103 +705,62 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: skeptical
       sentenceText: Why do you ask?
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: neutral
       sentenceText: Well, I found an iceberg when I was out fishing this morning
         - and it's midsummer.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: skeptical
       sentenceText: 'I figured a Witness had probably come to visit us. '
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: happy
       sentenceText: Also, your fur is a dead giveaway. If you want to keep yourself
         hidden you'll need a disguise.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: neutral
       sentenceText: 
       isChoice: 1
       choices:
-      - Why would I need to hide?
-      - Did you see my ice pick?
-      - I'm not a Witness.
-      isHub: 0
+      - text: Why would I need to hide?
+        hasCondition: 0
+        choiceID: 0
+        conditions: []
+      - text: Have you seen my ice pick?
+        hasCondition: 0
+        choiceID: 0
+        conditions: []
+      - text: Good thing I'm not a Witness.
+        hasCondition: 0
+        choiceID: 0
+        conditions: []
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -991,101 +840,60 @@ MonoBehaviour:
     - lineId: fisher_greet0
       singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: happy
       sentenceText: Good morning, young man.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: fisher_greet1
       singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: happy
       sentenceText: Good morning!
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: fisher_greet2
       singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: skeptical
       sentenceText: You're a Witness, aren't you?
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: fisher_greet3
       singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: nervous
       sentenceText: Uhhh..
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: fisher_greet4
       singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: nervous
       sentenceText: 
       isChoice: 1
       choices:
-      - I am.
-      - Why do you ask?
-      - ... no?
-      isHub: 0
+      - text: I am.
+        hasCondition: 0
+        choiceID: 0
+        conditions: []
+      - text: Why do you ask?
+        hasCondition: 0
+        choiceID: 0
+        conditions: []
+      - text: I'm not a Witness.
+        hasCondition: 0
+        choiceID: 0
+        conditions: []
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -1106,119 +914,62 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: concerned
       sentenceText: Why would I need to hide? Is it really that dangerous here?
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: neutral
       sentenceText: 'Not everyone has the same view on Witnesses. '
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: neutral
       sentenceText: There are some who feel bitter that you don't use your knowledge
         to fix things.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: neutral
       sentenceText: And others still who would rather not have their secrets known.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: neutral
       sentenceText: Be careful out there.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: neutral
       sentenceText: 
       isChoice: 1
       choices:
-      - Have you seen my ice pick?
-      isHub: 0
+      - text: Have you seen my ice pick?
+        hasCondition: 0
+        choiceID: 0
+        conditions: []
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -1363,22 +1114,12 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: neutral
       sentenceText: Good luck out there!
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -1399,60 +1140,30 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: happy
       sentenceText: I have indeed. It's wedged in an iceberg just west of here.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: happy
       sentenceText: Thank you! I've been looking all over for it.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: happy
       sentenceText: Not at all. I'm happy to be of assistance. Good luck out there!
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -1473,100 +1184,56 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: sad
       sentenceText: I'm not really supposed to tell you... but yes.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: skeptical
       sentenceText: But you'd already figured it out, hadn't you?
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: happy
       sentenceText: Of course. We were told legends about you when I was a cub.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: happy
       sentenceText: It's an honor to finally meet one.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: happy
       sentenceText: 
       isChoice: 1
       choices:
-      - I didn't know there were stories about us.
-      - Have you seen my ice pick?
-      isHub: 0
+      - text: There are legends about us?
+        hasCondition: 0
+        choiceID: 0
+        conditions: []
+      - text: Have you seen my ice pick?
+        hasCondition: 0
+        choiceID: 0
+        conditions: []
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -1663,7 +1330,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 5
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6989935313688039975}
   m_Solo: 0
@@ -1746,7 +1413,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 5
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3213886926745735292}
   m_Solo: 0
@@ -1778,99 +1445,49 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: guilty
       sentenceText: Uh.. no.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: skeptical
       sentenceText: Ah, I see. My mistake.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: neutral
       sentenceText: Well, if a Witness were to come by, I would tell them I found
         an iceberg with a pick lodged in it.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: skeptical
       sentenceText: If you happen to see one, would you pass on the message?
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: guilty
       sentenceText: Uh.. yeah, I'll do that.
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -1891,22 +1508,12 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: neutral
       sentenceText: Good day.
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -1923,7 +1530,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 4
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5846354443181799080}
   m_Solo: 0
@@ -2145,7 +1752,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 6
+    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 9177147705842091917}
   m_Solo: 0
@@ -2458,7 +2065,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 4
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3213886926745735292}
   m_Solo: 0

@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: Walrus
   m_EditorClassIdentifier: 
   name: Wise Old Walrus
-  dialogueFaces:
-  - emotion: happy
-    face: {fileID: -871519730, guid: 2b0c74d2e9cfddc4681fe8b0c5195902, type: 3}
-  neutralFace:
-    emotion: neutral
-    face: {fileID: 1445049729, guid: 2b0c74d2e9cfddc4681fe8b0c5195902, type: 3}
+  faceAnimations: {fileID: 9100000, guid: 751673e48f75228479080ef4623f99f0, type: 2}
+  emotionReference:
+  - neutral
+  - disdainful
+  - happy
+  - sad
+  - angry
+  neutralFace: {fileID: -1597798895, guid: 2906ff6ca36d8a74aa250f802f0fecfb, type: 3}

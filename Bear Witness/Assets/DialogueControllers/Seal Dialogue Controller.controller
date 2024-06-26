@@ -18,7 +18,8 @@ MonoBehaviour:
       singleUse: 0
       hasCondition: 0
       condition:
-        type: 0
+        conditionTypes: 
+        invert: 0
         upperBound: 0
         lowerBound: 0
         npcId: 0
@@ -26,18 +27,17 @@ MonoBehaviour:
         threshold: 0
         greaterThan: 0
         item: {fileID: 0}
-        invert: 0
       speaker: {fileID: 11400000, guid: 62d778196f7be3d47ac8a2c89abef8a6, type: 2}
       emotion: happy
       sentenceText: Yay!
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: seal_trust_1
       singleUse: 0
       hasCondition: 0
       condition:
-        type: 0
+        conditionTypes: 
+        invert: 0
         upperBound: 0
         lowerBound: 0
         npcId: 0
@@ -45,13 +45,11 @@ MonoBehaviour:
         threshold: 0
         greaterThan: 0
         item: {fileID: 0}
-        invert: 0
       speaker: {fileID: 11400000, guid: 62d778196f7be3d47ac8a2c89abef8a6, type: 2}
       emotion: happy
       sentenceText: I hope they don't find us!
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -73,7 +71,8 @@ MonoBehaviour:
       singleUse: 0
       hasCondition: 0
       condition:
-        type: 0
+        conditionTypes: 
+        invert: 0
         upperBound: 0
         lowerBound: 0
         npcId: 0
@@ -81,13 +80,11 @@ MonoBehaviour:
         threshold: 0
         greaterThan: 0
         item: {fileID: 0}
-        invert: 0
       speaker: {fileID: 11400000, guid: 62d778196f7be3d47ac8a2c89abef8a6, type: 2}
       emotion: happy
       sentenceText: I sure am lucky you haven't found me yet!
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -154,7 +151,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 5
+    m_EventTreshold: 1
   - m_ConditionMode: 1
     m_ConditionEvent: Choose
     m_EventTreshold: 0
@@ -185,7 +182,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 4
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 746454525396702744}
   m_Solo: 0
@@ -271,7 +268,8 @@ MonoBehaviour:
       singleUse: 0
       hasCondition: 0
       condition:
-        type: 0
+        conditionTypes: 
+        invert: 0
         upperBound: 0
         lowerBound: 0
         npcId: 0
@@ -279,18 +277,17 @@ MonoBehaviour:
         threshold: 0
         greaterThan: 0
         item: {fileID: 0}
-        invert: 0
       speaker: {fileID: 11400000, guid: 62d778196f7be3d47ac8a2c89abef8a6, type: 2}
       emotion: neutral
       sentenceText: Oh no!
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: seal_untrust_1
       singleUse: 0
       hasCondition: 0
       condition:
-        type: 0
+        conditionTypes: 
+        invert: 0
         upperBound: 0
         lowerBound: 0
         npcId: 0
@@ -298,13 +295,11 @@ MonoBehaviour:
         threshold: 0
         greaterThan: 0
         item: {fileID: 0}
-        invert: 0
       speaker: {fileID: 11400000, guid: 62d778196f7be3d47ac8a2c89abef8a6, type: 2}
       emotion: neutral
       sentenceText: I hope you don't find me!
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -491,25 +486,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Trust
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Choose
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Choice
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Dialogue
@@ -679,7 +674,8 @@ MonoBehaviour:
       singleUse: 0
       hasCondition: 0
       condition:
-        type: 0
+        conditionTypes: 
+        invert: 0
         upperBound: 0
         lowerBound: 0
         npcId: 0
@@ -687,13 +683,11 @@ MonoBehaviour:
         threshold: 0
         greaterThan: 0
         item: {fileID: 0}
-        invert: 0
       speaker: {fileID: 11400000, guid: 62d778196f7be3d47ac8a2c89abef8a6, type: 2}
       emotion: happy
       sentenceText: Be careful out there, the bear might find you!
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -769,7 +763,8 @@ MonoBehaviour:
       singleUse: 0
       hasCondition: 0
       condition:
-        type: 0
+        conditionTypes: 
+        invert: 0
         upperBound: 0
         lowerBound: 0
         npcId: 0
@@ -777,18 +772,17 @@ MonoBehaviour:
         threshold: 0
         greaterThan: 0
         item: {fileID: 0}
-        invert: 0
       speaker: {fileID: 11400000, guid: 62d778196f7be3d47ac8a2c89abef8a6, type: 2}
       emotion: happy
       sentenceText: I'm hiding from the bear!
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: seal_greet_1
       singleUse: 0
       hasCondition: 0
       condition:
-        type: 0
+        conditionTypes: 
+        invert: 0
         upperBound: 0
         lowerBound: 0
         npcId: 0
@@ -796,18 +790,17 @@ MonoBehaviour:
         threshold: 0
         greaterThan: 0
         item: {fileID: 0}
-        invert: 0
       speaker: {fileID: 11400000, guid: 62d778196f7be3d47ac8a2c89abef8a6, type: 2}
       emotion: happy
       sentenceText: Want to hide with me?
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: seal_greet_choice
       singleUse: 0
       hasCondition: 0
       condition:
-        type: 0
+        conditionTypes: 
+        invert: 0
         upperBound: 0
         lowerBound: 0
         npcId: 0
@@ -815,7 +808,6 @@ MonoBehaviour:
         threshold: 0
         greaterThan: 0
         item: {fileID: 0}
-        invert: 0
       speaker: {fileID: 11400000, guid: efdb59ff3054d144b9c7bc667042552a, type: 2}
       emotion: skeptical
       sentenceText: 
@@ -823,7 +815,6 @@ MonoBehaviour:
       choices:
       - Sure
       - I'm the bear
-      isHub: 0
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}

@@ -20,8 +20,16 @@ public class BossEnemy : BaseEnemy
         hpBar = FindObjectOfType<BossHealthBar>();
         player = FindObjectOfType<PlayerMovement>();
         audioManager = FindObjectOfType<AudioManager>();
-        audioManager.StopAll(0f);
-        audioManager.Play(bossMusic, 0, 0.5f);
+    }
+    
+    public void BeginFight()
+    {
+        Debug.Log("it begins...");
+        if (bossMusic != "")
+        {
+            audioManager.StopAll(0f);
+            audioManager.Play(bossMusic, 0, 0.5f);
+        }
         OnStart.Invoke();
     }
 
@@ -45,10 +53,10 @@ public class BossEnemy : BaseEnemy
 
     override public void Perish()
     {
-        base.Perish();
         uniqueEnemy.UniqueEnemySlain();
         audioManager.Stop(bossMusic, 1f);
         hpBar.SetVisibility(false);
+        base.Perish();
     }
 
     public override void DecreaseHealth(int damageValue)

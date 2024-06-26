@@ -13,25 +13,13 @@ MonoBehaviour:
   m_Name: Silica
   m_EditorClassIdentifier: 
   name: Wanderer
-  dialogueFaces:
-  - emotion: neutral
-    face: {fileID: -1576687511, guid: d07cd096524f2034c9db434e812eb05d, type: 3}
-  - emotion: regretful
-    face: {fileID: -1554031538, guid: d07cd096524f2034c9db434e812eb05d, type: 3}
-  - emotion: embarrassed
-    face: {fileID: -1490337606, guid: d07cd096524f2034c9db434e812eb05d, type: 3}
-  - emotion: happy
-    face: {fileID: -1656227048, guid: d07cd096524f2034c9db434e812eb05d, type: 3}
-  - emotion: closed_eyes
-    face: {fileID: -537195550, guid: d07cd096524f2034c9db434e812eb05d, type: 3}
-  - emotion: angry
-    face: {fileID: -735135795, guid: d07cd096524f2034c9db434e812eb05d, type: 3}
-  - emotion: sad
-    face: {fileID: -1997592134, guid: d07cd096524f2034c9db434e812eb05d, type: 3}
-  - emotion: skeptical
-    face: {fileID: -1837781749, guid: d07cd096524f2034c9db434e812eb05d, type: 3}
-  - emotion: concerned
-    face: {fileID: -969742290, guid: d07cd096524f2034c9db434e812eb05d, type: 3}
-  neutralFace:
-    emotion: neutral
-    face: {fileID: -894457865, guid: f53219d2d7330614b8e3d8963569464c, type: 3}
+  faceAnimations: {fileID: 9100000, guid: f14943ab7000c7f479e292eb3ec04ddc, type: 2}
+  emotionReference:
+  - neutral
+  - angry
+  - confused
+  - sad
+  - happy
+  - content
+  - embarrassed
+  neutralFace: {fileID: 830589478, guid: 72bd9a6e94234a843b500921231c8390, type: 3}

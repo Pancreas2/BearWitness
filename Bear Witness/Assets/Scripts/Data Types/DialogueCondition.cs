@@ -7,44 +7,26 @@ public class DialogueCondition
 {
     public enum ConditionType
     {
-        TrustLevel,
-        PreviousLinePlayed, 
-        Money,
+        None,
+        PreviousLinePlayed,
         HasItem
     }
-    public ConditionType type;
+    public ConditionType conditionType;
+    public int conditionSet = 0;
     public bool invert;
-    [Header("Trust Level")]
-    public int upperBound;
-    public int lowerBound;
-    public int npcId;
+
     [Header("Previous Line Played")]
     public string lineId;
-    [Header("Money")]
-    public int threshold;
-    public bool greaterThan;
+
     [Header("Has Item")]
     public Item item;
-    
 
-    public bool Evaluate(GameManager gameManager)
+    public bool EvaluateCondition(GameManager gameManager)
     {
-        if (type == ConditionType.TrustLevel)
-        {
-            NPCData nPCData = gameManager.npcMemory[npcId];
-            if (nPCData == null) return false;
-            int comparedValue = nPCData.trust;
-            if (upperBound >= comparedValue && lowerBound <= comparedValue)
-            {
-                return true ^ invert;
-            }
-        } else if (type == ConditionType.PreviousLinePlayed)
+        if (conditionType == ConditionType.PreviousLinePlayed)
         {
             return gameManager.playedLines.Contains(lineId) ^ invert;
-        } else if (type == ConditionType.Money)
-        {
-            return (gameManager.money < threshold ^ greaterThan) ^ invert;
-        } else if (type == ConditionType.HasItem)
+        } else if (conditionType == ConditionType.HasItem)
         {
             return gameManager.items.Contains(item) ^ invert;
         }

@@ -45,6 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
+  - name: Airship
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 78eeef5815e53d8438ef67814b00b887, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
   - name: Arktis
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 77a6ed27bf8ee5a4092a399c98670112, type: 3}
@@ -60,6 +66,12 @@ MonoBehaviour:
   - name: Crab
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 7c984cf13c5258544a8cd683d636bb73, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: Flying_Feathers
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: db96123dd5f99754e9805f08b9ea5c16, type: 3}
     volume: 1
     pitch: 1
     loop: 1

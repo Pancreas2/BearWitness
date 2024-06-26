@@ -13,10 +13,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 7
     m_ConditionEvent: Choice
-    m_EventTreshold: 5
-  - m_ConditionMode: 7
-    m_ConditionEvent: Choice
-    m_EventTreshold: 4
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 0}
   m_Solo: 0
@@ -59,7 +56,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 6
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6767545861752108716}
   m_Solo: 0
@@ -91,66 +88,44 @@ MonoBehaviour:
     - lineId: lh_door_inspect
       singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
-        invert: 0
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: neutral
       sentenceText: An old wooden door.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: lh_door_inspect_nokey
       singleUse: 0
-      hasCondition: 1
-      condition:
-        type: 3
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 11400000, guid: 429165caa3f2e8d49b9337965678709f, type: 2}
-        invert: 1
+      hasCondition: 0
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: annoyed
       sentenceText: It's locked.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: lh_door_inspect_key
       singleUse: 0
       hasCondition: 1
-      condition:
-        type: 3
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 11400000, guid: 429165caa3f2e8d49b9337965678709f, type: 2}
+      conditions:
+      - conditionType: 2
+        conditionSet: 0
         invert: 0
+        lineId: 
+        item: {fileID: 11400000, guid: 429165caa3f2e8d49b9337965678709f, type: 2}
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: neutral
       sentenceText: Use the Lighthouse Key?
       isChoice: 1
       choices:
-      - 
-      - 
-      - Yes
-      - 
-      - 
-      - No
-      isHub: 0
+      - text: 
+        hasCondition: 0
+        conditions: []
+      - text: Yes
+        hasCondition: 0
+        conditions: []
+      - text: No
+        hasCondition: 0
+        conditions: []
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -211,25 +186,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Trust
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Choose
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Choice
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Dialogue
@@ -303,8 +278,8 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 1
-  m_HasExitTime: 1
+  m_ExitTime: 0
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1

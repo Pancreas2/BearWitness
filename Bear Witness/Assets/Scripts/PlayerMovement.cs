@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     bool special = false;
     public bool frozen = false;
     bool wasFrozen = false;
+    public float freezeTime;
     bool attacking = false;
     readonly float attackRate = 3.5f;
     float attackDelay = 0;
@@ -126,8 +127,6 @@ public class PlayerMovement : MonoBehaviour
         {
             attackEnd = true;
         }
-
-        wasFrozen = false;
     }
 
     private void FixedUpdate()
@@ -151,6 +150,8 @@ public class PlayerMovement : MonoBehaviour
             jump = false;
             attacking = false;
             attackEnd = false;
+
+            wasFrozen = false;
         }
         else
         {
@@ -169,9 +170,10 @@ public class PlayerMovement : MonoBehaviour
                 float direction = Mathf.Sign(difference);
                 if (Mathf.Abs(difference) < moveSpeed * Time.fixedDeltaTime)
                 {
-                    transform.position.Set(moveTarget, transform.position.y, transform.position.z);
+                    transform.position = new(moveTarget, transform.position.y);
+                    controller.m_Rigidbody2D.velocity = Vector3.zero;
                     cutsceneMove = false;
-                    if (cutsceneFaceRight ^ difference > 0f)
+                    if (cutsceneFaceRight ^ transform.localScale.x == 1f)
                     {
                         controller.Flip();
                     }
@@ -192,4 +194,5 @@ public class PlayerMovement : MonoBehaviour
     {
         animator.Play(name, 5);
     }
+
 }

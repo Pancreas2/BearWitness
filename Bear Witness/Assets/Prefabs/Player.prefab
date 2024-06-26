@@ -149,6 +149,7 @@ MonoBehaviour:
   m_CrouchDisableCollider: {fileID: 5317592454457431495}
   animator: {fileID: 6733450766372703335}
   m_Grounded: 1
+  m_Rigidbody2D: {fileID: 0}
   attackRange: 0.4
   enemyLayers:
     serializedVersion: 2
@@ -315,9 +316,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 2072089859071907103}
   animator: {fileID: 6733450766372703335}
-  moveSpeed: 10
+  moveSpeed: 8
   runMultiplier: 2
   frozen: 0
+  freezeTime: 0
   climbing: 0
   onPassThroughPlatform: 0
   moveTarget: 0

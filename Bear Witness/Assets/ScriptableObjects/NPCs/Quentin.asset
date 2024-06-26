@@ -13,15 +13,11 @@ MonoBehaviour:
   m_Name: Quentin
   m_EditorClassIdentifier: 
   name: Quentin
-  dialogueFaces:
-  - emotion: skeptical
-    face: {fileID: -489417614, guid: 4e6c44ea8d8137949a2974238b0d8f72, type: 3}
-  - emotion: happy
-    face: {fileID: 1805734862, guid: 4e6c44ea8d8137949a2974238b0d8f72, type: 3}
-  - emotion: annoyed
-    face: {fileID: 1261496186, guid: 4e6c44ea8d8137949a2974238b0d8f72, type: 3}
-  - emotion: guilty
-    face: {fileID: -2030262452, guid: 4e6c44ea8d8137949a2974238b0d8f72, type: 3}
-  neutralFace:
-    emotion: neutral
-    face: {fileID: 1585167696, guid: 4e6c44ea8d8137949a2974238b0d8f72, type: 3}
+  faceAnimations: {fileID: 9100000, guid: 3367867df5f487947a17fa1d851c14e8, type: 2}
+  emotionReference:
+  - neutral
+  - skeptical
+  - angry
+  - guilty
+  - happy
+  neutralFace: {fileID: -1520006002, guid: 5deb50b0708422b4cb44b7bd6b9acd12, type: 3}

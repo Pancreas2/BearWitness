@@ -7,13 +7,13 @@ using UnityEngine;
 public class NPC : ScriptableObject
 {
     public string name;
-    public DialogueFace[] dialogueFaces;
-    public DialogueFace neutralFace;
+    public RuntimeAnimatorController faceAnimations;
+    public string[] emotionReference;
+    public Sprite neutralFace;
 
-    public DialogueFace GetDialogueFace(string emotion)
+    public int GetEmotionReference(string emotion)
     {
-        DialogueFace target = Array.Find(dialogueFaces, face => face.emotion == emotion);
-        if (target == null) target = neutralFace;
+        int target = Array.IndexOf(emotionReference, emotion);
         return target;
     }
 }

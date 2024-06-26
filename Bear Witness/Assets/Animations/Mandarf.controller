@@ -208,41 +208,21 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
-        invert: 0
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: concerned
       sentenceText: My apologies, Master. I'm not ready to leave yet.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
-        invert: 0
+      conditions: []
       speaker: {fileID: 11400000, guid: 98cad2525404fee43b5ebd80ce3deab7, type: 2}
       emotion: happy
       sentenceText: Not to worry, young one. Come back when you are ready.
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -260,43 +240,43 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: attackDone
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: attackStart
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: randomAttack
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: StartDialogue
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Choose
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Choice
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Dialogue
@@ -332,7 +312,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 4
+    m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Choose
     m_EventTreshold: 0
@@ -360,7 +340,7 @@ AnimatorStateTransition:
   m_Conditions:
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 5
+    m_EventTreshold: 1
   - m_ConditionMode: 1
     m_ConditionEvent: Choose
     m_EventTreshold: 0
@@ -395,81 +375,45 @@ MonoBehaviour:
     - lineId: wal_greet
       singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
-        invert: 0
+      conditions: []
       speaker: {fileID: 11400000, guid: 98cad2525404fee43b5ebd80ce3deab7, type: 2}
       emotion: neutral
       sentenceText: Hello, young one.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: wal_greet_1
       singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
-        invert: 0
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: nervous
       sentenceText: Hello, Master.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
-        invert: 0
+      conditions: []
       speaker: {fileID: 11400000, guid: 98cad2525404fee43b5ebd80ce3deab7, type: 2}
       emotion: neutral
       sentenceText: Shall we begin?
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
-        invert: 0
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: neutral
       sentenceText: 
       isChoice: 1
       choices:
-      - I'm ready
-      - Not yet
-      isHub: 0
+      - text: YES
+        hasCondition: 0
+        conditions: []
+      - text: NO
+        hasCondition: 0
+        conditions: []
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -570,41 +514,21 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
-        invert: 0
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: determined
       sentenceText: I am ready, Master.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
-        invert: 0
+      conditions: []
       speaker: {fileID: 11400000, guid: 98cad2525404fee43b5ebd80ce3deab7, type: 2}
       emotion: happy
       sentenceText: Excellent. Come with me.
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 1
   triggerOnEnd: walk
   consumeOnEnd: {fileID: 0}

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd7d77579bf29c4881f7de8d85dec35, type: 3}
+  m_Name: Gom
+  m_EditorClassIdentifier: 
+  name: Gom
+  faceAnimations: {fileID: 9100000, guid: 792fd2dab225ac148b45851172668d93, type: 2}
+  emotionReference:
+  - neutral
+  - suspicious
+  - shocked
+  neutralFace: {fileID: 1381965162, guid: 657eee8bc70a21d4d85b2c04461cbb25, type: 3}

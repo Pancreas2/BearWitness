@@ -14,44 +14,135 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueSegment:
     elements:
-    - lineId: fa_ticket_pay
+    - lineId: too_many_tickets
       singleUse: 0
-      hasCondition: 0
-      condition:
-        type: 0
+      hasCondition: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
         invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
+        lineId: fa_ticket_pay
         item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+      emotion: disdainful
+      sentenceText: I said, I'd like another ticket, please.
+      isChoice: 0
+      choices: []
+    - lineId: fa_2ticket1
+      singleUse: 1
+      hasCondition: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
+        invert: 0
+        lineId: fa_ticket_pay
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: concerned
+      sentenceText: I... what... ?
+      isChoice: 0
+      choices: []
+    - lineId: fa_2ticket
+      singleUse: 1
+      hasCondition: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
+        invert: 0
+        lineId: fa_ticket_pay
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: concerned
+      sentenceText: (This wasn't covered in orientation!)
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
+        invert: 0
+        lineId: fa_ticket_pay
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: concerned
+      sentenceText: Um... here you are.
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
+        invert: 0
+        lineId: fa_ticket_pay
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: concerned
+      sentenceText: Again.
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
+        invert: 0
+        lineId: fa_ticket_pay
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+      emotion: disdainful
+      sentenceText: Excellent.
+      isChoice: 0
+      choices: []
+    - lineId: fa_ticket_pay
+      singleUse: 1
+      hasCondition: 0
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: happy
       sentenceText: Here you are.
       isChoice: 0
       choices: []
-      isHub: 0
-    - lineId: 
-      singleUse: 0
+    - lineId: fa_ticket_pay1
+      singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: happy
       sentenceText: Thanks! And here's your ticket.
       isChoice: 0
       choices: []
-      isHub: 0
+    - lineId: fa_ticket_pay2
+      singleUse: 1
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: happy
+      sentenceText: Just walk through the gate behind me when you're ready.
+      isChoice: 0
+      choices: []
+    - lineId: fa_ticket_pay3
+      singleUse: 1
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: happy
+      sentenceText: Enjoy your flight!
+      isChoice: 0
+      choices: []
+    - lineId: fa_ticket_pay4
+      singleUse: 1
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+      emotion: happy
+      sentenceText: I'm sure I will, thanks!
+      isChoice: 0
+      choices: []
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -113,12 +204,12 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 4
+    m_ConditionEvent: VerifyMoney
+    m_EventTreshold: 200
   - m_ConditionMode: 1
     m_ConditionEvent: Choose
     m_EventTreshold: 0
-  - m_ConditionMode: 4
-    m_ConditionEvent: Choice
-    m_EventTreshold: 4
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5415876262225812547}
   m_Solo: 0
@@ -174,6 +265,34 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &-7565847821736472642
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: Choice
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 2485483693452915431}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &-7418187546557513643
 AnimatorState:
   serializedVersion: 6
@@ -187,8 +306,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: -2364484069926133874}
   - {fileID: -3924228671751734714}
-  - {fileID: -3319885020687873417}
   - {fileID: 2031284994587077446}
+  - {fileID: -3319885020687873417}
   m_StateMachineBehaviours:
   - {fileID: 1598348224702279305}
   m_Position: {x: 50, y: 50, z: 0}
@@ -328,7 +447,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 6
+    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2485483693452915431}
   m_Solo: 0
@@ -391,13 +510,13 @@ AnimatorStateMachine:
     m_Position: {x: 170, y: 380, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5147622464124431767}
-    m_Position: {x: 330, y: 450, z: 0}
+    m_Position: {x: 310, y: 440, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2097303457646682777}
     m_Position: {x: 30, y: 610, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5415876262225812547}
-    m_Position: {x: 30, y: 710, z: 0}
+    m_Position: {x: -30, y: 890, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4416132470189112936}
     m_Position: {x: 510, y: 380, z: 0}
@@ -406,7 +525,7 @@ AnimatorStateMachine:
     m_Position: {x: 580, y: 450, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2485483693452915431}
-    m_Position: {x: 250, y: 550, z: 0}
+    m_Position: {x: 340, y: 520, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2767207080162907994}
     m_Position: {x: -180, y: 540, z: 0}
@@ -424,16 +543,16 @@ AnimatorStateMachine:
     m_Position: {x: -150, y: 800, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1684650222827453272}
-    m_Position: {x: 20, y: 850, z: 0}
+    m_Position: {x: 10, y: 1060, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6915417726912938110}
-    m_Position: {x: 200, y: 800, z: 0}
+    m_Position: {x: 240, y: 1040, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1945417402280245394}
-    m_Position: {x: 400, y: 630, z: 0}
+    m_Position: {x: 450, y: 830, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6085599237787732820}
-    m_Position: {x: 340, y: 720, z: 0}
+    m_Position: {x: 530, y: 680, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3935014810229174628}
     m_Position: {x: -230, y: 730, z: 0}
@@ -464,6 +583,12 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -4483757946096241924}
     m_Position: {x: 660, y: 320, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -3699121966038152991}
+    m_Position: {x: -200, y: 310, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 3075990145450958788}
+    m_Position: {x: 210, y: 850, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -491,22 +616,12 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 1
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: concerned
       sentenceText: I can't believe I trusted you!
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -552,7 +667,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 5
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3965726881040667842}
   m_Solo: 0
@@ -637,6 +752,20 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-5488114390265476447
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f7997c07fe1ab478dc4299323f3f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parameter: DidSomething
+  state: 1
 --- !u!114 &-5292697965765338221
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -654,79 +783,53 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: skeptical
       sentenceText: 'Why would you name an airship the ''Tumbleweed''? '
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: skeptical
       sentenceText: And for that matter, what do topiaries have to do with airships?
       isChoice: 0
       choices: []
-      isHub: 0
-    - lineId: 
+    - lineId: fa_name_return
       singleUse: 0
-      hasCondition: 0
-      condition:
-        type: 0
+      hasCondition: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
         invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
+        lineId: fa_name0
         item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: worried
+      sentenceText: Your guess is as good as mine.
+      isChoice: 0
+      choices: []
+    - lineId: fa_name0
+      singleUse: 1
+      hasCondition: 0
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: worried
       sentenceText: I... I honestly have no idea. It's a little silly, isn't it?
       isChoice: 0
       choices: []
-      isHub: 0
-    - lineId: 
-      singleUse: 0
+    - lineId: fa_name1
+      singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: happy
       sentenceText: I suppose I can't really complain, though. My mom named me 'Door'.
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -772,22 +875,12 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: worried
       sentenceText: ( ...but I didn't do anything ?? )
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -808,80 +901,40 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: skeptical
       sentenceText: Why would you want to work somewhere you're clearly not invested
         in?
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: concerned
       sentenceText: Hey, not everyone has the money to do whatever they want.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: guilty
       sentenceText: I guess I didn't really think of that. Sorry.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: happy
       sentenceText: No harm done.
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -899,6 +952,7 @@ AnimatorState:
   - {fileID: 8227416461993949948}
   m_StateMachineBehaviours:
   - {fileID: -2152673562846410013}
+  - {fileID: 6019261467815254888}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -930,45 +984,40 @@ MonoBehaviour:
     - lineId: fa_greet0
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: bored
       sentenceText: Hello and welcome to Topiary Airlines, the top-(i)-air-(y)-line
         in all of Corendia.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: fa_greet1
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: bored
       sentenceText: What can I do for you today?
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+--- !u!114 &-4304978813861052998
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88565307ddcea154c999541e38d514b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventType: 1
+  targetItem: {fileID: 0}
+  doorId: 6
 --- !u!1102 &-4184410962668765986
 AnimatorState:
   serializedVersion: 6
@@ -1011,7 +1060,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 4
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4416132470189112936}
   m_Solo: 0
@@ -1067,7 +1116,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 5
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2097303457646682777}
   m_Solo: 0
@@ -1109,7 +1158,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 4
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2046259584634231051}
   m_Solo: 0
@@ -1124,6 +1173,34 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &-3699121966038152991
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: greet_angry
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 8648572636673080709}
+  m_StateMachineBehaviours:
+  - {fileID: -540096333442864837}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &-3434565727161507266
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1161,8 +1238,10 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1203837541644838910}
+  - {fileID: -309160198846247548}
   m_StateMachineBehaviours:
   - {fileID: -7873107078132635327}
+  - {fileID: 8520115868922545479}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1190,9 +1269,6 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 6
-  - m_ConditionMode: 4
-    m_ConditionEvent: Trust
     m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2767207080162907994}
@@ -1236,34 +1312,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1101 &-2874633822574793855
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: Choose
-    m_EventTreshold: 0
-  - m_ConditionMode: 6
-    m_ConditionEvent: Choice
-    m_EventTreshold: 5
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 6085599237787732820}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0
-  m_HasExitTime: 0
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!1102 &-2767207080162907994
 AnimatorState:
   serializedVersion: 6
@@ -1306,7 +1354,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 4
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5147622464124431767}
   m_Solo: 0
@@ -1332,8 +1380,8 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
-  - {fileID: -3434565727161507266}
   - {fileID: 4207860370177172943}
+  - {fileID: -3434565727161507266}
   m_StateMachineBehaviours:
   - {fileID: -4325606418166778959}
   m_Position: {x: 50, y: 50, z: 0}
@@ -1364,121 +1412,70 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueSegment:
     elements:
-    - lineId: 
-      singleUse: 0
+    - lineId: fa_intimidate
+      singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: disdainful
       sentenceText: Your boss will, in fact, be hearing about this.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: disdainful
       sentenceText: In fact, I'm here to evaluate your performance.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: worried
       sentenceText: What? No! Please, I really need this job!
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: disdainful
       sentenceText: 'Tell it to the boss. '
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: angry
       sentenceText: 'Ugh! Screw it, I''m out of here. '
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: concerned
+      sentenceText: ... after I finish my shift.
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: angry
       sentenceText: You're a horrible person, you know that?
       isChoice: 0
       choices: []
-      isHub: 0
-  lastState: 0
+  lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
 --- !u!1102 &-2097303457646682777
@@ -1493,10 +1490,10 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7945577409437512134}
-  - {fileID: 6135434448644354834}
-  - {fileID: -2874633822574793855}
+  - {fileID: 8535208199668624133}
   m_StateMachineBehaviours:
   - {fileID: 6380509560456935685}
+  - {fileID: 8690929084742741581}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1525,6 +1522,8 @@ AnimatorState:
   - {fileID: 6069990394300050396}
   m_StateMachineBehaviours:
   - {fileID: -9203689809248254192}
+  - {fileID: -4304978813861052998}
+  - {fileID: 6935085308658388404}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1552,7 +1551,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 5
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -1606514917432752791}
   m_Solo: 0
@@ -1602,7 +1601,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 0}
   m_Solo: 0
@@ -1612,7 +1614,32 @@ AnimatorStateTransition:
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0
-  m_HasExitTime: 1
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &-949945180461980471
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 2485483693452915431}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -1634,42 +1661,22 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: sincere
       sentenceText: You're doing what you think is right. And I really appreciate
         it.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: embarrassed
       sentenceText: Alright. Let's do this.
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -1690,80 +1697,75 @@ MonoBehaviour:
     - lineId: fa_smuggle_refuse
       singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: embarrassed
       sentenceText: I - I'm sorry, I can't.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: worried
       sentenceText: My boss would kill me.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: worried
       sentenceText: Possibly literally.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: sincere
       sentenceText: It's okay. I'll come back later when I can afford it.
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 0
+  triggerOnEnd: 
+  consumeOnEnd: {fileID: 0}
+--- !u!114 &-540096333442864837
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38ac78cad3040342bb73320141bd3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSegment:
+    elements:
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: angry
+      sentenceText: What more do you want from me?
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: concerned
+      sentenceText: Just get out of here.
+      isChoice: 0
+      choices: []
+  lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
 --- !u!1101 &-507448412944993988
@@ -1779,6 +1781,62 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7418187546557513643}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &-384396800298958820
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: Choice
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -1945417402280245394}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &-309160198846247548
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: StartDialogue
+    m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: Trust
+    m_EventTreshold: -3
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -3699121966038152991}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -1826,6 +1884,18 @@ AnimatorController:
     m_Controller: {fileID: 9100000}
   - m_Name: DidSomething
     m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: VerifyItem
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: VerifyMoney
+    m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -1886,22 +1956,12 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: happy
       sentenceText: That's all for now, thanks.
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -1947,44 +2007,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueSegment:
     elements:
-    - lineId: 
-      singleUse: 0
+    - lineId: fa_ticket_reassure
+      singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: sincere
       sentenceText: Don't worry, I won't hold it against you.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: embarrassed
       sentenceText: Sorry. Thanks.
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -2014,6 +2054,63 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &773616010592889690
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38ac78cad3040342bb73320141bd3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSegment:
+    elements:
+    - lineId: 
+      singleUse: 0
+      hasCondition: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
+        invert: 1
+        lineId: fa_ticket_pay
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+      emotion: neutral
+      sentenceText: 
+      isChoice: 1
+      choices:
+      - text: Buy ticket ( 200$ )
+        hasCondition: 0
+        conditions: []
+      - text: Do not
+        hasCondition: 0
+        conditions: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
+        invert: 0
+        lineId: fa_ticket_pay
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+      emotion: neutral
+      sentenceText: 
+      isChoice: 1
+      choices:
+      - text: I said I'd like another ticket.
+        hasCondition: 0
+        conditions: []
+      - text: I guess I don't need another.
+        hasCondition: 0
+        conditions: []
+  lastState: 0
+  triggerOnEnd: 
+  consumeOnEnd: {fileID: 0}
 --- !u!114 &798465895437793470
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2031,81 +2128,41 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: sincere
       sentenceText: I don't even know who your boss is. But I won't tell anyone,
         just to be safe.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: happy
       sentenceText: Ha! Yeah, I guess I shouldn't be so worried.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: neutral
       sentenceText: I never really wanted to work here. I just need the money, you
         know?
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: happy
       sentenceText: At least until I become a rich and famous author!
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -2152,61 +2209,40 @@ MonoBehaviour:
     elements:
     - lineId: 
       singleUse: 0
-      hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      hasCondition: 1
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: happy
       sentenceText: I don't need anything, I just came by to say hi.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
-      hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      hasCondition: 1
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: embarrassed
       sentenceText: Oh! Well... hi!
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
-      hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      hasCondition: 1
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
-      emotion: embarrassed
+      emotion: happy
       sentenceText: Hi!
       isChoice: 0
       choices: []
-      isHub: 0
+    - lineId: fa_end_friend0
+      singleUse: 1
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+      emotion: happy
+      sentenceText: That's all for now, thanks.
+      isChoice: 0
+      choices: []
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -2221,6 +2257,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: StartDialogue
     m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: Trust
+    m_EventTreshold: -4
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2339384849407206267}
   m_Solo: 0
@@ -2248,7 +2287,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 5
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1684650222827453272}
   m_Solo: 0
@@ -2305,25 +2344,21 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: neutral
       sentenceText: 
       isChoice: 1
       choices:
-      - What is Topiary Airlines?
-      - I'd like to buy a ticket, please.
-      - Nothing, thanks.
-      isHub: 0
+      - text: What is Topiary Airlines?
+        hasCondition: 0
+        conditions: []
+      - text: I'd like to buy a ticket.
+        hasCondition: 0
+        conditions: []
+      - text: Nothing, thanks.
+        hasCondition: 0
+        conditions: []
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -2387,22 +2422,40 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: happy
       sentenceText: On second thought - I think I'll pass, thanks.
       isChoice: 0
       choices: []
-      isHub: 0
+    - lineId: fa_3ticket0
+      singleUse: 1
+      hasCondition: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
+        invert: 0
+        lineId: fa_2ticket
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: happy
+      sentenceText: (Oh thank goodness, I could've sworn he was going to buy another.)
+      isChoice: 0
+      choices: []
+    - lineId: fa_3ticket1
+      singleUse: 1
+      hasCondition: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
+        invert: 0
+        lineId: fa_2ticket
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: worried
+      sentenceText: (What are all these tickets even for?)
+      isChoice: 0
+      choices: []
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -2441,7 +2494,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 6
+    m_EventTreshold: 2
   - m_ConditionMode: 3
     m_ConditionEvent: Trust
     m_EventTreshold: 1
@@ -2473,7 +2526,7 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
-  - {fileID: 4101158000902302611}
+  - {fileID: -949945180461980471}
   m_StateMachineBehaviours:
   - {fileID: 798465895437793470}
   - {fileID: 8386872420897822}
@@ -2508,131 +2561,81 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
-      emotion: embarrassed
+      emotion: concerned
       sentenceText: (Sigh...)
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: embarrassed
       sentenceText: Okay. But just for you.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: neutral
       sentenceText: You have to promise not to tell anyone. Especially not my boss.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: sincere
       sentenceText: Of course.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 1
-      condition:
-        type: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
         invert: 1
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
         lineId: fa_smuggle_refuse
-        threshold: 0
-        greaterThan: 0
         item: {fileID: 0}
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: bored
       sentenceText: (Sigh...) What am I doing?
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 1
-      condition:
-        type: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
         invert: 1
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
         lineId: fa_smuggle_refuse
-        threshold: 0
-        greaterThan: 0
         item: {fileID: 0}
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: nervous
       sentenceText: 
       isChoice: 1
       choices:
-      - You're doing what you feel is right.
-      - You don't have to do this.
-      isHub: 0
+      - text: You're helping me, and I appreciate it.
+        hasCondition: 0
+        conditions: []
+      - text: If you're not comfortable, you don't have to.
+        hasCondition: 0
+        conditions: []
     - lineId: 
       singleUse: 0
       hasCondition: 1
-      condition:
-        type: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
         invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
         lineId: fa_smuggle_refuse
-        threshold: 0
-        greaterThan: 0
         item: {fileID: 0}
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: concerned
@@ -2640,26 +2643,20 @@ MonoBehaviour:
         airship for free?
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 1
-      condition:
-        type: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
         invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
         lineId: fa_smuggle_refuse
-        threshold: 0
-        greaterThan: 0
         item: {fileID: 0}
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: guilty
       sentenceText: Uhh...
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -2680,64 +2677,40 @@ MonoBehaviour:
     - lineId: fa_info0
       singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: skeptical
       sentenceText: I've never heard of Topiary Airlines. What is it?
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: fa_info1
       singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: bored
       sentenceText: We're the leading air travel company on Corendia Island. Our
         ship, the Tumbleweed, tours the island twice a day.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: skeptical
       sentenceText: 
       isChoice: 1
       choices:
-      - You don't seem terribly interested in it.
-      - Why is it called the Tumbleweed?
-      - Thanks, that clears it up.
-      isHub: 0
+      - text: You seem pretty bored.
+        hasCondition: 0
+        conditions: []
+      - text: Why is it called the Tumbleweed?
+        hasCondition: 0
+        conditions: []
+      - text: Thanks, that clears it up.
+        hasCondition: 0
+        conditions: []
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -2755,6 +2728,7 @@ AnimatorState:
   - {fileID: -507448412944993988}
   m_StateMachineBehaviours:
   - {fileID: 2503460092877081593}
+  - {fileID: -5488114390265476447}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -2786,22 +2760,12 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: neutral
       sentenceText: Anything else I can help you with?
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -2818,7 +2782,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueSegment:
-    elements: []
+    elements:
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: bored
+      sentenceText: Topiary Airlines thanks you for your patronage.
+      isChoice: 0
+      choices: []
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -2860,7 +2833,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 4
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 864411111494136319}
   m_Solo: 0
@@ -2889,6 +2862,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetNPC: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
   modifier: 1
+--- !u!1102 &3075990145450958788
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: can_afford
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -384396800298958820}
+  - {fileID: 8558419824434500757}
+  m_StateMachineBehaviours:
+  - {fileID: 773616010592889690}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &3474144007337059959
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2952,7 +2954,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 6
+    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4483757946096241924}
   m_Solo: 0
@@ -2980,7 +2982,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 4
     m_ConditionEvent: Choice
-    m_EventTreshold: 4
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4184410962668765986}
   m_Solo: 0
@@ -3023,31 +3025,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1101 &4101158000902302611
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: Choose
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 0}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 1
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0
-  m_HasExitTime: 0
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!1101 &4170800874225803014
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -3115,6 +3092,7 @@ AnimatorState:
   - {fileID: -3703780033347865741}
   - {fileID: -1917071634635765039}
   - {fileID: 3869913019651802422}
+  - {fileID: -7565847821736472642}
   m_StateMachineBehaviours:
   - {fileID: 5985710830233052872}
   m_Position: {x: 50, y: 50, z: 0}
@@ -3144,7 +3122,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 6
+    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7272090174335119236}
   m_Solo: 0
@@ -3322,41 +3300,21 @@ MonoBehaviour:
     - lineId: fa_greet_q0
       singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: skeptical
       sentenceText: Do you have to say that every time?
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: fa_greet_q1
       singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: bored
       sentenceText: Unfortunately, yes.
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -3374,88 +3332,91 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueSegment:
     elements:
-    - lineId: 
+    - lineId: fa_bored_return
       singleUse: 0
-      hasCondition: 0
-      condition:
-        type: 0
+      hasCondition: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
         invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
+        lineId: fa_bored0
         item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: concerned
+      sentenceText: It's not exactly getting any more interesting, is it?
+      isChoice: 0
+      choices:
+      - text: 
+        hasCondition: 0
+        conditions: []
+      - text: 
+        hasCondition: 0
+        conditions: []
+      - text: 
+        hasCondition: 0
+        conditions: []
+    - lineId: fa_bored0
+      singleUse: 1
+      hasCondition: 0
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: skeptical
       sentenceText: This isn't terribly interesting for you, is it?
       isChoice: 0
       choices: []
-      isHub: 0
-    - lineId: 
-      singleUse: 0
+    - lineId: fa_bored1
+      singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: worried
       sentenceText: 'Oh! Um... no.. it... '
       isChoice: 0
       choices: []
-      isHub: 0
-    - lineId: 
-      singleUse: 0
+    - lineId: fa_bored2
+      singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: worried
       sentenceText: 'Please don''t tell my boss. '
       isChoice: 0
       choices: []
-      isHub: 0
-    - lineId: fa_bored4
+    - lineId: fa_bored3
       singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: 
       sentenceText: 
       isChoice: 1
       choices:
-      - Of course not.
-      - Why work here if you don't like it?
-      - I'm here on behalf of your boss.
-      isHub: 0
+      - text: Of course not.
+        hasCondition: 0
+        conditions: []
+      - text: Why work somewhere you don't care about?
+        hasCondition: 0
+        conditions: []
+      - text: I'm here on behalf of your boss.
+        hasCondition: 0
+        conditions: []
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+--- !u!114 &6019261467815254888
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5013325c0c41fe4e91ee51f03ce37cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetNPC: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+  modifier: -5
 --- !u!1101 &6069990394300050396
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -3509,34 +3470,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1101 &6135434448644354834
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: Choose
-    m_EventTreshold: 0
-  - m_ConditionMode: 6
-    m_ConditionEvent: Choice
-    m_EventTreshold: 4
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -1945417402280245394}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0
-  m_HasExitTime: 0
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!114 &6304998515982254226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3594,103 +3527,96 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueSegment:
     elements:
+    - lineId: fa_4ticket0
+      singleUse: 0
+      hasCondition: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
+        invert: 0
+        lineId: fa_2ticket
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: worried
+      sentenceText: (What is he doing? No! No, don't ask!)
+      isChoice: 0
+      choices: []
     - lineId: 
       singleUse: 0
       hasCondition: 1
-      condition:
-        type: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
         invert: 1
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
         lineId: fa_ticket_pay
-        threshold: 0
-        greaterThan: 0
         item: {fileID: 0}
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: happy
       sentenceText: One ticket, please.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 1
-      condition:
-        type: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
         invert: 1
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
         lineId: fa_ticket_pay
-        threshold: 0
-        greaterThan: 0
         item: {fileID: 0}
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: neutral
       sentenceText: That'll be 200$.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 1
-      condition:
-        type: 2
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
         invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 200
-        greaterThan: 1
-        item: {fileID: 0}
-      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
-      emotion: neutral
-      sentenceText: 
-      isChoice: 1
-      choices:
-      - Buy ticket ( - 200$ )
-      - Do not
-      isHub: 0
-    - lineId: 
-      singleUse: 0
-      hasCondition: 1
-      condition:
-        type: 1
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
         lineId: fa_ticket_pay
-        threshold: 0
-        greaterThan: 0
         item: {fileID: 0}
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: neutral
       sentenceText: I'd like another ticket, please.
       isChoice: 0
       choices: []
-      isHub: 0
+    - lineId: fa_4ticket1
+      singleUse: 1
+      hasCondition: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
+        invert: 0
+        lineId: fa_2ticket
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: worried
+      sentenceText: (What is wrong with you??)
+      isChoice: 0
+      choices:
+      - text: 
+        hasCondition: 0
+        conditions: []
+      - text: 
+        hasCondition: 0
+        conditions: []
     - lineId: 
       singleUse: 0
       hasCondition: 1
-      condition:
-        type: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
         invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
         lineId: fa_ticket_pay
-        threshold: 0
-        greaterThan: 0
         item: {fileID: 0}
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: worried
       sentenceText: But you just bought one! Your ticket's good for the whole day.
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -3707,7 +3633,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 4
     m_ConditionEvent: Choice
-    m_EventTreshold: 5
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 6915417726912938110}
   m_Solo: 0
@@ -3739,22 +3665,12 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: skeptical
       sentenceText: Could you let me on anyway?
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -3786,6 +3702,20 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &6935085308658388404
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11323e4bea4ce174198145d252f07113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 1957e71b57f52904eb8c7c12ba6dc774, type: 2}
+  price: 200
 --- !u!1101 &6979786811212990743
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -3828,22 +3758,26 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: happy
       sentenceText: 'Ah, that''s okay. I''ll come back later. '
       isChoice: 0
       choices: []
-      isHub: 0
+    - lineId: fa_5ticket
+      singleUse: 1
+      hasCondition: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
+        invert: 0
+        lineId: fa_2ticket
+        item: {fileID: 0}
+      speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
+      emotion: worried
+      sentenceText: Please don't.
+      isChoice: 0
+      choices: []
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -3861,107 +3795,82 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueSegment:
     elements:
-    - lineId: fa_too_exp
+    - lineId: 
       singleUse: 0
       hasCondition: 1
-      condition:
-        type: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
         invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: fa_too_exp0
-        threshold: 0
-        greaterThan: 0
+        lineId: fa_ticket_pay
         item: {fileID: 0}
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
-      emotion: sad
-      sentenceText: Sorry, I still can't afford it.
+      emotion: neutral
+      sentenceText: Wait, it's 200$, isn't it? I don't think I have enough.
       isChoice: 0
-      choices: []
-      isHub: 0
+      choices:
+      - text: 
+        hasCondition: 0
+        conditions: []
+      - text: 
+        hasCondition: 0
+        conditions: []
     - lineId: fa_too_exp0
       singleUse: 1
-      hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
+      hasCondition: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
+        invert: 1
+        lineId: fa_ticket_pay
         item: {fileID: 0}
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: concerned
       sentenceText: 'Whoa, that''s a bit expensive. '
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: fa_too_exp1
       singleUse: 1
-      hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
+      hasCondition: 1
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
+        invert: 1
+        lineId: fa_ticket_pay
         item: {fileID: 0}
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: worried
       sentenceText: Oh! I'm  really sorry.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: fa_too_exp3
       singleUse: 0
       hasCondition: 1
-      condition:
-        type: 1
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: fa_too_exp2
-        threshold: 0
-        greaterThan: 0
+      conditions:
+      - conditionType: 1
+        conditionSet: 0
+        invert: 1
+        lineId: fa_ticket_pay
         item: {fileID: 0}
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: skeptical
       sentenceText: 
       isChoice: 1
       choices:
-      - I'll come back later.
-      - 
-      - Could you let me on anyway?
-      isHub: 0
-    - lineId: fa_too_exp2
-      singleUse: 1
-      hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
-      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
-      emotion: skeptical
-      sentenceText: 
-      isChoice: 1
-      choices:
-      - I'll come back later.
-      - You're just doing your job.
-      - Could you let me on anyway?
-      isHub: 0
+      - text: I'll come back later.
+        hasCondition: 0
+        conditions: []
+      - text: You're just doing your job.
+        hasCondition: 1
+        conditions:
+        - conditionType: 1
+          conditionSet: 0
+          invert: 1
+          lineId: fa_ticket_reassure
+          item: {fileID: 0}
+      - text: Could you let me on anyway?
+        hasCondition: 0
+        conditions: []
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -4003,7 +3912,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 6
     m_ConditionEvent: Choice
-    m_EventTreshold: 5
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8955270716775149036}
   m_Solo: 0
@@ -4043,6 +3952,20 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &8520115868922545479
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73f7997c07fe1ab478dc4299323f3f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parameter: DidSomething
+  state: 0
 --- !u!114 &8534704895457853989
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4060,44 +3983,80 @@ MonoBehaviour:
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: sincere
       sentenceText: You don't have to do this. I understand it's asking a lot.
       isChoice: 0
       choices: []
-      isHub: 0
     - lineId: 
       singleUse: 0
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: happy
       sentenceText: (Sigh...) Okay. That's probably for the best. Thank you.
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+--- !u!1101 &8535208199668624133
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 3
+    m_ConditionEvent: VerifyMoney
+    m_EventTreshold: 199
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 3075990145450958788}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &8558419824434500757
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: Choice
+    m_EventTreshold: 1
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 6085599237787732820}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!114 &8563872370332878634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4112,28 +4071,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueSegment:
     elements:
-    - lineId: 
-      singleUse: 0
+    - lineId: fa_name2
+      singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 79504d74c3e42c14aab945ccadd28a93, type: 2}
       emotion: neutral
       sentenceText: I like to pretend it's short for Dorothy.
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+--- !u!1101 &8648572636673080709
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 0}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 1
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!114 &8690929084742741581
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45cdfb035b3f1dc479286397731cfb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8715569901523229560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4148,25 +4134,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueSegment:
     elements:
-    - lineId: 
-      singleUse: 0
+    - lineId: fa_name3
+      singleUse: 1
       hasCondition: 0
-      condition:
-        type: 0
-        invert: 0
-        upperBound: 0
-        lowerBound: 0
-        npcId: 0
-        lineId: 
-        threshold: 0
-        greaterThan: 0
-        item: {fileID: 0}
+      conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: concerned
       sentenceText: I don't blame you.
       isChoice: 0
       choices: []
-      isHub: 0
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}

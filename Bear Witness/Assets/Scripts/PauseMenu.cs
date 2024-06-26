@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+    [SerializeField] private GameObject resumeBtn;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Pause"))
         {
             if (GameIsPaused)
             {
@@ -18,6 +20,7 @@ public class PauseMenu : MonoBehaviour
             } else
             {
                 Pause();
+                EventSystem.current.SetSelectedGameObject(resumeBtn);
             }
         }
     }
@@ -31,6 +34,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
+        if (InventoryMenu.GameIsPaused) FindObjectOfType<InventoryMenu>().Resume();
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
@@ -38,8 +42,12 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMenu()
     {
+        pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
-        Destroy(FindObjectOfType<GameManager>().gameObject);
+        GameIsPaused = false;
+        // deletes save data! intentional
+        GameManager gameManager = GameManager.instance;
+        Destroy(gameManager.gameObject);
         SceneManager.LoadScene("Start");
     }
 

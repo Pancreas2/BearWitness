@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1612504835055702935}
   - component: {fileID: 3013221658307052773}
   - component: {fileID: 6158459709083821648}
+  - component: {fileID: 8039800661436747315}
   m_Layer: 10
   m_Name: Armoured Mollusk
   m_TagString: Untagged
@@ -35,7 +36,7 @@ Transform:
   m_Children:
   - {fileID: 2766603933273036606}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &5372063697431661403
 Rigidbody2D:
@@ -123,6 +124,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorID: 3
+--- !u!114 &8039800661436747315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4505997387687827838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25584e5204af85049917cc80c3eba9c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bigCoin: {fileID: 571788386667076984, guid: f925691b533213d438f686d7a57850fd, type: 3}
+  mediumCoin: {fileID: 2643579888471910234, guid: a5be1d9064bafa54d9849917bd45e03f, type: 3}
+  smallCoin: {fileID: 3521268495908571157, guid: fb0c264f257140f448f00cea837b599a, type: 3}
 --- !u!1 &5259785655524910001
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,7 +489,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f47d008aa9ae0947972e056738d55d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  passDamageTo: {fileID: 0}
   maxHealth: 35
+  currentHealth: 0
   animator: {fileID: 6389906993288093303}
   doKnockback: 1
   knockback: {x: 60, y: 40}
@@ -587,14 +605,14 @@ MonoBehaviour:
           m_StringArgument: die
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Cinemachine.CinemachineVirtualCameraBase, Cinemachine
-        m_MethodName: set_Priority
+      - m_Target: {fileID: 8039800661436747315}
+        m_TargetAssemblyTypeName: CoinShower, Assembly-CSharp
+        m_MethodName: SpawnCoins
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 8
+          m_IntArgument: 35
           m_FloatArgument: 0
           m_StringArgument: die
           m_BoolArgument: 0

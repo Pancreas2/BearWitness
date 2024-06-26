@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class PlayerController : MonoBehaviour
 
 	private bool m_wallClingState = false;
 	private bool startWallClingHitbox = false;
+	private float moveLeftDelay = 0f;
+	private float moveRightDelay = 0f;
 
 	private bool wasClimbing = false;
 
@@ -164,8 +167,13 @@ public class PlayerController : MonoBehaviour
 
 		animator.SetBool("roll", roll);
 
+		if ((moveLeftDelay > Time.time && move < 0) || (moveRightDelay > Time.time && move > 0))
+        {
+			move = 0f;
+        }
+
 		//only control the player if grounded or airControl is turned on
-		if ((m_Grounded || m_AirControl))
+		if (m_Grounded || m_AirControl)
 		{
 			// If rolling
 			if (roll)
@@ -204,37 +212,41 @@ public class PlayerController : MonoBehaviour
 				} else
                 {
 					// Move the character by finding the target velocity
-					targetVelocity = new Vector2(0f, m_Rigidbody2D.velocity.y);
+					targetVelocity = new Vector2(move * 7f, m_Rigidbody2D.velocity.y);
 				}
 			} else
             {
 				// Move the character by finding the target velocity
-				targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
+
+				if (Mathf.Abs(move * 14f) < Mathf.Abs(m_Rigidbody2D.velocity.x) && Mathf.Sign(move) == Mathf.Sign(m_Rigidbody2D.velocity.x) && Mathf.Abs(move) > 0.1f)
+				{
+					targetVelocity = new Vector2(m_Rigidbody2D.velocity.x / 2f, m_Rigidbody2D.velocity.y);
+				} else
+                {
+					targetVelocity = new Vector2(move * 7f + m_Rigidbody2D.velocity.x / 2f, m_Rigidbody2D.velocity.y);
+				}
 			}
 
-			if (!m_wallClingState)
-            {
-				// And then smoothing it out and applying it to the character
-				m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
-			} else if (m_Rigidbody2D.IsAwake())
-            {
-				m_Rigidbody2D.Sleep();
-            } 
+			// And then smoothing it out and applying it to the character
+			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 
 			animator.SetInteger("xSpeed", Mathf.RoundToInt(Mathf.Abs(m_Rigidbody2D.velocity.x)));
 			animator.SetFloat("ySpeed", m_Rigidbody2D.velocity.y);
 
-			// If the input is moving the player right and the player is facing left...
-			if (move > 0 && !m_FacingRight)
-			{
-				// ... flip the player.
-				Flip();
-			}
-			// Otherwise if the input is moving the player left and the player is facing right...
-			else if (move < 0 && m_FacingRight)
-			{
-				// ... flip the player.
-				Flip();
+			if (!attacking && !specialing)
+            {
+				// If the input is moving the player right and the player is facing left...
+				if (move > 0 && !m_FacingRight)
+				{
+					// ... flip the player.
+					Flip();
+				}
+				// Otherwise if the input is moving the player left and the player is facing right...
+				else if (move < 0 && m_FacingRight)
+				{
+					// ... flip the player.
+					Flip();
+				}
 			}
 		}
 
@@ -255,19 +267,24 @@ public class PlayerController : MonoBehaviour
 		if (startWallClingHitbox)
 		{
 			// check for wall-grabs (so it occurs during the duration of the swing)
-			Vector3 boxAttackPoint = m_AttackPoint.position + Vector3.up * 0.4f;
-			Vector2 boxRange = Vector2.down * 0.7f + Vector2.right * attackRange;
-			if (Physics2D.OverlapBoxAll(boxAttackPoint, boxRange, 0, m_WhatIsGround).Length > 0)
+			Vector3 attackCenter = m_AttackPoint.position + Vector3.down * 0.1f;
+			if (Physics2D.OverlapCircleAll(attackCenter, attackRange / 2f, m_WhatIsGround).Length > 0)
 			{
-				if (!m_wallClingState) animator.SetTrigger("attack");
-				m_Rigidbody2D.Sleep();
+				// cancel velocity and start wall jump
+				m_Rigidbody2D.velocity = Vector3.zero;
+				startWallClingHitbox = false;
 				m_wallClingState = true;
 				m_HasAirAttack = true;
-				attackTime = 0f;
+				attacking = false;
+				specialing = false;
+				ForceWallJump();
 			}
 
 			if (attackTime + 0.2f <= Time.time) startWallClingHitbox = false;
-		}
+		} else
+        {
+			m_wallClingState = false;
+        }
 
 		// If the player should jump...
 		if (jump)
@@ -275,11 +292,7 @@ public class PlayerController : MonoBehaviour
 			// prevent further jumps
 			coyotePoints = 0;
 
-			if (m_wallClingState)
-			{
-				ForceWallJump();
-			}
-			else if (m_Grounded)
+			if (m_Grounded)
 			{
 				m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, Mathf.Max(0f, m_Rigidbody2D.velocity.y));
 				if (roll)
@@ -310,11 +323,6 @@ public class PlayerController : MonoBehaviour
 	{
 		// Switch the way the player is labelled as facing.
 		m_FacingRight = !m_FacingRight;
-		if (m_wallClingState)
-		{
-			m_Rigidbody2D.WakeUp();
-			m_wallClingState = false;
-		}
 
 		// Multiply the player's x local scale by -1.
 		Vector3 theScale = transform.localScale;
@@ -331,7 +339,7 @@ public class PlayerController : MonoBehaviour
         } else if (invTime <= Time.time)
         {
 			invTime = Time.time + 0.5f;
-			FindObjectOfType<GameUI_Controller>().DecreaseHP(damage);
+			gameManager.DamagePlayer(damage);
 			if (gameManager.playerCurrentHealth <= 0)
 			{
 				Perish();
@@ -354,8 +362,15 @@ public class PlayerController : MonoBehaviour
 	public void Perish()
 	{
 		playerMovement.PlayAnimation("die");
+		playerMovement.frozen = true;
 		Debug.Log("Perished");
 	}
+
+	public void Unperish()
+    {
+		playerMovement.PlayAnimation("unperish");
+    }
+
 	public void Attack(bool useSpecial)
 	{
 		attackTime = Time.time + 0.15f;
@@ -363,13 +378,18 @@ public class PlayerController : MonoBehaviour
 		if (useSpecial)
         {
 			Item tool = gameManager.currentItem;
-			if (!tool || tool.name == null) animator.SetInteger("attackType", 1);
+			if (!tool || tool.name == null)
+			{
+				animator.SetInteger("attackType", 1);
+				m_Rigidbody2D.velocity = new Vector2(0f, m_Rigidbody2D.velocity.y);
+				moveLeftDelay = Time.time + 0.3f;
+				moveRightDelay = Time.time + 0.3f;
+			}
 			else
-            {
+			{
 				switch (tool.name)
-                {
+				{
 					case "Ice Pick":
-						if (m_wallClingState) ForceWallJump();
 						animator.SetInteger("attackType", 2);
 						break;
 
@@ -377,15 +397,12 @@ public class PlayerController : MonoBehaviour
 						animator.SetInteger("attackType", 3);
 						break;
 				}
-            }
+			}
         } else
         {
 			animator.SetInteger("attackType", 0);
-        }
-		if (!m_wallClingState)
-		{
-			animator.SetTrigger("attack");
 		}
+		animator.SetTrigger("attack");
 		attacking = !useSpecial;
 		specialing = useSpecial;
 	}
@@ -397,9 +414,8 @@ public class PlayerController : MonoBehaviour
 			Item currentItem = gameManager.currentItem;
 			if (currentItem.name == "Ice Pick")
 			{
-				Vector3 boxAttackPoint = m_AttackPoint.position + Vector3.right * 0.5f * attackRange;
-				Vector3 boxRange = Vector3.down * 0.7f + Vector3.right * attackRange;
-				Collider2D[] hitEnemies = Physics2D.OverlapBoxAll(boxAttackPoint, boxRange, enemyLayers);
+				Vector3 attackCenter = m_AttackPoint.position + Vector3.right * 0.15f + Vector3.down * 0.1f;
+				Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackCenter, attackRange, enemyLayers);
 				foreach (Collider2D enemy in hitEnemies)
 				{
 					enemy.TryGetComponent(out ReceiveDamage hitbox);
@@ -477,10 +493,18 @@ public class PlayerController : MonoBehaviour
 
 	private void ForceWallJump()
     {
-		m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-		m_Rigidbody2D.WakeUp();
-		m_wallClingState = false;
+		float jumpXKick = 200f;
+		if (m_FacingRight) jumpXKick *= -1f;
+		m_Rigidbody2D.AddForce(new Vector2(jumpXKick, m_JumpForce * 0.9f));
 		playerMovement.frozen = false;
+
+		if (m_FacingRight)
+        {
+			moveRightDelay = Time.time + 0.15f;
+        } else
+        {
+			moveLeftDelay = Time.time + 0.15f;
+        }
 	}
 
 	private void Knockback(float force)
@@ -497,9 +521,21 @@ public class PlayerController : MonoBehaviour
 	public void Climb(float vMove)
     {
 		m_Rigidbody2D.gravityScale = 0f;
-		Vector3 targetVelocity = new Vector2(0f, 5f * vMove);
+		Vector3 targetVelocity = new Vector2(0f, 7f * vMove);
 		m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 		wasClimbing = true;
 		animator.SetFloat("ySpeed", m_Rigidbody2D.velocity.y);
 	}
+
+	public void FreezeCooldown(float time)
+	{
+		StartCoroutine(UnfreezeAfter(time));
+	}
+
+	IEnumerator UnfreezeAfter(float time)
+    {
+		playerMovement.frozen = true;
+		yield return new WaitForSeconds(time);
+		playerMovement.frozen = false;
+    }
 }

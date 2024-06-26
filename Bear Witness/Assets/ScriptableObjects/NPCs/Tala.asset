@@ -13,15 +13,11 @@ MonoBehaviour:
   m_Name: Tala
   m_EditorClassIdentifier: 
   name: Tala
-  dialogueFaces:
-  - emotion: happy
-    face: {fileID: -1232489743, guid: bbfb842c029c29d40bf8185fb61d4dab, type: 3}
-  - emotion: annoyed
-    face: {fileID: -1741633557, guid: bbfb842c029c29d40bf8185fb61d4dab, type: 3}
-  - emotion: sad
-    face: {fileID: -550887149, guid: bbfb842c029c29d40bf8185fb61d4dab, type: 3}
-  - emotion: angry
-    face: {fileID: -460835967, guid: bbfb842c029c29d40bf8185fb61d4dab, type: 3}
-  neutralFace:
-    emotion: neutral
-    face: {fileID: -1992704831, guid: bbfb842c029c29d40bf8185fb61d4dab, type: 3}
+  faceAnimations: {fileID: 9100000, guid: 96c04fc1124670e4cb3a105e24659835, type: 2}
+  emotionReference:
+  - neutral
+  - sad
+  - angry
+  - happy
+  - disdainful
+  neutralFace: {fileID: 757270578, guid: 8f5c9c7cc8b63504db5b20e84a55c8f5, type: 3}

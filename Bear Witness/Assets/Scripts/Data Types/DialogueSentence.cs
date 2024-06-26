@@ -7,8 +7,9 @@ using UnityEngine.Events;
 public class DialogueSentence {
     public string lineId;
     public bool singleUse = false;
+    [Header("Conditions")]
     public bool hasCondition = false;
-    public DialogueCondition condition;
+    public List<DialogueCondition> conditions = new();
     [Header("Dialogue")]
     public NPC speaker;
     public string emotion;
@@ -18,8 +19,20 @@ public class DialogueSentence {
     [Header("Choices")]
     
     public bool isChoice;
-    [TextArea(3, 10)]
-    public List<string> choices = new();
+    public List<DialogueChoice> choices = new();
 
-    public bool isHub;
+    public bool EvaluateConditions(GameManager gameManager)
+    {
+        List<bool> results = new();
+        foreach (DialogueCondition condition in conditions)
+        {
+            if (results.Count <= condition.conditionSet) results.Insert(condition.conditionSet, true);
+            results[condition.conditionSet] = results[condition.conditionSet] && condition.EvaluateCondition(gameManager);
+        }
+        foreach (bool result in results)
+        {
+            if (result) return true;
+        }
+        return false;
+    }
 }
