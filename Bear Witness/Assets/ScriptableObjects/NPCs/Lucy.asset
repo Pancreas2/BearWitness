@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd7d77579bf29c4881f7de8d85dec35, type: 3}
+  m_Name: Lucy
+  m_EditorClassIdentifier: 
+  name: Lucy
+  faceAnimations: {fileID: 9100000, guid: cd8e810803db8ab4bbfe166b07a31ff4, type: 2}
+  emotionReference:
+  - neutral
+  - tired
+  - angry
+  - happy
+  neutralFace: {fileID: -666248066, guid: 13e1dca409d856b43b634f9a9552e406, type: 3}

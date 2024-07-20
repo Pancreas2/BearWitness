@@ -119,12 +119,15 @@ MonoBehaviour:
       choices:
       - text: 
         hasCondition: 0
+        choiceID: 0
         conditions: []
       - text: Yes
         hasCondition: 0
+        choiceID: 0
         conditions: []
       - text: No
         hasCondition: 0
+        choiceID: 0
         conditions: []
   lastState: 1
   triggerOnEnd: 
@@ -171,7 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventType: 1
   targetItem: {fileID: 0}
-  doorId: 0
+  doorId: 1
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0

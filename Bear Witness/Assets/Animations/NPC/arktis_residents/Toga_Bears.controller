@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueSegment:
     elements:
-    - lineId: 
-      singleUse: 0
+    - lineId: arcas_terrified
+      singleUse: 1
       hasCondition: 0
       conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
@@ -199,8 +199,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueSegment:
     elements:
-    - lineId: 
-      singleUse: 0
+    - lineId: arcas_nervous
+      singleUse: 1
       hasCondition: 0
       conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
@@ -562,31 +562,31 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Choose
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Choice
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Trust
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Met
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Dialogue
@@ -793,12 +793,15 @@ MonoBehaviour:
       choices:
       - text: I'm doing great!
         hasCondition: 0
+        choiceID: 0
         conditions: []
       - text: I'm a bit nervous.
         hasCondition: 0
+        choiceID: 1
         conditions: []
       - text: I have no idea what I'm doing please help
         hasCondition: 0
+        choiceID: 2
         conditions: []
   lastState: 0
   triggerOnEnd: 
@@ -817,8 +820,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueSegment:
     elements:
-    - lineId: 
-      singleUse: 0
+    - lineId: arcas_confident
+      singleUse: 1
       hasCondition: 0
       conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}

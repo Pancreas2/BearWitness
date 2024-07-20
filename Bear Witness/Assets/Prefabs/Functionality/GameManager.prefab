@@ -53,9 +53,16 @@ MonoBehaviour:
   previousLevel: Start
   playerMaxHealth: 5
   playerCurrentHealth: 5
-  currentItem: {fileID: 11400000, guid: 9cf45a5b087f15641b6f061edced8d3c, type: 2}
+  hourglassFill: 300
+  hourglassCapacity: 300
+  inArktis: 1
+  currentItems:
+  - {fileID: 11400000, guid: fe15ec2c3f29daa49a770bceb3b50280, type: 2}
+  - {fileID: 11400000, guid: fe15ec2c3f29daa49a770bceb3b50280, type: 2}
+  - {fileID: 11400000, guid: fe15ec2c3f29daa49a770bceb3b50280, type: 2}
   tools: []
   items: []
+  nullItem: {fileID: 11400000, guid: fe15ec2c3f29daa49a770bceb3b50280, type: 2}
   playedCutscenes: []
   playedLines: []
   foundItems: []

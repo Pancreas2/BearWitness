@@ -76,7 +76,7 @@ public class DialogueManager : MonoBehaviour
                     {
                         if (choices[i].gameObject == selected)
                         {
-                            currentDialogueStateMachine.SetInteger("Choice", i);
+                            currentDialogueStateMachine.SetInteger("Choice", choices[i].GetComponent<DialogueOption>().choice);
                         }
                     }
                 }
@@ -112,6 +112,8 @@ public class DialogueManager : MonoBehaviour
             {
                 sentences.Enqueue(element);
             }
+
+            gameManager.pauseGameTime = true;
 
             DisplayNextSentence();
             dialogueRunning = true;
@@ -165,19 +167,32 @@ public class DialogueManager : MonoBehaviour
             StartCoroutine(TypeSentence(sentence, dialogueText));
 
             bool chosenInitialSelected = false;
-            for (int i = 0; i < choices.Count; i++)
+            int j = 0;
+            for (int i = 0; i - j < choices.Count; i++)
             {
-                if (i < currentSentence.choices.Count && (!currentSentence.choices[i].hasCondition || currentSentence.choices[i].EvaluateConditions(gameManager)))
+                Debug.Log(i + ", " + j);
+                if (i < currentSentence.choices.Count)
                 {
-                    choices[i].gameObject.SetActive(true);
-                    if (!chosenInitialSelected)
+                    if (!currentSentence.choices[i].hasCondition || currentSentence.choices[i].EvaluateConditions(gameManager))
                     {
-                        chosenInitialSelected = true;
-                        EventSystem.current.SetSelectedGameObject(choices[i].gameObject);
+                        choices[i - j].gameObject.SetActive(true);
+                        if (!chosenInitialSelected)
+                        {
+                            chosenInitialSelected = true;
+                            EventSystem.current.SetSelectedGameObject(choices[i - j].gameObject);
+                        }
+                        StartCoroutine(TypeSentence(currentSentence.choices[i].text, choices[i - j]));
+
+                        choices[i - j].GetComponent<DialogueOption>().choice = currentSentence.choices[i].choiceID;
+                    } else
+                    {
+                        j++;
                     }
-                    StartCoroutine(TypeSentence(currentSentence.choices[i].text, choices[i]));
                 }
-                else choices[i].gameObject.SetActive(false);
+                else
+                {
+                    choices[i - j].gameObject.SetActive(false);
+                }
             }
         }
         else
@@ -240,6 +255,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        gameManager.pauseGameTime = false;
         animator.SetBool("IsOpen", false);
         dialogueRunning = false;
         if (!currentDialogueStateMachine)
@@ -252,8 +268,7 @@ public class DialogueManager : MonoBehaviour
     {
         shopMenu.SetActive(true);
         inShop = true;
-        if (!EventSystem.current.currentSelectedGameObject || !EventSystem.current.currentSelectedGameObject.activeInHierarchy)
-            EventSystem.current.SetSelectedGameObject(shopDisplays[0].gameObject);
+        EventSystem.current.SetSelectedGameObject(shopDisplays[0].gameObject);
 
         for (int i = 0; i < 6; i++)
         {

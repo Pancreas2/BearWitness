@@ -13,20 +13,12 @@ MonoBehaviour:
   m_Name: Carlotta
   m_EditorClassIdentifier: 
   name: Captain
-  color: {r: 0.5882353, g: 0.5321288, b: 0, a: 1}
-  dialogueFaces:
-  - emotion: surprised
-    face: {fileID: 1167928008, guid: 719ca78c6f9b5f44f8f7722fc946d30a, type: 3}
-  - emotion: annoyed
-    face: {fileID: 1106652578, guid: 719ca78c6f9b5f44f8f7722fc946d30a, type: 3}
-  - emotion: determined
-    face: {fileID: -950715014, guid: 719ca78c6f9b5f44f8f7722fc946d30a, type: 3}
-  - emotion: disdainful
-    face: {fileID: 1677665336, guid: 719ca78c6f9b5f44f8f7722fc946d30a, type: 3}
-  - emotion: skeptical
-    face: {fileID: -1798819166, guid: 719ca78c6f9b5f44f8f7722fc946d30a, type: 3}
-  - emotion: shocked
-    face: {fileID: 421407703, guid: 719ca78c6f9b5f44f8f7722fc946d30a, type: 3}
-  neutralFace:
-    emotion: neutral
-    face: {fileID: -1999292401, guid: 719ca78c6f9b5f44f8f7722fc946d30a, type: 3}
+  faceAnimations: {fileID: 9100000, guid: dbc75965851225f408f4a3a6eb4988fa, type: 2}
+  emotionReference:
+  - neutral
+  - skeptical
+  - concerned
+  - surprised
+  - angry
+  - disdainful
+  neutralFace: {fileID: 1016086579, guid: 6460574757700ae4c87395c3dc8369cd, type: 3}

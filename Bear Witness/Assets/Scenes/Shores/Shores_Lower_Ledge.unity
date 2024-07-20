@@ -20911,6 +20911,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gate
       objectReference: {fileID: 0}
+    - target: {fileID: 6915634939687270676, guid: 6ecca1095524fa74c82887377ed547ca, type: 3}
+      propertyPath: gateID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8157893428952979017, guid: 6ecca1095524fa74c82887377ed547ca, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -20968,6 +20972,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1411716243368757061, guid: e428864ded511b147b5f411197791ae2, type: 3}
+      propertyPath: doorID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5889363656045222964, guid: e428864ded511b147b5f411197791ae2, type: 3}
       propertyPath: m_Name
       value: Lever

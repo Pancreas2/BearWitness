@@ -2084,9 +2084,11 @@ MonoBehaviour:
       choices:
       - text: Buy ticket ( 200$ )
         hasCondition: 0
+        choiceID: 0
         conditions: []
       - text: Do not
         hasCondition: 0
+        choiceID: 1
         conditions: []
     - lineId: 
       singleUse: 0
@@ -2104,9 +2106,11 @@ MonoBehaviour:
       choices:
       - text: I said I'd like another ticket.
         hasCondition: 0
+        choiceID: 0
         conditions: []
       - text: I guess I don't need another.
         hasCondition: 0
+        choiceID: 1
         conditions: []
   lastState: 0
   triggerOnEnd: 
@@ -2352,12 +2356,15 @@ MonoBehaviour:
       choices:
       - text: What is Topiary Airlines?
         hasCondition: 0
+        choiceID: 0
         conditions: []
       - text: I'd like to buy a ticket.
         hasCondition: 0
+        choiceID: 1
         conditions: []
       - text: Nothing, thanks.
         hasCondition: 0
+        choiceID: 2
         conditions: []
   lastState: 0
   triggerOnEnd: 
@@ -2624,9 +2631,11 @@ MonoBehaviour:
       choices:
       - text: You're helping me, and I appreciate it.
         hasCondition: 0
+        choiceID: 0
         conditions: []
       - text: If you're not comfortable, you don't have to.
         hasCondition: 0
+        choiceID: 1
         conditions: []
     - lineId: 
       singleUse: 0
@@ -2704,12 +2713,15 @@ MonoBehaviour:
       choices:
       - text: You seem pretty bored.
         hasCondition: 0
+        choiceID: 0
         conditions: []
       - text: Why is it called the Tumbleweed?
         hasCondition: 0
+        choiceID: 1
         conditions: []
       - text: Thanks, that clears it up.
         hasCondition: 0
+        choiceID: 2
         conditions: []
   lastState: 0
   triggerOnEnd: 
@@ -3348,12 +3360,15 @@ MonoBehaviour:
       choices:
       - text: 
         hasCondition: 0
+        choiceID: 0
         conditions: []
       - text: 
         hasCondition: 0
+        choiceID: 0
         conditions: []
       - text: 
         hasCondition: 0
+        choiceID: 0
         conditions: []
     - lineId: fa_bored0
       singleUse: 1
@@ -3393,12 +3408,15 @@ MonoBehaviour:
       choices:
       - text: Of course not.
         hasCondition: 0
+        choiceID: 0
         conditions: []
       - text: Why work somewhere you don't care about?
         hasCondition: 0
+        choiceID: 1
         conditions: []
       - text: I'm here on behalf of your boss.
         hasCondition: 0
+        choiceID: 2
         conditions: []
   lastState: 0
   triggerOnEnd: 
@@ -3599,9 +3617,11 @@ MonoBehaviour:
       choices:
       - text: 
         hasCondition: 0
+        choiceID: 0
         conditions: []
       - text: 
         hasCondition: 0
+        choiceID: 0
         conditions: []
     - lineId: 
       singleUse: 0
@@ -3811,9 +3831,11 @@ MonoBehaviour:
       choices:
       - text: 
         hasCondition: 0
+        choiceID: 0
         conditions: []
       - text: 
         hasCondition: 0
+        choiceID: 0
         conditions: []
     - lineId: fa_too_exp0
       singleUse: 1
@@ -3859,9 +3881,11 @@ MonoBehaviour:
       choices:
       - text: I'll come back later.
         hasCondition: 0
+        choiceID: 0
         conditions: []
       - text: You're just doing your job.
         hasCondition: 1
+        choiceID: 1
         conditions:
         - conditionType: 1
           conditionSet: 0
@@ -3870,6 +3894,7 @@ MonoBehaviour:
           item: {fileID: 0}
       - text: Could you let me on anyway?
         hasCondition: 0
+        choiceID: 2
         conditions: []
   lastState: 0
   triggerOnEnd: 
