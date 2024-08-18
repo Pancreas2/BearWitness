@@ -168,7 +168,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a2db683dafb47ec47af374af306e3dc1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -284,11 +284,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f47d008aa9ae0947972e056738d55d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  passDamageTo: {fileID: 0}
   maxHealth: 50
+  currentHealth: 0
   animator: {fileID: 6128216905586141880}
   doKnockback: 1
   knockback: {x: 60, y: 100}
   m_Rigidbody2D: {fileID: 1814933614013531042}
+  invulnerable: 0
+  renderer: {fileID: 8615300163190319159}
   OnHurt:
     m_PersistentCalls:
       m_Calls:
@@ -304,6 +308,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnHurtInvulnerable:
+    m_PersistentCalls:
+      m_Calls: []
   OnStart:
     m_PersistentCalls:
       m_Calls: []
@@ -322,7 +329,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d133e29280ff144984c908107669ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 1.2
   turnCheckPoint: {fileID: 5666516232477169605}
+  ledgeCheckPoint: {fileID: 0}
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 320

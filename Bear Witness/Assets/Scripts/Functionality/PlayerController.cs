@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
 	private float attackTime = 0f;
 	public float attackRange = 0.4f;
 	public LayerMask enemyLayers;
+	public LayerMask hammerLayers;
 	private bool attacking = false;
 	private int attackType = 0;
 	private bool m_HasAirAttack = true;
@@ -41,6 +42,8 @@ public class PlayerController : MonoBehaviour
 	private bool wasClimbing = false;
 
 	private PlayerMovement playerMovement;
+
+	private float whiteFlash = 0f;
 
 	public bool inWater = false;
 	[SerializeField] private LayerMask m_WhatIsWater;
@@ -77,6 +80,21 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
 	{
+		if (m_Rigidbody2D.gravityScale != m_DefaultGravity)
+        {
+			if (m_Rigidbody2D.velocity.y < -0.25f)
+            {
+				SetGravityFraction(1f);
+            } 
+        }
+
+
+		if (whiteFlash != 0f)
+        {
+			whiteFlash = Mathf.Max(whiteFlash - 10 * Time.deltaTime, 0);
+			GetComponent<SpriteRenderer>().material.SetFloat("_FlashBrightness", whiteFlash);
+		}
+
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
 
@@ -132,6 +150,7 @@ public class PlayerController : MonoBehaviour
 		m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 		if (jump && atSurface)
         {
+			SetGravityFraction(2f / 3f);
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce * 1.2f));
 			m_Grounded = false;
 		}
@@ -299,6 +318,7 @@ public class PlayerController : MonoBehaviour
 
 			if (m_Grounded)
 			{
+				SetGravityFraction(2f / 3f);
 				m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, Mathf.Max(0f, m_Rigidbody2D.velocity.y));
 				if (roll)
 				{
@@ -350,6 +370,7 @@ public class PlayerController : MonoBehaviour
             }
 
 			invTime = Time.time + 1.0f;
+			whiteFlash = 2f;
 			gameManager.DamagePlayer(damage);
 			if (gameManager.playerCurrentHealth <= 0)
 			{
@@ -468,7 +489,7 @@ public class PlayerController : MonoBehaviour
 				break;
 
 			case 4:
-				hitEnemies = Physics2D.OverlapCircleAll(m_AttackPoint.position, attackRange, enemyLayers);
+				hitEnemies = Physics2D.OverlapCircleAll(m_AttackPoint.position, attackRange, hammerLayers);
 				foreach (Collider2D enemy in hitEnemies)
 				{
 					enemy.TryGetComponent(out ReceiveDamage hitbox);
@@ -482,7 +503,7 @@ public class PlayerController : MonoBehaviour
 
 			case 5:
 				attackCenter = transform.position + Vector3.right * 0.15f + Vector3.down * 0.4f;
-				hitEnemies = Physics2D.OverlapCircleAll(attackCenter, attackRange, enemyLayers);
+				hitEnemies = Physics2D.OverlapCircleAll(attackCenter, attackRange, hammerLayers);
 				foreach (Collider2D enemy in hitEnemies)
 				{
 					enemy.TryGetComponent(out ReceiveDamage hitbox);
@@ -491,9 +512,14 @@ public class PlayerController : MonoBehaviour
 				if (hitEnemies.Length > 0)
 				{
 					// land and bounce
-					m_HasAirAttack = true;
-					OnLandEvent.Invoke();
-					m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+					TryGetComponent<CancelHammerBounce>(out CancelHammerBounce chb);
+					if (!chb)
+                    {
+						m_HasAirAttack = true;
+						OnLandEvent.Invoke();
+						m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0f);
+						m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce / 1.5f));
+					}
 				}
 				break;
 		}
@@ -549,6 +575,7 @@ public class PlayerController : MonoBehaviour
     {
 		float jumpXKick = 200f;
 		if (m_FacingRight) jumpXKick *= -1f;
+		SetGravityFraction(2f / 3f);
 		m_Rigidbody2D.AddForce(new Vector2(jumpXKick, m_JumpForce * 0.9f));
 		playerMovement.frozen = false;
 
@@ -591,5 +618,15 @@ public class PlayerController : MonoBehaviour
 		playerMovement.frozen = true;
 		yield return new WaitForSeconds(time);
 		playerMovement.frozen = false;
+    }
+
+	public void ReduceUpwardMovement()
+    {
+		m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, Mathf.Min(m_Rigidbody2D.velocity.y, m_Rigidbody2D.velocity.y / 3f));
+	}
+
+	public void SetGravityFraction(float gravityFraction)
+    {
+		m_Rigidbody2D.gravityScale = gravityFraction * m_DefaultGravity;
     }
 }

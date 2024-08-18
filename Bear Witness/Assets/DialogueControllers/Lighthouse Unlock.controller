@@ -114,20 +114,16 @@ MonoBehaviour:
         item: {fileID: 11400000, guid: 429165caa3f2e8d49b9337965678709f, type: 2}
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: neutral
-      sentenceText: Use the Lighthouse Key?
+      sentenceText: 
       isChoice: 1
       choices:
-      - text: 
+      - text: Use the Lighthouse Key
         hasCondition: 0
-        choiceID: 0
+        choiceID: 1
         conditions: []
-      - text: Yes
+      - text: Do not
         hasCondition: 0
-        choiceID: 0
-        conditions: []
-      - text: No
-        hasCondition: 0
-        choiceID: 0
+        choiceID: 2
         conditions: []
   lastState: 1
   triggerOnEnd: 
@@ -282,7 +278,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 0
-  m_HasExitTime: 0
+  m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1

@@ -13,6 +13,9 @@ public class BaseEnemy : ReceiveDamage
     public Rigidbody2D m_Rigidbody2D;
     public bool invulnerable = false;
 
+    [SerializeField] private SpriteRenderer renderer;
+    private float flashValue = 0f;
+
     public UnityEvent OnHurt;
     public UnityEvent OnHurtInvulnerable;
     public UnityEvent OnStart;
@@ -26,13 +29,18 @@ public class BaseEnemy : ReceiveDamage
 
     private void FixedUpdate()
     {
-
+        if (flashValue != 0f)
+        {
+            flashValue = Mathf.Max(flashValue - 10 * Time.deltaTime, 0);
+            renderer.material.SetFloat("_FlashBrightness", flashValue);
+        }
     }
 
     public override void Damage(int damageValue, float sourcePosX)
     {
         if (!invulnerable)
         {
+            flashValue = 2f;
             if (currentHealth > 0)
             {
                 DecreaseHealth(damageValue);

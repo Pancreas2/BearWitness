@@ -164,6 +164,9 @@ public class GameManager : MonoBehaviour
         if (hourglassFill < 0f)
         {
             Debug.Log("Run Ends Here!!");
+            inArktis = true;
+            hourglassFill = hourglassCapacity;
+            ChangeScene("Arktis_Den");
         }
     }
 
@@ -171,6 +174,7 @@ public class GameManager : MonoBehaviour
     public string fileName;
     public float fileTime;
     public int fileCompletion;
+    public int loopNumber = 0;
 
     public bool pauseGameTime = false;
     public float gameTime;

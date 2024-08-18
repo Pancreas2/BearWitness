@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 15f;
     public float runMultiplier = 1.5f;
     bool jump = false;
+    bool heldJump = false;
     float jumpTime = 0f;
     bool run = false;
     bool roll = false;
@@ -52,10 +53,23 @@ public class PlayerMovement : MonoBehaviour
             horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed;
         }
 
+        if (heldJump && jumpTime <= Time.time)
+        {
+            heldJump = false;
+        }
+
+        if (heldJump && Input.GetButtonUp("Jump"))
+        {
+            heldJump = false;
+            StartCoroutine(CancelJump());
+        }
+
         // was Input.GetButtonDown("Jump") && !wasFrozen
         if (Input.GetButtonDown("Jump") && !(onPassThroughPlatform && Input.GetAxisRaw("Vertical") < 0))
         {
+            jumpTime = Time.time + 0.4f;
             jump = true;
+            heldJump = true;
             climbing = false;
         }
 
@@ -203,4 +217,9 @@ public class PlayerMovement : MonoBehaviour
         animator.Play(name, 5);
     }
 
+    IEnumerator CancelJump()
+    {
+        yield return new WaitForFixedUpdate();
+        controller.ReduceUpwardMovement();
+    }
 }

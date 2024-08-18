@@ -48,6 +48,7 @@ MonoBehaviour:
   fileName: 
   fileTime: 0
   fileCompletion: 0
+  loopNumber: 0
   pauseGameTime: 0
   gameTime: 0
   previousLevel: Start
@@ -60,8 +61,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fe15ec2c3f29daa49a770bceb3b50280, type: 2}
   - {fileID: 11400000, guid: fe15ec2c3f29daa49a770bceb3b50280, type: 2}
   - {fileID: 11400000, guid: fe15ec2c3f29daa49a770bceb3b50280, type: 2}
-  tools: []
-  items: []
+  tools:
+  - {fileID: 11400000, guid: 9cf45a5b087f15641b6f061edced8d3c, type: 2}
+  - {fileID: 11400000, guid: 5109cc27c245e15449ec433aa1985b75, type: 2}
+  items:
+  - {fileID: 11400000, guid: 429165caa3f2e8d49b9337965678709f, type: 2}
   nullItem: {fileID: 11400000, guid: fe15ec2c3f29daa49a770bceb3b50280, type: 2}
   playedCutscenes: []
   playedLines: []

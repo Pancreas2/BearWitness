@@ -63,7 +63,7 @@ public class SaveFile : MonoBehaviour
             if (slotID == 3)
                 // Tutorial replay
                 gameManager.ChangeScene("Arktis_Den");
-            else gameManager.ChangeScene("Shores_Entrance");
+            else gameManager.ChangeScene("Arktis_Den");
         }
         else
         {

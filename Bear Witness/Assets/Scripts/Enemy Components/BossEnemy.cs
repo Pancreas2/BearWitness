@@ -24,6 +24,7 @@ public class BossEnemy : BaseEnemy
     
     public void BeginFight()
     {
+        audioManager = FindObjectOfType<AudioManager>();
         Debug.Log("it begins...");
         if (bossMusic != "")
         {

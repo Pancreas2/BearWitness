@@ -25,7 +25,7 @@ TagManager:
   - NPC
   - Post Processing
   - Coin
-  - 
+  - HammerHittable
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 139590735
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

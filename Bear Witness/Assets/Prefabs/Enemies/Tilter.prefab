@@ -60,7 +60,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a2db683dafb47ec47af374af306e3dc1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -213,6 +213,8 @@ MonoBehaviour:
           m_StringArgument: damage
           m_BoolArgument: 0
         m_CallState: 2
+  active: 1
+  collider: {fileID: 0}
 --- !u!114 &3124231776395923530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,11 +227,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f47d008aa9ae0947972e056738d55d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  passDamageTo: {fileID: 0}
   maxHealth: 15
+  currentHealth: 0
   animator: {fileID: 6171499773383569767}
   doKnockback: 1
   knockback: {x: 60, y: 100}
   m_Rigidbody2D: {fileID: 7408823940594023699}
+  invulnerable: 0
+  renderer: {fileID: 1035043795574342735}
   OnHurt:
     m_PersistentCalls:
       m_Calls:
@@ -257,7 +263,13 @@ MonoBehaviour:
           m_StringArgument: damage
           m_BoolArgument: 0
         m_CallState: 2
+  OnHurtInvulnerable:
+    m_PersistentCalls:
+      m_Calls: []
   OnStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPerish:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &5257261813717717470
@@ -275,6 +287,7 @@ MonoBehaviour:
   runSpeed: 18
   m_Rigidbody2D: {fileID: 7408823940594023699}
   facingRight: 0
+  autoRun: 1
 --- !u!114 &1181043334172150904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,6 +306,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 328
   eyePoint: {fileID: 6599836883797045461}
+  seesPlayer: 0
   limitingAngle: 20
   OnSee:
     m_PersistentCalls:

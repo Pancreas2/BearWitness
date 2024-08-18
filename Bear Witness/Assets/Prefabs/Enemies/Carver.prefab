@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4107861512020021874
 SpriteRenderer:
@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a2db683dafb47ec47af374af306e3dc1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -121,11 +121,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f47d008aa9ae0947972e056738d55d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  passDamageTo: {fileID: 0}
   maxHealth: 60
+  currentHealth: 0
   animator: {fileID: 1032086668560381036}
   doKnockback: 1
   knockback: {x: 20, y: 10}
   m_Rigidbody2D: {fileID: 8557665014167748970}
+  invulnerable: 0
+  renderer: {fileID: 4107861512020021874}
   OnHurt:
     m_PersistentCalls:
       m_Calls:
@@ -141,6 +145,9 @@ MonoBehaviour:
           m_StringArgument: wakeUp
           m_BoolArgument: 0
         m_CallState: 2
+  OnHurtInvulnerable:
+    m_PersistentCalls:
+      m_Calls: []
   OnStart:
     m_PersistentCalls:
       m_Calls: []

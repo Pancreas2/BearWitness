@@ -12,7 +12,7 @@ public class Door : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (isFrontDoor && collision.collider.CompareTag("Player") && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)))
+        if (isFrontDoor && collision.collider.CompareTag("Player") && (Input.GetAxisRaw("Vertical") != 0))
         {
             ChangeRooms();
         }
