@@ -7,7 +7,7 @@ public class Door : MonoBehaviour
     [HideInInspector] public bool active = true;
     [SerializeField] private Animator animator;
     public bool isFrontDoor = false;
-    [SerializeField] private string destination;
+    [SerializeField] public string destination;
     [SerializeField] private Animator interactText;
 
     private void OnCollisionStay2D(Collision2D collision)

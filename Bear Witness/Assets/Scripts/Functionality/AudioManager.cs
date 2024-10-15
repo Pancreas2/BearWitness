@@ -74,15 +74,15 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void Play(string name, float startTime = 0f, float fadeTime = 1f)
+    public void Play(string name, float startTime = 0f, float fadeTime = 1f, float delay = 0f)
     {
         Sound sound = sounds.Find(sound => sound.name == name);
         if (sound == null) return;
+        Debug.LogError("Starting " + name);
         sound.source.volume = 0;
         sound.source.Play();
-        StartCoroutine(FadeIn(sound, fadeTime));
         sound.source.time = startTime;
-        playingSounds.Add(sound);
+        StartCoroutine(FadeIn(sound, fadeTime, delay));
     }
 
     public void KeepTimePlay(string name, float offset)
@@ -93,6 +93,8 @@ public class AudioManager : MonoBehaviour
 
     public void Stop(string name, float fadeTime = 1f)
     {
+
+        Debug.LogError("Stopping " + name);
         Sound sound = playingSounds.Find(sound => sound.name == name);
         if (sound == null) return;
         StartCoroutine(FadeOut(sound, fadeTime));
@@ -105,29 +107,50 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void TempMute(float muteTime = 2f, float muteStrength = 1f)
+    {
+        foreach (Sound sound in playingSounds)
+        {
+            float originalVolume = sound.source.volume;
+            sound.source.volume *= muteStrength;
+            StartCoroutine(RestoreVolumeAfter(sound, muteTime, originalVolume));
+        }
+    }
+
+    private IEnumerator RestoreVolumeAfter(Sound sound, float delay, float volume)
+    {
+        yield return new WaitForSeconds(delay);
+        sound.source.volume = volume;
+    }
+
     private IEnumerator FadeOut(Sound sound, float time)
     {
         float initialVolume = sound.volume;
 
-        for (int i = 9; i >= 0; i--)
-        {
-            sound.source.volume = i * initialVolume / 10;
-            yield return new WaitForSeconds(time / 10f);
-        }
+        if (time > 0f)
+            for (int i = 9; i >= 0; i--)
+            {
+                sound.source.volume = i * initialVolume / 10;
+                yield return new WaitForSeconds(time / 10f);
+            }
 
         playingSounds.Remove(sound);
         sound.source.Stop();
     }
 
-    private IEnumerator FadeIn(Sound sound, float time)
+    private IEnumerator FadeIn(Sound sound, float time, float delay)
     {
+        yield return new WaitForSeconds(delay);
+
         float initialVolume = sound.volume;
 
         for (int i = 1; i <= 10; i++)
         {
             sound.source.volume = i * initialVolume / 10;
-            yield return new WaitForSeconds(time / 10f);
+            yield return new WaitForSeconds(time / 10);
         }
+
+        playingSounds.Add(sound);
     }
 
     private float GetSoundTime(string name)

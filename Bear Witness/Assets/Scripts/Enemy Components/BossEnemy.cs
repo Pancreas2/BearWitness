@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BossEnemy : BaseEnemy
 {
@@ -14,6 +15,8 @@ public class BossEnemy : BaseEnemy
 
     [SerializeField] private UniqueEnemy uniqueEnemy;
 
+    [HideInInspector] public bool fightActive = false;
+
     void Start()
     {
         currentHealth = maxHealth;
@@ -22,10 +25,10 @@ public class BossEnemy : BaseEnemy
         audioManager = FindObjectOfType<AudioManager>();
     }
     
-    public void BeginFight()
+    public virtual void BeginFight()
     {
+        fightActive = true;
         audioManager = FindObjectOfType<AudioManager>();
-        Debug.Log("it begins...");
         if (bossMusic != "")
         {
             audioManager.StopAll(0f);
@@ -54,6 +57,7 @@ public class BossEnemy : BaseEnemy
 
     override public void Perish()
     {
+        fightActive = false;
         uniqueEnemy.UniqueEnemySlain();
         audioManager.Stop(bossMusic, 1f);
         hpBar.SetVisibility(false);

@@ -28,6 +28,7 @@ public class UniqueEnemy : MonoBehaviour
     public void UniqueEnemySlain()
     {
         GameManager gameManager = FindObjectOfType<GameManager>();
+        gameManager.GetComponent<FreezeFrame>().Slow(1f, 0.05f);
         int index = (int)name;
         gameManager.uniqueEnemies[index] = true;
     }

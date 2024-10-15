@@ -13,16 +13,9 @@ MonoBehaviour:
   m_Name: Seal
   m_EditorClassIdentifier: 
   name: Seal
-  color: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
-  dialogueFaces:
-  - emotion: happy
-    face: {fileID: 268277563, guid: 911b1c16d904c4a4590127550728c839, type: 3}
-  - emotion: neutral
-    face: {fileID: -806963672, guid: 911b1c16d904c4a4590127550728c839, type: 3}
-  - emotion: dessicated
-    face: {fileID: -2102445581, guid: 911b1c16d904c4a4590127550728c839, type: 3}
-  - emotion: rotting
-    face: {fileID: -709035237, guid: 911b1c16d904c4a4590127550728c839, type: 3}
-  neutralFace:
-    emotion: neutral
-    face: {fileID: -806963672, guid: 911b1c16d904c4a4590127550728c839, type: 3}
+  faceAnimations: {fileID: 9100000, guid: 9608d85542ecdb5418e8fce82831fc93, type: 2}
+  emotionReference:
+  - happy
+  - sad
+  - suspicious
+  neutralFace: {fileID: 209778844, guid: 3cdb641013eef474ea5db9ff1a555d43, type: 3}

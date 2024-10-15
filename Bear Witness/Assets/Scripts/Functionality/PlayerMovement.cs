@@ -32,11 +32,12 @@ public class PlayerMovement : MonoBehaviour
     private bool cutsceneMove = false;
     public bool cutsceneFaceRight = false;
 
-    public void WalkToPoint(float pointX)
+    public void WalkToPoint(float pointX, bool faceRight = true)
     {
         cutsceneMove = true;
         wasFrozen = true;
         frozen = true;
+        cutsceneFaceRight = faceRight;
 
         moveTarget = pointX;
     }

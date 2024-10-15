@@ -26,6 +26,32 @@ MonoBehaviour:
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+  isCall: 0
+--- !u!1101 &-8379448576005927163
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: Met
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 8571573367129867455}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-8346994187221428052
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -105,6 +131,7 @@ MonoBehaviour:
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+  isCall: 0
 --- !u!1102 &-7523554618398494200
 AnimatorState:
   serializedVersion: 6
@@ -186,6 +213,7 @@ MonoBehaviour:
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+  isCall: 0
 --- !u!1102 &-6380664007550085449
 AnimatorState:
   serializedVersion: 6
@@ -551,6 +579,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floatName: random
+--- !u!1107 &-870654156385120674
+AnimatorStateMachine:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Walrus
+  m_ChildStates:
+  - serializedVersion: 1
+    m_State: {fileID: 1357893339856853821}
+    m_Position: {x: 30, y: 170, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 8571573367129867455}
+    m_Position: {x: -50, y: 270, z: 0}
+  m_ChildStateMachines: []
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions: {}
+  m_StateMachineBehaviours: []
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_DefaultState: {fileID: 1357893339856853821}
 --- !u!1102 &-654555552202895053
 AnimatorState:
   serializedVersion: 6
@@ -686,6 +739,7 @@ MonoBehaviour:
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+  isCall: 0
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -747,6 +801,18 @@ AnimatorController:
   - serializedVersion: 5
     m_Name: Base Layer
     m_StateMachine: {fileID: -1133828885805290542}
+    m_Mask: {fileID: 0}
+    m_Motions: []
+    m_Behaviours: []
+    m_BlendingMode: 0
+    m_SyncedLayerIndex: -1
+    m_DefaultWeight: 1
+    m_IKPass: 0
+    m_SyncedLayerAffectsTiming: 0
+    m_Controller: {fileID: 9100000}
+  - serializedVersion: 5
+    m_Name: Walrus
+    m_StateMachine: {fileID: -870654156385120674}
     m_Mask: {fileID: 0}
     m_Motions: []
     m_Behaviours: []
@@ -980,6 +1046,7 @@ MonoBehaviour:
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+  isCall: 0
 --- !u!1101 &1099647154006835063
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1027,6 +1094,33 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &1357893339856853821
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: nothing
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -8379448576005927163}
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &2216189013277178992
 AnimatorState:
   serializedVersion: 6
@@ -1150,6 +1244,7 @@ MonoBehaviour:
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+  isCall: 0
 --- !u!1101 &4278349656947935236
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1260,6 +1355,7 @@ MonoBehaviour:
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+  isCall: 0
 --- !u!114 &4975293153998454226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1305,6 +1401,7 @@ MonoBehaviour:
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+  isCall: 0
 --- !u!1102 &5353426397012934574
 AnimatorState:
   serializedVersion: 6
@@ -1391,6 +1488,7 @@ MonoBehaviour:
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+  isCall: 0
 --- !u!114 &7447368019224183686
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1566,3 +1664,29 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &8571573367129867455
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: walrus_present
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: b061d59fcf8d37d449e790e0dcd681d2, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 

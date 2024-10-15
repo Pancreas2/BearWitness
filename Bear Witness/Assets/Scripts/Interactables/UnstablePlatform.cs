@@ -71,7 +71,7 @@ public class UnstablePlatform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!breaking && collision.collider.CompareTag("Player"))
+        if (!breaking && collision.collider.CompareTag("Player") && player.m_Grounded)
         {
             for (int i = 1; i <= length; i++)
             {

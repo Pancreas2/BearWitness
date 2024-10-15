@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class SaveFile : MonoBehaviour
@@ -16,7 +17,14 @@ public class SaveFile : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI createText;
 
+    [SerializeField] private Animator animator;
+
     private string file;
+
+    private bool enableDeletion;
+
+    public float flashValue = 0f;
+    public Image renderer;
 
     private void Awake()
     {
@@ -54,6 +62,11 @@ public class SaveFile : MonoBehaviour
         }
     }
 
+    public void Reload()
+    {
+        Awake();
+    }
+
     public void LoadFile()
     {
         if (file == null)
@@ -61,7 +74,7 @@ public class SaveFile : MonoBehaviour
             gameManager.fileNumber = slotID;
 
             if (slotID == 3)
-                // Tutorial replay
+                // Tutorial replay, vestigial
                 gameManager.ChangeScene("Arktis_Den");
             else gameManager.ChangeScene("Arktis_Den");
         }
@@ -92,5 +105,42 @@ public class SaveFile : MonoBehaviour
         }
         returnString += seconds;
         return returnString;
+    }
+
+    public void SetAllowDeletion(bool value)
+    {
+        enableDeletion = value;
+        animator.SetBool("CanDelete", value);
+    }
+
+    public void OnClick()
+    {
+        if (enableDeletion)
+        {
+            Delete(slotID);
+            animator.SetTrigger("Delete");
+            Reload();
+        } else
+        {
+            LoadFile();
+            animator.SetTrigger("Load");
+        }
+    }
+
+    public void Delete(int slot)
+    {
+        Debug.Log("Deleting " + slot);
+        flashValue = 2f;
+        SaveSystem.DeleteSave(slot);
+        Reload();
+    }
+
+    private void FixedUpdate()
+    {
+        if (flashValue != 0f)
+        {
+            flashValue = Mathf.Max(flashValue - 10 * Time.deltaTime, 0);
+            if (renderer) renderer.material.SetFloat("_FlashBrightness", flashValue);
+        }
     }
 }

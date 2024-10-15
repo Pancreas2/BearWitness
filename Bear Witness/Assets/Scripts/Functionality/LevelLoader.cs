@@ -9,6 +9,16 @@ public class LevelLoader : MonoBehaviour
     public float transitionTime = 0.5f;
     public string levelMusic;
     [SerializeField] private bool doStartCutscene = true;
+    public enum LevelArea
+    {
+        Arktis,
+        Shores,
+        Lighthouse,
+        Hollow,
+        Airship
+    }
+
+    public LevelArea area;
 
     private void Start()
     {

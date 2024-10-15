@@ -8,6 +8,8 @@ public class MouseSlayer : MonoBehaviour
 {
     GameObject lastselect;
 
+    public bool active = true;
+
     void Start()
     {
         lastselect = new GameObject();
@@ -15,9 +17,26 @@ public class MouseSlayer : MonoBehaviour
 
     void Update()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        if (active)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
 
+            IgnoreClick();
+        } else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+
+    public void SetActive(bool value)
+    {
+        active = value;
+    }
+
+    public void IgnoreClick()
+    {
         if (EventSystem.current.currentSelectedGameObject == null)
         {
             EventSystem.current.SetSelectedGameObject(lastselect);

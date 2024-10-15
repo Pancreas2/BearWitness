@@ -59,4 +59,15 @@ public class CutsceneTrigger : MonoBehaviour
         if (!reuseable)
             gameManager.playedCutscenes.Add(cutscene_ID);
     }
+
+    public void SetUIVisible(float delay)
+    {
+        StartCoroutine(ShowUI(delay));
+    }
+
+    private IEnumerator ShowUI(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        GameUI_Controller.instance.ShowAll();
+    }
 }

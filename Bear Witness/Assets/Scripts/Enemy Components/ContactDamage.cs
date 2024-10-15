@@ -25,6 +25,15 @@ public class ContactDamage : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (active && collision.collider.CompareTag("Player") && collision.otherCollider.Equals(collider))
+        {
+            player.Damage(damageAmount, transform.position.x);
+            OnDamage.Invoke();
+        }
+    }
+
     public void SetActive(bool value)
     {
         active = value;

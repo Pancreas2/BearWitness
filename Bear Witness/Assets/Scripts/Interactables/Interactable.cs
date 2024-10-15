@@ -19,7 +19,7 @@ public class Interactable : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player")) 
         {
-            animator.SetBool("playerInRange", true);
+            if (animator) animator.SetBool("playerInRange", true);
             if (Input.GetAxisRaw("Vertical") != 0 && Time.time >= cooldown)
             {
                 cooldown = Time.time + 2f;
@@ -32,7 +32,7 @@ public class Interactable : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
-            animator.SetBool("playerInRange", false);
+            if (animator) animator.SetBool("playerInRange", false);
         }
     }
 

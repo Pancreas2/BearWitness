@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class InventoryMenu : MonoBehaviour
 {
-    public static bool GameIsPaused = false;
+    private bool pausedByThis = false;
 
     private bool invOpen = false;
     public GameObject resumeMenuUI;
@@ -16,6 +16,8 @@ public class InventoryMenu : MonoBehaviour
     public InventorySlot lastSelectedSlot = new();
 
     private List<int> equippedSlots = new();
+
+    [SerializeField] private MapMenu mapMenu;
 
     private void Start()
     {
@@ -39,15 +41,15 @@ public class InventoryMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Inventory"))
+        if (Input.GetButtonDown("Inventory") && !FindObjectOfType<DialogueManager>().dialogueRunning)
         {
-            if (GameIsPaused)
-            {
-                Resume();
-            }
-            else
+
+            if (!PauseMenu.GameIsPaused)
             {
                 Pause();
+            } else if (pausedByThis)
+            {
+                Resume();
             }
         }
 
@@ -102,14 +104,20 @@ public class InventoryMenu : MonoBehaviour
         invOpen = false;
         resumeMenuUI.SetActive(false);
         Time.timeScale = 1f;
-        GameIsPaused = false;
+        pausedByThis = false;
+        PauseMenu.GameIsPaused = false;
         resumeMenuUI.GetComponentInParent<GameUI_Controller>().Reload();
+        GetComponent<MouseSlayer>().SetActive(true);
     }
 
     public void Pause()
     {
         invOpen = true;
-        if (PauseMenu.GameIsPaused) FindObjectOfType<PauseMenu>().Resume();
+        GetComponent<MouseSlayer>().SetActive(true);
+        PauseMenu.GameIsPaused = true;
+        pausedByThis = true;
+        Time.timeScale = 0f;
+
         resumeMenuUI.SetActive(true);
         foreach (InventorySlot slot in toolSlots)
         {
@@ -128,9 +136,12 @@ public class InventoryMenu : MonoBehaviour
             }
         }
         Time.timeScale = 0f;
-        GameIsPaused = true;
 
         EventSystem.current.SetSelectedGameObject(toolSlots[0].gameObject);
+
+        Debug.Log("TAB: " + PauseMenu.GameIsPaused);
+
+        mapMenu.LoadMap();
     }
 
     public void SwapInventoryPosition(int a, int b, bool tool)

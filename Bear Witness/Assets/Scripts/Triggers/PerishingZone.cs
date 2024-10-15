@@ -31,6 +31,8 @@ public class PerishingZone : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {
             playerM.frozen = true;
+            player.SetGravityFraction(0f);
+            player.m_Rigidbody2D.velocity = Vector3.zero;
             StartCoroutine(RespawnPlayer());
         }
     }
@@ -39,6 +41,7 @@ public class PerishingZone : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         playerM.PlayAnimation("stun");
+        player.SetGravityFraction(1f);
         playerFrozen = true;
         freezeTime = Time.time + 1.25f;
         gameManager.RespawnPlayer();

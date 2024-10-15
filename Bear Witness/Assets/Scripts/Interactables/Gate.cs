@@ -10,6 +10,7 @@ public class Gate : MonoBehaviour
     private GameManager gameManager;
     private bool isOpen;
     [SerializeField] private bool forceOpen;
+    [SerializeField] private bool forceClose;
     [SerializeField] private float gateRate = 0.03f;
 
     private void Start()
@@ -19,13 +20,19 @@ public class Gate : MonoBehaviour
         if (gameManager.doorStates[gateID] || forceOpen)
         {
             isOpen = true;
-            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + openingSize);
+            transform.localPosition = new Vector3(transform.localPosition.x, closedPoint + openingSize);
+        }
+
+        if (!gameManager.doorStates[gateID] || forceClose)
+        {
+            isOpen = false;
+            transform.localPosition = new Vector3(transform.localPosition.x, closedPoint);
         }
     }
 
     private void Update()
     {
-        if (gameManager.doorStates[gateID] || forceOpen)
+        if ((gameManager.doorStates[gateID] || forceOpen) && !forceClose)
         {
             if (!isOpen)
             {
@@ -48,6 +55,11 @@ public class Gate : MonoBehaviour
     public void SetForceOpen(bool value)
     {
         forceOpen = value;
+    }
+
+    public void SetForceClose(bool value)
+    {
+        forceClose = value;
     }
 
     IEnumerator OpenGate()

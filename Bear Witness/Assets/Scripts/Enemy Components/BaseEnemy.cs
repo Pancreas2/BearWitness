@@ -12,14 +12,13 @@ public class BaseEnemy : ReceiveDamage
     [SerializeField] private Vector2 knockback;
     public Rigidbody2D m_Rigidbody2D;
     public bool invulnerable = false;
+    private float invTime = 0f;
 
-    [SerializeField] private SpriteRenderer renderer;
-    private float flashValue = 0f;
-
-    public UnityEvent OnHurt;
-    public UnityEvent OnHurtInvulnerable;
     public UnityEvent OnStart;
     public UnityEvent OnPerish;
+
+    [SerializeField] private CoinShower coinShower;
+    [SerializeField] private int droppedCoins = 0;
 
     private void Start()
     {
@@ -27,30 +26,19 @@ public class BaseEnemy : ReceiveDamage
         OnStart.Invoke();
     }
 
-    private void FixedUpdate()
-    {
-        if (flashValue != 0f)
-        {
-            flashValue = Mathf.Max(flashValue - 10 * Time.deltaTime, 0);
-            renderer.material.SetFloat("_FlashBrightness", flashValue);
-        }
-    }
-
     public override void Damage(int damageValue, float sourcePosX)
     {
-        if (!invulnerable)
+        if (invTime < Time.time && !invulnerable)
         {
             flashValue = 2f;
+            invTime = Time.time + 0.2f;
             if (currentHealth > 0)
             {
                 DecreaseHealth(damageValue);
             }
-        } else
-        {
-            OnHurtInvulnerable.Invoke();
         }
 
-        if (currentHealth > 0)
+        if (currentHealth > 0 && m_Rigidbody2D)
         {
             m_Rigidbody2D.velocity = Vector2.zero;
             Vector2 knockbackForce = new(Mathf.Sign(transform.position.x - sourcePosX) * knockback.x, knockback.y);
@@ -66,14 +54,11 @@ public class BaseEnemy : ReceiveDamage
         {
             Perish();
         }
-        else
-        {
-            OnHurt.Invoke();
-        }
     }
 
     virtual public void Perish() 
     {
+        if (coinShower) coinShower.SpawnCoins(droppedCoins);
         OnPerish.Invoke();
     }
 }

@@ -28,7 +28,6 @@ public class DialogueInteractable : Interactable
     {
         if (dialogueStateMachine == null || dialogueStateMachine.GetCurrentAnimatorStateInfo(0).IsName("nothing"))
         {
-            Debug.Log("interacting");
             if (dialogueStateMachine != null)
                 dialogueStateMachine.SetTrigger("StartDialogue");
             else

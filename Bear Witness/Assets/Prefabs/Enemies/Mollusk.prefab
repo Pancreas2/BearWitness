@@ -216,6 +216,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passDamageTo: {fileID: 0}
+  renderer: {fileID: 1769722434398929637}
+  flashValue: 0
   maxHealth: 15
   currentHealth: 0
   animator: {fileID: 6044148262277639355}
@@ -223,25 +225,6 @@ MonoBehaviour:
   knockback: {x: 100, y: 80}
   m_Rigidbody2D: {fileID: 6629999595610732267}
   invulnerable: 0
-  renderer: {fileID: 1769722434398929637}
-  OnHurt:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6044148262277639355}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: hurt
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnHurtInvulnerable:
-    m_PersistentCalls:
-      m_Calls: []
   OnStart:
     m_PersistentCalls:
       m_Calls: []
@@ -284,18 +267,8 @@ MonoBehaviour:
           m_StringArgument: die
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4789005042286325274}
-        m_TargetAssemblyTypeName: CoinShower, Assembly-CSharp
-        m_MethodName: SpawnCoins
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 5
-          m_FloatArgument: 0
-          m_StringArgument: die
-          m_BoolArgument: 0
-        m_CallState: 2
+  coinShower: {fileID: 4789005042286325274}
+  droppedCoins: 5
 --- !u!114 &6651387511359207095
 MonoBehaviour:
   m_ObjectHideFlags: 0

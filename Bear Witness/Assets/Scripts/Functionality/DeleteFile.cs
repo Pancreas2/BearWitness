@@ -1,19 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DeleteFile : MonoBehaviour
 {
-    public void Delete(int slot)
+    [SerializeField] private List<SaveFile> files = new();
+    private bool deletionState = false;
+    [SerializeField] private Animator animator;
+
+    public void SetAllowDeletion(bool value)
     {
-        SaveSystem.DeleteSave(slot);
+        foreach (SaveFile file in files)
+        {
+            file.SetAllowDeletion(value);
+        }
     }
 
-    public void DeleteAll()
+    public void OnClick()
     {
-        SaveSystem.DeleteSave(0);
-        SaveSystem.DeleteSave(1);
-        SaveSystem.DeleteSave(2);
-        SaveSystem.DeleteSave(3);
+        deletionState = !deletionState;
+        SetAllowDeletion(deletionState);
+        animator.SetBool("CanDelete", deletionState);
     }
 }

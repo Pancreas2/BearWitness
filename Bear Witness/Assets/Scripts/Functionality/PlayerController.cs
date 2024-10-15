@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
 	[SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
 	[SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
-	[SerializeField] private Transform m_AttackPoint; 
+	[SerializeField] private Transform m_AttackPoint;
+	[SerializeField] private Light2D lanternLight;
 	[SerializeField] private Collider2D m_CrouchDisableCollider;     // A collider that will be disabled when rolling
 	[SerializeField] private Animator animator;
 
@@ -35,7 +37,7 @@ public class PlayerController : MonoBehaviour
 	private bool shielded = false;
 
 	private bool m_wallClingState = false;
-	private bool startWallClingHitbox = false;
+	private bool doAttackHitbox = false;
 	private float moveLeftDelay = 0f;
 	private float moveRightDelay = 0f;
 
@@ -137,6 +139,22 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         if (!gameManager) gameManager = FindObjectOfType<GameManager>();
+
+		// check for lantern
+		for (int i = 0; i < gameManager.currentItems.Count; i++)
+		{
+			if (gameManager.currentItems[i].name == "Lantern")
+			{
+				animator.SetBool("useLantern", true);
+				lanternLight.enabled = true;
+				break;
+			}
+			else if (i + 1 == gameManager.currentItems.Count)
+			{
+				animator.SetBool("useLantern", false);
+				lanternLight.enabled = false;
+			}
+        }
 	}
 
 	public void Swim(float hmove, float vmove, bool jump)
@@ -289,26 +307,24 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 
-		if (startWallClingHitbox)
+		if (doAttackHitbox)
 		{
+			AttackHitboxes();
 			// check for wall-grabs (so it occurs during the duration of the swing)
-			Vector3 attackCenter = m_AttackPoint.position + Vector3.down * 0.1f;
-			if (Physics2D.OverlapCircleAll(attackCenter, attackRange / 2f, m_WhatIsGround).Length > 0)
-			{
-				// cancel velocity and start wall jump
-				m_Rigidbody2D.velocity = Vector3.zero;
-				startWallClingHitbox = false;
-				m_wallClingState = true;
-				m_HasAirAttack = true;
-				attacking = false;
-				ForceWallJump();
-			}
+			//Vector3 attackCenter = m_AttackPoint.position + Vector3.down * 0.1f;
+			//if (Physics2D.OverlapCircleAll(attackCenter, attackRange / 2f, m_WhatIsGround).Length > 0)
+			//{
+			//	// cancel velocity and start wall jump
+			//	m_Rigidbody2D.velocity = Vector3.zero;
+			//	startWallClingHitbox = false;
+			//	m_wallClingState = true;
+			//	m_HasAirAttack = true;
+			//	attacking = false;
+			//	ForceWallJump();
+			//}
 
-			if (attackTime + 0.2f <= Time.time) startWallClingHitbox = false;
-		} else
-        {
-			m_wallClingState = false;
-        }
+			//if (attackTime + 0.2f <= Time.time) startWallClingHitbox = false;
+		}
 
 		// If the player should jump...
 		if (jump)
@@ -340,7 +356,6 @@ public class PlayerController : MonoBehaviour
         }
 
 		animator.SetBool("grounded", m_Grounded);
-		animator.SetBool("wallCling", m_wallClingState);
 	}
 
 
@@ -372,7 +387,12 @@ public class PlayerController : MonoBehaviour
 			invTime = Time.time + 1.0f;
 			whiteFlash = 2f;
 			gameManager.DamagePlayer(damage);
-			if (gameManager.playerCurrentHealth <= 0)
+			AudioManager.instance.TempMute(2f, 1f);
+
+			gameManager.GetComponent<FreezeFrame>().Freeze(Mathf.Min(0.1f * damage, 0.5f));
+            CinemachineShake.instance.ShakeCamera(0.5f, 1f);
+
+            if (gameManager.playerCurrentHealth <= 0)
 			{
 				Perish();
 				return;
@@ -465,14 +485,15 @@ public class PlayerController : MonoBehaviour
 				if (hitEnemies.Length > 0)
 				{
 					Knockback(100f);
-				}
+                    CinemachineShake.instance.ShakeCamera(0.1f, 0.25f);
+                }
 				break;
 
 				// attackType 1 is dab
 
 			case 2:
-				attackCenter = m_AttackPoint.position + Vector3.right * 0.15f + Vector3.down * 0.1f;
-				hitEnemies = Physics2D.OverlapCircleAll(attackCenter, attackRange, enemyLayers);
+				attackCenter = m_AttackPoint.position + Vector3.right * 0.05f + Vector3.down * 0.1f;
+				hitEnemies = Physics2D.OverlapCircleAll(attackCenter, attackRange * 0.7f, enemyLayers + m_WhatIsGround);
 				foreach (Collider2D enemy in hitEnemies)
 				{
 					enemy.TryGetComponent(out ReceiveDamage hitbox);
@@ -480,8 +501,19 @@ public class PlayerController : MonoBehaviour
 				}
 				if (hitEnemies.Length > 0)
 				{
-					Knockback(100f);
-				}
+                    CinemachineShake.instance.ShakeCamera(0.1f, 0.25f);
+
+                    // cancel velocity and start wall jump
+                    m_Rigidbody2D.velocity = Vector3.zero;
+					animator.SetTrigger("wallCling");
+					SetAttackHitboxes(-1);
+
+					// gives you 1 frame for a superjump
+					coyotePoints = Mathf.Min(coyotePoints, 1);
+                    m_HasAirAttack = true;
+                    attacking = false;
+                    ForceWallJump();
+                }
 				break;
 
 			case 3:
@@ -498,7 +530,8 @@ public class PlayerController : MonoBehaviour
 				if (hitEnemies.Length > 0)
 				{
 					Knockback(100f);
-				}
+                    CinemachineShake.instance.ShakeCamera(0.2f, 2f);
+                }
 				break;
 
 			case 5:
@@ -520,7 +553,8 @@ public class PlayerController : MonoBehaviour
 						m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0f);
 						m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce / 1.5f));
 					}
-				}
+                    CinemachineShake.instance.ShakeCamera(0.2f, 2f);
+                }
 				break;
 		}
 	}
@@ -529,7 +563,7 @@ public class PlayerController : MonoBehaviour
 	{
 		if (m_AttackPoint != null)
 		{
-			Gizmos.DrawWireSphere(m_AttackPoint.position, attackRange);
+			Gizmos.DrawWireSphere(m_AttackPoint.position + Vector3.right * 0.15f + Vector3.down * 0.1f, attackRange);
 		}
 	}
 
@@ -555,6 +589,18 @@ public class PlayerController : MonoBehaviour
 		}
     }
 
+	public void SetAttackHitboxes(int value)
+	{
+		if (value == -1)
+		{
+			doAttackHitbox = false;
+		} else
+		{
+			doAttackHitbox = true;
+			attackType = value;
+		}
+	}
+
 	public void AttackEnd() 
     {
 		animator.SetTrigger("attackEnd");
@@ -564,11 +610,6 @@ public class PlayerController : MonoBehaviour
     {
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position + new Vector3(0f, 0.05f, 0f), 0.01f, m_WhatIsWater);
 		return colliders.Length == 0;
-    }
-
-	public void StartWallClingHitbox()
-    {
-		startWallClingHitbox = true;
     }
 
 	private void ForceWallJump()

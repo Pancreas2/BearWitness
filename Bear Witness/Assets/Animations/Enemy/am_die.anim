@@ -21,17 +21,17 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: -790443349, guid: 4ce16b3f4b930a742b0c9db79ff73814, type: 3}
+      value: {fileID: -1459864655, guid: 6dfe34491b3bb21479fa696fcc78eb61, type: 3}
     - time: 0.083333336
-      value: {fileID: 2130100720, guid: 4ce16b3f4b930a742b0c9db79ff73814, type: 3}
+      value: {fileID: -1386774745, guid: 6dfe34491b3bb21479fa696fcc78eb61, type: 3}
     - time: 0.16666667
-      value: {fileID: 752876884, guid: 4ce16b3f4b930a742b0c9db79ff73814, type: 3}
+      value: {fileID: -892185057, guid: 6dfe34491b3bb21479fa696fcc78eb61, type: 3}
     - time: 0.25
-      value: {fileID: -209630725, guid: 4ce16b3f4b930a742b0c9db79ff73814, type: 3}
+      value: {fileID: 2044202249, guid: 6dfe34491b3bb21479fa696fcc78eb61, type: 3}
     - time: 0.33333334
-      value: {fileID: 1896563372, guid: 4ce16b3f4b930a742b0c9db79ff73814, type: 3}
+      value: {fileID: -890795107, guid: 6dfe34491b3bb21479fa696fcc78eb61, type: 3}
     - time: 0.41666666
-      value: {fileID: 1879758082, guid: 4ce16b3f4b930a742b0c9db79ff73814, type: 3}
+      value: {fileID: -1587283630, guid: 6dfe34491b3bb21479fa696fcc78eb61, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -54,18 +54,18 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: -790443349, guid: 4ce16b3f4b930a742b0c9db79ff73814, type: 3}
-    - {fileID: 2130100720, guid: 4ce16b3f4b930a742b0c9db79ff73814, type: 3}
-    - {fileID: 752876884, guid: 4ce16b3f4b930a742b0c9db79ff73814, type: 3}
-    - {fileID: -209630725, guid: 4ce16b3f4b930a742b0c9db79ff73814, type: 3}
-    - {fileID: 1896563372, guid: 4ce16b3f4b930a742b0c9db79ff73814, type: 3}
-    - {fileID: 1879758082, guid: 4ce16b3f4b930a742b0c9db79ff73814, type: 3}
+    - {fileID: -1459864655, guid: 6dfe34491b3bb21479fa696fcc78eb61, type: 3}
+    - {fileID: -1386774745, guid: 6dfe34491b3bb21479fa696fcc78eb61, type: 3}
+    - {fileID: -892185057, guid: 6dfe34491b3bb21479fa696fcc78eb61, type: 3}
+    - {fileID: 2044202249, guid: 6dfe34491b3bb21479fa696fcc78eb61, type: 3}
+    - {fileID: -890795107, guid: 6dfe34491b3bb21479fa696fcc78eb61, type: 3}
+    - {fileID: -1587283630, guid: 6dfe34491b3bb21479fa696fcc78eb61, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.43333334
+    m_StopTime: 0.6666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -84,4 +84,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.6666667
+    functionName: SpawnCoins
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 35
+    messageOptions: 0

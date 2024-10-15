@@ -9,4 +9,5 @@ public class NPCData
     public string displayName;
     public int trust = 0;
     public bool met = false;
+    public bool spokenTo = false;
 }

@@ -7,20 +7,28 @@ using UnityEngine.EventSystems;
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
+    private bool pausedByThis = false;
+
     public GameObject pauseMenuUI;
     [SerializeField] private GameObject resumeBtn;
 
     private void Update()
     {
-        if (Input.GetButtonDown("Pause"))
+        if (Input.GetButtonDown("Pause") && !FindObjectOfType<DialogueManager>().dialogueRunning)
         {
-            if (GameIsPaused)
+            if (!GameIsPaused || pausedByThis)
             {
-                Resume();
-            } else
-            {
-                Pause();
-                EventSystem.current.SetSelectedGameObject(resumeBtn);
+                if (GameIsPaused)
+                {
+                    Resume();
+                    pausedByThis = false;
+                }
+                else
+                {
+                    Pause();
+                    pausedByThis = true;
+                    EventSystem.current.SetSelectedGameObject(resumeBtn);
+                }
             }
         }
     }
@@ -30,14 +38,15 @@ public class PauseMenu : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
+        GetComponent<MouseSlayer>().SetActive(true);
     }
 
     public void Pause()
     {
-        if (InventoryMenu.GameIsPaused) FindObjectOfType<InventoryMenu>().Resume();
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
+        GetComponent<MouseSlayer>().SetActive(false);
     }
 
     public void LoadMenu()

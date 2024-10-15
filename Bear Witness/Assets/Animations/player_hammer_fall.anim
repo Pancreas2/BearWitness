@@ -77,9 +77,16 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: AttackHitboxes
+    functionName: SetAttackHitboxes
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 0
+    intParameter: 5
+    messageOptions: 0
+  - time: 0.16666667
+    functionName: SetAttackHitboxes
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: -1
     messageOptions: 0

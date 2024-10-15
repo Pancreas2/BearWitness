@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8160726984739113400
 MonoBehaviour:
@@ -48,37 +48,37 @@ MonoBehaviour:
   - name: Airship
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 78eeef5815e53d8438ef67814b00b887, type: 3}
-    volume: 1
+    volume: 0.204
     pitch: 1
     loop: 1
   - name: Arktis
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 77a6ed27bf8ee5a4092a399c98670112, type: 3}
-    volume: 1
+    volume: 0.204
     pitch: 1
     loop: 1
   - name: Blacksmith
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: f047abff9fc026744bb58cfc5c1f7e49, type: 3}
-    volume: 1
+    volume: 0.507
     pitch: 1
     loop: 1
   - name: Crab
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 7c984cf13c5258544a8cd683d636bb73, type: 3}
-    volume: 1
+    volume: 0.501
     pitch: 1
     loop: 1
   - name: Flying_Feathers
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: db96123dd5f99754e9805f08b9ea5c16, type: 3}
-    volume: 1
+    volume: 0.507
     pitch: 1
     loop: 1
   - name: Golden_City
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 170b7914e6b80d642a2c31009248cfb7, type: 3}
-    volume: 1
+    volume: 0.204
     pitch: 1
     loop: 1
   - name: Intemperance_Intro
@@ -96,25 +96,25 @@ MonoBehaviour:
   - name: Lighthouse
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 7ed9539a130a73342ac3c079c4619859, type: 3}
-    volume: 1
+    volume: 0.204
     pitch: 1
     loop: 1
   - name: Overgrown_Hollow
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 53799abb1ee32c9408594159c674e567, type: 3}
-    volume: 0.513
+    volume: 0.109
     pitch: 1
     loop: 1
   - name: Shores
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 0a81fbf71ddf44d41bb9c3f52ec16dfc, type: 3}
-    volume: 1
+    volume: 0.204
     pitch: 1
     loop: 1
   - name: Village
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 4fd6d0023336d374e957561c44fe0122, type: 3}
-    volume: 1
+    volume: 0.21
     pitch: 1
     loop: 1
   - name: Walrus
@@ -159,3 +159,27 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 0
+  - name: Fragmentation
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: d74c9fa3d079f234aa1c972b270c6c2f, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+  - name: Crown
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9169a19f5a6b05a40acaf0c75365bc8a, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 1
+  - name: Library
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: fe04b097219dc6a47a3336ba18643eb4, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 1
+  - name: Library_Isabel
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 5d9d9d7c73cedcf478a8791ba58d2bf9, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 1

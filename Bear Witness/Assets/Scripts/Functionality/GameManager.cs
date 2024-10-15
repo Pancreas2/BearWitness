@@ -137,11 +137,24 @@ public class GameManager : MonoBehaviour
     {
         hourglassFill -= damage * 10f;
         guic.hourglass.DamageFlash(damage);
+        if (panicMode)
+        {
+            AudioManager.instance.Stop("Fragmentation", fadeTime: 0f);
+            AudioManager.instance.Play("Fragmentation", startTime: Mathf.Min(panicTime, panicTime - hourglassFill), fadeTime: 0.25f, delay: 0.25f);
+        }
     }
 
     public void HealPlayer(float heal)
     {
         hourglassFill = Mathf.Min(hourglassCapacity, hourglassFill + heal);
+
+        if (panicMode && hourglassFill > panicTime)
+        {
+            panicMode = false;
+            AudioManager.instance.Stop("Fragmentation", 3);
+            string replaceSong = FindObjectOfType<LevelLoader>().levelMusic;
+            AudioManager.instance.Play(replaceSong, fadeTime: 3);
+        }
     }
 
     public void StartRun()
@@ -151,9 +164,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!pauseGameTime)
+        if (!pauseGameTime || panicMode)
         {
-            gameTime += Time.deltaTime * 2f / 3f;
+            gameTime += Time.deltaTime;
 
             if (!inArktis)
             {
@@ -161,12 +174,27 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (hourglassFill < panicTime && !panicMode)
+        {
+            panicMode = true;
+            AudioManager.instance.StopAll(3);
+            AudioManager.instance.Play("Fragmentation", fadeTime: 4);
+        }
+
         if (hourglassFill < 0f)
         {
             Debug.Log("Run Ends Here!!");
+
+            for (int i = 0; i < npcMemory.Count; i++)
+            {
+                npcMemory[i].spokenTo = false;
+            }
+
+            panicMode = false;
             inArktis = true;
             hourglassFill = hourglassCapacity;
-            ChangeScene("Arktis_Den");
+            loopNumber++;
+            ChangeScene("Arktis_Save_Room");
         }
     }
 
@@ -183,8 +211,11 @@ public class GameManager : MonoBehaviour
     public int playerMaxHealth = 5;
     public int playerCurrentHealth = 5;
 
-    public float hourglassFill = 300f;
-    public float hourglassCapacity = 300f;
+    public float hourglassFill = 900f;
+    public float hourglassCapacity = 900f;
+    private bool panicMode = false;
+
+    public const float panicTime = 76.8f;
 
     public bool inArktis = true;
 

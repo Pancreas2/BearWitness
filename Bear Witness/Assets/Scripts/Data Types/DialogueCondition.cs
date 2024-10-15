@@ -28,7 +28,7 @@ public class DialogueCondition
             return gameManager.playedLines.Contains(lineId) ^ invert;
         } else if (conditionType == ConditionType.HasItem)
         {
-            return gameManager.items.Contains(item) ^ invert;
+            return (gameManager.items.Contains(item) || gameManager.tools.Contains(item)) ^ invert;
         }
         return false;
     }
