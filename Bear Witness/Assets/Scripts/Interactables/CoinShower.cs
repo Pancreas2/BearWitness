@@ -18,19 +18,22 @@ public class CoinShower : MonoBehaviour
         // remainder is the number of small coins
         for (int i = 0; i < bigCoins; i++)
         {
-            GameObject coin = Instantiate(bigCoin, transform);
+            GameObject coin = Instantiate(bigCoin);
+            coin.transform.position = transform.position;
             Vector2 randomVel = new(Random.value * 2f - 1f, Random.value * 4f);
             coin.GetComponent<Rigidbody2D>().velocity = randomVel;
         }
         for (int i = 0; i < midCoins; i++)
         {
-            GameObject coin = Instantiate(mediumCoin, transform);
+            GameObject coin = Instantiate(mediumCoin);
+            coin.transform.position = transform.position;
             Vector2 randomVel = new(Random.value * 2f - 1f, Random.value * 4f);
             coin.GetComponent<Rigidbody2D>().velocity = randomVel;
         }
         for (int i = 0; i < sum; i++)
         {
-            GameObject coin = Instantiate(smallCoin, transform);
+            GameObject coin = Instantiate(smallCoin);
+            coin.transform.position = transform.position;
             Vector2 randomVel = new(Random.value * 2f - 1f, Random.value * 4f);
             coin.GetComponent<Rigidbody2D>().velocity = randomVel;
         }

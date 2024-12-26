@@ -20,6 +20,19 @@ public class Coin : MonoBehaviour
         {
             collected = true;
             GameManager.instance.money += value;
+            if (!wallet) wallet = FindObjectOfType<WalletUI>();
+            wallet.AddMoney(value);
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Player") && !collected)
+        {
+            collected = true;
+            GameManager.instance.money += value;
+            if (!wallet) wallet = FindObjectOfType<WalletUI>();
             wallet.AddMoney(value);
             Destroy(gameObject);
         }

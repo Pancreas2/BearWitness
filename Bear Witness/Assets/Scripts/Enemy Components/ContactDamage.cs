@@ -12,25 +12,36 @@ public class ContactDamage : MonoBehaviour
 
     public Collider2D collider;
 
+    public bool damageEnemies = false;
+
     private void Start()
     {
         player = FindObjectOfType<PlayerController>();
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (active && collision.collider.CompareTag("Player") && collision.otherCollider.Equals(collider))
-        {
-            player.Damage(damageAmount, transform.position.x);
-            OnDamage.Invoke();
-        }
+        CheckDamage(collision);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (active && collision.collider.CompareTag("Player") && collision.otherCollider.Equals(collider))
+        CheckDamage(collision);
+    }
+
+    private void CheckDamage(Collision2D collision)
+    {
+        if (active && collision.otherCollider.Equals(collider))
         {
-            player.Damage(damageAmount, transform.position.x);
-            OnDamage.Invoke();
+            if (collision.collider.CompareTag("Player"))
+            {
+                player.Damage(damageAmount, transform.position.x);
+                OnDamage.Invoke();
+            }
+            else if (damageEnemies)
+            {
+                collision.collider.TryGetComponent<ReceiveDamage>(out ReceiveDamage receiveDamage);
+                if (receiveDamage) receiveDamage.Damage(damageAmount, transform.position.x);
+            }
         }
     }
 

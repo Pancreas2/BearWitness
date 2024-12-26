@@ -201,6 +201,9 @@ MonoBehaviour:
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 256
+  m_WhatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 1024
   doesContactDamage: 1
   baseEnemy: {fileID: 6384632861872852396}
 --- !u!114 &6384632861872852396
@@ -287,6 +290,7 @@ MonoBehaviour:
       m_Calls: []
   active: 1
   collider: {fileID: 5097489894099378585}
+  damageEnemies: 0
 --- !u!95 &6044148262277639355
 Animator:
   serializedVersion: 5

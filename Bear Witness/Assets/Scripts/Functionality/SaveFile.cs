@@ -26,8 +26,13 @@ public class SaveFile : MonoBehaviour
     public float flashValue = 0f;
     public Image renderer;
 
+    private Dictionary<string, string> RoomIdTranscription = new();
+
     private void Awake()
     {
+        RoomIdTranscription.Add("Arktis_Save_Room", "Arktis");
+        RoomIdTranscription.Add("Shores_Village", "Fishing Village");
+
         gameManager = FindObjectOfType<GameManager>();
         file = SaveSystem.LoadPlayer(slotID);
         if (file == null)
@@ -48,8 +53,8 @@ public class SaveFile : MonoBehaviour
             Debug.Log(temporaryGameManager.previousLevel);
 
             lastSavedSceneName = temporaryGameManager.previousLevel;
-            nameText.text = temporaryGameManager.fileName;
-            location.text = lastSavedSceneName;  // find a good way to convert this
+            nameText.text = "Loop   " + temporaryGameManager.loopNumber;
+            location.text = RoomIdTranscription[lastSavedSceneName];
             time.text = TimeConverter(temporaryGameManager.fileTime);
             percent.text = temporaryGameManager.fileCompletion.ToString() + "%";
 

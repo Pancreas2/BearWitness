@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using static Gate;
 
 public class AudioManager : MonoBehaviour
 {
@@ -17,6 +18,51 @@ public class AudioManager : MonoBehaviour
     private float prevBGMusicTime;
 
     private LevelLoader levelLoader;
+
+    public string AreaMusicMatch(LevelLoader.LevelArea area)
+    {
+        string music = "Intemperance";
+
+        if (GameManager.instance.panicMode)
+        {
+            return "Fragmentation";
+        }
+
+        switch (area) {
+            case LevelLoader.LevelArea.Arktis:
+                music = "Arktis";
+                break;
+
+            case LevelLoader.LevelArea.Airship:
+                music = "Airship";
+                break;
+
+            case LevelLoader.LevelArea.Shores:
+                if (GameManager.instance.gameTime < AppearAtTime.EventMatch[AppearAtTime.Events.ShoreStorm])
+                {
+                    music = "Shores";
+                }
+                else
+                {
+                    music = "Stormy_Shores";
+                }
+                break;
+
+            case LevelLoader.LevelArea.Hollow:
+                music = "Overgrown_Hollow";
+                break;
+
+            case LevelLoader.LevelArea.Lighthouse:
+                music = "Lighthouse";
+                break;
+
+            case LevelLoader.LevelArea.ShoresVillage:
+                music = "Village";
+                break;
+        }
+
+        return music;
+    }
 
     private void Awake()
     {
@@ -52,22 +98,31 @@ public class AudioManager : MonoBehaviour
     {
         if (instance != this) return;
         levelLoader = FindObjectOfType<LevelLoader>();
-        if (currentBGMusic != levelLoader.levelMusic)
+
+        string defaultLevelMusic = AreaMusicMatch(levelLoader.area);
+        string levelMusic = defaultLevelMusic;
+
+        if (levelLoader.overrideLevelMusic != "")
+        {
+            levelMusic = levelLoader.overrideLevelMusic;
+        }
+
+        if (currentBGMusic != levelMusic)
         {
 
-            if (prevBGMusic == levelLoader.levelMusic)
+            if (prevBGMusic == levelMusic)
             {
-                KeepTimePlay(levelLoader.levelMusic, 1f);
+                KeepTimePlay(levelMusic, 1f);
             } else
             {
-                Play(levelLoader.levelMusic, 1f);
+                Play(levelMusic, 1f);
             }
 
             prevBGMusicTime = GetSoundTime(currentBGMusic);
             Stop(currentBGMusic);
 
             prevBGMusic = currentBGMusic;
-            currentBGMusic = levelLoader.levelMusic;
+            currentBGMusic = levelMusic;
         } else
         {
             prevBGMusicTime = GetSoundTime(currentBGMusic);
@@ -78,7 +133,6 @@ public class AudioManager : MonoBehaviour
     {
         Sound sound = sounds.Find(sound => sound.name == name);
         if (sound == null) return;
-        Debug.LogError("Starting " + name);
         sound.source.volume = 0;
         sound.source.Play();
         sound.source.time = startTime;
@@ -93,8 +147,6 @@ public class AudioManager : MonoBehaviour
 
     public void Stop(string name, float fadeTime = 1f)
     {
-
-        Debug.LogError("Stopping " + name);
         Sound sound = playingSounds.Find(sound => sound.name == name);
         if (sound == null) return;
         StartCoroutine(FadeOut(sound, fadeTime));
@@ -133,6 +185,7 @@ public class AudioManager : MonoBehaviour
                 sound.source.volume = i * initialVolume / 10;
                 yield return new WaitForSeconds(time / 10f);
             }
+        else yield return new WaitForEndOfFrame();
 
         playingSounds.Remove(sound);
         sound.source.Stop();

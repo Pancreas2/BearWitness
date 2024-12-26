@@ -1,29 +1,39 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.ParticleSystemJobs;
 
+
+/// <summary>
+/// Script for calculating player movement in response to inputs from PlayerMovement
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
-	[SerializeField] private float m_DefaultGravity = 1.75f;
+	[SerializeField] private float m_DefaultGravity = 1.75f;					// Default gravity
 	[SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
 	[SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
 	[SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
 	[SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
 	[SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
-	[SerializeField] private Transform m_AttackPoint;
-	[SerializeField] private Light2D lanternLight;
-	[SerializeField] private Collider2D m_CrouchDisableCollider;     // A collider that will be disabled when rolling
-	[SerializeField] private Animator animator;
+	[SerializeField] private Transform m_AttackPoint;							// A position marking the center of attacks
+	[SerializeField] private Light2D lanternLight;								// A light which appears if the lantern is held
+	[SerializeField] private Collider2D m_CrouchDisableCollider;				// A collider that will be disabled when rolling
+	[SerializeField] private Animator animator;									// Player sprite animator
+	[SerializeField] private ParticleSystem damageParticles;					// Particles that appear when player is damaged
+	[SerializeField] private GameObject lantern;								// Throwable lantern object
+	[SerializeField] public Item brokenLantern;									// Lantern items
+	[SerializeField] public Item normalLantern;
 
-	const float k_GroundedRadius = .1f; // Radius of the overlap circle to determine if grounded
-	public bool m_Grounded = true;            // Whether or not the player is grounded.
-	const float k_CeilingRadius = .1f; // Radius of the overlap circle to determine if the player can stand up
+	const float k_GroundedRadius = .1f;			// Radius of the overlap circle to determine if grounded
+	public bool m_Grounded = true;				// Whether or not the player is grounded.
+	const float k_CeilingRadius = .1f;			// Radius of the overlap circle to determine if the player can stand up
 	public Rigidbody2D m_Rigidbody2D;
-	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+	private bool m_FacingRight = true;			// For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
-	private int coyotePoints = 8;
+	private int coyotePoints = 8;				// Number of forgiveness frames for jumps
 
 	private GameManager gameManager;
 	private float attackTime = 0f;
@@ -78,11 +88,32 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
 		gameManager = FindFirstObjectByType<GameManager>();
+		CheckLantern();
+    }
+
+	public void CheckLantern()
+	{
+        // checks to see if the lantern is equipped
+        for (int i = 0; i < gameManager.currentItems.Count; i++)
+        {
+            if (gameManager.currentItems[i].name == "Lantern")
+            {
+                animator.SetBool("useLantern", true);
+                lanternLight.enabled = true;
+                break;
+            }
+            else if (i + 1 == gameManager.currentItems.Count)
+            {
+                animator.SetBool("useLantern", false);
+                lanternLight.enabled = false;
+            }
+        }
     }
 
     private void FixedUpdate()
 	{
-		if (m_Rigidbody2D.gravityScale != m_DefaultGravity)
+		// increases gravity when falling
+		if (m_Rigidbody2D.gravityScale != m_DefaultGravity && !inWater)
         {
 			if (m_Rigidbody2D.velocity.y < -0.25f)
             {
@@ -90,45 +121,27 @@ public class PlayerController : MonoBehaviour
             } 
         }
 
-
+		// makes the damage flash decay over time
 		if (whiteFlash != 0f)
         {
 			whiteFlash = Mathf.Max(whiteFlash - 10 * Time.deltaTime, 0);
 			GetComponent<SpriteRenderer>().material.SetFloat("_FlashBrightness", whiteFlash);
 		}
 
-		bool wasGrounded = m_Grounded;
-		m_Grounded = false;
+		// checks to see if the player is grounded
+		CheckGround();
 
-		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
-		for (int i = 0; i < colliders.Length; i++)
-		{
-			if (colliders[i].gameObject != gameObject)
-			{
-				m_Grounded = true;
-				if (m_Rigidbody2D.velocity.y < 0)
-				{
-					playerMovement.climbing = false;
-					if (!wasGrounded)
-                    {
-						coyotePoints = 8;
-						m_HasAirAttack = true;
-						OnLandEvent.Invoke();
-                    }
-				}
-			}
-		}
-
+		// counts the number of frames the player has spent in the air
 		if (!m_Grounded && coyotePoints > 0)
         {
 			coyotePoints--;
 			m_Grounded = true;
         }
 
+		// checks to see if the player is in water
 		CheckWater();
 
+		// VESTIGIAL (?) CLIMBING CODE
 		if (wasClimbing && !playerMovement.climbing)
         {
 			wasClimbing = false;
@@ -138,34 +151,28 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+		// PROBABLY DON'T NEED THIS
         if (!gameManager) gameManager = FindObjectOfType<GameManager>();
-
-		// check for lantern
-		for (int i = 0; i < gameManager.currentItems.Count; i++)
-		{
-			if (gameManager.currentItems[i].name == "Lantern")
-			{
-				animator.SetBool("useLantern", true);
-				lanternLight.enabled = true;
-				break;
-			}
-			else if (i + 1 == gameManager.currentItems.Count)
-			{
-				animator.SetBool("useLantern", false);
-				lanternLight.enabled = false;
-			}
-        }
 	}
 
+
+	// MOVEMENT SCRIPT FOR SWIMMING
 	public void Swim(float hmove, float vmove, bool jump)
     {
+		// left/right/up/down movement
 		bool atSurface = CheckAtSurface();
 		Vector2 targetVelocity = new Vector2(hmove * 10f, vmove * 10f);
+
 		if (atSurface)
         {
+			// makes sure you can't swim past the surface
 			targetVelocity.y = Mathf.Min(targetVelocity.y, 0f);
         }
+
 		m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+
+
+		// jumping
 		if (jump && atSurface)
         {
 			SetGravityFraction(2f / 3f);
@@ -173,6 +180,8 @@ public class PlayerController : MonoBehaviour
 			m_Grounded = false;
 		}
 
+
+		// animation
 		animator.SetInteger("swimSpeed", Mathf.RoundToInt(Mathf.Abs(m_Rigidbody2D.velocity.x) + Mathf.Abs(m_Rigidbody2D.velocity.y)));
 
 		// If the input is moving the player right and the player is facing left...
@@ -189,8 +198,10 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+	// MOVEMENT SCRIPT FOR WALKING/RUNNING/ROLLING
     public void Move(float move, bool jump, bool run, bool roll)
 	{
+		// you can't move if shielded
 		if (shielded)
         {
 			move = 0f;
@@ -198,8 +209,8 @@ public class PlayerController : MonoBehaviour
 			run = false;
 			roll = false;
         }
-		animator.SetBool("run", run);
-		// If rolling, check to see if the character can stand up
+
+		// If attempting to leave a roll, check to see if the character can stand up
 		if (!roll && animator.GetCurrentAnimatorStateInfo(0).IsName("roll"))
 		{
 			// If the character has a ceiling preventing them from standing up, keep them rolling
@@ -209,8 +220,11 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 
-		animator.SetBool("roll", roll);
+		// animations
+        animator.SetBool("run", run);
+        animator.SetBool("roll", roll);
 
+		// if move left/move right cooldowns are not refreshed, prevent player from moving in that direction
 		if ((moveLeftDelay > Time.time && move < 0) || (moveRightDelay > Time.time && move > 0))
         {
 			move = 0f;
@@ -224,6 +238,7 @@ public class PlayerController : MonoBehaviour
 			{
 				if (!m_wasCrouching)
 				{
+					// player just started rolling
 					m_wasCrouching = true;
 					OnCrouchEvent.Invoke(true);
 				}
@@ -240,6 +255,7 @@ public class PlayerController : MonoBehaviour
 
 				if (m_wasCrouching)
 				{
+					// player just stopped rolling
 					m_wasCrouching = false;
 					OnCrouchEvent.Invoke(false);
 				}
@@ -251,32 +267,38 @@ public class PlayerController : MonoBehaviour
             {
 				if (m_HasAirAttack)
                 {
-					// Move the character by finding the target velocity
+					// slows vertical speed while attacking
 					targetVelocity = new Vector2(move, Mathf.Max(m_Rigidbody2D.velocity.y, 0f));
 				} else
                 {
-					// Move the character by finding the target velocity
+					// normal movement, without momentum
 					targetVelocity = new Vector2(move * 7f, m_Rigidbody2D.velocity.y);
 				}
 			} else
             {
-				// Move the character by finding the target velocity
+                targetVelocity = new Vector2(move * 7f + m_Rigidbody2D.velocity.x / 2f, m_Rigidbody2D.velocity.y);
 
-				if (Mathf.Abs(move * 14f) < Mathf.Abs(m_Rigidbody2D.velocity.x) && Mathf.Sign(move) == Mathf.Sign(m_Rigidbody2D.velocity.x) && Mathf.Abs(move) > 0.1f)
-				{
-					targetVelocity = new Vector2(m_Rigidbody2D.velocity.x / 2f, m_Rigidbody2D.velocity.y);
-				} else
-                {
-					targetVelocity = new Vector2(move * 7f + m_Rigidbody2D.velocity.x / 2f, m_Rigidbody2D.velocity.y);
-				}
+				// REMOVING THIS TO SEE IF IT'S NECESSARY
+                // if (Mathf.Abs(move * 14f) < Mathf.Abs(m_Rigidbody2D.velocity.x) && Mathf.Sign(move) == Mathf.Sign(m_Rigidbody2D.velocity.x) && Mathf.Abs(move) > 0.1f)
+				// {
+					// if the player is moving extremely fast compared to their normal speed, slow them down gradually
+					// maybe the /2f is too fast?
+					// targetVelocity = new Vector2(m_Rigidbody2D.velocity.x / 2f, m_Rigidbody2D.velocity.y);
+				// } else
+                // {
+                    // normal movement, with momentum
+                    // targetVelocity = new Vector2(move * 7f + m_Rigidbody2D.velocity.x / 2f, m_Rigidbody2D.velocity.y);
+                // }
 			}
 
-			// And then smoothing it out and applying it to the character
+			// Smoothing it out and applying it to the player
 			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 
+			// animations
 			animator.SetInteger("xSpeed", Mathf.RoundToInt(Mathf.Abs(m_Rigidbody2D.velocity.x)));
 			animator.SetFloat("ySpeed", m_Rigidbody2D.velocity.y);
 
+			// only flip player when not attacking
 			if (!attacking)
             {
 				// If the input is moving the player right and the player is facing left...
@@ -332,7 +354,7 @@ public class PlayerController : MonoBehaviour
 			// prevent further jumps
 			coyotePoints = 0;
 
-			if (m_Grounded)
+			if (m_Grounded || wasClimbing)
 			{
 				SetGravityFraction(2f / 3f);
 				m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, Mathf.Max(0f, m_Rigidbody2D.velocity.y));
@@ -384,10 +406,16 @@ public class PlayerController : MonoBehaviour
 				animator.SetTrigger("attackEnd");
             }
 
-			invTime = Time.time + 1.0f;
+            float impactSide = Mathf.Sign(sourcePositionX - transform.position.x);
+
+            // pretty effects
+
+            invTime = Time.time + 1.0f;
 			whiteFlash = 2f;
 			gameManager.DamagePlayer(damage);
 			AudioManager.instance.TempMute(2f, 1f);
+
+            damageParticles.Play();
 
 			gameManager.GetComponent<FreezeFrame>().Freeze(Mathf.Min(0.1f * damage, 0.5f));
             CinemachineShake.instance.ShakeCamera(0.5f, 1f);
@@ -403,7 +431,6 @@ public class PlayerController : MonoBehaviour
 
 			if (doKnockback)
             {
-				float impactSide = Mathf.Sign(sourcePositionX - transform.position.x);
 				Vector2 knockbackForce = transform.up * 100f + transform.right * -250f * (impactSide);
 				m_Rigidbody2D.velocity = Vector3.zero;
 				m_Rigidbody2D.AddForce(knockbackForce);
@@ -449,7 +476,11 @@ public class PlayerController : MonoBehaviour
                 }
 				break;
 
-			case "":
+			case "Lantern":
+				attackType = 6;
+				break;
+
+			default:
 				if (button != 0)
 				{
 					attackType = 1;
@@ -556,6 +587,24 @@ public class PlayerController : MonoBehaviour
                     CinemachineShake.instance.ShakeCamera(0.2f, 2f);
                 }
 				break;
+
+			case 6:
+				GameObject lanternProjectile = Instantiate(lantern);
+				lanternProjectile.transform.position = transform.position;
+				Vector2 vel = new(transform.localScale.x * 5f, -2f);
+				lanternProjectile.GetComponent<Rigidbody2D>().velocity = vel;
+
+				int index = -1;
+				index = gameManager.tools.IndexOf(normalLantern);
+                if (index > -1) gameManager.tools[index] = brokenLantern;
+
+                index = -1;
+				index = gameManager.currentItems.IndexOf(normalLantern);
+				if (index > -1) gameManager.currentItems[index] = brokenLantern;
+
+				GameUI_Controller.instance.Reload();
+				CheckLantern();
+				break;
 		}
 	}
 
@@ -587,6 +636,33 @@ public class PlayerController : MonoBehaviour
 			animator.SetBool("inWater", false);
 			m_Rigidbody2D.gravityScale = m_DefaultGravity;
 		}
+    }
+
+	private void CheckGround()
+	{
+        bool wasGrounded = m_Grounded;
+        m_Grounded = false;
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].gameObject != gameObject)
+            {
+                m_Grounded = true;
+                if (m_Rigidbody2D.velocity.y < 0)
+                {
+                    // NOT SURE IF THIS IS STILL NECESSARY
+                    playerMovement.climbing = false;
+                    if (!wasGrounded)
+                    {
+                        // player just landed!
+                        coyotePoints = 8;
+                        m_HasAirAttack = true;
+                        OnLandEvent.Invoke();
+                    }
+                }
+            }
+        }
     }
 
 	public void SetAttackHitboxes(int value)

@@ -18,7 +18,7 @@ public class Hourglass : MonoBehaviour
     [SerializeField] Color arktisColor;
 
     private float capacity = 100f;
-    [SerializeField] private float fill = 100f;
+    private float fill = 100f;
 
     float damageFlashCooldown = 0f;
     bool isFrozen = false;
@@ -34,6 +34,7 @@ public class Hourglass : MonoBehaviour
     private void Start()
     {
         gameManager = GameManager.instance;
+        capacity = gameManager.hourglassCapacity;
         defaultTransform = transform.position;
         Refresh();
     }

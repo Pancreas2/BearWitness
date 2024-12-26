@@ -50,7 +50,7 @@ public class NPCEvolveOverLoops : MonoBehaviour
         targetAnimator.runtimeAnimatorController = stateMachine.stateMachine;
         if (setLevelMusicIfPresent != "")
         {
-            FindObjectOfType<LevelLoader>().levelMusic = setLevelMusicIfPresent;            
+            FindObjectOfType<LevelLoader>().overrideLevelMusic = setLevelMusicIfPresent;            
         }
     }
 }

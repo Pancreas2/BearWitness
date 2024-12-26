@@ -13,7 +13,7 @@ public class BossEnemy : BaseEnemy
     [SerializeField] private string bossMusic;
     [SerializeField] private Sprite bossPortrait;
 
-    [SerializeField] private UniqueEnemy uniqueEnemy;
+    [SerializeField] public UniqueEnemy uniqueEnemy;
 
     [HideInInspector] public bool fightActive = false;
 

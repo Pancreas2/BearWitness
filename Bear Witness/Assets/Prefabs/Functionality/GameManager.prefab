@@ -55,16 +55,16 @@ MonoBehaviour:
   previousLevel: Start
   playerMaxHealth: 5
   playerCurrentHealth: 5
-  hourglassFill: 300
-  hourglassCapacity: 300
+  hourglassFill: 600
+  hourglassCapacity: 600
+  panicMode: 0
   inArktis: 1
   currentItems:
   - {fileID: 11400000, guid: fe15ec2c3f29daa49a770bceb3b50280, type: 2}
   - {fileID: 11400000, guid: fe15ec2c3f29daa49a770bceb3b50280, type: 2}
   - {fileID: 11400000, guid: fe15ec2c3f29daa49a770bceb3b50280, type: 2}
   tools: []
-  items:
-  - {fileID: 11400000, guid: 429165caa3f2e8d49b9337965678709f, type: 2}
+  items: []
   nullItem: {fileID: 11400000, guid: fe15ec2c3f29daa49a770bceb3b50280, type: 2}
   playedCutscenes: []
   playedLines: []

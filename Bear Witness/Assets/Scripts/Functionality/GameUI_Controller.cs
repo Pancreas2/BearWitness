@@ -52,7 +52,7 @@ public class GameUI_Controller : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            if (gameManager.currentItems[i] != null) DisplayHeldItem(gameManager.currentItems[i], i);
+            if (GameManager.instance.currentItems[i] != null) DisplayHeldItem(GameManager.instance.currentItems[i], i);
         }
     }
 

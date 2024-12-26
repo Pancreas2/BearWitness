@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6406002078155273551
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11323e4bea4ce174198145d252f07113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: d0b0bbd11ddecea48b84f6a393888270, type: 2}
+  price: 0
 --- !u!1102 &-6284206639414469044
 AnimatorState:
   serializedVersion: 6
@@ -38,9 +52,12 @@ AnimatorState:
   m_Name: mid_fight_dialogue
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
+  m_Transitions:
+  - {fileID: 464691730373494533}
   m_StateMachineBehaviours:
   - {fileID: 1274570650203614302}
+  - {fileID: 5619193081648770213}
+  - {fileID: -6406002078155273551}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -225,6 +242,7 @@ MonoBehaviour:
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+  isCall: 0
 --- !u!1101 &-1463971352705973399
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -413,6 +431,31 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!1101 &464691730373494533
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 0}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 1
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &470374887864962212
 AnimatorState:
   serializedVersion: 6
@@ -539,7 +582,7 @@ MonoBehaviour:
       conditions: []
       speaker: {fileID: 11400000, guid: cdbcc7e9a7a785c43aead7c7a321f108, type: 2}
       emotion: 
-      sentenceText: 'Phew... you''re a tough one. '
+      sentenceText: Congrats! That's all for now.
       isChoice: 0
       choices: []
     - lineId: 
@@ -548,7 +591,7 @@ MonoBehaviour:
       conditions: []
       speaker: {fileID: 11400000, guid: cdbcc7e9a7a785c43aead7c7a321f108, type: 2}
       emotion: 
-      sentenceText: What brought you to trespass on my ship, anyway?
+      sentenceText: Have some experimental weapons.
       isChoice: 0
       choices: []
     - lineId: 
@@ -556,9 +599,9 @@ MonoBehaviour:
       hasCondition: 0
       conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
-      emotion: worried
-      sentenceText: 
-      isChoice: 1
+      emotion: happy
+      sentenceText: Yippee!
+      isChoice: 0
       choices:
       - text: A flight attendant smuggled me onboard.
         hasCondition: 1
@@ -582,9 +625,10 @@ MonoBehaviour:
           invert: 0
           lineId: fa_intimidate
           item: {fileID: 0}
-  lastState: 0
+  lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+  isCall: 0
 --- !u!1102 &2315619609510988583
 AnimatorState:
   serializedVersion: 6
@@ -786,6 +830,20 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &5619193081648770213
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11323e4bea4ce174198145d252f07113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 5109cc27c245e15449ec433aa1985b75, type: 2}
+  price: 0
 --- !u!1101 &7566407451341636713
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

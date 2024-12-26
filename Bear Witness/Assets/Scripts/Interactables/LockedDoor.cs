@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class LockedDoor : Door
 {
-    [SerializeField] private int doorId;
+    [SerializeField] private Gate.Gates doorName;
     private GameManager gameManager;
-    [SerializeField] private Collider2D collider;
+    [SerializeField] private GameObject disableOnUnlock;
+    bool active = false;
 
     private void Start()
     {
@@ -15,14 +16,15 @@ public class LockedDoor : Door
 
     private void Update()
     {
+
+        active = gameManager.doorStates[Gate.GateMatch[doorName]];
+
         if (active)
         {
-            if (collider)
+            if (disableOnUnlock)
             {
-                collider.enabled = false;
+                disableOnUnlock.SetActive(false);
             }
         }
-
-        active = gameManager.doorStates[doorId];
     }
 }

@@ -18,6 +18,8 @@ public class DialogueInteractable : Interactable
     [SerializeField] private float talkOffset = 0;
     [SerializeField] private bool playerFacesRight = false;
 
+    private bool active = true;
+
     private void Awake()
     {
         dialogueManager = FindObjectOfType<DialogueManager>();
@@ -26,7 +28,7 @@ public class DialogueInteractable : Interactable
 
     override public void OnInteract()
     {
-        if (dialogueStateMachine == null || dialogueStateMachine.GetCurrentAnimatorStateInfo(0).IsName("nothing"))
+        if (active && (dialogueStateMachine == null || dialogueStateMachine.GetCurrentAnimatorStateInfo(0).IsName("nothing")))
         {
             if (dialogueStateMachine != null)
                 dialogueStateMachine.SetTrigger("StartDialogue");
@@ -40,5 +42,12 @@ public class DialogueInteractable : Interactable
             dialogueManager.OnDialogueEnd = OnDialogueEnd;
             OnDialogueStart.Invoke();
         }
+    }
+
+    public void OnDisable()
+    {
+        active = false;
+        // the animator here is the hover text animator
+        base.animator.gameObject.SetActive(false);
     }
 }

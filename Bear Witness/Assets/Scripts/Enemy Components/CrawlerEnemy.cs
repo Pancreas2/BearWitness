@@ -10,6 +10,7 @@ public class CrawlerEnemy : MonoBehaviour
     [SerializeField] private Transform turnCheckPoint;
     [SerializeField] private Transform ledgeCheckPoint;
     [SerializeField] private LayerMask m_WhatIsGround;
+    [SerializeField] private LayerMask m_WhatIsEnemy;
     [SerializeField] private bool doesContactDamage = false;
     private bool hiding = false;
     [SerializeField] private BaseEnemy baseEnemy;
@@ -34,7 +35,8 @@ public class CrawlerEnemy : MonoBehaviour
             m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, 0.05f);
 
             Collider2D[] wallColliders = Physics2D.OverlapCircleAll(turnCheckPoint.position, 0.2f, m_WhatIsGround);
-            if (wallColliders.Length > 0)
+            Collider2D[] enemyColliders = Physics2D.OverlapCircleAll(turnCheckPoint.position, 0.2f, m_WhatIsEnemy);
+            if (wallColliders.Length > 0 || enemyColliders.Length > 1) // Mollusks have one hitbox which will always be inside this range
             {
                 facingDirection *= -1;
                 Vector3 theScale = transform.localScale;

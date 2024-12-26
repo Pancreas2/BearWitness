@@ -6,12 +6,14 @@ public class Lever : ReceiveDamage
 {
     private GameManager gameManager;
     [SerializeField] private bool oneUse;
-    [SerializeField] private int doorID;
+    [SerializeField] private Gate.Gates doorName;
     [SerializeField] private Animator animator;
     private bool state;
+    private int doorID;
 
     void Start()
     {
+        doorID = Gate.GateMatch[doorName];
         gameManager = FindObjectOfType<GameManager>();
         state = gameManager.doorStates[doorID];
         animator.SetBool("active", state);

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Gate : MonoBehaviour
 {
-    public int gateID;
+    public Gates gateName;
+    private int gateID;
     [SerializeField] private float openingSize = 1f;
     private float closedPoint = 0f;
     private GameManager gameManager;
@@ -13,8 +14,40 @@ public class Gate : MonoBehaviour
     [SerializeField] private bool forceClose;
     [SerializeField] private float gateRate = 0.03f;
 
+    public enum Gates
+    {
+        Lighthouse,
+        LighthouseAirship,
+        ArmouredMollusk,
+        ShoresLedge,
+        ShoresMidShortcut,
+        CrabArena,
+        Library,
+        ShoresLighthouseShortcut,
+        CrabShortcut,
+        CircleSigilDoor,
+        CircleSigil
+    }
+
+    public static readonly Dictionary<Gates, int> GateMatch = new Dictionary<Gates, int>
+    {
+        { Gates.Lighthouse, 1 },
+        { Gates.ShoresLedge, 2 },
+        { Gates.ShoresMidShortcut, 3 },
+        { Gates.CrabArena, 4 },
+        { Gates.ArmouredMollusk, 5 },
+        { Gates.LighthouseAirship, 6 },
+        { Gates.ShoresLighthouseShortcut, 7 },
+        { Gates.CrabShortcut, 8 },
+        { Gates.CircleSigilDoor, 9 },
+        { Gates.CircleSigil, 10 }
+    };
+
+
     private void Start()
     {
+        gateID = GateMatch[gateName];
+
         closedPoint = transform.localPosition.y;
         gameManager = FindObjectOfType<GameManager>();
         if (gameManager.doorStates[gateID] || forceOpen)

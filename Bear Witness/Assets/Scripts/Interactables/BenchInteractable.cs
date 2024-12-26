@@ -39,6 +39,8 @@ public class BenchInteractable : Interactable
     public void Exit()
     {
         GameUI_Controller.instance.ShowAll();
+        player.ClearInputs();
+        player.GetComponent<PlayerController>().CheckLantern();
         player.frozen = false;
         gameManager.pauseGameTime = false;
         playerAnim.SetBool("sitting", false);

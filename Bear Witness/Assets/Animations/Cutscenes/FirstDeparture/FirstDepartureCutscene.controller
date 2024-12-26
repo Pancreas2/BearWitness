@@ -441,13 +441,23 @@ MonoBehaviour:
       isChoice: 1
       choices:
       - text: How much time will I have?
-        hasCondition: 0
+        hasCondition: 1
         choiceID: 1
-        conditions: []
+        conditions:
+        - conditionType: 1
+          conditionSet: 0
+          invert: 1
+          lineId: arcas_exped_how_long
+          item: {fileID: 0}
       - text: Why are you sending <i>me</i>?
-        hasCondition: 0
+        hasCondition: 1
         choiceID: 2
-        conditions: []
+        conditions:
+        - conditionType: 1
+          conditionSet: 0
+          invert: 1
+          lineId: arcas_exped_why_me
+          item: {fileID: 0}
       - text: I'm ready to go.
         hasCondition: 1
         choiceID: 0
@@ -801,7 +811,7 @@ MonoBehaviour:
   dialogueSegment:
     elements:
     - lineId: arcas_exped_why_me
-      singleUse: 0
+      singleUse: 1
       hasCondition: 0
       conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
@@ -862,7 +872,7 @@ MonoBehaviour:
       conditions: []
       speaker: {fileID: 11400000, guid: 98cad2525404fee43b5ebd80ce3deab7, type: 2}
       emotion: neutral
-      sentenceText: 'Well, most of the time, we can keep you there for fifteen minutes. '
+      sentenceText: Normally, the best we can do is 10 minutes.
       isChoice: 0
       choices: []
     - lineId: 

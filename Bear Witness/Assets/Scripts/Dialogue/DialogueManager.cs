@@ -258,8 +258,12 @@ public class DialogueManager : MonoBehaviour
         gameManager.pauseGameTime = false;
         animator.SetBool("IsOpen", false);
         dialogueRunning = false;
+
+        PlayerMovement playerM = FindObjectOfType<PlayerMovement>();
+        playerM.ClearInputs();
+
         if (!currentDialogueStateMachine)
-            FindObjectOfType<PlayerMovement>().frozen = false;
+            playerM.frozen = false;
         if (OnDialogueEnd != null)
             OnDialogueEnd.Invoke();
     }

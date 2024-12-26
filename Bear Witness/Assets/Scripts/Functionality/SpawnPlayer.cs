@@ -27,7 +27,7 @@ public class SpawnPlayer : MonoBehaviour
 
         }
 
-        if (loadingZone.room == gameManager.previousLevel && spawnOnLoad)
+        if (loadingZone && loadingZone.room == gameManager.previousLevel && spawnOnLoad)
         {
             AssignAsSpawn();
             Spawn();

@@ -56,6 +56,8 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = false;
         // deletes save data! intentional
         GameManager gameManager = GameManager.instance;
+        GameUI_Controller guic = GameUI_Controller.instance;
+        Destroy(guic.gameObject);
         Destroy(gameManager.gameObject);
         SceneManager.LoadScene("Start");
     }

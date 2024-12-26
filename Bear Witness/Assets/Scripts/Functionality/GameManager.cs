@@ -5,11 +5,17 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Cinemachine;
 using System.Dynamic;
+using System;
 
 public class GameManager : MonoBehaviour
 {
 
     public static GameManager instance;
+
+    public readonly static List<Gate.Gates> resetGatesOnLoop = new List<Gate.Gates> { 
+        Gate.Gates.CircleSigilDoor 
+    };
+
     void Awake()
     {
         if (instance == null)
@@ -139,8 +145,7 @@ public class GameManager : MonoBehaviour
         guic.hourglass.DamageFlash(damage);
         if (panicMode)
         {
-            AudioManager.instance.Stop("Fragmentation", fadeTime: 0f);
-            AudioManager.instance.Play("Fragmentation", startTime: Mathf.Min(panicTime, panicTime - hourglassFill), fadeTime: 0.25f, delay: 0.25f);
+            ResetPanicAudio();
         }
     }
 
@@ -152,7 +157,7 @@ public class GameManager : MonoBehaviour
         {
             panicMode = false;
             AudioManager.instance.Stop("Fragmentation", 3);
-            string replaceSong = FindObjectOfType<LevelLoader>().levelMusic;
+            string replaceSong = AudioManager.instance.AreaMusicMatch(FindObjectOfType<LevelLoader>().area);
             AudioManager.instance.Play(replaceSong, fadeTime: 3);
         }
     }
@@ -160,19 +165,28 @@ public class GameManager : MonoBehaviour
     public void StartRun()
     {
         inArktis = false;
+        foreach (Gate.Gates gate in resetGatesOnLoop)
+        {
+            doorStates[Gate.GateMatch[gate]] = false;
+        }
     }
 
     private void Update()
     {
         if (!pauseGameTime || panicMode)
         {
-            gameTime += Time.deltaTime;
-
             if (!inArktis)
             {
-                hourglassFill -= Time.deltaTime;
+                // I'm using this instead of Time.deltaTime to account for scene changes and lag
+                gameTime += (Time.realtimeSinceStartup - lastUpdateTime);
+                hourglassFill -= (Time.realtimeSinceStartup - lastUpdateTime);
+            } else
+            {
+                fileTime += (Time.realtimeSinceStartup - lastUpdateTime);
             }
         }
+
+        lastUpdateTime = Time.realtimeSinceStartup;
 
         if (hourglassFill < panicTime && !panicMode)
         {
@@ -191,11 +205,25 @@ public class GameManager : MonoBehaviour
             }
 
             panicMode = false;
+            fileTime += gameTime;
+            gameTime = 0f;
             inArktis = true;
             hourglassFill = hourglassCapacity;
             loopNumber++;
             ChangeScene("Arktis_Save_Room");
+
+            PlayerController player = FindObjectOfType<PlayerController>();
+            if (tools.Contains(player.brokenLantern)) {
+                int index = tools.IndexOf(player.brokenLantern);
+                tools[index] = player.normalLantern;
+            }
         }
+    }
+
+    public void ResetPanicAudio()
+    {
+        AudioManager.instance.Stop("Fragmentation", fadeTime: 0f);
+        AudioManager.instance.Play("Fragmentation", startTime: Mathf.Min(panicTime, panicTime - hourglassFill), fadeTime: 0.25f, delay: 0.25f);
     }
 
     public int fileNumber;
@@ -204,6 +232,7 @@ public class GameManager : MonoBehaviour
     public int fileCompletion;
     public int loopNumber = 0;
 
+    private float lastUpdateTime = 0f;
     public bool pauseGameTime = false;
     public float gameTime;
 
@@ -211,9 +240,9 @@ public class GameManager : MonoBehaviour
     public int playerMaxHealth = 5;
     public int playerCurrentHealth = 5;
 
-    public float hourglassFill = 900f;
-    public float hourglassCapacity = 900f;
-    private bool panicMode = false;
+    public float hourglassFill = 90f; // normally 900
+    public float hourglassCapacity = 90f;
+    public bool panicMode = false;
 
     public const float panicTime = 76.8f;
 

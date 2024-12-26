@@ -13,6 +13,8 @@ public class ArktisExitDoor : Door
     [SerializeField] private List<Sprite> runes;
     [SerializeField] private Image runeDisplay;
 
+    [SerializeField] private Item nullTool;
+
     public override void ChangeRooms()
     {
         int num = GameManager.instance.loopNumber % 9;
@@ -29,9 +31,18 @@ public class ArktisExitDoor : Door
         GameManager.instance.StartRun();
         if (GameManager.instance.loopNumber == 0)
         {
-            GameManager.instance.tools.Remove(icePick);
+            int index = -1;
+            index = GameManager.instance.tools.IndexOf(icePick);
+            if (index > -1) GameManager.instance.tools[index] = nullTool;
+
+            index = -1;
+            index = GameManager.instance.currentItems.IndexOf(icePick);
+            if (index > -1) GameManager.instance.currentItems[index] = nullTool;
+
+            GameUI_Controller.instance.Reload();
         }
-        GameManager.instance.hourglassFill = 900f;
+        GameManager.instance.hourglassFill = GameManager.instance.hourglassCapacity;
         FindObjectOfType<LevelLoader>().LoadNextLevel(base.destination);
     }
 }
+

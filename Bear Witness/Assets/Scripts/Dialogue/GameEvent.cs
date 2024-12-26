@@ -11,7 +11,8 @@ public class GameEvent : StateMachineBehaviour
     {
         RemoveItem,
         OpenDoor,
-        DestroySelf
+        DestroySelf,
+        DestroyDialogue
     }
 
     public EventType eventType;
@@ -20,7 +21,7 @@ public class GameEvent : StateMachineBehaviour
     public Item targetItem;
 
     [Header("Open Door")]
-    public int doorId;
+    public Gate.Gates doorName;
 
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -42,11 +43,15 @@ public class GameEvent : StateMachineBehaviour
                 break;
 
             case EventType.OpenDoor:
-                gameManager.doorStates[doorId] = true;
+                gameManager.doorStates[Gate.GateMatch[doorName]] = true;
                 break;
 
             case EventType.DestroySelf:
                 animator.gameObject.SetActive(false);
+                break;
+
+            case EventType.DestroyDialogue:
+                animator.gameObject.GetComponent<DialogueInteractable>().enabled = false;
                 break;
         }
     }

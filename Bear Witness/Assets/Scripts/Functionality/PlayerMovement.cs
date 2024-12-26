@@ -180,12 +180,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!wasFrozen)
             {
-                wasFrozen = true;
-                horizontalMove = 0;
-                run = false;
-                roll = false;
-                attacking = false;
-                jump = false;
+                ClearInputs();
             }
             if (cutsceneMove)
             {
@@ -222,5 +217,15 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForFixedUpdate();
         controller.ReduceUpwardMovement();
+    }
+
+    public void ClearInputs()
+    {
+        wasFrozen = true;
+        horizontalMove = 0;
+        run = false;
+        roll = false;
+        attacking = false;
+        jump = false;
     }
 }

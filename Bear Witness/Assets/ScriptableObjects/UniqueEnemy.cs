@@ -32,4 +32,11 @@ public class UniqueEnemy : MonoBehaviour
         int index = (int)name;
         gameManager.uniqueEnemies[index] = true;
     }
+
+    public bool IsAlive()
+    {
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        int index = (int)name;
+        return !gameManager.uniqueEnemies[index];
+    }
 }

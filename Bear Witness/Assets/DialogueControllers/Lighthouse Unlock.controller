@@ -128,6 +128,7 @@ MonoBehaviour:
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
+  isCall: 0
 --- !u!1107 &-2823013010410786051
 AnimatorStateMachine:
   serializedVersion: 6
@@ -170,7 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventType: 1
   targetItem: {fileID: 0}
-  doorId: 1
+  doorId: 2
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0

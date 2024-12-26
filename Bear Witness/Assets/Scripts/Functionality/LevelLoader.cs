@@ -7,15 +7,17 @@ public class LevelLoader : MonoBehaviour
 {
     public Animator transition;
     public float transitionTime = 0.5f;
-    public string levelMusic;
+    public string overrideLevelMusic;
     [SerializeField] private bool doStartCutscene = true;
     public enum LevelArea
     {
         Arktis,
         Shores,
+        ShoresVillage,
         Lighthouse,
         Hollow,
-        Airship
+        Airship,
+        Ruins
     }
 
     public LevelArea area;
