@@ -13,9 +13,14 @@ public class Lever : ReceiveDamage
 
     void Start()
     {
-        doorID = Gate.GateMatch[doorName];
         gameManager = FindObjectOfType<GameManager>();
-        state = gameManager.doorStates[doorID];
+
+        if (doorName != Gate.Gates.None)
+        {
+            doorID = Gate.GateMatch[doorName];
+            state = gameManager.doorStates[doorID];
+        }
+
         animator.SetBool("active", state);
     }
 
@@ -24,13 +29,15 @@ public class Lever : ReceiveDamage
         if (!state)
         {
             state = true;
-            gameManager.doorStates[doorID] = true;
+            if (doorName != Gate.Gates.None)
+                gameManager.doorStates[doorID] = true;
             animator.SetBool("active", true);
             Debug.Log(true);
         } else if (!oneUse)
         {
             state = false;
-            gameManager.doorStates[doorID] = false;
+            if (doorName != Gate.Gates.None)
+                gameManager.doorStates[doorID] = false;
             animator.SetBool("active", false);
         }
     }

@@ -4,36 +4,37 @@ using UnityEngine;
 
 public class ParallaxScroller : MonoBehaviour
 {
-    private float startposX;
-    private float startposY;
-    public bool scrollX = true;
-    public float centerPointX;
-    public float parallaxFactorX;
-    public bool scrollY;
-    public float centerPointY;
-    public float parallaxFactorY;
-    public GameObject cam;
+    private Vector2 length = new(1f, 1f), startpos;
+    public GameObject camera;
+    public Vector2 parallax;
+    public bool loopX, loopY;
 
-    void Start()
+    private void Start()
     {
-        startposX = transform.position.x;
-        startposY = transform.position.y;
+        startpos = transform.position;
+        TryGetComponent<SpriteRenderer>(out SpriteRenderer renderer);
+        if (renderer)
+            length = renderer.bounds.size;
     }
 
-    void Update()
+    private void Update()
     {
-        if (scrollX)
+        Vector2 temp = camera.transform.position * (new Vector2(1, 1) - parallax);
+        Vector2 distance = (camera.transform.position * parallax);
+
+        transform.position = startpos + distance;
+
+        if (loopX)
         {
-            float distance = (cam.transform.position.x - centerPointX) * parallaxFactorX;
-            Vector3 newPosition = new Vector3(startposX + distance, transform.position.y);
-            transform.position = newPosition;
+            if (temp.x > (startpos + length).x) startpos.x += length.x;
+            else if (temp.x < (startpos - length).x) startpos.x -= length.x;
         }
 
-        if (scrollY)
+        if (loopY)
         {
-            float distance = (cam.transform.position.y - centerPointY) * parallaxFactorY;
-            Vector3 newPosition = new Vector3(transform.position.x, startposY + distance);
-            transform.position = newPosition;
+            if (temp.y > (startpos + length).y) startpos.y += length.y;
+            else if (temp.y < (startpos - length).y) startpos.y -= length.y;
         }
+
     }
 }

@@ -26,7 +26,7 @@ TagManager:
   - Post Processing
   - Coin
   - HammerHittable
-  - 
+  - Blur
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: DeepBackground
+    uniqueID: 800048881
+    locked: 0
   - name: Background
     uniqueID: 139590735
     locked: 0
@@ -51,4 +54,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 2378166813
     locked: 0

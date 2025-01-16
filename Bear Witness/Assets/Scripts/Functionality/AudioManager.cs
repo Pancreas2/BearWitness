@@ -96,24 +96,37 @@ public class AudioManager : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
+        ReloadMusic();
+    }
+
+    public void ReloadMusic(string overrideMusic = "")
+    {
         if (instance != this) return;
         levelLoader = FindObjectOfType<LevelLoader>();
 
         string defaultLevelMusic = AreaMusicMatch(levelLoader.area);
         string levelMusic = defaultLevelMusic;
 
+        // for when one room has different music, but is still in the same area
         if (levelLoader.overrideLevelMusic != "")
         {
             levelMusic = levelLoader.overrideLevelMusic;
         }
 
+        // for overriding music during gameplay (e.g. Shores Storm)
+        if (overrideMusic != "")
+        {
+            levelMusic = overrideMusic;
+        }
+
         if (currentBGMusic != levelMusic)
         {
 
-            if (prevBGMusic == levelMusic)
+            if (prevBGMusic == levelMusic && prevBGMusic != "Fragmentation")
             {
                 KeepTimePlay(levelMusic, 1f);
-            } else
+            }
+            else
             {
                 Play(levelMusic, 1f);
             }
@@ -123,7 +136,8 @@ public class AudioManager : MonoBehaviour
 
             prevBGMusic = currentBGMusic;
             currentBGMusic = levelMusic;
-        } else
+        }
+        else
         {
             prevBGMusicTime = GetSoundTime(currentBGMusic);
         }
@@ -209,7 +223,6 @@ public class AudioManager : MonoBehaviour
     private float GetSoundTime(string name)
     {
         Sound sound = sounds.Find(sound => sound.name == name);
-        Debug.Log(sound);
         if (sound == null) return 0f;
         else return sound.source.time;
     }

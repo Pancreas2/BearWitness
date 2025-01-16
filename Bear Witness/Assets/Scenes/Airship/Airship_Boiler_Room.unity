@@ -7834,7 +7834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3649223491785412620, guid: 06b9ba8e956f83c4e93b03697080d9b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.9146667
+      value: 2.9107177
       objectReference: {fileID: 0}
     - target: {fileID: 3649223491785412620, guid: 06b9ba8e956f83c4e93b03697080d9b7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9032,7 +9032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7857786011467424883, guid: b72da7dcc3855964ead7db92f475ce0c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.1317177
+      value: -3.131718
       objectReference: {fileID: 0}
     - target: {fileID: 7857786011467424883, guid: b72da7dcc3855964ead7db92f475ce0c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13885,7 +13885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e6551de6b2351343a88826b4983c3fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gateName: 0
+  gateName: 4
   openingSize: 1.5
   forceOpen: 1
   forceClose: 0
@@ -15718,6 +15718,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1705388109780934445, guid: a2580a6073e59ed4289f1723afe2ae01, type: 3}
+      propertyPath: gateName
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4538352962001168973, guid: a2580a6073e59ed4289f1723afe2ae01, type: 3}
       propertyPath: m_Name
       value: Captain_Carlotta

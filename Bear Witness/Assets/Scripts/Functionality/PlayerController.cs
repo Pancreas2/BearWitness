@@ -420,14 +420,7 @@ public class PlayerController : MonoBehaviour
 			gameManager.GetComponent<FreezeFrame>().Freeze(Mathf.Min(0.1f * damage, 0.5f));
             CinemachineShake.instance.ShakeCamera(0.5f, 1f);
 
-            if (gameManager.playerCurrentHealth <= 0)
-			{
-				Perish();
-				return;
-			} else
-            {
-				playerMovement.PlayAnimation("hurt");
-            }
+            playerMovement.PlayAnimation("hurt");
 
 			if (doKnockback)
             {
@@ -455,7 +448,6 @@ public class PlayerController : MonoBehaviour
 		animator.ResetTrigger("attackEnd");
 		attackTime = Time.time + 0.15f;
 		Item tool = gameManager.currentItems[button];
-		Debug.Log(tool.name);
 		switch (tool.name)
 		{
 			case "Ice Pick":

@@ -43,6 +43,8 @@ public class DialogueManager : MonoBehaviour
     private int shopPageIndex;
     [SerializeField] private List<ShopDisplay> shopDisplays = new();
 
+    private GameObject lastSelected;
+
     void Start()
     {
         sentences = new Queue<DialogueSentence>();
@@ -84,11 +86,29 @@ public class DialogueManager : MonoBehaviour
 
             DisplayNextSentence();
         }
-    }
 
-    private void LateUpdate()
-    {
-        faceDisplay.SetNativeSize();
+        if (dialogueRunning)
+        {
+            // code that keeps the cursor on one of the dialogue options
+
+            if (currentSentence.isChoice)
+            {
+                bool choiceSelected = false;
+                foreach (TextMeshProUGUI choice in choices)
+                {
+                    if (choice.gameObject == lastSelected) choiceSelected = true;
+                }
+
+                Debug.Log(lastSelected);
+
+                if (!choiceSelected)
+                {
+                    EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
+                }
+            }
+
+            lastSelected = EventSystem.current.currentSelectedGameObject;
+        }
     }
 
     public void StartDialogue(Dialogue dialogue)
@@ -194,6 +214,9 @@ public class DialogueManager : MonoBehaviour
                     choices[i - j].gameObject.SetActive(false);
                 }
             }
+
+            // auto-selects the top choice
+            lastSelected = choices[0].gameObject;
         }
         else
         {

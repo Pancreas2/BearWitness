@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerData
 {
-    public int playerMaxHealth = 5;
+    public float playerMaxHealth = 5;
     public List<Item> currentItems;
     public List<Item> inventory;
     public int inventoryNextSpace = 0;

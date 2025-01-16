@@ -53,11 +53,12 @@ MonoBehaviour:
   pauseGameTime: 0
   gameTime: 0
   previousLevel: Start
-  playerMaxHealth: 5
-  playerCurrentHealth: 5
+  playerMaxHealth: 10
+  playerCurrentHealth: 10
   hourglassFill: 600
   hourglassCapacity: 600
   panicMode: 0
+  hourglassBroken: 0
   inArktis: 1
   currentItems:
   - {fileID: 11400000, guid: fe15ec2c3f29daa49a770bceb3b50280, type: 2}

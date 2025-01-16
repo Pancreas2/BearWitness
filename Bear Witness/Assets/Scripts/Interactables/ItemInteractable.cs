@@ -28,8 +28,6 @@ public class ItemInteractable : Interactable
     }
     override public void OnInteract()
     {
-
-        Debug.Log("ksjfhk");
         gameManager.PickupItem(item);
         if (renewsOnSave)
         {

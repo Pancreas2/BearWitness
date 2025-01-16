@@ -12,8 +12,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
-    public readonly static List<Gate.Gates> resetGatesOnLoop = new List<Gate.Gates> { 
-        Gate.Gates.CircleSigilDoor 
+    public readonly static List<Gate.Gates> keepGatesOnLoop = new List<Gate.Gates> { 
+        Gate.Gates.CircleSigil 
     };
 
     void Awake()
@@ -141,11 +141,19 @@ public class GameManager : MonoBehaviour
 
     public void DamagePlayer(float damage)
     {
-        hourglassFill -= damage * 10f;
+        playerCurrentHealth -= damage;
         guic.hourglass.DamageFlash(damage);
-        if (panicMode)
+
+        if (playerCurrentHealth <= 0)
         {
-            ResetPanicAudio();
+            guic.hourglass.SetBroken(true);
+
+            if (panicMode)
+            {
+                EndRun();
+            }
+
+            timeMultiplier /= 1.5f;
         }
     }
 
@@ -153,21 +161,75 @@ public class GameManager : MonoBehaviour
     {
         hourglassFill = Mathf.Min(hourglassCapacity, hourglassFill + heal);
 
-        if (panicMode && hourglassFill > panicTime)
+        if (panicMode && hourglassFill > panicTime / timeMultiplier)
         {
             panicMode = false;
-            AudioManager.instance.Stop("Fragmentation", 3);
-            string replaceSong = AudioManager.instance.AreaMusicMatch(FindObjectOfType<LevelLoader>().area);
-            AudioManager.instance.Play(replaceSong, fadeTime: 3);
+            AudioManager.instance.ReloadMusic();
         }
     }
 
     public void StartRun()
     {
-        inArktis = false;
-        foreach (Gate.Gates gate in resetGatesOnLoop)
+        if (!guic) guic = GameUI_Controller.instance;
+
+        if (playedCutscenes.Contains("enter_shores"))
         {
-            doorStates[Gate.GateMatch[gate]] = false;
+            playedCutscenes.Remove("enter_shores");
+        }
+
+        timeMultiplier = 1f;
+        inArktis = false;
+        for (int i = 0; i < doorStates.Count; i++)
+        {
+            bool kept = false;
+            foreach (Gate.Gates gate in keepGatesOnLoop)
+            {
+                if (i == Gate.GateMatch[gate])
+                {
+                    kept = true;
+                }
+            }
+
+            if (!kept)
+            {
+                doorStates[i] = false;
+            }
+        }
+
+        for (int i = 0; i < 20; i++)
+        {
+            uniqueEnemies[i] = false;
+        }
+
+        guic.hourglass.Refresh();
+    }
+
+    public void EndRun()
+    {
+        Debug.Log("Run Ends Here!!");
+
+        for (int i = 0; i < npcMemory.Count; i++)
+        {
+            npcMemory[i].spokenTo = false;
+        }
+
+        panicMode = false;
+        fileTime += gameTime;
+        gameTime = 0f;
+        inArktis = true;
+        hourglassFill = hourglassCapacity;
+        loopNumber++;
+
+        playerCurrentHealth = playerMaxHealth;
+        guic.hourglass.SetBroken(false);
+
+        ChangeScene("Arktis_Save_Room");
+
+        PlayerController player = FindObjectOfType<PlayerController>();
+        if (tools.Contains(player.brokenLantern))
+        {
+            int index = tools.IndexOf(player.brokenLantern);
+            tools[index] = player.normalLantern;
         }
     }
 
@@ -179,7 +241,7 @@ public class GameManager : MonoBehaviour
             {
                 // I'm using this instead of Time.deltaTime to account for scene changes and lag
                 gameTime += (Time.realtimeSinceStartup - lastUpdateTime);
-                hourglassFill -= (Time.realtimeSinceStartup - lastUpdateTime);
+                hourglassFill -= (Time.realtimeSinceStartup - lastUpdateTime) / timeMultiplier;
             } else
             {
                 fileTime += (Time.realtimeSinceStartup - lastUpdateTime);
@@ -188,42 +250,18 @@ public class GameManager : MonoBehaviour
 
         lastUpdateTime = Time.realtimeSinceStartup;
 
-        if (hourglassFill < panicTime && !panicMode)
+        // starts panic mode at T-76.8 s
+        // if timeMultiplier < 1, i.e. if hourglass is broken, start it earlier
+        if (hourglassFill < panicTime / timeMultiplier && !panicMode)
         {
             panicMode = true;
-            AudioManager.instance.StopAll(3);
-            AudioManager.instance.Play("Fragmentation", fadeTime: 4);
+            AudioManager.instance.ReloadMusic("Fragmentation");
         }
 
         if (hourglassFill < 0f)
         {
-            Debug.Log("Run Ends Here!!");
-
-            for (int i = 0; i < npcMemory.Count; i++)
-            {
-                npcMemory[i].spokenTo = false;
-            }
-
-            panicMode = false;
-            fileTime += gameTime;
-            gameTime = 0f;
-            inArktis = true;
-            hourglassFill = hourglassCapacity;
-            loopNumber++;
-            ChangeScene("Arktis_Save_Room");
-
-            PlayerController player = FindObjectOfType<PlayerController>();
-            if (tools.Contains(player.brokenLantern)) {
-                int index = tools.IndexOf(player.brokenLantern);
-                tools[index] = player.normalLantern;
-            }
+            EndRun();
         }
-    }
-
-    public void ResetPanicAudio()
-    {
-        AudioManager.instance.Stop("Fragmentation", fadeTime: 0f);
-        AudioManager.instance.Play("Fragmentation", startTime: Mathf.Min(panicTime, panicTime - hourglassFill), fadeTime: 0.25f, delay: 0.25f);
     }
 
     public int fileNumber;
@@ -237,12 +275,15 @@ public class GameManager : MonoBehaviour
     public float gameTime;
 
     public string previousLevel;
-    public int playerMaxHealth = 5;
-    public int playerCurrentHealth = 5;
+    public float playerMaxHealth = 10;
+    public float playerCurrentHealth = 10;
 
-    public float hourglassFill = 90f; // normally 900
-    public float hourglassCapacity = 90f;
+    public float hourglassFill = 900f; // normally 900
+    public float hourglassCapacity = 900f;
     public bool panicMode = false;
+    public bool hourglassBroken = false;
+
+    private float timeMultiplier = 1f; // decrease to die faster, increase to die slower
 
     public const float panicTime = 76.8f;
 

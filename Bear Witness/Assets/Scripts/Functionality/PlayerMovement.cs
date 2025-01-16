@@ -42,11 +42,6 @@ public class PlayerMovement : MonoBehaviour
         moveTarget = pointX;
     }
 
-    public void Perish()
-    {
-        Debug.Log("Perished");
-    }
-
     void Update()
     {
         if (!climbing)
@@ -147,7 +142,6 @@ public class PlayerMovement : MonoBehaviour
 
         if ((Input.GetButtonUp("AttackB") && attackButton == 2) || (Input.GetButtonUp("AttackY") && attackButton == 1) || (Input.GetButtonUp("AttackX") && attackButton == 0))
         {
-            Debug.Log("attackEnd");
             attackEnd = true;
         }
     }

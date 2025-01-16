@@ -1,5 +1,86 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1101 &-8846880698574633562
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 3139297216161963682}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1102 &-8658036259335325187
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: huh?
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -7926039614211756286}
+  m_StateMachineBehaviours:
+  - {fileID: -1302726665616932261}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1101 &-8575385864306099822
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: Choice
+    m_EventTreshold: 3
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -6604265807645997679}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!114 &-8302359366104599638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -20,7 +101,7 @@ MonoBehaviour:
       conditions: []
       speaker: {fileID: 11400000, guid: a051031efcbd29347b841fc426a6c077, type: 2}
       emotion: happy
-      sentenceText: Morning, Arcas! Ready for your big day?
+      sentenceText: Hey, Arcas! Good to see you up and about.
       isChoice: 0
       choices: []
     - lineId: 
@@ -28,14 +109,60 @@ MonoBehaviour:
       hasCondition: 0
       conditions: []
       speaker: {fileID: 11400000, guid: a051031efcbd29347b841fc426a6c077, type: 2}
-      emotion: happy
-      sentenceText: I've been getting some equipment ready for you. Allow me to present...
+      emotion: concerned
+      sentenceText: How are you doing?
       isChoice: 0
       choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+      emotion: neutral
+      sentenceText: 
+      isChoice: 1
+      choices:
+      - text: I'm doing great!
+        hasCondition: 0
+        choiceID: 1
+        conditions: []
+      - text: What happened?
+        hasCondition: 0
+        choiceID: 2
+        conditions: []
+      - text: ...
+        hasCondition: 0
+        choiceID: 3
+        conditions: []
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
   isCall: 0
+--- !u!1101 &-7926039614211756286
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 3139297216161963682}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &-7300571360847296765
 AnimatorState:
   serializedVersion: 6
@@ -51,6 +178,62 @@ AnimatorState:
   - {fileID: 4929233861014650173}
   m_StateMachineBehaviours:
   - {fileID: -5742445993459636487}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1101 &-7178147882973878052
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: Choice
+    m_EventTreshold: 1
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -614835680043532925}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1102 &-6604265807645997679
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: saynothing
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 8468678043928509358}
+  m_StateMachineBehaviours:
+  - {fileID: 460350130700834222}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -124,9 +307,18 @@ MonoBehaviour:
       singleUse: 0
       hasCondition: 0
       conditions: []
-      speaker: {fileID: 11400000, guid: a051031efcbd29347b841fc426a6c077, type: 2}
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: happy
-      sentenceText: Your very own ice pick!
+      sentenceText: I'm doing great!
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: a051031efcbd29347b841fc426a6c077, type: 2}
+      emotion: concerned
+      sentenceText: ....Sure.
       isChoice: 0
       choices: []
     - lineId: 
@@ -135,61 +327,15 @@ MonoBehaviour:
       conditions: []
       speaker: {fileID: 11400000, guid: a051031efcbd29347b841fc426a6c077, type: 2}
       emotion: neutral
-      sentenceText: It was your mom's favourite tool.. back before..
+      sentenceText: Well, I know I can't convince you not to head back out right
+        away.
       isChoice: 0
       choices: []
-    - lineId: 
-      singleUse: 0
-      hasCondition: 0
-      conditions: []
-      speaker: {fileID: 11400000, guid: a051031efcbd29347b841fc426a6c077, type: 2}
-      emotion: sad
-      sentenceText: Well...
-      isChoice: 0
-      choices: []
-    - lineId: 
-      singleUse: 0
-      hasCondition: 0
-      conditions: []
-      speaker: {fileID: 11400000, guid: a051031efcbd29347b841fc426a6c077, type: 2}
-      emotion: happy
-      sentenceText: Anyway, just get it stuck in a wall and it'll give you the leverage
-        to climb it.
-      isChoice: 0
-      choices: []
-    - lineId: 
-      singleUse: 0
-      hasCondition: 0
-      conditions: []
-      speaker: {fileID: 11400000, guid: a051031efcbd29347b841fc426a6c077, type: 2}
-      emotion: happy
-      sentenceText: I've kept it nice and sharp for you, so it's not a half bad weapon
-        either.
-      isChoice: 0
-      choices: []
-    - lineId: 
-      singleUse: 0
-      hasCondition: 0
-      conditions: []
-      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
-      emotion: happy
-      sentenceText: Thanks, Isley. This will be really helpful, I'm sure.
-      isChoice: 0
-      choices: []
-    - lineId: 
-      singleUse: 0
-      hasCondition: 0
-      conditions: []
-      speaker: {fileID: 11400000, guid: a051031efcbd29347b841fc426a6c077, type: 2}
-      emotion: happy
-      sentenceText: Make sure to tell me all about it when you get back!
-      isChoice: 0
-      choices: []
-  lastState: 1
+  lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
   isCall: 0
---- !u!1101 &-2667341178222761257
+--- !u!1101 &-4153519839830621942
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,11 +346,14 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Choose
     m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: Choice
+    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 0}
+  m_DstState: {fileID: -8658036259335325187}
   m_Solo: 0
   m_Mute: 0
-  m_IsExit: 1
+  m_IsExit: 0
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
@@ -214,6 +363,89 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-1302726665616932261
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38ac78cad3040342bb73320141bd3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSegment:
+    elements:
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+      emotion: skeptical
+      sentenceText: I'm... doing just fine. Why are you so worried?
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: a051031efcbd29347b841fc426a6c077, type: 2}
+      emotion: concerned
+      sentenceText: You... really don't know, do you?
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: a051031efcbd29347b841fc426a6c077, type: 2}
+      emotion: concerned
+      sentenceText: You were gone a long time. Like a lot longer than usual.
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: a051031efcbd29347b841fc426a6c077, type: 2}
+      emotion: concerned
+      sentenceText: And when Master brought you back, he wouldn't let anyone see
+        you for weeks.
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: a051031efcbd29347b841fc426a6c077, type: 2}
+      emotion: concerned
+      sentenceText: I don't really know what happened, but I'm glad you're back on
+        your feet.
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: a051031efcbd29347b841fc426a6c077, type: 2}
+      emotion: concerned
+      sentenceText: Just - be careful, alright?
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+      emotion: concerned
+      sentenceText: Oh.. yeah, okay.
+      isChoice: 0
+      choices: []
+  lastState: 0
+  triggerOnEnd: 
+  consumeOnEnd: {fileID: 0}
+  isCall: 0
 --- !u!1102 &-745800299068013782
 AnimatorState:
   serializedVersion: 6
@@ -247,13 +479,12 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: give_ice_pick
+  m_Name: great
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
-  - {fileID: -2667341178222761257}
+  - {fileID: -8846880698574633562}
   m_StateMachineBehaviours:
-  - {fileID: 6987716953326326834}
   - {fileID: -4644086455055060483}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -286,10 +517,19 @@ AnimatorStateMachine:
     m_Position: {x: 30, y: 270, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -614835680043532925}
-    m_Position: {x: 30, y: 350, z: 0}
+    m_Position: {x: -180, y: 360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8851968426614435528}
-    m_Position: {x: 190, y: 310, z: 0}
+    m_Position: {x: -430, y: 350, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 3139297216161963682}
+    m_Position: {x: 30, y: 460, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -8658036259335325187}
+    m_Position: {x: 30, y: 360, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -6604265807645997679}
+    m_Position: {x: 240, y: 360, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -297,7 +537,7 @@ AnimatorStateMachine:
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 50, y: 450, z: 0}
+  m_ExitPosition: {x: 50, y: 550, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -7300571360847296765}
 --- !u!91 &9100000
@@ -314,19 +554,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: StartDialogue
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Choose
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
+  - m_Name: Choice
+    m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Dialogue
@@ -374,6 +620,108 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -745800299068013782}
+--- !u!114 &460350130700834222
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38ac78cad3040342bb73320141bd3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSegment:
+    elements:
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+      emotion: disainful
+      sentenceText: ...
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: a051031efcbd29347b841fc426a6c077, type: 2}
+      emotion: shocked
+      sentenceText: Oh! Sorry, um... you don't have to talk about it.
+      isChoice: 0
+      choices: []
+  lastState: 1
+  triggerOnEnd: 
+  consumeOnEnd: {fileID: 0}
+  isCall: 0
+--- !u!114 &719602805680181629
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38ac78cad3040342bb73320141bd3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSegment:
+    elements:
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: a051031efcbd29347b841fc426a6c077, type: 2}
+      emotion: neutral
+      sentenceText: While you're out there, make sure to keep an eye out for that
+        ice pick of yours.
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: a051031efcbd29347b841fc426a6c077, type: 2}
+      emotion: neutral
+      sentenceText: I'd make you another, but it would take a while, and odds are
+        your old one's still out there.
+      isChoice: 0
+      choices: []
+  lastState: 1
+  triggerOnEnd: 
+  consumeOnEnd: {fileID: 0}
+  isCall: 0
+--- !u!1102 &3139297216161963682
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ice pick
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 5046219606921045260}
+  m_StateMachineBehaviours:
+  - {fileID: 719602805680181629}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &4275899247922627017
 AnimatorState:
   serializedVersion: 6
@@ -385,7 +733,9 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
-  - {fileID: 7876824225471778895}
+  - {fileID: -7178147882973878052}
+  - {fileID: -4153519839830621942}
+  - {fileID: -8575385864306099822}
   m_StateMachineBehaviours:
   - {fileID: -8302359366104599638}
   - {fileID: 8333486302612693878}
@@ -456,6 +806,31 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &5046219606921045260
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 0}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 1
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!114 &6648359019484796421
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -475,53 +850,14 @@ MonoBehaviour:
       hasCondition: 0
       conditions: []
       speaker: {fileID: 11400000, guid: a051031efcbd29347b841fc426a6c077, type: 2}
-      emotion: happy
-      sentenceText: Hurry along now, you wouldn't want to be late!
+      emotion: neutral
+      sentenceText: Take care!
       isChoice: 0
       choices: []
   lastState: 1
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
   isCall: 0
---- !u!114 &6987716953326326834
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11323e4bea4ce174198145d252f07113, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: 9cf45a5b087f15641b6f061edced8d3c, type: 2}
-  price: 0
---- !u!1101 &7876824225471778895
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: Choose
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -614835680043532925}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0
-  m_HasExitTime: 0
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!114 &8333486302612693878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -535,6 +871,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetNPC: {fileID: 11400000, guid: a051031efcbd29347b841fc426a6c077, type: 2}
+--- !u!1101 &8468678043928509358
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 0}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 1
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &8851968426614435528
 AnimatorState:
   serializedVersion: 6

@@ -9,6 +9,7 @@ public class Hourglass : MonoBehaviour
 
     [SerializeField] Animator leftBulb;
     [SerializeField] Animator rightBulb;
+    [SerializeField] Animator crackingOverlay;
 
     [SerializeField] Image leftSand;
     [SerializeField] Image rightSand;
@@ -19,6 +20,9 @@ public class Hourglass : MonoBehaviour
 
     private float capacity = 100f;
     private float fill = 100f;
+    private float maxIntegrity = 10f;
+    private float integrity = 10f;
+    private bool broken = false;
 
     float damageFlashCooldown = 0f;
     bool isFrozen = false;
@@ -35,6 +39,7 @@ public class Hourglass : MonoBehaviour
     {
         gameManager = GameManager.instance;
         capacity = gameManager.hourglassCapacity;
+        maxIntegrity = gameManager.playerMaxHealth;
         defaultTransform = transform.position;
         Refresh();
     }
@@ -45,6 +50,12 @@ public class Hourglass : MonoBehaviour
         float fillPercent = fill / capacity;
         leftBulb.SetFloat("Fill", fillPercent);
         rightBulb.SetFloat("Fill", 0.8f - fillPercent);
+
+        integrity = gameManager.playerCurrentHealth;
+        float integrityPercent = integrity / maxIntegrity;
+        crackingOverlay.SetFloat("Integrity", integrityPercent);
+
+        crackingOverlay.SetBool("Broken", broken);
 
         isFrozen = gameManager.pauseGameTime;
 
@@ -134,5 +145,10 @@ public class Hourglass : MonoBehaviour
     public void DamageFlash(float damage)
     {
         damageFlashCooldown = Time.time + damage / 4f;
+    }
+
+    public void SetBroken(bool value)
+    {
+        broken = value;
     }
 }

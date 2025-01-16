@@ -15,11 +15,9 @@ public class BasicTrigger : MonoBehaviour
     {
         if (isActiveTime <= Time.time)
         {
-            Debug.Log("collide");
             if (collision.collider.CompareTag(contactTag))
             {
                 isActiveTime = Time.time + deadTime;
-                Debug.Log("invoke");
                 OnTrigger.Invoke();
             }
         }

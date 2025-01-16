@@ -20,20 +20,21 @@ public class Gate : MonoBehaviour
         LighthouseAirship,
         ArmouredMollusk,
         ShoresLedge,
-        ShoresMidShortcut,
+        BoilerRoom,
         CrabArena,
         Library,
         ShoresLighthouseShortcut,
         CrabShortcut,
         CircleSigilDoor,
-        CircleSigil
+        CircleSigil,
+        None
     }
 
     public static readonly Dictionary<Gates, int> GateMatch = new Dictionary<Gates, int>
     {
         { Gates.Lighthouse, 1 },
         { Gates.ShoresLedge, 2 },
-        { Gates.ShoresMidShortcut, 3 },
+        { Gates.BoilerRoom, 3 },
         { Gates.CrabArena, 4 },
         { Gates.ArmouredMollusk, 5 },
         { Gates.LighthouseAirship, 6 },
@@ -46,42 +47,48 @@ public class Gate : MonoBehaviour
 
     private void Start()
     {
-        gateID = GateMatch[gateName];
-
-        closedPoint = transform.localPosition.y;
-        gameManager = FindObjectOfType<GameManager>();
-        if (gameManager.doorStates[gateID] || forceOpen)
+        if (gateName != Gates.None)
         {
-            isOpen = true;
-            transform.localPosition = new Vector3(transform.localPosition.x, closedPoint + openingSize);
-        }
+            gateID = GateMatch[gateName];
 
-        if (!gameManager.doorStates[gateID] || forceClose)
-        {
-            isOpen = false;
-            transform.localPosition = new Vector3(transform.localPosition.x, closedPoint);
+            closedPoint = transform.localPosition.y;
+            gameManager = FindObjectOfType<GameManager>();
+            if (gameManager.doorStates[gateID] || forceOpen)
+            {
+                isOpen = true;
+                transform.localPosition = new Vector3(transform.localPosition.x, closedPoint + openingSize);
+            }
+
+            if (!gameManager.doorStates[gateID] || forceClose)
+            {
+                isOpen = false;
+                transform.localPosition = new Vector3(transform.localPosition.x, closedPoint);
+            }
         }
     }
 
     private void Update()
     {
-        if ((gameManager.doorStates[gateID] || forceOpen) && !forceClose)
+        if (gateName != Gates.None)
         {
-            if (!isOpen)
+            if ((gameManager.doorStates[gateID] || forceOpen) && !forceClose)
             {
-                StopAllCoroutines();
-                StartCoroutine(OpenGate());
+                if (!isOpen)
+                {
+                    StopAllCoroutines();
+                    StartCoroutine(OpenGate());
+                }
+                isOpen = true;
             }
-            isOpen = true;
-        }
-        else
-        {
-            if (isOpen)
+            else
             {
-                StopAllCoroutines();
-                StartCoroutine(CloseGate());
+                if (isOpen)
+                {
+                    StopAllCoroutines();
+                    StartCoroutine(CloseGate());
+                }
+                isOpen = false;
             }
-            isOpen = false;
         }
     }
 
