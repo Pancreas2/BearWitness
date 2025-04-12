@@ -20,7 +20,8 @@ public class UniqueEnemy : MonoBehaviour
     {
         ArmouredMollusk,
         CaptainCarlotta,
-        RockCrab
+        RockCrab,
+        ShoresArena
     }
 
     public UniqueEnemyName name;

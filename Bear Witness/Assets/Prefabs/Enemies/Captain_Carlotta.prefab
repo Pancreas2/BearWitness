@@ -189,6 +189,7 @@ MonoBehaviour:
       m_Calls: []
   active: 0
   collider: {fileID: 6441497584371188268}
+  damageEnemies: 0
 --- !u!1 &2722106029467442758
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,6 +317,7 @@ MonoBehaviour:
       m_Calls: []
   active: 0
   collider: {fileID: 9078378957341606151}
+  damageEnemies: 0
 --- !u!1 &4538352962001168973
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,6 +460,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passDamageTo: {fileID: 0}
+  renderer: {fileID: 5074014130485125064}
+  flashValue: 0
   maxHealth: 175
   currentHealth: 0
   animator: {fileID: 1092801154751736779}
@@ -465,25 +469,6 @@ MonoBehaviour:
   knockback: {x: 200, y: 100}
   m_Rigidbody2D: {fileID: 4642727865426483287}
   invulnerable: 0
-  renderer: {fileID: 5074014130485125064}
-  OnHurt:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1590898662676642117}
-        m_TargetAssemblyTypeName: CarlottaBoss, Assembly-CSharp
-        m_MethodName: CarlottaHurt
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: carlotta_flap
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnHurtInvulnerable:
-    m_PersistentCalls:
-      m_Calls: []
   OnStart:
     m_PersistentCalls:
       m_Calls: []
@@ -526,9 +511,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  coinShower: {fileID: 0}
+  droppedCoins: 0
   bossMusic: Flying_Feathers
   bossPortrait: {fileID: 21300000, guid: d30ebccf17863f948be41824a91dff0e, type: 3}
   uniqueEnemy: {fileID: 1131635269649001586}
+  fightActive: 0
 --- !u!114 &1590898662676642117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -602,7 +590,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -642,4 +630,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff278a020c2cc245ab121bc76c6d3fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorID: 6
+  gateName: 0

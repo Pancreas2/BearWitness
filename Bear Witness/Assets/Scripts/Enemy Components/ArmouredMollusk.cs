@@ -11,7 +11,7 @@ public class ArmouredMollusk : MonoBehaviour
     private PlayerController player;
 
     private float attackTime;
-    private bool facingRight = false;
+    [SerializeField] private bool facingRight = false;
     private float hideTime = 0f;
     private float xDifference;
     private float chargeTime;

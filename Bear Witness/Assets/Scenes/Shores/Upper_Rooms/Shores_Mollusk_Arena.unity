@@ -13766,7 +13766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7589621864306530443, guid: 6f180feef9d245f458d8db78576cb811, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.9171114
+      value: 4.9185424
       objectReference: {fileID: 0}
     - target: {fileID: 7589621864306530443, guid: 6f180feef9d245f458d8db78576cb811, type: 3}
       propertyPath: m_LocalPosition.y
@@ -19964,7 +19964,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7857786011467424883, guid: b72da7dcc3855964ead7db92f475ce0c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0067174435
+      value: -0.0067173243
       objectReference: {fileID: 0}
     - target: {fileID: 7857786011467424883, guid: b72da7dcc3855964ead7db92f475ce0c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -20235,6 +20235,7 @@ MonoBehaviour:
   parallax: {x: 0.1, y: 0.1}
   loopX: 0
   loopY: 0
+  overrideLength: {x: 0, y: 0}
 --- !u!1001 &1316389745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21256,10 +21257,6 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 344789665, guid: 6dfe34491b3bb21479fa696fcc78eb61, type: 3}
-    - target: {fileID: 7580803233564780676, guid: 7dae927dc9a093646ae244ec9d19c746, type: 3}
-      propertyPath: droppedCoins
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7580803233564780676, guid: 7dae927dc9a093646ae244ec9d19c746, type: 3}
       propertyPath: OnPerish.m_PersistentCalls.m_Calls.Array.data[6].m_Mode
       value: 3

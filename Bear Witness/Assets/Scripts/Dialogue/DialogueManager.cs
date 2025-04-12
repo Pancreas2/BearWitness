@@ -19,6 +19,8 @@ public class DialogueManager : MonoBehaviour
     public Image faceDisplay;
     public Animator faceAnimator;
 
+    public Image dialogueBox;
+
     public Animator animator;
 
     private AudioManager audioManager;
@@ -168,6 +170,7 @@ public class DialogueManager : MonoBehaviour
         animator.SetBool("LastState", false);
         NPCData speaker = gameManager.npcMemory.Find(npcData => npcData.npc.name == currentSentence.speaker.name);
         faceDisplay.sprite = currentSentence.speaker.neutralFace;
+        dialogueBox.sprite = currentSentence.speaker.dialogueBox;
         faceAnimator.runtimeAnimatorController = currentSentence.speaker.faceAnimations;
         faceAnimator.SetInteger("State", currentSentence.speaker.GetEmotionReference(currentSentence.emotion));
         string name = "";
@@ -177,7 +180,9 @@ public class DialogueManager : MonoBehaviour
             {
                 speaker.displayName = speaker.npc.name;
             }
-            name = speaker.displayName;
+
+            if (speaker.displayName != "Narrator")
+                name = speaker.displayName;
         }
         string sentence = currentSentence.sentenceText;
         StopAllCoroutines();
@@ -242,6 +247,18 @@ public class DialogueManager : MonoBehaviour
         {
             float timeDelay = 0.015f;
 
+            if (letter == '(')
+            {
+                faceAnimator.ResetTrigger("Start");
+                faceAnimator.SetTrigger("Stop");
+            }
+
+            if (letter == ')')
+            {
+                faceAnimator.ResetTrigger("Stop");
+                faceAnimator.SetTrigger("Start");
+            }
+
             if (letter == '|')
             {
                 writingDialogueCommand = true;
@@ -256,6 +273,13 @@ public class DialogueManager : MonoBehaviour
                     case '1':
                         timeDelay = 0.5f;
                         break;
+                    case 'P':
+                        timeDelay = 3f;
+                        break;
+                    case 'B':
+                        writingDialogueCommand = false;
+                        DisplayNextSentence();
+                        break;
                 }
                 writingDialogueCommand = false;
             } else
@@ -263,7 +287,19 @@ public class DialogueManager : MonoBehaviour
                 destination.text += letter;
             }
 
+            if (timeDelay > 1f)
+            {
+                faceAnimator.ResetTrigger("Start");
+                faceAnimator.SetTrigger("Stop");
+            }
+
             yield return new WaitForSeconds(timeDelay);
+
+            if (timeDelay > 1f)
+            {
+                faceAnimator.ResetTrigger("Stop");
+                faceAnimator.SetTrigger("Start");
+            }
         }
         if (!inShop)
         {

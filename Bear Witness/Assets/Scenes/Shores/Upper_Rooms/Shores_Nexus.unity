@@ -57729,7 +57729,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7589621864306530443, guid: 6f180feef9d245f458d8db78576cb811, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.660699
+      value: 5.6660585
       objectReference: {fileID: 0}
     - target: {fileID: 7589621864306530443, guid: 6f180feef9d245f458d8db78576cb811, type: 3}
       propertyPath: m_LocalPosition.y
@@ -57783,6 +57783,11 @@ Transform:
 --- !u!1 &251290475 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4200549462743169384, guid: 6f180feef9d245f458d8db78576cb811, type: 3}
+  m_PrefabInstance: {fileID: 251290473}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &251290476 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1148007401654841368, guid: 6f180feef9d245f458d8db78576cb811, type: 3}
   m_PrefabInstance: {fileID: 251290473}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &277059550
@@ -70919,6 +70924,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameUI
       objectReference: {fileID: 0}
+    - target: {fileID: 8946365754058898093, guid: 618cb014893df74499cd83f68869d5b5, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 251290476}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

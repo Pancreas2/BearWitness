@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfbfbbf2bb515264db81a3ff901c506f, type: 3}
+  m_Name: LucyShop
+  m_EditorClassIdentifier: 
+  name: Lucy
+  backgroundDialogue:
+    elements:
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: ce1b16a2bea529f46813ae645cd54c6d, type: 2}
+      emotion: tired
+      sentenceText: Sorry we're low on stock - you came at a bad time.
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: ce1b16a2bea529f46813ae645cd54c6d, type: 2}
+      emotion: tired
+      sentenceText: Most of the town has been out on a big fishing trip for the past
+        week.
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: ce1b16a2bea529f46813ae645cd54c6d, type: 2}
+      emotion: tired
+      sentenceText: Truth is, it's been harder and harder to find fish. Nobody's
+        really sure why, but I think -
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: ce1b16a2bea529f46813ae645cd54c6d, type: 2}
+      emotion: angry
+      sentenceText: Steven! Let your brother go!
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: ce1b16a2bea529f46813ae645cd54c6d, type: 2}
+      emotion: tired
+      sentenceText: Sigh... kids.
+      isChoice: 0
+      choices: []
+  startingStock:
+  - name: Compass
+    item: {fileID: 11400000, guid: 8351f8c9157383f43b94e7611ac38ea8, type: 2}
+    price: 100
+    finiteStock: 1
+    stock: 1
+  - name: Seashell
+    item: {fileID: 11400000, guid: 8cb7f6ff80afd29429ad05821e276447, type: 2}
+    price: 50
+    finiteStock: 0
+    stock: 1
+  - name: Haddock
+    item: {fileID: 11400000, guid: 05d3630f1aaa95843a3b36c33717ed13, type: 2}
+    price: 25
+    finiteStock: 0
+    stock: 1

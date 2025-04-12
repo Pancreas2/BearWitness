@@ -58,6 +58,7 @@ public class BaseEnemy : ReceiveDamage
 
     virtual public void Perish() 
     {
+        Debug.Log("Perished");
         if (coinShower) coinShower.SpawnCoins(droppedCoins);
         OnPerish.Invoke();
     }

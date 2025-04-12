@@ -480,13 +480,13 @@ AnimatorStateMachine:
     m_Position: {x: 30, y: 370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3213886926745735292}
-    m_Position: {x: -190, y: 440, z: 0}
+    m_Position: {x: -430, y: 510, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 9177147705842091917}
     m_Position: {x: 140, y: 440, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5846354443181799080}
-    m_Position: {x: -120, y: 570, z: 0}
+    m_Position: {x: -210, y: 660, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7135173900822598327}
     m_Position: {x: -410, y: 370, z: 0}
@@ -502,6 +502,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -8716697350065952482}
     m_Position: {x: 380, y: 530, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -197297932981856675}
+    m_Position: {x: -160, y: 440, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -576,8 +579,13 @@ MonoBehaviour:
       choices: []
     - lineId: 
       singleUse: 0
-      hasCondition: 0
-      conditions: []
+      hasCondition: 1
+      conditions:
+      - conditionType: 2
+        conditionSet: 0
+        invert: 1
+        lineId: 
+        item: {fileID: 11400000, guid: 9cf45a5b087f15641b6f061edced8d3c, type: 2}
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: skeptical
       sentenceText: If ye say so, laddie. But if ye happen to see the Witness, which
@@ -586,8 +594,13 @@ MonoBehaviour:
       choices: []
     - lineId: 
       singleUse: 0
-      hasCondition: 0
-      conditions: []
+      hasCondition: 1
+      conditions:
+      - conditionType: 2
+        conditionSet: 0
+        invert: 1
+        lineId: 
+        item: {fileID: 11400000, guid: 9cf45a5b087f15641b6f061edced8d3c, type: 2}
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: neutral
       sentenceText: I'm taken to believe it's a poor Witness indeed, leaving evidence
@@ -596,11 +609,30 @@ MonoBehaviour:
       choices: []
     - lineId: 
       singleUse: 0
-      hasCondition: 0
-      conditions: []
+      hasCondition: 1
+      conditions:
+      - conditionType: 2
+        conditionSet: 0
+        invert: 1
+        lineId: 
+        item: {fileID: 11400000, guid: 9cf45a5b087f15641b6f061edced8d3c, type: 2}
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: hurt
       sentenceText: ... (hey, that's not even my fault!)
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 1
+      conditions:
+      - conditionType: 2
+        conditionSet: 0
+        invert: 0
+        lineId: 
+        item: {fileID: 11400000, guid: 9cf45a5b087f15641b6f061edced8d3c, type: 2}
+      speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
+      emotion: skeptical
+      sentenceText: If ye say so, laddie.
       isChoice: 0
       choices: []
   lastState: 1
@@ -837,18 +869,13 @@ MonoBehaviour:
       choices: []
     - lineId: 
       singleUse: 0
-      hasCondition: 0
-      conditions: []
-      speaker: {fileID: 11400000, guid: 709bcbfd423d9944a9b252bb386c3f1b, type: 2}
-      emotion: neutral
-      sentenceText: '[Developer''s note: This quest isn''t in the game yet! Try it
-        later!]'
-      isChoice: 0
-      choices: []
-    - lineId: 
-      singleUse: 0
-      hasCondition: 0
-      conditions: []
+      hasCondition: 1
+      conditions:
+      - conditionType: 2
+        conditionSet: 0
+        invert: 1
+        lineId: 
+        item: {fileID: 11400000, guid: 9cf45a5b087f15641b6f061edced8d3c, type: 2}
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: neutral
       sentenceText: By the way, you haven't seen an ice pick anywhere, have you?
@@ -883,13 +910,34 @@ MonoBehaviour:
       choices: []
     - lineId: 
       singleUse: 0
-      hasCondition: 0
-      conditions: []
+      hasCondition: 1
+      conditions:
+      - conditionType: 2
+        conditionSet: 0
+        invert: 1
+        lineId: 
+        item: {fileID: 11400000, guid: 9cf45a5b087f15641b6f061edced8d3c, type: 2}
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: neutral
       sentenceText: Look, laddie. There's an iceberg with a pick stuck in it over
         yonder, some bear I ain't never seen before comes by, and 'is fur's a white
         the likes none'f'us've seen in years.
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 1
+      conditions:
+      - conditionType: 2
+        conditionSet: 0
+        invert: 0
+        lineId: 
+        item: {fileID: 11400000, guid: 9cf45a5b087f15641b6f061edced8d3c, type: 2}
+      speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
+      emotion: neutral
+      sentenceText: Look, laddie. There's an iceberg over yonder, some bear I ain't
+        never seen before comes by, and 'is fur's a white the likes none'f'us've
+        seen in years.
       isChoice: 0
       choices: []
     - lineId: 
@@ -1088,6 +1136,35 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &-197297932981856675
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: admit_under_duress
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 3868513083905707526}
+  m_StateMachineBehaviours:
+  - {fileID: 6643376370524841853}
+  - {fileID: 3804808564566337930}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!114 &-126573875360625505
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1171,55 +1248,55 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: sitting
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: fishing
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: StartDialogue
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Choose
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Choice
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Trust
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Met
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: VerifyTime
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Dialogue
@@ -1330,8 +1407,13 @@ MonoBehaviour:
     elements:
     - lineId: 
       singleUse: 0
-      hasCondition: 0
-      conditions: []
+      hasCondition: 1
+      conditions:
+      - conditionType: 2
+        conditionSet: 0
+        invert: 1
+        lineId: 
+        item: {fileID: 11400000, guid: 9cf45a5b087f15641b6f061edced8d3c, type: 2}
       speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
       emotion: happy
       sentenceText: Ay, that I have. t's wedged in an iceberg yonder westwards.
@@ -1339,8 +1421,13 @@ MonoBehaviour:
       choices: []
     - lineId: 
       singleUse: 0
-      hasCondition: 0
-      conditions: []
+      hasCondition: 1
+      conditions:
+      - conditionType: 2
+        conditionSet: 0
+        invert: 1
+        lineId: 
+        item: {fileID: 11400000, guid: 9cf45a5b087f15641b6f061edced8d3c, type: 2}
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: happy
       sentenceText: Thank you! I've been looking all over for it.
@@ -1423,9 +1510,14 @@ MonoBehaviour:
         choiceID: 0
         conditions: []
       - text: Have you seen my ice pick?
-        hasCondition: 0
+        hasCondition: 1
         choiceID: 1
-        conditions: []
+        conditions:
+        - conditionType: 2
+          conditionSet: 0
+          invert: 1
+          lineId: 
+          item: {fileID: 11400000, guid: 9cf45a5b087f15641b6f061edced8d3c, type: 2}
   lastState: 0
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
@@ -1594,34 +1686,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1101 &2195311473298674480
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: Choose
-    m_EventTreshold: 0
-  - m_ConditionMode: 6
-    m_ConditionEvent: Choice
-    m_EventTreshold: 1
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 3213886926745735292}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0
-  m_HasExitTime: 0
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!114 &2427272879606212374
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1830,6 +1894,45 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &3804808564566337930
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5013325c0c41fe4e91ee51f03ce37cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetNPC: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
+  modifier: 1
+--- !u!1101 &3868513083905707526
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 0}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 1
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!114 &4121839095818532547
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1876,6 +1979,34 @@ MonoBehaviour:
   triggerOnEnd: 
   consumeOnEnd: {fileID: 0}
   isCall: 0
+--- !u!1101 &5223812768614260765
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: Choose
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: Choice
+    m_EventTreshold: 1
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -197297932981856675}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &5690291471401965010
 AnimatorState:
   serializedVersion: 6
@@ -1985,6 +2116,42 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &6643376370524841853
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38ac78cad3040342bb73320141bd3ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueSegment:
+    elements:
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+      emotion: embarrassed
+      sentenceText: Yeah, you got me. I'm not really supposed to tell you.
+      isChoice: 0
+      choices: []
+    - lineId: 
+      singleUse: 0
+      hasCondition: 0
+      conditions: []
+      speaker: {fileID: 11400000, guid: 1913f15b6a657f44b8779a83a3207dcc, type: 2}
+      emotion: happy
+      sentenceText: No worries, laddie. I won't tell a soul.
+      isChoice: 0
+      choices: []
+  lastState: 1
+  triggerOnEnd: 
+  consumeOnEnd: {fileID: 0}
+  isCall: 0
 --- !u!1101 &6669816501026469406
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2043,9 +2210,9 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
-  - {fileID: 2195311473298674480}
   - {fileID: 6356806554173260378}
   - {fileID: 2834962581461735118}
+  - {fileID: 5223812768614260765}
   m_StateMachineBehaviours:
   - {fileID: -1847228382921653664}
   m_Position: {x: 50, y: 50, z: 0}

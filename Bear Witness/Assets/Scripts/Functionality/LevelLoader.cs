@@ -17,7 +17,8 @@ public class LevelLoader : MonoBehaviour
         Lighthouse,
         Hollow,
         Airship,
-        Ruins
+        Ruins,
+        Sigilroom
     }
 
     public LevelArea area;
@@ -47,9 +48,10 @@ public class LevelLoader : MonoBehaviour
     IEnumerator StartScene()
     {
         PlayerMovement player = FindObjectOfType<PlayerMovement>();
-        player.frozen = true;
+        if (player) player.frozen = true;
         yield return new WaitForSeconds(transitionTime);
         GameManager.instance.pauseGameTime = false;
-        player.frozen = false;
+        if (GameUI_Controller.instance) GameUI_Controller.instance.Reload();
+        if (player) player.frozen = false;
     }
 }

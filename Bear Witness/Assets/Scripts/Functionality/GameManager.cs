@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Cinemachine;
 using System.Dynamic;
 using System;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -64,10 +65,17 @@ public class GameManager : MonoBehaviour
 
     public void PickupItem(Item item)
     {
-        InventoryMenu invManager = FindObjectOfType<InventoryMenu>();
 
         if (!guic) guic = FindObjectOfType<GameUI_Controller>();
         guic.itemPopup.QueueItem(item);
+
+        if (item.type == Item.ItemType.CircleBadge || item.type == Item.ItemType.SquareBadge || item.type == Item.ItemType.TriangleBadge)
+        {
+            foundBadges.Add(item);
+            return;
+        }
+
+        InventoryMenu invManager = FindObjectOfType<InventoryMenu>();
 
         if (item.type == Item.ItemType.Tool)
         {
@@ -81,21 +89,21 @@ public class GameManager : MonoBehaviour
             tools[index] = item;
 
             // render in menu
-            foreach (InventorySlot toolSlot in invManager.toolSlots)
-            {
-                if (toolSlot)
-                    toolSlot.FindItem();
-            }
+            //foreach (InventorySlot toolSlot in invManager.toolSlots)
+            //{
+            //    if (toolSlot)
+            //        toolSlot.FindItem();
+            //}
         } else
         {
             int index = items.IndexOf(nullItem);
             items[index] = item;
 
             // render in menu
-            foreach (InventorySlot itemSlot in invManager.itemSlots)
-            {
-                itemSlot.FindItem();
-            }
+            //foreach (InventorySlot itemSlot in invManager.itemSlots)
+            //{
+            //    itemSlot.FindItem();
+            //}
         }
     }
 
@@ -206,11 +214,13 @@ public class GameManager : MonoBehaviour
 
     public void EndRun()
     {
+        loopNumber++;
+
         Debug.Log("Run Ends Here!!");
 
         for (int i = 0; i < npcMemory.Count; i++)
         {
-            npcMemory[i].spokenTo = false;
+            npcMemory[i].met = false;
         }
 
         panicMode = false;
@@ -218,7 +228,8 @@ public class GameManager : MonoBehaviour
         gameTime = 0f;
         inArktis = true;
         hourglassFill = hourglassCapacity;
-        loopNumber++;
+
+        AudioManager.instance.StopAll();
 
         playerCurrentHealth = playerMaxHealth;
         guic.hourglass.SetBroken(false);
@@ -309,6 +320,8 @@ public class GameManager : MonoBehaviour
 
     public List<bool> uniqueEnemies = new();
     public SlainEnemies slainEnemies;
+
+    public List<Item> foundBadges = new();
 
     private GameUI_Controller guic;
 }

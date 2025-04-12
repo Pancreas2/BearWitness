@@ -142,6 +142,8 @@ public class InventoryMenu : MonoBehaviour
         Debug.Log("TAB: " + PauseMenu.GameIsPaused);
 
         mapMenu.LoadMap();
+
+        GameUI_Controller.instance.Reload();
     }
 
     public void SwapInventoryPosition(int a, int b, bool tool)

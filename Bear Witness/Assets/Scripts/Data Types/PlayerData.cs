@@ -20,6 +20,10 @@ public class PlayerData
     public float fileTime;
     public int fileCompletion;
 
+    public List<ShopData> shopMemory = new();
+
+    public List<Item> foundBadges = new();
+
     public float gameTime;
 
     public int money;
@@ -45,5 +49,7 @@ public class PlayerData
         money = gameManager.money;
         previousLevel = gameManager.previousLevel;
         slainEnemies = gameManager.slainEnemies;
+        shopMemory = gameManager.shopMemory;
+        foundBadges = gameManager.foundBadges;
     }
 }

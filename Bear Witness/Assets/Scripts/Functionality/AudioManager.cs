@@ -59,6 +59,17 @@ public class AudioManager : MonoBehaviour
             case LevelLoader.LevelArea.ShoresVillage:
                 music = "Village";
                 break;
+
+            case LevelLoader.LevelArea.Sigilroom:
+                Gate.Gates sigil = FindObjectOfType<DoorOpener>().GetGateName();
+                if (GameManager.instance.doorStates[Gate.GateMatch[sigil]])
+                {
+                    music = "Sigil_Wake";
+                } else
+                {
+                    music = "Sigil_Sleep";
+                }
+                break;
         }
 
         return music;
@@ -128,7 +139,7 @@ public class AudioManager : MonoBehaviour
             }
             else
             {
-                Play(levelMusic, 1f);
+                Play(levelMusic);
             }
 
             prevBGMusicTime = GetSoundTime(currentBGMusic);

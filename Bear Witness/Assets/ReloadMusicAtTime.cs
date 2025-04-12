@@ -24,9 +24,14 @@ public class ReloadMusicAtTime : MonoBehaviour
             float currentTime = GameManager.instance.gameTime;
             if (eventTime < currentTime)
             {
-                AudioManager.instance.ReloadMusic(AudioManager.instance.AreaMusicMatch(area));
+                ForceReload();
                 eventInPast = true;
             }
         }
+    }
+
+    public void ForceReload()
+    {
+        AudioManager.instance.ReloadMusic(AudioManager.instance.AreaMusicMatch(area));
     }
 }

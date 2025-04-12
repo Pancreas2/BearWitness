@@ -7,6 +7,8 @@ public class WalletUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI budgetDisplay;
     [SerializeField] private TextMeshProUGUI modifierDisplay;
+    [SerializeField] private Animator animator;
+    public bool inShop = false;
 
     private GameManager gameManager;
     private int modifier;
@@ -24,17 +26,28 @@ public class WalletUI : MonoBehaviour
 
     public void AddMoney(int value)
     {
+        animator.SetBool("Show", true);
         modifier += value;
         delayTime = Time.time + 1f;
         if (modifier > maxModifier) maxModifier = modifier;
     }
 
+    public void ExitShop()
+    {
+        inShop = false;
+    }
+
     private void Update()
     {
+        if (inShop)
+            animator.SetBool("Show", true);
+
         if (modifier == 0)
         {
             maxModifier = 0;
             modifierDisplay.text = "";
+            if (!inShop)
+                animator.SetBool("Show", false);
         }
         else {
             if (Time.time > delayTime)

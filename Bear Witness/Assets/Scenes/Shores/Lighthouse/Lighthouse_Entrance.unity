@@ -14124,7 +14124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3649223491785412620, guid: 06b9ba8e956f83c4e93b03697080d9b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.09018278
+      value: 0.08392143
       objectReference: {fileID: 0}
     - target: {fileID: 3649223491785412620, guid: 06b9ba8e956f83c4e93b03697080d9b7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -15110,12 +15110,12 @@ MonoBehaviour:
       isChoice: 0
       choices: []
     - lineId: lh_statue1
-      singleUse: 1
+      singleUse: 0
       hasCondition: 0
       conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
-      emotion: skeptical
-      sentenceText: That orb looks like the one Master showed me.
+      emotion: concerned
+      sentenceText: The inscription's too faded to read...
       isChoice: 0
       choices: []
     - lineId: lh_statue2
@@ -15124,7 +15124,7 @@ MonoBehaviour:
       conditions: []
       speaker: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
       emotion: concerned
-      sentenceText: But the inscription's too faded to read...
+      sentenceText: ...haven't I seen that orb before?
       isChoice: 0
       choices: []
 --- !u!114 &833984733

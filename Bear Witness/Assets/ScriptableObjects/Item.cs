@@ -10,8 +10,11 @@ public class Item : ScriptableObject
     {
         Tool,
         Item,
-        Wearable
+        CircleBadge,
+        SquareBadge,
+        TriangleBadge
     }
+
     public ItemType type;
     public new string name;
     public string description;

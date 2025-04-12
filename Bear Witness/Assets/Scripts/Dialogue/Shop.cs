@@ -13,6 +13,7 @@ public class Shop : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        FindObjectOfType<WalletUI>().inShop = true;
         if (!gameManager) gameManager = GameManager.instance;
         ShopData npcShop = gameManager.shopMemory.Find(npcShop => npcShop.name == shopType.name);
         if (npcShop == null)
@@ -42,9 +43,9 @@ public class Shop : StateMachineBehaviour
 
         base.OnStateEnter(animator, stateInfo, layerIndex);
         dialogueManager = FindObjectOfType<DialogueManager>();
-        dialogueManager.StartDialogue(backgroundDialogue);
 
         dialogueManager.RefreshShop(shopData);
+        dialogueManager.StartDialogue(backgroundDialogue);
     }
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 

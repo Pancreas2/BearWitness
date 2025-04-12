@@ -27,7 +27,8 @@ public class Gate : MonoBehaviour
         CrabShortcut,
         CircleSigilDoor,
         CircleSigil,
-        None
+        None,
+        ShoresNexusShortcut
     }
 
     public static readonly Dictionary<Gates, int> GateMatch = new Dictionary<Gates, int>
@@ -41,7 +42,8 @@ public class Gate : MonoBehaviour
         { Gates.ShoresLighthouseShortcut, 7 },
         { Gates.CrabShortcut, 8 },
         { Gates.CircleSigilDoor, 9 },
-        { Gates.CircleSigil, 10 }
+        { Gates.CircleSigil, 10 },
+        { Gates.ShoresNexusShortcut, 11}
     };
 
 

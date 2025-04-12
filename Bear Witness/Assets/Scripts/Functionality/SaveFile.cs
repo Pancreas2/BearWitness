@@ -81,7 +81,7 @@ public class SaveFile : MonoBehaviour
             if (slotID == 3)
                 // Tutorial replay, vestigial
                 gameManager.ChangeScene("Arktis_Den");
-            else gameManager.ChangeScene("Arktis_Den");
+            else StartCoroutine(DelayStartCutscene());
         }
         else
         {
@@ -147,5 +147,12 @@ public class SaveFile : MonoBehaviour
             flashValue = Mathf.Max(flashValue - 10 * Time.deltaTime, 0);
             if (renderer) renderer.material.SetFloat("_FlashBrightness", flashValue);
         }
+    }
+
+    private IEnumerator DelayStartCutscene()
+    {
+        FindObjectOfType<LevelLoader>().transition.SetTrigger("Start");
+        yield return new WaitForSeconds(3);
+        gameManager.ChangeScene("Intro_Cutscene");
     }
 }

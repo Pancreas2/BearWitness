@@ -10,4 +10,9 @@ public class DoorOpener : MonoBehaviour
     {
         GameManager.instance.doorStates[Gate.GateMatch[gateName]] = value;
     }
+
+    public Gate.Gates GetGateName()
+    {
+        return gateName;
+    }
 }

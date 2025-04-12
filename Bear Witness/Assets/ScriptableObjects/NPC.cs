@@ -10,6 +10,7 @@ public class NPC : ScriptableObject
     public RuntimeAnimatorController faceAnimations;
     public string[] emotionReference;
     public Sprite neutralFace;
+    public Sprite dialogueBox;
 
     public int GetEmotionReference(string emotion)
     {

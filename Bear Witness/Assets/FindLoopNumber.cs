@@ -12,8 +12,9 @@ public class FindLoopNumber : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private string parameterName;
 
-    [Header("Thresholds")]
-    [SerializeField] private int threshold = 1;
+    [Header("Thresholds (Inclusive)")]
+    [SerializeField] private int min = 1;
+    [SerializeField] private int max = 1;
     public UnityEvent OnLoopsHitThreshold;
 
     private int loopNumber = 0;
@@ -30,12 +31,18 @@ public class FindLoopNumber : MonoBehaviour
             } else
                 GetNumber();
         }
+
+        if (max < min)
+        {
+            max = min;
+            Debug.LogError("FindLoopNumber bounds improperly set on object " + gameObject);
+        }
     }
 
     public int GetNumber()
     {
         loopNumber = GameManager.instance.loopNumber;
-        if (loopNumber >= threshold)
+        if (loopNumber >= min && loopNumber <= max)
         {
             OnLoopsHitThreshold.Invoke();
         }

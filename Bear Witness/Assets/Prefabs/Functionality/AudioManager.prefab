@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8160726984739113400
 MonoBehaviour:
@@ -66,7 +66,7 @@ MonoBehaviour:
   - name: Crab
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 7c984cf13c5258544a8cd683d636bb73, type: 3}
-    volume: 0.501
+    volume: 0.25
     pitch: 1
     loop: 1
   - name: Flying_Feathers
@@ -102,7 +102,7 @@ MonoBehaviour:
   - name: Overgrown_Hollow
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 53799abb1ee32c9408594159c674e567, type: 3}
-    volume: 0.109
+    volume: 0.112
     pitch: 1
     loop: 1
   - name: Shores
@@ -186,6 +186,24 @@ MonoBehaviour:
   - name: Stormy_Shores
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 255d9f840a640e242b855d6d11d661df, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 1
+  - name: Menu
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: db2bb9c7aeaffc8409f30f5b91011321, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 1
+  - name: Sigil_Sleep
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: e319b2afe42f24e4982e178250f13889, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 1
+  - name: Sigil_Wake
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: c9e11bcde856be746a5351488dfc8701, type: 3}
     volume: 0.3
     pitch: 1
     loop: 1

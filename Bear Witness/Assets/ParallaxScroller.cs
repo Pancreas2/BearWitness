@@ -9,12 +9,19 @@ public class ParallaxScroller : MonoBehaviour
     public Vector2 parallax;
     public bool loopX, loopY;
 
+    public Vector2 overrideLength;
+
     private void Start()
     {
         startpos = transform.position;
-        TryGetComponent<SpriteRenderer>(out SpriteRenderer renderer);
-        if (renderer)
-            length = renderer.bounds.size;
+        if (overrideLength.x != 0 || overrideLength.y != 0)
+            length = overrideLength;
+        else
+        {
+            TryGetComponent<SpriteRenderer>(out SpriteRenderer renderer);
+            if (renderer)
+                length = renderer.bounds.size;
+        }
     }
 
     private void Update()

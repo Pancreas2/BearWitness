@@ -20,6 +20,8 @@ public class GameUI_Controller : MonoBehaviour
             return;
         }
 
+        GetComponent<Canvas>().worldCamera = FindObjectOfType<Camera>();
+
         DontDestroyOnLoad(gameObject);
     }
 
@@ -29,6 +31,8 @@ public class GameUI_Controller : MonoBehaviour
     [SerializeField] private Sprite emptyToolSlot;
 
     [SerializeField] public List<Image> toolSlots;
+
+    [SerializeField] public List<BadgeSlot> badgeSlots;
 
     [SerializeField] private GameObject inventoryMenuRoot;
 
@@ -54,6 +58,15 @@ public class GameUI_Controller : MonoBehaviour
         {
             if (GameManager.instance.currentItems[i] != null) DisplayHeldItem(GameManager.instance.currentItems[i], i);
         }
+
+        foreach (BadgeSlot badgeSlot in badgeSlots)
+        {
+            badgeSlot.Reload();
+        }
+
+        FindObjectOfType<WalletUI>().ExitShop();  // ensures wallet closes when room refreshes
+
+        GetComponent<Canvas>().worldCamera = FindObjectOfType<Camera>();
     }
 
     public void DisplayHeldItem(Item item, int slot)
