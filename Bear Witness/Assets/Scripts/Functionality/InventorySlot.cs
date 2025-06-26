@@ -38,13 +38,13 @@ public class InventorySlot : MonoBehaviour
         if (slotType == SlotType.Tool)
         {
             if (index < gameManager.tools.Count)
-                heldItem = gameManager.tools[index];
+                heldItem = Resources.Load<Item>(gameManager.tools[index]);
             else heldItem = null;
         }
         else if (slotType == SlotType.Item)
         {
             if (index < gameManager.items.Count)
-                heldItem = gameManager.items[index];
+                heldItem = Resources.Load<Item>(gameManager.items[index]);
             else heldItem = null;
         }
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public Dialogue dialogue;
+    public TextAsset dialogue;
 
     public void TriggerDialogue(float delay = 0f)
     {

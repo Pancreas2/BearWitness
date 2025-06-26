@@ -9,6 +9,7 @@ public class LevelLoader : MonoBehaviour
     public float transitionTime = 0.5f;
     public string overrideLevelMusic;
     [SerializeField] private bool doStartCutscene = true;
+    public bool hideAreaFlag = false;
     public enum LevelArea
     {
         Arktis,
@@ -18,7 +19,8 @@ public class LevelLoader : MonoBehaviour
         Hollow,
         Airship,
         Ruins,
-        Sigilroom
+        Sigilroom,
+        Twixt
     }
 
     public LevelArea area;
@@ -48,10 +50,18 @@ public class LevelLoader : MonoBehaviour
     IEnumerator StartScene()
     {
         PlayerMovement player = FindObjectOfType<PlayerMovement>();
-        if (player) player.frozen = true;
+        if (player) player.Freeze("NewScene");
         yield return new WaitForSeconds(transitionTime);
         GameManager.instance.pauseGameTime = false;
         if (GameUI_Controller.instance) GameUI_Controller.instance.Reload();
-        if (player) player.frozen = false;
+        if (player) player.Unfreeze("NewScene");
+    }
+
+    public void CancelStartScene()
+    {
+        StopCoroutine(StartScene());
+        PlayerMovement player = FindObjectOfType<PlayerMovement>();
+        player.Unfreeze("NewScene");
+        player.ClearInputs();
     }
 }

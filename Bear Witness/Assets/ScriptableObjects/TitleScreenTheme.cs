@@ -15,7 +15,8 @@ public class TitleScreenTheme : ScriptableObject
     public TitleTheme theme;
     public Color backgroundColor;
     public Sprite titleScreenImage;
-    public Color titleColor;
+    public Sprite titleVariant;
     public Color buttonColor;
     public string songTitle;
+    public string id;
 }

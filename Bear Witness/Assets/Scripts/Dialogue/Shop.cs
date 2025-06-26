@@ -45,7 +45,7 @@ public class Shop : StateMachineBehaviour
         dialogueManager = FindObjectOfType<DialogueManager>();
 
         dialogueManager.RefreshShop(shopData);
-        dialogueManager.StartDialogue(backgroundDialogue);
+        //dialogueManager.StartDialogue(backgroundDialogue);
     }
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 

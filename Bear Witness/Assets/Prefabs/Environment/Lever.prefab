@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5597394765804711613}
   - component: {fileID: 1411716243368757061}
   - component: {fileID: 7228789518950632430}
+  - component: {fileID: 6118700531281742187}
   m_Layer: 6
   m_Name: Lever
   m_TagString: Untagged
@@ -33,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3070689865426456722
 SpriteRenderer:
@@ -144,8 +145,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d55728264cfc58f4bb389469f08cca49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  passDamageTo: {fileID: 0}
+  renderer: {fileID: 0}
+  flashValue: 0
   oneUse: 1
-  doorID: 1
+  doorName: 0
   animator: {fileID: 7228789518950632430}
 --- !u!95 &7228789518950632430
 Animator:
@@ -168,3 +172,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6118700531281742187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5889363656045222964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193ea951b0d8d5b41bbdba4a017dbf34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

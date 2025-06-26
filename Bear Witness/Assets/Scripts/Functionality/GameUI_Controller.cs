@@ -13,8 +13,9 @@ public class GameUI_Controller : MonoBehaviour
         {
             instance = this;
         }
-        else
+        else if (instance != this)
         {
+            Debug.Log("DESTROYING GUIC!!");
             Destroy(gameObject);
             gameObject.SetActive(false);
             return;
@@ -56,7 +57,7 @@ public class GameUI_Controller : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            if (GameManager.instance.currentItems[i] != null) DisplayHeldItem(GameManager.instance.currentItems[i], i);
+            if (GameManager.instance.currentItems[i] != null) DisplayHeldItem(Resources.Load<Item>(GameManager.instance.currentItems[i]), i);
         }
 
         foreach (BadgeSlot badgeSlot in badgeSlots)

@@ -143,7 +143,7 @@ public class CallManager : MonoBehaviour
     {
         animator.SetBool("Proceed", false);
         animator.SetBool("LastState", false);
-        NPCData speaker = gameManager.npcMemory.Find(npcData => npcData.npc.name == currentSentence.speaker.name);
+        NPCData speaker = gameManager.npcMemory.Find(npcData => npcData.npc == currentSentence.speaker.name);
         faceDisplay.sprite = currentSentence.speaker.neutralFace;
         faceAnimator.runtimeAnimatorController = currentSentence.speaker.faceAnimations;
         faceAnimator.SetInteger("State", currentSentence.speaker.GetEmotionReference(currentSentence.emotion));
@@ -152,7 +152,7 @@ public class CallManager : MonoBehaviour
         {
             if (speaker.displayName == "")
             {
-                speaker.displayName = speaker.npc.name;
+                speaker.displayName = speaker.npc;
             }
             name = speaker.displayName;
         }

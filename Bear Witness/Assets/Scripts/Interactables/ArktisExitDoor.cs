@@ -29,18 +29,7 @@ public class ArktisExitDoor : Door
         GameUI_Controller.instance.HideAll();
         yield return new WaitForSeconds(8.5f);
         GameManager.instance.StartRun();
-        if (GameManager.instance.loopNumber == 0)
-        {
-            int index = -1;
-            index = GameManager.instance.tools.IndexOf(icePick);
-            if (index > -1) GameManager.instance.tools[index] = nullTool;
 
-            index = -1;
-            index = GameManager.instance.currentItems.IndexOf(icePick);
-            if (index > -1) GameManager.instance.currentItems[index] = nullTool;
-
-            GameUI_Controller.instance.Reload();
-        }
         GameManager.instance.hourglassFill = GameManager.instance.hourglassCapacity;
         FindObjectOfType<LevelLoader>().LoadNextLevel(base.destination);
     }

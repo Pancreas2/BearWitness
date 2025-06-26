@@ -25,7 +25,7 @@ public class BenchMenu : MonoBehaviour
         for (int i = 0; i < tools.Count; i++)
         {
             InventorySlot slot = tools[i].GetComponent<InventorySlot>();
-            slot.heldItem = GameManager.instance.tools[i];
+            slot.heldItem = Resources.Load<Item>(GameManager.instance.tools[i]);
             slot.ReloadImage();
         }
     }

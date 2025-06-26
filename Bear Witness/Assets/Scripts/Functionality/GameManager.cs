@@ -7,6 +7,8 @@ using Cinemachine;
 using System.Dynamic;
 using System;
 using Unity.VisualScripting;
+using Ink.Runtime;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,7 +25,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
-        else
+        else if (instance != this)
         {
             Destroy(gameObject);
             gameObject.SetActive(false);
@@ -34,12 +36,12 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < 12; i++)
         {
-            tools.Add(nullItem);
+            tools.Add("");
         }
 
         for (int i = 0; i < 24; i++)
         {
-            items.Add(nullItem);
+            items.Add("");
         }
 
         for (int i = 0; i < 20; i++)
@@ -71,7 +73,7 @@ public class GameManager : MonoBehaviour
 
         if (item.type == Item.ItemType.CircleBadge || item.type == Item.ItemType.SquareBadge || item.type == Item.ItemType.TriangleBadge)
         {
-            foundBadges.Add(item);
+            foundBadges.Add(item.name);
             return;
         }
 
@@ -79,14 +81,9 @@ public class GameManager : MonoBehaviour
 
         if (item.type == Item.ItemType.Tool)
         {
-            if (currentItems.Count < 3)
-            {
-                guic.DisplayHeldItem(item, currentItems.Count);
-                currentItems.Add(item);
-            }
 
-            int index = tools.IndexOf(nullItem);
-            tools[index] = item;
+            int index = tools.IndexOf("");
+            tools[index] = item.name;
 
             // render in menu
             //foreach (InventorySlot toolSlot in invManager.toolSlots)
@@ -96,8 +93,8 @@ public class GameManager : MonoBehaviour
             //}
         } else
         {
-            int index = items.IndexOf(nullItem);
-            items[index] = item;
+            int index = items.IndexOf("");
+            items[index] = item.name;
 
             // render in menu
             //foreach (InventorySlot itemSlot in invManager.itemSlots)
@@ -149,6 +146,7 @@ public class GameManager : MonoBehaviour
 
     public void DamagePlayer(float damage)
     {
+        if (!guic) guic = FindObjectOfType<GameUI_Controller>();
         playerCurrentHealth -= damage;
         guic.hourglass.DamageFlash(damage);
 
@@ -216,7 +214,16 @@ public class GameManager : MonoBehaviour
     {
         loopNumber++;
 
-        Debug.Log("Run Ends Here!!");
+        SerializableDictionary<string, string> keptStories = new();
+
+        foreach (string story in currentStories.Keys)
+        {
+            if (keepDialogueOnLoop.Contains(story)) {
+                keptStories.Add(story, currentStories[story]);
+            }
+        }
+
+        currentStories = keptStories;
 
         for (int i = 0; i < npcMemory.Count; i++)
         {
@@ -234,19 +241,19 @@ public class GameManager : MonoBehaviour
         playerCurrentHealth = playerMaxHealth;
         guic.hourglass.SetBroken(false);
 
-        ChangeScene("Arktis_Save_Room");
+        ChangeScene("The_Twixt");
 
         PlayerController player = FindObjectOfType<PlayerController>();
-        if (tools.Contains(player.brokenLantern))
+        if (tools.Contains("Broken Lantern"))
         {
-            int index = tools.IndexOf(player.brokenLantern);
-            tools[index] = player.normalLantern;
+            int index = tools.IndexOf("Broken Lantern");
+            tools[index] = "Lantern";
         }
     }
 
     private void Update()
     {
-        if (!pauseGameTime || panicMode)
+        if (!(pauseGameTime || PauseMenu.GameIsPaused) || panicMode)
         {
             if (!inArktis)
             {
@@ -280,6 +287,7 @@ public class GameManager : MonoBehaviour
     public float fileTime;
     public int fileCompletion;
     public int loopNumber = 0;
+    public int plotProgress = 0;
 
     private float lastUpdateTime = 0f;
     public bool pauseGameTime = false;
@@ -300,13 +308,14 @@ public class GameManager : MonoBehaviour
 
     public bool inArktis = true;
 
-    public List<Item> currentItems;
-    public List<Item> tools;
-    public List<Item> items;
-    [SerializeField] private Item nullItem;
+    public List<string> currentItems;
+    public List<string> tools;
+    public List<string> items;
 
     public List<string> playedCutscenes = new();
     public List<string> playedLines = new();
+    public SerializableDictionary<string, string> currentStories = new();
+
     public List<string> foundItems = new();
     public List<string> permanentFoundItems = new();
     public List<bool> doorStates = new();
@@ -321,8 +330,15 @@ public class GameManager : MonoBehaviour
     public List<bool> uniqueEnemies = new();
     public SlainEnemies slainEnemies;
 
-    public List<Item> foundBadges = new();
+    public List<string> foundBadges = new();
+
+    public List<TitleScreenTheme.TitleTheme> unlockedThemes = new();
 
     private GameUI_Controller guic;
+
+    private static string[] keepDialogueOnLoop =
+    {
+        "seal_pile", "lighthouse_unlock"
+    };
 }
 

@@ -33,7 +33,9 @@ public class PlayerController : MonoBehaviour
 	public Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;			// For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
-	private int coyotePoints = 8;				// Number of forgiveness frames for jumps
+	private int coyotePoints = 8;               // Number of forgiveness frames for jumps
+
+	private bool jumping = false;
 
 	private GameManager gameManager;
 	private float attackTime = 0f;
@@ -96,7 +98,7 @@ public class PlayerController : MonoBehaviour
         // checks to see if the lantern is equipped
         for (int i = 0; i < gameManager.currentItems.Count; i++)
         {
-            if (gameManager.currentItems[i].name == "Lantern")
+            if (gameManager.currentItems[i] == "Lantern")
             {
                 animator.SetBool("useLantern", true);
                 lanternLight.enabled = true;
@@ -353,6 +355,7 @@ public class PlayerController : MonoBehaviour
         {
 			// prevent further jumps
 			coyotePoints = 0;
+			jumping = true;
 
 			if (m_Grounded || wasClimbing)
 			{
@@ -392,13 +395,13 @@ public class PlayerController : MonoBehaviour
 		transform.localScale = theScale;
 	}
 
-	public void Damage(int damage, float sourcePositionX, bool doKnockback = true)
+	public void Damage(int damage, float sourcePositionX, bool doKnockback = true, bool bypassInv = false)
 	{
 		if (shielded && (transform.position.x - sourcePositionX > 0 ^ m_FacingRight))
         {
 			if (doKnockback)
 				Knockback(200f);
-        } else if (invTime <= Time.time)
+        } else if (invTime <= Time.time || bypassInv)
         {
 			if (shielded)
             {
@@ -447,8 +450,8 @@ public class PlayerController : MonoBehaviour
 	{
 		animator.ResetTrigger("attackEnd");
 		attackTime = Time.time + 0.15f;
-		Item tool = gameManager.currentItems[button];
-		switch (tool.name)
+		string tool = gameManager.currentItems[button];
+		switch (tool)
 		{
 			case "Ice Pick":
 				attackType = 2;
@@ -472,8 +475,17 @@ public class PlayerController : MonoBehaviour
 				attackType = 6;
 				break;
 
+			case "Fire Spear":
+				attackType = 7;
+				if (m_HasAirAttack)
+				{
+					SpearUp();
+					m_HasAirAttack = false;
+				}
+				break;
+
 			default:
-				if (button != 0)
+				if (button == 2 && Input.GetButton("Run"))
 				{
 					attackType = 1;
 					m_Rigidbody2D.velocity = new Vector2(0f, m_Rigidbody2D.velocity.y);
@@ -496,6 +508,7 @@ public class PlayerController : MonoBehaviour
     {
 		Vector3 attackCenter;
 		Collider2D[] hitEnemies;
+		bool hitLiveEnemy = false;
 		switch (attackType)
         {
 			case 0:
@@ -504,8 +517,10 @@ public class PlayerController : MonoBehaviour
 				{
 					enemy.TryGetComponent(out ReceiveDamage hitbox);
 					if (hitbox) hitbox.Damage(3, transform.position.x);
-				}
-				if (hitEnemies.Length > 0)
+					enemy.TryGetComponent(out AttackBounce atkBounce);
+					if (atkBounce && atkBounce.GetActive()) hitLiveEnemy = true;
+                }
+				if (hitLiveEnemy)
 				{
 					Knockback(100f);
                     CinemachineShake.instance.ShakeCamera(0.1f, 0.25f);
@@ -519,9 +534,11 @@ public class PlayerController : MonoBehaviour
 				hitEnemies = Physics2D.OverlapCircleAll(attackCenter, attackRange * 0.7f, enemyLayers + m_WhatIsGround);
 				foreach (Collider2D enemy in hitEnemies)
 				{
-					enemy.TryGetComponent(out ReceiveDamage hitbox);
-					if (hitbox) hitbox.Damage(5, transform.position.x);
-				}
+                    enemy.TryGetComponent(out ReceiveDamage hitbox);
+                    if (hitbox) hitbox.Damage(5, transform.position.x);
+                    enemy.TryGetComponent(out AttackBounce atkBounce);
+                    if (atkBounce && atkBounce.GetActive()) hitLiveEnemy = true;
+                }
 				if (hitEnemies.Length > 0)
 				{
                     CinemachineShake.instance.ShakeCamera(0.1f, 0.25f);
@@ -547,10 +564,12 @@ public class PlayerController : MonoBehaviour
 				hitEnemies = Physics2D.OverlapCircleAll(m_AttackPoint.position, attackRange, hammerLayers);
 				foreach (Collider2D enemy in hitEnemies)
 				{
-					enemy.TryGetComponent(out ReceiveDamage hitbox);
-					if (hitbox) hitbox.Damage(10, transform.position.x);
-				}
-				if (hitEnemies.Length > 0)
+                    enemy.TryGetComponent(out ReceiveDamage hitbox);
+                    if (hitbox) hitbox.Damage(10, transform.position.x);
+                    enemy.TryGetComponent(out AttackBounce atkBounce);
+                    if (atkBounce && atkBounce.GetActive()) hitLiveEnemy = true;
+                }
+				if (hitLiveEnemy)
 				{
 					Knockback(100f);
                     CinemachineShake.instance.ShakeCamera(0.2f, 2f);
@@ -562,10 +581,12 @@ public class PlayerController : MonoBehaviour
 				hitEnemies = Physics2D.OverlapCircleAll(attackCenter, attackRange, hammerLayers);
 				foreach (Collider2D enemy in hitEnemies)
 				{
-					enemy.TryGetComponent(out ReceiveDamage hitbox);
-					if (hitbox) hitbox.Damage(10, transform.position.x);
-				}
-				if (hitEnemies.Length > 0)
+                    enemy.TryGetComponent(out ReceiveDamage hitbox);
+                    if (hitbox) hitbox.Damage(10, transform.position.x);
+                    enemy.TryGetComponent(out AttackBounce atkBounce);
+                    if (atkBounce && atkBounce.GetActive()) hitLiveEnemy = true;
+                }
+				if (hitLiveEnemy)
 				{
 					// land and bounce
 					TryGetComponent<CancelHammerBounce>(out CancelHammerBounce chb);
@@ -587,12 +608,12 @@ public class PlayerController : MonoBehaviour
 				lanternProjectile.GetComponent<Rigidbody2D>().velocity = vel;
 
 				int index = -1;
-				index = gameManager.tools.IndexOf(normalLantern);
-                if (index > -1) gameManager.tools[index] = brokenLantern;
+				index = gameManager.tools.IndexOf("Lantern");
+                if (index > -1) gameManager.tools[index] = "Broken Lantern";
 
                 index = -1;
-				index = gameManager.currentItems.IndexOf(normalLantern);
-				if (index > -1) gameManager.currentItems[index] = brokenLantern;
+				index = gameManager.currentItems.IndexOf("Lantern");
+				if (index > -1) gameManager.currentItems[index] = "Broken Lantern";
 
 				GameUI_Controller.instance.Reload();
 				CheckLantern();
@@ -641,6 +662,7 @@ public class PlayerController : MonoBehaviour
             if (colliders[i].gameObject != gameObject)
             {
                 m_Grounded = true;
+                m_HasAirAttack = true;
                 if (m_Rigidbody2D.velocity.y < 0)
                 {
                     // NOT SURE IF THIS IS STILL NECESSARY
@@ -649,8 +671,8 @@ public class PlayerController : MonoBehaviour
                     {
                         // player just landed!
                         coyotePoints = 8;
-                        m_HasAirAttack = true;
                         OnLandEvent.Invoke();
+						jumping = false;
                     }
                 }
             }
@@ -682,6 +704,7 @@ public class PlayerController : MonoBehaviour
 
 	private void ForceWallJump()
     {
+		jumping = false;
 		float jumpXKick = 200f;
 		if (m_FacingRight) jumpXKick *= -1f;
 		SetGravityFraction(2f / 3f);
@@ -696,6 +719,19 @@ public class PlayerController : MonoBehaviour
 			moveLeftDelay = Time.time + 0.15f;
         }
 	}
+
+	private void SpearUp()
+	{
+		jumping = false;
+		coyotePoints = 0;
+        SetGravityFraction(2f / 3f);
+		m_Rigidbody2D.velocity = Vector2.zero;
+        m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+        playerMovement.frozen = false;
+        moveRightDelay = Time.time + 0.25f;
+        moveLeftDelay = Time.time + 0.25f;
+		invTime = Time.time + 0.25f;
+    }
 
 	private void Knockback(float force)
     {
@@ -724,14 +760,18 @@ public class PlayerController : MonoBehaviour
 
 	IEnumerator UnfreezeAfter(float time)
     {
-		playerMovement.frozen = true;
+		playerMovement.Freeze("Controller");
 		yield return new WaitForSeconds(time);
-		playerMovement.frozen = false;
+		playerMovement.Unfreeze("Controller");
     }
 
 	public void ReduceUpwardMovement()
     {
-		m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, Mathf.Min(m_Rigidbody2D.velocity.y, m_Rigidbody2D.velocity.y / 3f));
+		if (jumping)
+		{
+            m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, Mathf.Min(m_Rigidbody2D.velocity.y, m_Rigidbody2D.velocity.y / 3f));
+			jumping = false;
+        }
 	}
 
 	public void SetGravityFraction(float gravityFraction)

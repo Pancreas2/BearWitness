@@ -8,8 +8,13 @@ public class AirshipScreen : MonoBehaviour
     [SerializeField] private List<Sprite> digitSprites;
     [SerializeField] private List<SpriteRenderer> digitRenderers;
 
+    [SerializeField] private Transform airshipIndicator;
+
     private List<int> convertedTime = new();
     private List<int> rememberedTime = new();
+
+    readonly private float airshipIndicatorLeft = -0.875f;
+    readonly private float airshipIndicatorRight = 0.875f;
 
     private GameManager gameManager;
 
@@ -29,15 +34,37 @@ public class AirshipScreen : MonoBehaviour
     void Update()
     {
         float gameTime = gameManager.gameTime;
-        convertedTime[0] = Mathf.FloorToInt(gameTime / 1440f);
-        gameTime -= convertedTime[0] * 1440f;
-        convertedTime[1] = Mathf.FloorToInt(gameTime / 600f);
-        gameTime -= convertedTime[1] * 600f;
-        convertedTime[2] = Mathf.FloorToInt(gameTime / 60f);
-        gameTime -= convertedTime[2] * 60f;
-        convertedTime[3] = Mathf.FloorToInt(gameTime / 10f);
-        gameTime -= convertedTime[3] * 10f;
-        convertedTime[4] = Mathf.FloorToInt(gameTime);
+        float displayTime = gameTime;
+
+        // disgusting spaghetti
+        float testTime = AppearAtTime.EventMatch[AppearAtTime.Events.AirshipLeaveShore];
+        if (gameTime < testTime)
+        {
+            displayTime = testTime - gameTime;
+            airshipIndicator.position = new Vector2(airshipIndicatorLeft, airshipIndicator.position.y);
+        } else
+        {
+            testTime = AppearAtTime.EventMatch[AppearAtTime.Events.AirshipArriveCity];
+            if (gameTime < testTime)
+            {
+                displayTime = testTime - gameTime;
+                float dist = displayTime / (AppearAtTime.EventMatch[AppearAtTime.Events.AirshipArriveCity] - AppearAtTime.EventMatch[AppearAtTime.Events.AirshipLeaveShore]);
+                airshipIndicator.position = new Vector2(airshipIndicatorLeft * dist + airshipIndicatorRight * (1 - dist), airshipIndicator.position.y);
+            } else
+            {
+                airshipIndicator.position = new Vector2(airshipIndicatorRight, airshipIndicator.position.y);
+            }
+        }
+
+        convertedTime[0] = Mathf.FloorToInt(displayTime / 1440f);
+        displayTime -= convertedTime[0] * 1440f;
+        convertedTime[1] = Mathf.FloorToInt(displayTime / 600f);
+        displayTime -= convertedTime[1] * 600f;
+        convertedTime[2] = Mathf.FloorToInt(displayTime / 60f);
+        displayTime -= convertedTime[2] * 60f;
+        convertedTime[3] = Mathf.FloorToInt(displayTime / 10f);
+        displayTime -= convertedTime[3] * 10f;
+        convertedTime[4] = Mathf.FloorToInt(displayTime);
 
         for (int i = 0; i < 5; i++)
         {

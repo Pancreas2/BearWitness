@@ -16,7 +16,7 @@ public class ChangeNPCName : StateMachineBehaviour
             gameManager = FindObjectOfType<GameManager>();
         }
 
-        NPCData npcData = gameManager.npcMemory.Find(npcData => npcData.npc.name == targetNPC.name);
+        NPCData npcData = gameManager.npcMemory.Find(npcData => npcData.npc == targetNPC.name);
         if (npcData == null)
         {
             Debug.LogAssertion("NPC " + targetNPC.name + " not found");

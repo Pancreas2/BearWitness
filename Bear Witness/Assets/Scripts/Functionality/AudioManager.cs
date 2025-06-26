@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Audio;
 using static Gate;
+using System.Linq;
 
 public class AudioManager : MonoBehaviour
 {
@@ -18,6 +19,14 @@ public class AudioManager : MonoBehaviour
     private float prevBGMusicTime;
 
     private LevelLoader levelLoader;
+
+    public float musicVolFactor = 1f;
+    public float soundVolFactor = 1f;
+
+    private readonly string[] isMusic =
+    {
+        "Arktis", "Airship", "Shores", "Stormy_Shores", "Overgrown_Hollow", "Lighthouse", "Village", "Sigil_Wake", "Sigil_Sleep", "Fragmentation", "Intemperance", "Blacksmith", "Crab", "Flying_Feathers", "Golden_City", "Intemperance_Intro", "Walrus", "Library", "Library_Isabel", "Crown", "Menu"
+    };
 
     public string AreaMusicMatch(LevelLoader.LevelArea area)
     {
@@ -80,7 +89,8 @@ public class AudioManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-        } else
+            DontDestroyOnLoad(gameObject);
+        } else if (instance != this)
         {
             Destroy(gameObject);
             // for some reason this is necessary ???
@@ -88,15 +98,38 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        DontDestroyOnLoad(gameObject);
+        musicVolFactor = PlayerPrefs.GetFloat("music");
+        soundVolFactor = PlayerPrefs.GetFloat("sound");
 
         foreach (Sound sound in sounds)
         {
             sound.source = gameObject.AddComponent<AudioSource>();
             sound.source.clip = sound.clip;
-            sound.source.volume = sound.volume;
+            if (isMusic.Contains(sound.name)) {
+                sound.source.volume = sound.volume * musicVolFactor;
+            } else
+            {
+                sound.source.volume = sound.volume * soundVolFactor;
+            }
             sound.source.pitch = sound.pitch;
             sound.source.loop = sound.loop;
+        }
+    }
+
+    public void RecalibrateVolume()
+    {
+        foreach (Sound sound in sounds)
+        {
+            if (isMusic.Contains(sound.name))
+            {
+                sound.source.volume = sound.volume * musicVolFactor;
+                sound.source.mute = musicVolFactor == 0f;  // mutes if factor is 0, unmutes otherwise
+            }
+            else
+            {
+                sound.source.volume = sound.volume * soundVolFactor;
+                sound.source.mute = soundVolFactor == 0f;
+            }
         }
     }
 
@@ -122,6 +155,10 @@ public class AudioManager : MonoBehaviour
         if (levelLoader.overrideLevelMusic != "")
         {
             levelMusic = levelLoader.overrideLevelMusic;
+        } else if (levelLoader.overrideLevelMusic == "None")
+        {
+            Stop(currentBGMusic);
+            return;
         }
 
         // for overriding music during gameplay (e.g. Shores Storm)
@@ -158,7 +195,6 @@ public class AudioManager : MonoBehaviour
     {
         Sound sound = sounds.Find(sound => sound.name == name);
         if (sound == null) return;
-        sound.source.volume = 0;
         sound.source.Play();
         sound.source.time = startTime;
         StartCoroutine(FadeIn(sound, fadeTime, delay));
@@ -202,7 +238,7 @@ public class AudioManager : MonoBehaviour
 
     private IEnumerator FadeOut(Sound sound, float time)
     {
-        float initialVolume = sound.volume;
+        float initialVolume = sound.source.volume;
 
         if (time > 0f)
             for (int i = 9; i >= 0; i--)
@@ -214,13 +250,15 @@ public class AudioManager : MonoBehaviour
 
         playingSounds.Remove(sound);
         sound.source.Stop();
+        sound.source.volume = initialVolume;
     }
 
     private IEnumerator FadeIn(Sound sound, float time, float delay)
     {
         yield return new WaitForSeconds(delay);
 
-        float initialVolume = sound.volume;
+        float initialVolume = sound.source.volume;
+        sound.source.volume = 0;
 
         for (int i = 1; i <= 10; i++)
         {

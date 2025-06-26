@@ -14,7 +14,7 @@ public class NPCController : DialogueInteractable
         bool containsNPC = false;
         foreach (NPCData npcData in gameManager.npcMemory)
         {
-            if (npcData.npc.name == data.npc.name)
+            if (npcData.npc == data.npc)
             {
                 containsNPC = true;
                 break;

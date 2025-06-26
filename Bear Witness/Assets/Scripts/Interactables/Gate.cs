@@ -28,7 +28,8 @@ public class Gate : MonoBehaviour
         CircleSigilDoor,
         CircleSigil,
         None,
-        ShoresNexusShortcut
+        ShoresNexusShortcut,
+        AirshipShortcut
     }
 
     public static readonly Dictionary<Gates, int> GateMatch = new Dictionary<Gates, int>
@@ -43,7 +44,8 @@ public class Gate : MonoBehaviour
         { Gates.CrabShortcut, 8 },
         { Gates.CircleSigilDoor, 9 },
         { Gates.CircleSigil, 10 },
-        { Gates.ShoresNexusShortcut, 11}
+        { Gates.ShoresNexusShortcut, 11},
+        { Gates.AirshipShortcut, 12 }
     };
 
 
@@ -126,5 +128,17 @@ public class Gate : MonoBehaviour
         }
 
         transform.localPosition = new Vector3(transform.localPosition.x, closedPoint);
+    }
+
+    public static Gates stringToGate(string input)
+    {
+        switch (input)
+        {
+            case "Lighthouse": return Gates.Lighthouse;
+            case "Lighthouse_Airship": return Gates.LighthouseAirship;
+            default:
+                Debug.LogError(input + " not added to stringToGate method");
+                return Gates.None;
+        }
     }
 }

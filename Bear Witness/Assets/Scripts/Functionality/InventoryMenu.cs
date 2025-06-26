@@ -150,7 +150,7 @@ public class InventoryMenu : MonoBehaviour
     {
         if (tool)
         {
-            Item itemHolder = gameManager.tools[a];
+            string itemHolder = gameManager.tools[a];
             gameManager.tools[a] = gameManager.tools[b];
             gameManager.tools[b] = itemHolder;
 
@@ -164,14 +164,14 @@ public class InventoryMenu : MonoBehaviour
                     }
                     else
                     {
-                        gameManager.currentItems[i] = new();
+                        gameManager.currentItems[i] = "";
                     }
                 }
             }
 
         } else
         {
-            Item itemHolder = gameManager.items[a];
+            string itemHolder = gameManager.items[a];
             gameManager.items[a] = gameManager.items[b];
             gameManager.items[b] = itemHolder;
         }

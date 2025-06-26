@@ -6,7 +6,7 @@ public class TooltipFade : MonoBehaviour
 {
     public float timeDelay;
     public bool active = true;
-    public List<KeyCode> keyCodes;
+    public string input;
     private float timeDestination;
     [SerializeField] private Animator animator;
 
@@ -23,7 +23,7 @@ public class TooltipFade : MonoBehaviour
         {
             animator.SetBool("visible", true);
         }
-        if (AnyKeyPressed(keyCodes))
+        if (InputIs(input))
         {
             ForceFadeOut();
         }
@@ -33,17 +33,20 @@ public class TooltipFade : MonoBehaviour
         }
     }
 
-    bool AnyKeyPressed(List<KeyCode> keys)
+    bool InputIs(string target)
     {
-        foreach (KeyCode key in keys) {
-            if (Input.GetKey(key)) return true;
+        if (target == "Horizontal" || target == "Vertical")
+        {
+            return Input.GetAxisRaw(target) != 0;
+        } else
+        {
+            return Input.GetButton(target);
         }
-        return false;
     }
 
     public void ForceFadeOut()
     {
-        animator.SetBool("visible", false);
         active = false;
+        animator.SetBool("visible", false);
     }
 }

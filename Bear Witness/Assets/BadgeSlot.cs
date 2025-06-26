@@ -18,7 +18,7 @@ public class BadgeSlot : MonoBehaviour
     {
         if (heldBadge)
         {
-            badgeOwned = GameManager.instance.foundBadges.Contains(heldBadge);
+            badgeOwned = GameManager.instance.foundBadges.Contains(heldBadge.name);
             image.sprite = heldBadge.image;
         }
 

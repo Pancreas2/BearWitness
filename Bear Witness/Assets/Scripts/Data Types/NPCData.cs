@@ -5,9 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class NPCData
 {
-    public NPC npc;
+    public string npc;
     public string displayName;
     public int trust = 0;
     public bool met = false;
     public bool spokenTo = false;
+    public string id;
 }

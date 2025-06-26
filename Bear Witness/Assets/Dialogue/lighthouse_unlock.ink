@@ -1,0 +1,31 @@
+#lighthouse_unlock
+
+EXTERNAL hasItem(name)
+EXTERNAL openDoor(name)
+
+SKIP ME
+
+-> main
+
+=== main ===
+An old wooden door. #arc_
+{
+- hasItem("Eyestone"): It's locked. #arc_conce
+    -> use_key 
+- It's locked. #arc_conce
+    -> end
+}
+
+=== use_key ===
++ [Use the Eyestone] It fits perfectly! #arc_happy
+    ~ openDoor("Lighthouse")
+    -> end
++ [Do not] I think I'll hold on to it. #arc_
+    -> end
+
+=== end ===
+^S
+-> END
+
+=== start ===
+-> main

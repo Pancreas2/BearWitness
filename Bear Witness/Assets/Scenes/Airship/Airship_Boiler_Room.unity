@@ -7834,7 +7834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3649223491785412620, guid: 06b9ba8e956f83c4e93b03697080d9b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.9185572
+      value: 2.9198654
       objectReference: {fileID: 0}
     - target: {fileID: 3649223491785412620, guid: 06b9ba8e956f83c4e93b03697080d9b7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8772,7 +8772,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3801705913285955251, guid: bb2360c25c9c1194b98631ed0f09373c, type: 3}
       propertyPath: room
-      value: Airship_Lounge
+      value: Airship_Controls
       objectReference: {fileID: 0}
     - target: {fileID: 4708023624459353122, guid: bb2360c25c9c1194b98631ed0f09373c, type: 3}
       propertyPath: m_Name
@@ -9032,7 +9032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7857786011467424883, guid: b72da7dcc3855964ead7db92f475ce0c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.1317177
+      value: -3.131718
       objectReference: {fileID: 0}
     - target: {fileID: 7857786011467424883, guid: b72da7dcc3855964ead7db92f475ce0c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13328,7 +13328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 381048991196515774, guid: 192cd021680c8f345831afd6134ba90c, type: 3}
       propertyPath: OnCutsceneStart.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 381048991196515774, guid: 192cd021680c8f345831afd6134ba90c, type: 3}
       propertyPath: OnCutsceneStart.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -13353,7 +13353,7 @@ PrefabInstance:
     - target: {fileID: 381048991196515774, guid: 192cd021680c8f345831afd6134ba90c, type: 3}
       propertyPath: OnCutsceneStart.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 7602293223525326990}
+      objectReference: {fileID: 1847051625914198505}
     - target: {fileID: 381048991196515774, guid: 192cd021680c8f345831afd6134ba90c, type: 3}
       propertyPath: OnCutsceneStart.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -13400,7 +13400,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 381048991196515774, guid: 192cd021680c8f345831afd6134ba90c, type: 3}
       propertyPath: OnCutsceneStart.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetTrigger
+      value: StartFight
       objectReference: {fileID: 0}
     - target: {fileID: 381048991196515774, guid: 192cd021680c8f345831afd6134ba90c, type: 3}
       propertyPath: OnCutsceneStart.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -13424,7 +13424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 381048991196515774, guid: 192cd021680c8f345831afd6134ba90c, type: 3}
       propertyPath: OnCutsceneStart.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.Animator, UnityEngine
+      value: CarlottaBoss, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 381048991196515774, guid: 192cd021680c8f345831afd6134ba90c, type: 3}
       propertyPath: OnCutsceneStart.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -13576,7 +13576,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8310943458786535156, guid: 192cd021680c8f345831afd6134ba90c, type: 3}
       propertyPath: m_Name
-      value: Cutscene Trigger
+      value: Fight Trigger
       objectReference: {fileID: 0}
     - target: {fileID: 8310943458786535156, guid: 192cd021680c8f345831afd6134ba90c, type: 3}
       propertyPath: m_Layer
@@ -13586,7 +13586,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 381048991196515774, guid: 192cd021680c8f345831afd6134ba90c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -13596,6 +13597,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8310943458786535156, guid: 192cd021680c8f345831afd6134ba90c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1323180215}
+    - targetCorrespondingSourceObject: {fileID: 8310943458786535156, guid: 192cd021680c8f345831afd6134ba90c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1323180216}
   m_SourcePrefab: {fileID: 100100000, guid: 192cd021680c8f345831afd6134ba90c, type: 3}
 --- !u!1 &1323180211 stripped
 GameObject:
@@ -13665,6 +13669,83 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: 1
+--- !u!114 &1323180216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323180211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210ee39c86a29154c99b7d0fe934f011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1847051625914198505}
+        m_TargetAssemblyTypeName: CarlottaBoss, Assembly-CSharp
+        m_MethodName: StartFight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1564894822}
+        m_TargetAssemblyTypeName: BossEnemy, Assembly-CSharp
+        m_MethodName: UpdateHealth
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1135739336}
+        m_TargetAssemblyTypeName: Cinemachine.CinemachineVirtualCameraBase, Cinemachine
+        m_MethodName: set_Priority
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 12
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1513978229}
+        m_TargetAssemblyTypeName: Gate, Assembly-CSharp
+        m_MethodName: SetForceOpen
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 12
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1323180211}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 12
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  deadTime: 0.5
+  contactTag: Player
 --- !u!1 &1358014427
 GameObject:
   m_ObjectHideFlags: 0
@@ -15779,11 +15860,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2580a6073e59ed4289f1723afe2ae01, type: 3}
---- !u!95 &7602293223525326990 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 1092801154751736779, guid: a2580a6073e59ed4289f1723afe2ae01, type: 3}
+--- !u!114 &1847051625914198505 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1590898662676642117, guid: a2580a6073e59ed4289f1723afe2ae01, type: 3}
   m_PrefabInstance: {fileID: 1847051625914198504}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f68084424190999418eabd0fa308d467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8246439781056012134
 PrefabInstance:
   m_ObjectHideFlags: 0

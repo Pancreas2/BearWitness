@@ -12,12 +12,12 @@ public class InitializeDialogue : StateMachineBehaviour
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
         if (!gameManager) gameManager = FindObjectOfType<GameManager>();
-        NPCData npcData = gameManager.npcMemory.Find(npcData => npcData.npc.name == targetNPC.name);
+        NPCData npcData = gameManager.npcMemory.Find(npcData => npcData.npc == targetNPC.name);
         if (npcData == null)
         {
             Debug.Log("Adding NPC data for " + targetNPC.name);
             NPCData newData = new();
-            newData.npc = targetNPC;
+            newData.npc = targetNPC.name;
             newData.displayName = targetNPC.name;
             newData.trust = 0;
             gameManager.npcMemory.Add(newData);
@@ -39,7 +39,7 @@ public class InitializeDialogue : StateMachineBehaviour
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateExit(animator, stateInfo, layerIndex);
-        NPCData npcData = gameManager.npcMemory.Find(npcData => npcData.npc.name == targetNPC.name);
+        NPCData npcData = gameManager.npcMemory.Find(npcData => npcData.npc == targetNPC.name);
         if (npcData == null)
         {
             Debug.LogError("NPC " + targetNPC.name + " not found");

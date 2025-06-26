@@ -5,12 +5,10 @@ using UnityEngine;
 public class NPCEvolveOverLoops : MonoBehaviour
 {
     [Header("Priority top to bottom")]
-    public List<DialogueControllerByLoop> stateMachines = new();
+    public List<DialogueControllerByLoop> dialogues = new();
     private int loopNumber = 0;
-    public Animator targetAnimator;
-    public RuntimeAnimatorController defaultController;
-
-    public NPCController npcController;
+    public DialogueInteractable targetInteractable;
+    public TextAsset defaultDialogue;
 
     public string setLevelMusicIfPresent;
 
@@ -20,34 +18,34 @@ public class NPCEvolveOverLoops : MonoBehaviour
     {
         loopNumber = GameManager.instance.loopNumber;
 
-        foreach (DialogueControllerByLoop stateMachine in stateMachines)
+        foreach (DialogueControllerByLoop controller in dialogues)
         {
-            if (loopNumber == stateMachine.loopNumber + stateMachine.offset)
+            if (loopNumber == controller.loopNumber + controller.offset)
             {
-                SetDialogue(stateMachine);
+                SetDialogue(controller);
                 return;
-            } else if (stateMachine.periodic && (loopNumber - stateMachine.offset) % stateMachine.loopNumber == 0)
+            } else if (controller.periodic && (loopNumber - controller.offset) % controller.loopNumber == 0)
             {
-                if (!(loopNumber == 0 && stateMachine.excludeZeroLoop))
+                if (!(loopNumber == 0 && controller.excludeZeroLoop))
                 {
-                    SetDialogue(stateMachine);
+                    SetDialogue(controller);
                     return;
                 }
             }
         }
 
         Debug.Log("No special cases found");
-        npcController.enabled = false;
-        targetAnimator.runtimeAnimatorController = defaultController;
+        targetInteractable.enabled = false;
+        targetInteractable.dialogue = defaultDialogue;
         if (disableIfNotPresent)
         {
             gameObject.SetActive(false);
         }
     }
 
-    void SetDialogue(DialogueControllerByLoop stateMachine)
+    void SetDialogue(DialogueControllerByLoop controller)
     {
-        targetAnimator.runtimeAnimatorController = stateMachine.stateMachine;
+        targetInteractable.dialogue = controller.dialogue;
         if (setLevelMusicIfPresent != "")
         {
             FindObjectOfType<LevelLoader>().overrideLevelMusic = setLevelMusicIfPresent;            

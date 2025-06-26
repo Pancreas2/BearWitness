@@ -22,4 +22,15 @@ public class ReceiveDamage : MonoBehaviour
             if (renderer) renderer.material.SetFloat("_FlashBrightness", flashValue);
         }
     }
+
+    public int GetHealth()
+    {
+        if (passDamageTo)
+        {
+            passDamageTo.TryGetComponent<BaseEnemy>(out BaseEnemy enemy);
+            if (enemy) return enemy.currentHealth;
+            else return 0;
+        }
+        else return 0;
+    }
 }

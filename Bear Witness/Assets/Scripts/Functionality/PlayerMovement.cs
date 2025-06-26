@@ -18,7 +18,8 @@ public class PlayerMovement : MonoBehaviour
     bool roll = false;
     public bool frozen = false;
     bool wasFrozen = false;
-    public float freezeTime;
+    string frozenBy = "";
+
     bool attacking = false;
     int attackButton = 0;
     readonly float attackRate = 3.5f;
@@ -54,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
             heldJump = false;
         }
 
-        if (heldJump && Input.GetButtonUp("Jump"))
+        if (heldJump && Input.GetButtonUp("Jump") )
         {
             heldJump = false;
             StartCoroutine(CancelJump());
@@ -221,5 +222,19 @@ public class PlayerMovement : MonoBehaviour
         roll = false;
         attacking = false;
         jump = false;
+    }
+
+    public void Freeze(string source)
+    {
+        frozen = true;
+        frozenBy = source;
+    }
+
+    public void Unfreeze(string source)
+    {
+        if (source == frozenBy)
+        {
+            frozen = false;
+        }
     }
 }

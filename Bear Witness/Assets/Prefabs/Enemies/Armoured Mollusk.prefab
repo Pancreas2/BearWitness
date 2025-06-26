@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 2766603933273036606}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &5372063697431661403
 Rigidbody2D:
@@ -79,6 +79,7 @@ MonoBehaviour:
   baseEnemy: {fileID: 7580803233564780676}
   animator: {fileID: 6389906993288093303}
   lookForPlayer: {fileID: 5442295733840109928}
+  facingRight: 0
 --- !u!114 &1612504835055702935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,6 +324,7 @@ GameObject:
   - component: {fileID: 7580803233564780676}
   - component: {fileID: 5442295733840109928}
   - component: {fileID: 5702375192009844630}
+  - component: {fileID: 5534914552691121548}
   m_Layer: 10
   m_Name: Sprite
   m_TagString: Untagged
@@ -565,18 +567,6 @@ MonoBehaviour:
           m_StringArgument: die
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Cinemachine.CinemachineVirtualCameraBase, Cinemachine
-        m_MethodName: set_Priority
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 8
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 0
   coinShower: {fileID: 5702375192009844630}
   droppedCoins: 35
 --- !u!114 &5442295733840109928
@@ -632,3 +622,15 @@ MonoBehaviour:
   bigCoin: {fileID: 571788386667076984, guid: f925691b533213d438f686d7a57850fd, type: 3}
   mediumCoin: {fileID: 2643579888471910234, guid: a5be1d9064bafa54d9849917bd45e03f, type: 3}
   smallCoin: {fileID: 3521268495908571157, guid: fb0c264f257140f448f00cea837b599a, type: 3}
+--- !u!114 &5534914552691121548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8394134127646337637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193ea951b0d8d5b41bbdba4a017dbf34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

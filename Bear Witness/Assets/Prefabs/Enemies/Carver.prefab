@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7675192617463320679}
   - component: {fileID: 3113530036820217430}
   - component: {fileID: 8557665014167748970}
+  - component: {fileID: 7382111691783425067}
   m_Layer: 10
   m_Name: Carver
   m_TagString: Untagged
@@ -122,6 +123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passDamageTo: {fileID: 0}
+  renderer: {fileID: 4107861512020021874}
+  flashValue: 0
   maxHealth: 60
   currentHealth: 0
   animator: {fileID: 1032086668560381036}
@@ -129,31 +132,14 @@ MonoBehaviour:
   knockback: {x: 20, y: 10}
   m_Rigidbody2D: {fileID: 8557665014167748970}
   invulnerable: 0
-  renderer: {fileID: 4107861512020021874}
-  OnHurt:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1032086668560381036}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: wakeUp
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnHurtInvulnerable:
-    m_PersistentCalls:
-      m_Calls: []
   OnStart:
     m_PersistentCalls:
       m_Calls: []
   OnPerish:
     m_PersistentCalls:
       m_Calls: []
+  coinShower: {fileID: 0}
+  droppedCoins: 0
 --- !u!61 &3113530036820217430
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -226,3 +212,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &7382111691783425067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7597604442686145986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193ea951b0d8d5b41bbdba4a017dbf34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

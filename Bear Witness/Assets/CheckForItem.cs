@@ -12,7 +12,7 @@ public class CheckForItem : MonoBehaviour
 
     void Start()
     {
-        if (GameManager.instance.tools.Contains(item) || GameManager.instance.items.Contains(item))
+        if (GameManager.instance.tools.Contains(item.name) || GameManager.instance.items.Contains(item.name))
         {
             OnHasItem.Invoke();
         } else

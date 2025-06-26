@@ -35,6 +35,7 @@ public class SaveInteractable : Interactable
         playerIsFrozen = true;
         player.frozen = true;
         player.PlayAnimation("spin");
+        gameManager.HealPlayer(gameManager.playerMaxHealth);
         freezeDelay = Time.time + 1f;
         gameManager.SavePlayerData(gameManager.fileNumber);
     }

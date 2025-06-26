@@ -41106,6 +41106,14 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1312510955}
+    - target: {fileID: 1049516454634095233, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 4900000, guid: 241b1b20a0f589f46a709984a9acaf92, type: 3}
+    - target: {fileID: 1049516454634095233, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogueTrigger
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2107673399963597427, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -41126,6 +41134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Seal Pile
       objectReference: {fileID: 0}
+    - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 4900000, guid: 241b1b20a0f589f46a709984a9acaf92, type: 3}
     - target: {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
       propertyPath: dialogue.elements.Array.size
       value: 4
@@ -41298,7 +41310,8 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: -1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8838085657771519567, guid: e3310e1a9dbe8854692dc5fcc8e62547, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -66157,7 +66170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3649223491785412620, guid: 06b9ba8e956f83c4e93b03697080d9b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.66296625
+      value: -0.66986465
       objectReference: {fileID: 0}
     - target: {fileID: 3649223491785412620, guid: 06b9ba8e956f83c4e93b03697080d9b7, type: 3}
       propertyPath: m_LocalPosition.y

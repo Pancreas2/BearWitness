@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
+using Ink.Runtime;
+using System.Linq;
+using static UnityEngine.Rendering.DebugUI;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -38,6 +41,8 @@ public class DialogueManager : MonoBehaviour
     public bool lastState = false;
 
     private bool writingDialogueCommand;
+    private bool doneSpeaking = false;
+    private int positionTracker = 0;
 
     public GameObject shopMenu;
 
@@ -46,6 +51,10 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private List<ShopDisplay> shopDisplays = new();
 
     private GameObject lastSelected;
+
+    // Ink stuff:
+    private Story dialogue;
+    private bool choiceAvailable = false;
 
     void Start()
     {
@@ -71,37 +80,39 @@ public class DialogueManager : MonoBehaviour
         }
         else if (Input.GetButtonDown("Jump") && dialogueRunning)
         {
-            if (currentSentence.isChoice)
+            if (choiceAvailable)
             {
+                choiceAvailable = false;
                 GameObject selected = EventSystem.current.currentSelectedGameObject;
-                if (currentDialogueStateMachine != null)
+                for (int i = 0; i < choices.Count; i++)
                 {
-                    for (int i = 0; i < choices.Count; i++)
+                    if (choices[i].gameObject == selected)
                     {
-                        if (choices[i].gameObject == selected)
-                        {
-                            currentDialogueStateMachine.SetInteger("Choice", choices[i].GetComponent<DialogueOption>().choice);
-                        }
+                        dialogue.ChooseChoiceIndex(i);
                     }
                 }
-            }
 
-            DisplayNextSentence();
+                DisplayNextSentence();
+
+            } else
+            {
+                if (doneSpeaking || inShop)
+                    DisplayNextSentence();
+                else SkipToLineEnd(dialogue.currentText, dialogueText);
+            }
         }
 
         if (dialogueRunning)
         {
             // code that keeps the cursor on one of the dialogue options
 
-            if (currentSentence.isChoice)
+            if (dialogue.currentChoices.Count > 0)
             {
                 bool choiceSelected = false;
                 foreach (TextMeshProUGUI choice in choices)
                 {
                     if (choice.gameObject == lastSelected) choiceSelected = true;
                 }
-
-                Debug.Log(lastSelected);
 
                 if (!choiceSelected)
                 {
@@ -113,12 +124,92 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    public void PlayLine(string line)
     {
-        List<DialogueSentence> dialogueElements = dialogue.elements;
+        dialogue.ChoosePathString(line);
+    }
+
+    public void StartDialogue(TextAsset inputDialogue)
+    {
+        if (!gameManager) gameManager = FindObjectOfType<GameManager>();
+
         frameDelay = 20;
         if (!dialogueRunning)
         {
+
+            if (!inputDialogue)
+            {
+                inputDialogue = Resources.Load<TextAsset>("default_dialogue");
+            }
+
+            dialogue = new Story(inputDialogue.text);
+            string dialogueID = dialogue.globalTags[0];
+
+            dialogue.BindExternalFunction("changeFriend", (string id, int modifier) =>
+            {
+                gameManager.npcMemory.Find(target => target.id == id).trust += modifier;
+            });
+
+            dialogue.BindExternalFunction("changeMoney", (int modifier) =>
+            {
+                gameManager.money += modifier;
+            });
+
+            dialogue.BindExternalFunction("changeName", (string id, string name) =>
+            {
+                gameManager.npcMemory.Find(target => target.id == id).displayName = name;
+            });
+
+            dialogue.BindExternalFunction("giveItem", (string id) =>
+            {
+                gameManager.PickupItem(Resources.Load<Item>(id));
+            });
+
+            dialogue.BindExternalFunction("hasItem", (string id) =>
+            {
+                return gameManager.items.Contains(id);
+            });
+
+            dialogue.BindExternalFunction("openDoor", (string id) =>
+            {
+                gameManager.doorStates[Gate.GateMatch[Gate.stringToGate(id)]] = true;
+            });
+
+            dialogue.BindExternalFunction("openShop", (string id) =>
+            {
+                FindObjectOfType<WalletUI>().inShop = true;
+                ShopData currentData = gameManager.shopMemory.Find(npcShop => npcShop.name == id);
+
+                if (currentData == null)
+                {
+                    Debug.Log("Adding shop data for " + id);
+                    ShopData newData = new();
+                    newData.LoadFromBaseShop(Resources.Load<NPCShop>("Shops/" + id));
+                    gameManager.shopMemory.Add(newData);
+                    RefreshShop(newData);
+                } else
+                {
+                    RefreshShop(currentData);
+                }
+            });
+
+            // the first line of ink text is always skipped to separate global tags and save flags
+            if (gameManager.currentStories.ContainsKey(dialogueID))
+            {
+                dialogue.state.LoadJson(gameManager.currentStories[dialogueID]);
+                PlayLine("start");
+                dialogue.Continue();
+            } else
+            {
+                dialogue.Continue();
+            }
+
+            if (dialogue.variablesState.GlobalVariableExistsWithName("money")) dialogue.variablesState["money"] = gameManager.money;
+            if (dialogue.variablesState.GlobalVariableExistsWithName("friend")) dialogue.variablesState["friend"] = gameManager.npcMemory.Find(target => target.id == dialogueID[0..3]).trust;
+            if (dialogue.variablesState.GlobalVariableExistsWithName("loops")) dialogue.variablesState["loops"] = gameManager.loopNumber;
+            if (dialogue.variablesState.GlobalVariableExistsWithName("plot_progress")) dialogue.variablesState["plot_progress"] = gameManager.plotProgress;
+            if (dialogue.variablesState.GlobalVariableExistsWithName("time")) dialogue.variablesState["time"] = gameManager.gameTime;
+
             foreach (TextMeshProUGUI choice in choices)
             {
                 choice.text = "";
@@ -130,11 +221,6 @@ public class DialogueManager : MonoBehaviour
 
             sentences.Clear();
 
-            foreach (DialogueSentence element in dialogueElements)
-            {
-                sentences.Enqueue(element);
-            }
-
             gameManager.pauseGameTime = true;
 
             DisplayNextSentence();
@@ -144,23 +230,66 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayNextSentence()
     {
-        if (sentences.Count == 0)
+        doneSpeaking = false;
+        if (dialogue.canContinue)
         {
-            if (!currentDialogueStateMachine) EndDialogue();
-            else currentDialogueStateMachine.SetTrigger("Choose");
+            string sentence = dialogue.Continue();
+            string tag = "_";
+            if (dialogue.currentTags.Count > 0)
+            {
+                faceDisplay.gameObject.SetActive(true);
+                tag = dialogue.currentTags[0];
+                string id = tag[0..tag.IndexOf("_")];
+                NPCData speaker = gameManager.npcMemory.Find(target => target.id == id);
+
+                NPC npc = Resources.Load<NPC>("NPCs/" + speaker.npc);
+                faceAnimator.runtimeAnimatorController = npc.faceAnimations;
+                faceAnimator.SetInteger("State", npc.GetEmotionReference(tag));
+
+                nameText.text = speaker.displayName;
+            } else
+            {
+                faceDisplay.gameObject.SetActive(false);
+            }
+
+            StopAllCoroutines();
+
+            foreach (TextMeshProUGUI choice in choices)
+            {
+                choice.text = "";
+                choice.gameObject.SetActive(false);
+            }
+
+            StartCoroutine(TypeSentence(sentence, dialogueText));
         } else
         {
-            currentSentence = sentences.Dequeue();
+            if (dialogue.currentChoices.Count > 0)
+            {
+                faceDisplay.gameObject.SetActive(false);
+                StopAllCoroutines();
+                // choice
+                nameText.text = "";
+                dialogueText.text = "";
 
-            if ((!currentSentence.hasCondition || currentSentence.EvaluateConditions(gameManager)) && (!gameManager.playedLines.Contains(currentSentence.lineId) || !currentSentence.singleUse))
-            {
-                if (currentSentence.singleUse) gameManager.playedLines.Add(currentSentence.lineId);
-                audioManager.Play("Select");
-                WriteToDialogueBox();
-            } else 
-            {
-                DisplayNextSentence();
+                for (int i = 0; i < choices.Count; i++)
+                {
+                    if (i < dialogue.currentChoices.Count)
+                    {
+                        choices[i].gameObject.SetActive(true);
+                        StartCoroutine(TypeSentence(dialogue.currentChoices[i].text, choices[i]));
+                    }
+                    else
+                    {
+                        choices[i].gameObject.SetActive(false);
+                    }
+                }
+
+                // auto-selects the top choice
+                EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
+                lastSelected = choices[0].gameObject;
+                choiceAvailable = true;
             }
+            else EndDialogue();
         }
     }
 
@@ -168,7 +297,7 @@ public class DialogueManager : MonoBehaviour
     {
         animator.SetBool("Proceed", false);
         animator.SetBool("LastState", false);
-        NPCData speaker = gameManager.npcMemory.Find(npcData => npcData.npc.name == currentSentence.speaker.name);
+        NPCData speaker = gameManager.npcMemory.Find(npcData => npcData.npc == currentSentence.speaker.name);
         faceDisplay.sprite = currentSentence.speaker.neutralFace;
         dialogueBox.sprite = currentSentence.speaker.dialogueBox;
         faceAnimator.runtimeAnimatorController = currentSentence.speaker.faceAnimations;
@@ -178,7 +307,7 @@ public class DialogueManager : MonoBehaviour
         {
             if (speaker.displayName == "")
             {
-                speaker.displayName = speaker.npc.name;
+                speaker.displayName = speaker.npc;
             }
 
             if (speaker.displayName != "Narrator")
@@ -238,11 +367,34 @@ public class DialogueManager : MonoBehaviour
 
     }
 
+    void SkipToLineEnd(string sentence, TextMeshProUGUI destination)
+    {
+        StopAllCoroutines();
+        faceAnimator.ResetTrigger("Start");
+        faceAnimator.SetTrigger("Stop");
+        string leftover = sentence.Substring(positionTracker + 1);
+        foreach (char letter in leftover.ToCharArray())
+        {
+            if (letter == '^')
+            {
+                writingDialogueCommand = true;
+            } else if (!writingDialogueCommand && letter != '`')
+            {
+                destination.text += letter;
+            } else if (writingDialogueCommand)
+            {
+                writingDialogueCommand = false;
+            }
+        }
+        doneSpeaking = true;
+    }
+
     IEnumerator TypeSentence(string sentence, TextMeshProUGUI destination)
     {
         faceAnimator.ResetTrigger("Stop");
         faceAnimator.SetTrigger("Start");
         destination.text = "";
+        positionTracker = 0;
         foreach (char letter in sentence.ToCharArray())
         {
             float timeDelay = 0.015f;
@@ -255,11 +407,12 @@ public class DialogueManager : MonoBehaviour
 
             if (letter == ')')
             {
+                // causes a 'hiccup' on the face animator, fix later
                 faceAnimator.ResetTrigger("Stop");
                 faceAnimator.SetTrigger("Start");
             }
 
-            if (letter == '|')
+            if (letter == '^')
             {
                 writingDialogueCommand = true;
                 timeDelay = 0f;
@@ -280,9 +433,21 @@ public class DialogueManager : MonoBehaviour
                         writingDialogueCommand = false;
                         DisplayNextSentence();
                         break;
+                    case 'S':
+                        string dialogueID = dialogue.globalTags[0];
+                        if (gameManager.currentStories.ContainsKey(dialogueID))
+                        {
+                            gameManager.currentStories[dialogueID] = dialogue.state.ToJson();
+                        }
+                        else
+                        {
+                            gameManager.currentStories.Add(dialogueID, dialogue.state.ToJson());
+                        }
+                        EndDialogue();
+                        break;
                 }
                 writingDialogueCommand = false;
-            } else
+            } else if (letter != '`')
             {
                 destination.text += letter;
             }
@@ -294,6 +459,7 @@ public class DialogueManager : MonoBehaviour
             }
 
             yield return new WaitForSeconds(timeDelay);
+            positionTracker++;
 
             if (timeDelay > 1f)
             {
@@ -310,6 +476,7 @@ public class DialogueManager : MonoBehaviour
         }
         faceAnimator.ResetTrigger("Start");
         faceAnimator.SetTrigger("Stop");
+        doneSpeaking = true;
     }
 
     public void EndDialogue()
@@ -321,8 +488,7 @@ public class DialogueManager : MonoBehaviour
         PlayerMovement playerM = FindObjectOfType<PlayerMovement>();
         playerM.ClearInputs();
 
-        if (!currentDialogueStateMachine)
-            playerM.frozen = false;
+        playerM.Unfreeze("Dialogue");
         if (OnDialogueEnd != null)
             OnDialogueEnd.Invoke();
     }
@@ -355,6 +521,6 @@ public class DialogueManager : MonoBehaviour
     {
         inShop = false;
         shopMenu.SetActive(false);
-        currentDialogueStateMachine.SetTrigger("ExitShop");
+        PlayLine("exit");
     }
 }

@@ -50,6 +50,7 @@ MonoBehaviour:
   fileTime: 0
   fileCompletion: 0
   loopNumber: 0
+  plotProgress: 0
   pauseGameTime: 0
   gameTime: 0
   previousLevel: Start
@@ -61,29 +62,107 @@ MonoBehaviour:
   hourglassBroken: 0
   inArktis: 1
   currentItems:
-  - {fileID: 11400000, guid: fe15ec2c3f29daa49a770bceb3b50280, type: 2}
-  - {fileID: 11400000, guid: fe15ec2c3f29daa49a770bceb3b50280, type: 2}
-  - {fileID: 11400000, guid: fe15ec2c3f29daa49a770bceb3b50280, type: 2}
+  - 
+  - 
+  - 
   tools: []
   items: []
   nullItem: {fileID: 11400000, guid: fe15ec2c3f29daa49a770bceb3b50280, type: 2}
   playedCutscenes: []
   playedLines: []
+  currentStories:
+    m_Keys: []
+    m_Values: []
   foundItems: []
   permanentFoundItems: []
   doorStates: 
   money: 0
   npcMemory:
-  - npc: {fileID: 11400000, guid: 308ab4fb6b9614449adcbd703525ff0e, type: 2}
+  - npc: Arcas
     displayName: Arcas
     trust: 0
     met: 0
     spokenTo: 0
+    id: arc
+  - npc: Carlotta
+    displayName: Captain
+    trust: 0
+    met: 0
+    spokenTo: 0
+    id: car
+  - npc: Dorothy
+    displayName: Flight Attendant
+    trust: 0
+    met: 0
+    spokenTo: 0
+    id: dor
+  - npc: Fisher
+    displayName: Fisher
+    trust: 0
+    met: 0
+    spokenTo: 0
+    id: fis
+  - npc: Gom
+    displayName: Gom
+    trust: 0
+    met: 0
+    spokenTo: 0
+    id: gom
+  - npc: Isabel
+    displayName: Isabel
+    trust: 0
+    met: 0
+    spokenTo: 0
+    id: isa
+  - npc: Isley
+    displayName: Isley
+    trust: 0
+    met: 0
+    spokenTo: 0
+    id: isl
+  - npc: Lucy
+    displayName: Shopkeeper
+    trust: 0
+    met: 0
+    spokenTo: 0
+    id: luc
+  - npc: Quentin
+    displayName: Quentin
+    trust: 0
+    met: 0
+    spokenTo: 0
+    id: que
+  - npc: Seal
+    displayName: Seal
+    trust: 0
+    met: 0
+    spokenTo: 0
+    id: sea
+  - npc: Silica
+    displayName: Wanderer
+    trust: 0
+    met: 0
+    spokenTo: 0
+    id: sil
+  - npc: Tala
+    displayName: Tala
+    trust: 0
+    met: 0
+    spokenTo: 0
+    id: tal
+  - npc: Walrus
+    displayName: Wise old walrus
+    trust: 0
+    met: 0
+    spokenTo: 0
+    id: wal
   shopMemory: []
   uniqueEnemies: 
   slainEnemies:
     armouredMollusk: 0
     mollusk: 0
+  foundBadges: []
+  unlockedThemes: 0000000001000000
 --- !u!114 &3238552464832373722
 MonoBehaviour:
   m_ObjectHideFlags: 0

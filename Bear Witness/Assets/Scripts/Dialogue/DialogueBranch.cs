@@ -36,7 +36,7 @@ public class DialogueBranch : StateMachineBehaviour
             dialogueManager.dialogueRunning = false;
             dialogueManager.lastState = lastState;
             dialogueManager.currentDialogueStateMachine = animator;
-            dialogueManager.StartDialogue(dialogueSegment);
+            //dialogueManager.StartDialogue(dialogueSegment);
         }
 
     }
@@ -53,9 +53,9 @@ public class DialogueBranch : StateMachineBehaviour
     { 
         animator.SetTrigger(triggerOnEnd);
 
-        if (consumeOnEnd && gameManager.items.Contains(consumeOnEnd))
+        if (consumeOnEnd && gameManager.items.Contains(consumeOnEnd.name))
         {
-            gameManager.items.Remove(consumeOnEnd);
+            gameManager.items.Remove(consumeOnEnd.name);
         }
 
         if (lastState)

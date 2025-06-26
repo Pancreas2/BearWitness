@@ -210,7 +210,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 311214474869819859}
-  - component: {fileID: 6245512879799482269}
   m_Layer: 0
   m_Name: Arktis_Caves
   m_TagString: Untagged
@@ -236,22 +235,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6245512879799482269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1707871366340524746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52dd39175d5a6b34e9f2949ab97325a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 0}
-  scrollers:
-  - {fileID: 3071340978149551862}
-  - {fileID: 6438963867823717710}
 --- !u!1 &1811261408100000528
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,13 +1177,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7dbfd8fdbdbbc4bb36fdc6ddccf1f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollX: 1
-  centerPointX: 5.125
-  parallaxFactorX: 0.1
-  scrollY: 1
-  centerPointY: -5
-  parallaxFactorY: 0.05
-  cam: {fileID: 0}
+  camera: {fileID: 0}
+  parallax: {x: 0, y: 0}
+  loopX: 0
+  loopY: 0
+  overrideLength: {x: 0, y: 0}
 --- !u!1 &6062805821316250618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1643,13 +1624,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7dbfd8fdbdbbc4bb36fdc6ddccf1f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollX: 1
-  centerPointX: 5.125
-  parallaxFactorX: 0.1
-  scrollY: 1
-  centerPointY: -5
-  parallaxFactorY: 0.05
-  cam: {fileID: 0}
+  camera: {fileID: 0}
+  parallax: {x: 0, y: 0}
+  loopX: 0
+  loopY: 0
+  overrideLength: {x: 0, y: 0}
 --- !u!1 &7829273998467669918
 GameObject:
   m_ObjectHideFlags: 0

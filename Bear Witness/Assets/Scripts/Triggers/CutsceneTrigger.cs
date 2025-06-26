@@ -30,6 +30,7 @@ public class CutsceneTrigger : MonoBehaviour
         {
             player.cutsceneFaceRight = faceRight;
             player.WalkToPoint(playerPosition.position.x);
+            player.Freeze("Dialogue");
             cutsceneStartTime = Time.time + delay;
         }
     }
@@ -49,6 +50,7 @@ public class CutsceneTrigger : MonoBehaviour
         {
             player.cutsceneFaceRight = faceRight;
             player.WalkToPoint(playerPosition.position.x);
+            player.Freeze("Dialogue");
             cutsceneStartTime = Time.time + delay;
         }
     }
@@ -56,6 +58,7 @@ public class CutsceneTrigger : MonoBehaviour
     private void TriggerCutscene()
     {
         OnCutsceneStart.Invoke();
+
         if (!reuseable)
             gameManager.playedCutscenes.Add(cutscene_ID);
     }

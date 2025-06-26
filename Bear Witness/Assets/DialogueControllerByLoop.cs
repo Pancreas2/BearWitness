@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class DialogueControllerByLoop
 {
-    public RuntimeAnimatorController stateMachine;
+    public TextAsset dialogue;
     public bool periodic = false;
     public int loopNumber;
     public int offset;

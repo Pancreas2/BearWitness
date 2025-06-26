@@ -538,6 +538,7 @@ MonoBehaviour:
   animator: {fileID: 3482047430377566516}
   text: {fileID: 3138165422403773946}
   interactText: TALK
+  dialogue: {fileID: 0}
   dialogueStateMachine: {fileID: 5221165599846186445}
   dialogueTrigger: {fileID: 0}
   OnDialogueStart:
@@ -573,10 +574,12 @@ MonoBehaviour:
   talkOffset: 0
   playerFacesRight: 0
   data:
-    npc: {fileID: 0}
+    npc: 
     displayName: 
     trust: 0
     met: 0
+    spokenTo: 0
+    id: 
 --- !u!1 &6623960615097312156
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,6 +589,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1322605782922765130}
+  - component: {fileID: -5661580728937453958}
   m_Layer: 0
   m_Name: Calix
   m_TagString: Untagged
@@ -611,6 +615,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5661580728937453958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6623960615097312156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193ea951b0d8d5b41bbdba4a017dbf34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7660511817345409801
 GameObject:
   m_ObjectHideFlags: 0

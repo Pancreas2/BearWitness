@@ -58,11 +58,11 @@ public class ShopDisplay : MonoBehaviour
                 purchaseMenu.SetItem(heldItem, true);
                 purchaseMenu.SetShop(currentShop);
                 EventSystem.current.SetSelectedGameObject(purchaseMenu.acceptBtn);
-                dialogueManager.currentDialogueStateMachine.SetInteger("Choice", itemIndex);
-                dialogueManager.currentDialogueStateMachine.SetTrigger("Choose");
+                string friendlyName = heldItem.name.ToLower().Replace(" ", "_");  // converts to an appropriate format for ink code
+                dialogueManager.PlayLine(friendlyName);
             } else
             {
-                dialogueManager.currentDialogueStateMachine.SetTrigger("TooExpensive");
+                dialogueManager.PlayLine("too_expensive");
             }
         }
     }
@@ -86,7 +86,7 @@ public class ShopDisplay : MonoBehaviour
             dialogueManager.RefreshShop(currentShop);
 
             // start purchasing dialogue
-            dialogueManager.currentDialogueStateMachine.SetTrigger("Purchase");
+            dialogueManager.PlayLine("purchase");
         }
     }
 

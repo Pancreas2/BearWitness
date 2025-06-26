@@ -21,7 +21,7 @@ public class ToolSlot : MonoBehaviour
     {
         if (equipState > -1)
         {
-            GameManager.instance.currentItems[equipState] = nullItem;
+            GameManager.instance.currentItems[equipState] = "";
         }
 
         if (slot == equipState)
@@ -50,14 +50,14 @@ public class ToolSlot : MonoBehaviour
         ss.selectedSprite = equippedSelectedSprite;
         GetComponent<Button>().spriteState = ss;
 
-        GameManager.instance.currentItems[slot] = GetComponent<InventorySlot>().heldItem;
+        GameManager.instance.currentItems[slot] = GetComponent<InventorySlot>().heldItem.name;
     }
 
     public void UnequipItem()
     {
         if (equipState > -1)
         {
-            GameManager.instance.currentItems[equipState] = nullItem;
+            GameManager.instance.currentItems[equipState] = "";
         }
 
         equipState = -1;

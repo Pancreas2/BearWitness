@@ -17,14 +17,18 @@ public class AppearAtTime : MonoBehaviour
     {
         Arrival,
         ShoreStorm,
-        End
+        End,
+        AirshipLeaveShore,
+        AirshipArriveCity
     }
 
     public static readonly Dictionary<Events, float> EventMatch = new Dictionary<Events, float>
     {
         { Events.Arrival, 0f },
         { Events.ShoreStorm, 390f },
-        { Events.End, 1440f }
+        { Events.End, 1440f },
+        { Events.AirshipLeaveShore, 180f },
+        { Events.AirshipArriveCity, 240f }
     };
 
     private void Update()

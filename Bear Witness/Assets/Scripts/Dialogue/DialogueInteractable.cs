@@ -6,6 +6,8 @@ using TMPro;
 
 public class DialogueInteractable : Interactable
 {
+    public TextAsset dialogue;
+
     public Animator dialogueStateMachine;
     public DialogueTrigger dialogueTrigger;
 
@@ -22,25 +24,28 @@ public class DialogueInteractable : Interactable
 
     private void Awake()
     {
-        dialogueManager = FindObjectOfType<DialogueManager>();
         playerMovement = FindObjectOfType<PlayerMovement>();
+        if (!dialogue)
+        {
+            dialogue = Resources.Load<TextAsset>("default_dialogue.json");
+        }
     }
 
     override public void OnInteract()
     {
-        if (active && (dialogueStateMachine == null || dialogueStateMachine.GetCurrentAnimatorStateInfo(0).IsName("nothing")))
+        if (active)
         {
-            if (dialogueStateMachine != null)
-                dialogueStateMachine.SetTrigger("StartDialogue");
-            else
-                dialogueTrigger.TriggerDialogue();
+            OnDialogueStart.Invoke();
 
-            playerMovement.frozen = true;
+            playerMovement.Freeze("Dialogue");
             playerMovement.WalkToPoint(transform.position.x + talkOffset);
             playerMovement.cutsceneFaceRight = playerFacesRight;
 
+            dialogueManager = FindObjectOfType<DialogueManager>();
+
             dialogueManager.OnDialogueEnd = OnDialogueEnd;
-            OnDialogueStart.Invoke();
+
+            dialogueManager.StartDialogue(dialogue);
         }
     }
 
@@ -49,5 +54,11 @@ public class DialogueInteractable : Interactable
         active = false;
         // the animator here is the hover text animator
         base.animator.gameObject.SetActive(false);
+    }
+
+    public void OnEnable()
+    {
+        active = true;
+        base.animator.gameObject.SetActive(true);
     }
 }

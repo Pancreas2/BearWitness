@@ -34178,7 +34178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3649223491785412620, guid: 06b9ba8e956f83c4e93b03697080d9b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.33392382
+      value: -0.33369923
       objectReference: {fileID: 0}
     - target: {fileID: 3649223491785412620, guid: 06b9ba8e956f83c4e93b03697080d9b7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -34592,7 +34592,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7857786011467424883, guid: b72da7dcc3855964ead7db92f475ce0c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.5067177
+      value: -4.506717
       objectReference: {fileID: 0}
     - target: {fileID: 7857786011467424883, guid: b72da7dcc3855964ead7db92f475ce0c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -38987,6 +38987,7 @@ MonoBehaviour:
   animator: {fileID: 1647256473}
   text: {fileID: 1647256470}
   interactText: TALK
+  dialogue: {fileID: 4900000, guid: a3fc56fa0a6bbf74aa51a0e812fa374e, type: 3}
   dialogueStateMachine: {fileID: 1647256473}
   dialogueTrigger: {fileID: 0}
   OnDialogueStart:

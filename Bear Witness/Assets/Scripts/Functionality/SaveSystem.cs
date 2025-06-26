@@ -20,6 +20,7 @@ public static class SaveSystem
 
     public static string LoadPlayer(int slot)
     {
+        Debug.Log(Application.persistentDataPath);
         string path = Application.persistentDataPath + "/player_data_" + slot + ".pancreas";
         if (File.Exists(path))
         {

@@ -11,6 +11,7 @@ public class NPC : ScriptableObject
     public string[] emotionReference;
     public Sprite neutralFace;
     public Sprite dialogueBox;
+    public string id;
 
     public int GetEmotionReference(string emotion)
     {

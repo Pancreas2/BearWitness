@@ -35,4 +35,9 @@ public class BossHealthBar : MonoBehaviour
     {
         bar.SetActive(false);
     }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        bar.SetActive(false);
+    }
 }

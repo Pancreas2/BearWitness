@@ -26,12 +26,17 @@ public class SaveFile : MonoBehaviour
     public float flashValue = 0f;
     public Image renderer;
 
-    private Dictionary<string, string> RoomIdTranscription = new();
+    private Dictionary<string, string> RoomIdTranscription = new Dictionary<string, string>
+    {
+        { "Arktis_Save_Room", "Arktis" },
+        { "Shores_Village", "Silverstone" },
+        { "Grasslands_Stream", "Stream" }
+    };
+
+
 
     private void Awake()
     {
-        RoomIdTranscription.Add("Arktis_Save_Room", "Arktis");
-        RoomIdTranscription.Add("Shores_Village", "Fishing Village");
 
         gameManager = FindObjectOfType<GameManager>();
         file = SaveSystem.LoadPlayer(slotID);
@@ -49,8 +54,6 @@ public class SaveFile : MonoBehaviour
 
             GameManager temporaryGameManager = new();
             JsonUtility.FromJsonOverwrite(file, temporaryGameManager);
-
-            Debug.Log(temporaryGameManager.previousLevel);
 
             lastSavedSceneName = temporaryGameManager.previousLevel;
             nameText.text = "Loop   " + temporaryGameManager.loopNumber;

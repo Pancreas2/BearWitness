@@ -21,7 +21,7 @@ public class VerifyItem : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateExit(animator, stateInfo, layerIndex);
-        animator.SetBool("VerifyItem", GameManager.instance.items.Contains(target));
+        animator.SetBool("VerifyItem", GameManager.instance.items.Contains(target.name));
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6805472497267009292}
   - component: {fileID: 2848424936995410255}
   - component: {fileID: 827055540461687561}
+  - component: {fileID: -5618085782007990140}
   m_Layer: 10
   m_Name: Grabber
   m_TagString: Untagged
@@ -127,6 +128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passDamageTo: {fileID: 0}
+  renderer: {fileID: 4410565811203178379}
+  flashValue: 0
   maxHealth: 6
   currentHealth: 0
   animator: {fileID: 4578347535992306053}
@@ -134,25 +137,6 @@ MonoBehaviour:
   knockback: {x: 60, y: 60}
   m_Rigidbody2D: {fileID: 3513141648270437546}
   invulnerable: 0
-  renderer: {fileID: 4410565811203178379}
-  OnHurt:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GrabberEnemy, Assembly-CSharp
-        m_MethodName: FinishAttack
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnHurtInvulnerable:
-    m_PersistentCalls:
-      m_Calls: []
   OnStart:
     m_PersistentCalls:
       m_Calls:
@@ -171,6 +155,8 @@ MonoBehaviour:
   OnPerish:
     m_PersistentCalls:
       m_Calls: []
+  coinShower: {fileID: 0}
+  droppedCoins: 0
 --- !u!50 &3513141648270437546
 Rigidbody2D:
   serializedVersion: 4
@@ -273,6 +259,7 @@ MonoBehaviour:
         m_CallState: 2
   active: 1
   collider: {fileID: 0}
+  damageEnemies: 0
 --- !u!114 &2848424936995410255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,6 +331,18 @@ MonoBehaviour:
   OnSwoopAttack:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-5618085782007990140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3249546646968693938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193ea951b0d8d5b41bbdba4a017dbf34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3395653333085498907
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,6 +439,7 @@ MonoBehaviour:
       m_Calls: []
   active: 1
   collider: {fileID: 0}
+  damageEnemies: 0
 --- !u!1 &4090462505373203818
 GameObject:
   m_ObjectHideFlags: 0

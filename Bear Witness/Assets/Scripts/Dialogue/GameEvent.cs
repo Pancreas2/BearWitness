@@ -34,11 +34,11 @@ public class GameEvent : StateMachineBehaviour
             case EventType.RemoveItem:
                 if (targetItem.type == Item.ItemType.Item)
                 {
-                    gameManager.items.Remove(targetItem);
+                    gameManager.items.Remove(targetItem.name);
                 }
                 else if (targetItem.type == Item.ItemType.Tool)
                 {
-                    gameManager.tools.Remove(targetItem);
+                    gameManager.tools.Remove(targetItem.name);
                 }
                 break;
 

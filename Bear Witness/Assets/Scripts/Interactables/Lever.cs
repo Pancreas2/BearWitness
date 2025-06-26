@@ -21,6 +21,11 @@ public class Lever : ReceiveDamage
             state = gameManager.doorStates[doorID];
         }
 
+        if (state && oneUse)
+        {
+            GetComponent<Collider2D>().enabled = false;
+        }
+
         animator.SetBool("active", state);
     }
 
@@ -32,7 +37,10 @@ public class Lever : ReceiveDamage
             if (doorName != Gate.Gates.None)
                 gameManager.doorStates[doorID] = true;
             animator.SetBool("active", true);
-            Debug.Log(true);
+            if (oneUse)
+            {
+                GetComponent<Collider2D>().enabled = false;
+            }
         } else if (!oneUse)
         {
             state = false;
