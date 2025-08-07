@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     bool wasFrozen = false;
     string frozenBy = "";
 
+    public bool lookingDown = false;
+
     bool attacking = false;
     int attackButton = 0;
     readonly float attackRate = 3.5f;
@@ -45,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+
         if (!climbing)
         {
             horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed;
@@ -74,10 +77,12 @@ public class PlayerMovement : MonoBehaviour
         {
             verticalMove = Input.GetAxisRaw("Vertical") * moveSpeed;
             run = false;
-            roll = false;
+            roll = false; 
+            lookingDown = false;
         }
         else
         {
+            verticalMove = Input.GetAxisRaw("Vertical");
             if (controller.m_Grounded)
             {
                 if (Input.GetButton("Run") || Input.GetAxisRaw("RightTrigger") > 0.25f)
@@ -95,11 +100,21 @@ public class PlayerMovement : MonoBehaviour
                     roll = false;
                 }
 
-                if (horizontalMove == 0) run = false;
+                if (horizontalMove == 0)
+                {
+                    run = false;
+
+                    lookingDown = verticalMove < 0;
+                }
+                else lookingDown = false;
             } else if (roll && horizontalMove == 0)
             {
                 roll = false;
                 run = false;
+                lookingDown = false;
+            } else
+            {
+                lookingDown = false;
             }
 
             if (run)
@@ -150,6 +165,8 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         animator.SetBool("climbing", climbing);
+        animator.SetBool("lookDown", lookingDown);
+
         if (!frozen)
         {
             if (controller.inWater)

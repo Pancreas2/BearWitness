@@ -32,6 +32,11 @@ public class WalletUI : MonoBehaviour
         if (modifier > maxModifier) maxModifier = modifier;
     }
 
+    private void OnLevelWasLoaded(int level)
+    {
+        animator.SetBool("Show", false);
+    }
+
     public void ExitShop()
     {
         inShop = false;

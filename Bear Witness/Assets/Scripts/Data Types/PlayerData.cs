@@ -9,7 +9,7 @@ public class PlayerData
     public float playerMaxHealth = 10;
     public List<string> currentItems;
     public List<string> tools;
-    public List<string> items;
+    public List<ItemStack> items;
 
     public List<string> playedCutscenes = new();
     public List<string> playedLines = new();

@@ -25,6 +25,11 @@ public class ShopDisplay : MonoBehaviour
         dialogueManager = FindObjectOfType<DialogueManager>();
     }
 
+    private void Awake()
+    {
+        if (heldItem == null) SetItemEmpty();
+    }
+
     public void SetShop(ShopData newShop)
     {
         currentShop = newShop;
@@ -46,6 +51,13 @@ public class ShopDisplay : MonoBehaviour
             if (item.price == 0) priceText.text = "$ --";
             else priceText.text = "$ " + item.price.ToString();
         }
+    }
+
+    private void SetItemEmpty()
+    {
+        if (nameText) nameText.text = "";
+        priceText.text = "";
+        image.sprite = Resources.Load<Sprite>("null_image");
     }
 
     public void VerifyPurchase()

@@ -1,7 +1,5 @@
 #fis_0
 
-(SKIPPED TEXT)
-
 VAR money = 0
 VAR friend = 0
 VAR time = 0
@@ -77,4 +75,4 @@ Uhhh... #arc_nervo
 }
 
 === start ===
-{fis_end: -> fis_further_greet |-> fis_greet}
+{fis_end:-> fis_further_greet |-> fis_greet}

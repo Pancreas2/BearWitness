@@ -1,16 +1,13 @@
 #lighthouse_unlock
 
-EXTERNAL hasItem(name)
+EXTERNAL hasKey(name)
 EXTERNAL openDoor(name)
-
-SKIP ME
-
 -> main
 
 === main ===
 An old wooden door. #arc_
 {
-- hasItem("Eyestone"): It's locked. #arc_conce
+- hasKey("Eyestone"): It's locked. #arc_conce
     -> use_key 
 - It's locked. #arc_conce
     -> end

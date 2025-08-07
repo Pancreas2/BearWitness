@@ -22,6 +22,7 @@ public class Coin : MonoBehaviour
             GameManager.instance.money += value;
             if (!wallet) wallet = FindObjectOfType<WalletUI>();
             wallet.AddMoney(value);
+            AudioManager.instance.Play("CollectCoin", 0, 0, 0);
             Destroy(gameObject);
         }
     }

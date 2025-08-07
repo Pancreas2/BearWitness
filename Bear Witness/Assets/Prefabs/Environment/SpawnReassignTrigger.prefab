@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 7586682422890368209}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2843672997764573972
 BoxCollider2D:
@@ -59,7 +59,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ContactCaptureLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 8
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -107,6 +107,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   deadTime: 0.5
+  contactTag: Player
 --- !u!1001 &7868360682690619710
 PrefabInstance:
   m_ObjectHideFlags: 0

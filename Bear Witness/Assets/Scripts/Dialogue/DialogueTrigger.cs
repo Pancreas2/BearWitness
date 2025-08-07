@@ -5,6 +5,7 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
     public TextAsset dialogue;
+    public string startFromNode = "start";
 
     public void TriggerDialogue(float delay = 0f)
     {
@@ -15,6 +16,6 @@ public class DialogueTrigger : MonoBehaviour
     IEnumerator WaitPatiently(float delay)
     {
         yield return new WaitForSeconds(delay);
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        FindObjectOfType<DialogueManager>().StartDialogue(dialogue, startFromNode);
     }
 }

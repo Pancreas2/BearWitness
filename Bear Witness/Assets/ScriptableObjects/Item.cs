@@ -12,12 +12,13 @@ public class Item : ScriptableObject
         Item,
         CircleBadge,
         SquareBadge,
-        TriangleBadge
+        TriangleBadge,
+        Key
     }
 
     public ItemType type;
     public new string name;
-    public string description;
+    [TextArea(3, 5)] public string description;
 
     public Sprite image;
 }

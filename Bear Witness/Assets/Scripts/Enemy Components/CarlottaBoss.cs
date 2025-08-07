@@ -198,6 +198,7 @@ public class CarlottaBoss : MonoBehaviour
     public void EndFight()
     {
         inFight = false;
+        GameManager.instance.GrantAchievement("Flying Feathers");
         bossEnemy.animator.SetTrigger("MidFightDialogue");
     }
 }

@@ -71,7 +71,7 @@ public class PerishingZone : MonoBehaviour
 
     IEnumerator RespawnPlayer()
     {
-        yield return new WaitForSeconds(0.35f);
+        yield return new WaitForSeconds(0.55f);
         playerM.PlayAnimation("stun");
         player.SetGravityFraction(1f);
         playerFrozen = true;

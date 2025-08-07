@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject pauseMenuUI;
     [SerializeField] private GameObject resumeBtn;
+    private float denyPauseTime = 0f;
 
     private void Update()
     {
@@ -23,7 +24,7 @@ public class PauseMenu : MonoBehaviour
                     Resume();
                     pausedByThis = false;
                 }
-                else
+                else if (denyPauseTime < Time.time)
                 {
                     Pause();
                     pausedByThis = true;
@@ -71,5 +72,10 @@ public class PauseMenu : MonoBehaviour
     {
         Resume();
         GameManager.instance.EndRun();
+    }
+
+    public void DenyPause(float delay)
+    {
+        denyPauseTime = Time.time + delay;
     }
 }

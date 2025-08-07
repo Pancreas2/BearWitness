@@ -17,7 +17,7 @@ public class SpawnPlayer : MonoBehaviour
 
         if (spawnOnLoad)
         {
-            entranceDirection = -loadingZone.direction;
+            if (loadingZone) entranceDirection = -loadingZone.direction;
 
             if (entranceDirection.x != 0)
             {

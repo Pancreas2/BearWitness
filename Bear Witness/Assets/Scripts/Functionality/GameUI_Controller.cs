@@ -15,7 +15,6 @@ public class GameUI_Controller : MonoBehaviour
         }
         else if (instance != this)
         {
-            Debug.Log("DESTROYING GUIC!!");
             Destroy(gameObject);
             gameObject.SetActive(false);
             return;
@@ -39,9 +38,14 @@ public class GameUI_Controller : MonoBehaviour
 
     [SerializeField] private Animator benchMenuAnimator;
     [SerializeField] private GameObject benchMenuDefault;
+
+    [SerializeField] private MapMenu mapMenu;
+
     public ItemPopup itemPopup;
 
     [SerializeField] Animator animator;
+
+    [SerializeField] AchievementPopup achievementPopup;
 
     void Start()
     {
@@ -66,10 +70,11 @@ public class GameUI_Controller : MonoBehaviour
         }
 
         FindObjectOfType<WalletUI>().ExitShop();  // ensures wallet closes when room refreshes
+        mapMenu.LoadMap();
 
         GetComponent<Canvas>().worldCamera = FindObjectOfType<Camera>();
     }
-
+    
     public void DisplayHeldItem(Item item, int slot)
     {
         if (!item || item.image == null) 
@@ -88,5 +93,10 @@ public class GameUI_Controller : MonoBehaviour
     public void ShowAll()
     {
         animator.SetBool("Hidden", false);
+    }
+
+    public void AchievementPopup(Achievement ach)
+    {
+        achievementPopup.QueueAchievement(ach);
     }
 }

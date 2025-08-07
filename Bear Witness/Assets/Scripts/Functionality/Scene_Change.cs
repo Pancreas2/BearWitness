@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 public class Scene_Change : MonoBehaviour
 {
 
-    public string destination; 
+    public string destination;
 
     public void ChangeScene()
     {
-        SceneManager.LoadScene(destination);
+        if (SceneManager.GetActiveScene().name == "The_Twixt") GameManager.instance.ExitTwixt();
+        FindObjectOfType<LevelLoader>().LoadNextLevel(destination);
     }
 
 }

@@ -55,7 +55,7 @@ public class CutsceneTrigger : MonoBehaviour
         }
     }
 
-    private void TriggerCutscene()
+    public void TriggerCutscene()
     {
         OnCutsceneStart.Invoke();
 

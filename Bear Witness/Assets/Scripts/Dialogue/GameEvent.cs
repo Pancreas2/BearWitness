@@ -32,11 +32,7 @@ public class GameEvent : StateMachineBehaviour
         switch (eventType)
         {
             case EventType.RemoveItem:
-                if (targetItem.type == Item.ItemType.Item)
-                {
-                    gameManager.items.Remove(targetItem.name);
-                }
-                else if (targetItem.type == Item.ItemType.Tool)
+                if (targetItem.type == Item.ItemType.Tool)
                 {
                     gameManager.tools.Remove(targetItem.name);
                 }

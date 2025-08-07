@@ -1,8 +1,10 @@
 #luc_0
-(SKIPPED)
 
 EXTERNAL openShop(name)
 
+-> start
+
+=== start ===
 Hey, can I get anything for ya? #luc_tired
 ~ openShop("LucyShop")
 -> idle
@@ -37,6 +39,14 @@ The whole town's low on fish right now, but I'll get you what I can. #luc_happy
 
 === generic ===
 Can I help you with anything else? #luc_tired
+-> generic
+
+=== afishionado ===
+If you're a fan of fish, this little trinket will help you get the best flavor out of anything you catch! #luc_happy
+-> generic
+
+=== windbreaker ===
+The winds can get rough around here at night - this will help you resist them a little bit. #luc_
 -> generic
 
 === exit ===

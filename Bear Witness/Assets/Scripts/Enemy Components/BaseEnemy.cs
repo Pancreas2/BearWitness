@@ -17,6 +17,8 @@ public class BaseEnemy : ReceiveDamage
     public UnityEvent OnStart;
     public UnityEvent OnPerish;
 
+    private bool deathRecorded = false;
+
     [SerializeField] private CoinShower coinShower;
     [SerializeField] private int droppedCoins = 0;
 
@@ -26,16 +28,20 @@ public class BaseEnemy : ReceiveDamage
         OnStart.Invoke();
     }
 
-    public override void Damage(int damageValue, float sourcePosX)
+    public override void Damage(int damageValue, float sourcePosX, bool bypassInv = false)
     {
-        if (invTime < Time.time && !invulnerable)
+        if (bypassInv || (invTime < Time.time && !invulnerable))
         {
             flashValue = 2f;
             invTime = Time.time + 0.2f;
             if (currentHealth > 0)
             {
+                AudioManager.instance.Play("Hit", 0, 0, 0);
                 DecreaseHealth(damageValue);
             }
+        } else if (invulnerable)
+        {
+            AudioManager.instance.Play("HitInv", 0, 0, 0);
         }
 
         if (currentHealth > 0 && m_Rigidbody2D)
@@ -62,5 +68,19 @@ public class BaseEnemy : ReceiveDamage
         TryGetComponent<AttackBounce>(out AttackBounce atkBounce);
         if (atkBounce) atkBounce.SetActive(false);
         OnPerish.Invoke();
+        if (!deathRecorded)
+        {
+            int counter = PlayerPrefs.GetInt("EnemiesDefeated", 0);
+            deathRecorded = true;
+            PlayerPrefs.SetInt("EnemiesDefeated", counter + 1);
+
+            if (counter == 9)
+            {
+                GameManager.instance.GrantAchievement("Brawler");
+            } else if (counter == 99)
+            {
+                GameManager.instance.GrantAchievement("Crusher");
+            }
+        }
     }
 }

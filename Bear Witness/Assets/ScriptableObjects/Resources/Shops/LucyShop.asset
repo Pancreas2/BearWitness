@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfbfbbf2bb515264db81a3ff901c506f, type: 3}
   m_Name: LucyShop
   m_EditorClassIdentifier: 
-  name: Lucy
+  name: LucyShop
   backgroundDialogue:
     elements:
     - lineId: 
@@ -65,7 +65,17 @@ MonoBehaviour:
   startingStock:
   - name: Compass
     item: {fileID: 11400000, guid: 8351f8c9157383f43b94e7611ac38ea8, type: 2}
-    price: 100
+    price: 40
+    finiteStock: 1
+    stock: 1
+  - name: Windbreaker
+    item: {fileID: 11400000, guid: 544d17950fabc864bb7b2f5e4c988e91, type: 2}
+    price: 90
+    finiteStock: 1
+    stock: 1
+  - name: Afishionado
+    item: {fileID: 11400000, guid: 60f78bc7e280cf94aae3a51b8714770a, type: 2}
+    price: 75
     finiteStock: 1
     stock: 1
   - name: Seashell

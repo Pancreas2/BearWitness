@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2033746893388900699}
   - component: {fileID: 6531404518941314646}
   - component: {fileID: 2615772951374190575}
-  - component: {fileID: -7762910394753126010}
+  - component: {fileID: 1871962625794964564}
   m_Layer: 5
   m_Name: Tool Slot
   m_TagString: Untagged
@@ -123,19 +123,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2033746893388900699}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2615772951374190575}
-        m_TargetAssemblyTypeName: InventorySlot, Assembly-CSharp
-        m_MethodName: SwapWithActive
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2615772951374190575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,7 +141,7 @@ MonoBehaviour:
   imageIcon: {fileID: 7538118022932325695}
   index: 0
   defaultSprite: {fileID: 21300000, guid: ec40399316d6c4045a9b9c84864dcd46, type: 3}
---- !u!114 &-7762910394753126010
+--- !u!114 &1871962625794964564
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,6 +162,7 @@ MonoBehaviour:
   equipB: {fileID: 1659779924, guid: 6352e059e89f84b4aa1c943e584e2dde, type: 3}
   buttonImage: {fileID: 2033746893388900699}
   nullItem: {fileID: 11400000, guid: fe15ec2c3f29daa49a770bceb3b50280, type: 2}
+  invSlot: {fileID: 2615772951374190575}
 --- !u!1 &6229880848758305489
 GameObject:
   m_ObjectHideFlags: 0

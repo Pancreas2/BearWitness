@@ -1,10 +1,12 @@
 #seal
-(Skipped)
 
 VAR friend = 0
 
 EXTERNAL changeFriend(id, mod)
 
+-> start
+
+=== seal_greet ===
 I'm hiding from the bears! #sea_happy
 Want to hide with me? #sea_happy
 * I'm a bear. #arc_disda
@@ -19,8 +21,7 @@ Want to hide with me? #sea_happy
     ~ friend++
 - ^S -> END
 
-=== start ===
-(SKIP)
+=== seal_return ===
 {
 - friend > 0: Be careful out there, a bear might find you! #sea_happy
     ^S -> END
@@ -29,3 +30,7 @@ Want to hide with me? #sea_happy
 - How did you get here? #sea_sad
     ^S -> END
 }
+
+=== start ===
+(SKIPPED)
+{-> seal_greet |-> seal_return }

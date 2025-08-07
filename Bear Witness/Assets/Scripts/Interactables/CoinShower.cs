@@ -10,6 +10,12 @@ public class CoinShower : MonoBehaviour
 
     public void SpawnCoins(int sum)
     {
+        // BADGE EFFECT: AVARICE
+        if (GameManager.instance.currentBadges.Contains("Avarice"))
+        {
+            sum = Mathf.RoundToInt(sum * 1.25f);
+        }
+
         // has a chance to produce more than the optimal number of coins
         int bigCoins = Mathf.FloorToInt(sum / 16f * Random.Range(0.35f, 1f));
         sum -= bigCoins * 16;

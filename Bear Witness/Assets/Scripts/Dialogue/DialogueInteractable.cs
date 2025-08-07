@@ -7,6 +7,7 @@ using TMPro;
 public class DialogueInteractable : Interactable
 {
     public TextAsset dialogue;
+    public string startFromNode = "start";
 
     public Animator dialogueStateMachine;
     public DialogueTrigger dialogueTrigger;
@@ -45,7 +46,7 @@ public class DialogueInteractable : Interactable
 
             dialogueManager.OnDialogueEnd = OnDialogueEnd;
 
-            dialogueManager.StartDialogue(dialogue);
+            dialogueManager.StartDialogue(dialogue, startFromNode);
         }
     }
 

@@ -12,7 +12,7 @@ public class ContactDamage : MonoBehaviour
 
     public Collider2D collider;
 
-    public bool damageEnemies = false;
+    public bool damageEnemies;
 
     private void Start()
     {
@@ -30,7 +30,7 @@ public class ContactDamage : MonoBehaviour
 
     private void CheckDamage(Collision2D collision)
     {
-        if (active && collision.otherCollider.Equals(collider))
+        if (active && collision.otherCollider == collider)
         {
             if (collision.collider.CompareTag("Player"))
             {
@@ -40,7 +40,14 @@ public class ContactDamage : MonoBehaviour
             else if (damageEnemies)
             {
                 collision.collider.TryGetComponent<ReceiveDamage>(out ReceiveDamage receiveDamage);
-                if (receiveDamage) receiveDamage.Damage(damageAmount, transform.position.x);
+                collision.collider.TryGetComponent<BaseEnemy>(out BaseEnemy baseEnemy);
+                if (receiveDamage)
+                {
+                    receiveDamage.Damage(damageAmount, transform.position.x);
+                } else if (baseEnemy)
+                {
+                    baseEnemy.Damage(damageAmount, transform.position.x);
+                }
             }
         }
     }

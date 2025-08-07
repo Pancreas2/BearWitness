@@ -51,6 +51,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private List<ShopDisplay> shopDisplays = new();
 
     private GameObject lastSelected;
+    private bool skipToEnd = false;
 
     // Ink stuff:
     private Story dialogue;
@@ -66,7 +67,7 @@ public class DialogueManager : MonoBehaviour
         for (int i = 0; i < 6; i++)
         {
             GameObject newChoice = Instantiate(templateChoice, choiceTexts.transform, false);
-            newChoice.transform.localPosition = new Vector3(Mathf.Floor(i / 3) * 200f, i % 3 * -30f, 0);
+            newChoice.transform.localPosition = new Vector3(Mathf.Floor(i / 3) * 200f, i % 3 * -20f, 0);
             choices.Add(newChoice.GetComponent<TextMeshProUGUI>());
         }
     }
@@ -129,7 +130,7 @@ public class DialogueManager : MonoBehaviour
         dialogue.ChoosePathString(line);
     }
 
-    public void StartDialogue(TextAsset inputDialogue)
+    public void StartDialogue(TextAsset inputDialogue, string start)
     {
         if (!gameManager) gameManager = FindObjectOfType<GameManager>();
 
@@ -167,7 +168,22 @@ public class DialogueManager : MonoBehaviour
 
             dialogue.BindExternalFunction("hasItem", (string id) =>
             {
-                return gameManager.items.Contains(id);
+                return gameManager.ContainsItem(id);
+            });
+
+            dialogue.BindExternalFunction("hasKey", (string id) =>
+            {
+                return gameManager.keys.Contains(id);
+            });
+
+            dialogue.BindExternalFunction("hasTool", (string id) =>
+            {
+                return gameManager.tools.Contains(id);
+            });
+
+            dialogue.BindExternalFunction("wearingBadge", (string id) =>
+            {
+                return gameManager.currentBadges.Contains(id);
             });
 
             dialogue.BindExternalFunction("openDoor", (string id) =>
@@ -193,15 +209,41 @@ public class DialogueManager : MonoBehaviour
                 }
             });
 
+            dialogue.BindExternalFunction("triggerFlag", (string flag) =>
+            {
+                DialogueAgent[] agents = FindObjectsOfType<DialogueAgent>();
+                foreach (DialogueAgent agent in agents)
+                {
+                    agent.Activate(flag);
+                }
+            });
+
+            dialogue.BindExternalFunction("rememberLine", (string line) =>
+            {
+                if (!gameManager.arcasProgressionDialogues.Contains(line))
+                    gameManager.arcasProgressionDialogues.Add(line);
+            });
+
+            dialogue.BindExternalFunction("seenLine", (string line) =>
+            {
+                return gameManager.arcasProgressionDialogues.Contains(line);
+            });
+
+            dialogue.BindExternalFunction("progressPlot", (int newMax) =>
+            {
+                gameManager.plotProgress = Mathf.Max(gameManager.plotProgress, newMax);
+            });
+
+            if (start == "") start = "start";  // "start" is the default starting node
+
             // the first line of ink text is always skipped to separate global tags and save flags
             if (gameManager.currentStories.ContainsKey(dialogueID))
             {
                 dialogue.state.LoadJson(gameManager.currentStories[dialogueID]);
-                PlayLine("start");
-                dialogue.Continue();
+                PlayLine(start);
             } else
             {
-                dialogue.Continue();
+                PlayLine(start);
             }
 
             if (dialogue.variablesState.GlobalVariableExistsWithName("money")) dialogue.variablesState["money"] = gameManager.money;
@@ -369,24 +411,26 @@ public class DialogueManager : MonoBehaviour
 
     void SkipToLineEnd(string sentence, TextMeshProUGUI destination)
     {
-        StopAllCoroutines();
-        faceAnimator.ResetTrigger("Start");
-        faceAnimator.SetTrigger("Stop");
-        string leftover = sentence.Substring(positionTracker + 1);
-        foreach (char letter in leftover.ToCharArray())
-        {
-            if (letter == '^')
-            {
-                writingDialogueCommand = true;
-            } else if (!writingDialogueCommand && letter != '`')
-            {
-                destination.text += letter;
-            } else if (writingDialogueCommand)
-            {
-                writingDialogueCommand = false;
-            }
-        }
-        doneSpeaking = true;
+        skipToEnd = true;
+
+        //StopAllCoroutines();
+        //faceAnimator.ResetTrigger("Start");
+        //faceAnimator.SetTrigger("Stop");
+        //string leftover = sentence.Substring(positionTracker + 1);
+        //foreach (char letter in leftover.ToCharArray())
+        //{
+        //    if (letter == '^')
+        //    {
+        //        writingDialogueCommand = true;
+        //    } else if (!writingDialogueCommand && letter != '`')
+        //    {
+        //        destination.text += letter;
+        //    } else if (writingDialogueCommand)
+        //    {
+        //        writingDialogueCommand = false;
+        //    }
+        //}
+        //doneSpeaking = true;
     }
 
     IEnumerator TypeSentence(string sentence, TextMeshProUGUI destination)
@@ -395,6 +439,7 @@ public class DialogueManager : MonoBehaviour
         faceAnimator.SetTrigger("Start");
         destination.text = "";
         positionTracker = 0;
+        bool colorCommand = false;
         foreach (char letter in sentence.ToCharArray())
         {
             float timeDelay = 0.015f;
@@ -418,35 +463,82 @@ public class DialogueManager : MonoBehaviour
                 timeDelay = 0f;
             } else if (writingDialogueCommand)
             {
-                switch (letter)
+                if (colorCommand)
                 {
-                    case '0':
-                        timeDelay = 0.25f;
-                        break;
-                    case '1':
-                        timeDelay = 0.5f;
-                        break;
-                    case 'P':
-                        timeDelay = 3f;
-                        break;
-                    case 'B':
-                        writingDialogueCommand = false;
-                        DisplayNextSentence();
-                        break;
-                    case 'S':
-                        string dialogueID = dialogue.globalTags[0];
-                        if (gameManager.currentStories.ContainsKey(dialogueID))
-                        {
-                            gameManager.currentStories[dialogueID] = dialogue.state.ToJson();
-                        }
-                        else
-                        {
-                            gameManager.currentStories.Add(dialogueID, dialogue.state.ToJson());
-                        }
-                        EndDialogue();
-                        break;
+                    switch (letter)
+                    {
+                        case 'Y':
+                            destination.text += "<color=\"yellow\">";
+                            break;
+                        case 'G':
+                            destination.text += "<color=\"green\">";
+                            break;
+                        case 'R':
+                            destination.text += "<color=\"red\">";
+                            break;
+                        case 'O':
+                            destination.text += "<color=\"orange\">";
+                            break;
+                        case 'B':
+                            destination.text += "<color=#90CAF9>";  // light blue
+                            break;
+                        case 'X':
+                            destination.text += "</color>";
+                            break;
+
+                    }
+
+                    timeDelay = 0f;
+                    colorCommand = false;
+                    writingDialogueCommand = false;
+                } else
+                {
+                    switch (letter)
+                    {
+                        case '0':
+                            timeDelay = 0.25f;
+                            writingDialogueCommand = false;
+                            break;
+                        case '1':
+                            timeDelay = 0.5f;
+                            writingDialogueCommand = false;
+                            break;
+                        case 'P':
+                            timeDelay = 3f;
+                            writingDialogueCommand = false;
+                            break;
+                        case 'B':
+                            writingDialogueCommand = false;
+                            DisplayNextSentence();
+                            break;
+                        case 'S':
+                            string dialogueID = dialogue.globalTags[0];
+                            if (gameManager.currentStories.ContainsKey(dialogueID))
+                            {
+                                gameManager.currentStories[dialogueID] = dialogue.state.ToJson();
+                            }
+                            else
+                            {
+                                gameManager.currentStories.Add(dialogueID, dialogue.state.ToJson());
+                            }
+                            writingDialogueCommand = false;
+                            EndDialogue();
+                            break;
+                        case 'C':
+                            timeDelay = 0f;
+                            colorCommand = true;
+                            break;
+                        case 'i':
+                            timeDelay = 0f;
+                            destination.text += "<em>";
+                            break;
+                        case 'I':
+                            timeDelay = 0f;
+                            destination.text += "</em>";
+                            break;
+                    }
                 }
-                writingDialogueCommand = false;
+
             } else if (letter != '`')
             {
                 destination.text += letter;
@@ -458,7 +550,9 @@ public class DialogueManager : MonoBehaviour
                 faceAnimator.SetTrigger("Stop");
             }
 
-            yield return new WaitForSeconds(timeDelay);
+            if (!skipToEnd)
+                yield return new WaitForSeconds(timeDelay);
+
             positionTracker++;
 
             if (timeDelay > 1f)
@@ -476,6 +570,7 @@ public class DialogueManager : MonoBehaviour
         }
         faceAnimator.ResetTrigger("Start");
         faceAnimator.SetTrigger("Stop");
+        skipToEnd = false;
         doneSpeaking = true;
     }
 
@@ -484,6 +579,7 @@ public class DialogueManager : MonoBehaviour
         gameManager.pauseGameTime = false;
         animator.SetBool("IsOpen", false);
         dialogueRunning = false;
+        skipToEnd = false;
 
         PlayerMovement playerM = FindObjectOfType<PlayerMovement>();
         playerM.ClearInputs();

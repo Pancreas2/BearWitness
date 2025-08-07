@@ -1,11 +1,10 @@
 #gom_shop
 
-(SKIP LINE)
-
 VAR didSomething = false
 
 EXTERNAL openShop(name)
 
+=== start ===
 hmm... something smells... #gom_sus
 ....rotten....mmmmm.... #gom_
 has one brought presents for gom? #gom_

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.ParticleSystemJobs;
+using UnityEngine.Tilemaps;
 
 
 /// <summary>
@@ -22,10 +23,13 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private Light2D lanternLight;								// A light which appears if the lantern is held
 	[SerializeField] private Collider2D m_CrouchDisableCollider;				// A collider that will be disabled when rolling
 	[SerializeField] private Animator animator;									// Player sprite animator
-	[SerializeField] private ParticleSystem damageParticles;					// Particles that appear when player is damaged
-	[SerializeField] private GameObject lantern;								// Throwable lantern object
+	[SerializeField] private ParticleSystem damageParticles;                    // Particles that appear when player is damaged
+    [SerializeField] private ParticleSystem deathParticles;                    // Particles that appear when player dies
+    [SerializeField] private GameObject lantern;
+	[SerializeField] private GameObject phaserBlast;
 	[SerializeField] public Item brokenLantern;									// Lantern items
 	[SerializeField] public Item normalLantern;
+	[SerializeField] private Tilemap collisionTilemap;
 
 	const float k_GroundedRadius = .1f;			// Radius of the overlap circle to determine if grounded
 	public bool m_Grounded = true;				// Whether or not the player is grounded.
@@ -45,13 +49,15 @@ public class PlayerController : MonoBehaviour
 	private bool attacking = false;
 	private int attackType = 0;
 	private bool m_HasAirAttack = true;
-	private float invTime = 0f;
+	public float invTime = 0f;
 	private bool shielded = false;
 
-	private bool m_wallClingState = false;
+	private bool wedgeState = false;
 	private bool doAttackHitbox = false;
 	private float moveLeftDelay = 0f;
 	private float moveRightDelay = 0f;
+
+	private bool running = false;
 
 	private bool wasClimbing = false;
 
@@ -85,6 +91,8 @@ public class PlayerController : MonoBehaviour
 			OnCrouchEvent = new BoolEvent();
 
 		playerMovement = GetComponent<PlayerMovement>();
+
+		if (!collisionTilemap) collisionTilemap = FindFirstObjectByType<TilemapCollider2D>().GetComponent<Tilemap>();
 	}
 
     private void Start()
@@ -143,18 +151,20 @@ public class PlayerController : MonoBehaviour
 		// checks to see if the player is in water
 		CheckWater();
 
-		// VESTIGIAL (?) CLIMBING CODE
+		// ladders
 		if (wasClimbing && !playerMovement.climbing)
         {
 			wasClimbing = false;
 			m_Rigidbody2D.gravityScale = m_DefaultGravity;
         }
-	}
+
+		if (wedgeState) m_Rigidbody2D.velocity = Vector2.zero;
+    }
 
     private void Update()
     {
-		// PROBABLY DON'T NEED THIS
-        if (!gameManager) gameManager = FindObjectOfType<GameManager>();
+        animator.SetBool("stayOnIcePick", wedgeState);
+
 	}
 
 
@@ -163,6 +173,10 @@ public class PlayerController : MonoBehaviour
     {
 		// left/right/up/down movement
 		bool atSurface = CheckAtSurface();
+		float mod = gameManager.GetSpeedModifiers(this);
+		hmove *= mod;
+		vmove *= mod;
+
 		Vector2 targetVelocity = new Vector2(hmove * 10f, vmove * 10f);
 
 		if (atSurface)
@@ -226,6 +240,8 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("run", run);
         animator.SetBool("roll", roll);
 
+		running = run;
+
 		// if move left/move right cooldowns are not refreshed, prevent player from moving in that direction
 		if ((moveLeftDelay > Time.time && move < 0) || (moveRightDelay > Time.time && move > 0))
         {
@@ -263,6 +279,7 @@ public class PlayerController : MonoBehaviour
 				}
 			}
 
+			move *= gameManager.GetSpeedModifiers(this);
 			Vector3 targetVelocity;
 
 			if (attacking)
@@ -357,7 +374,11 @@ public class PlayerController : MonoBehaviour
 			coyotePoints = 0;
 			jumping = true;
 
-			if (m_Grounded || wasClimbing)
+            if (wedgeState)
+            {
+                ForceWallJump();
+                wedgeState = false;
+            } else if (m_Grounded || wasClimbing)
 			{
 				SetGravityFraction(2f / 3f);
 				m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, Mathf.Max(0f, m_Rigidbody2D.velocity.y));
@@ -376,7 +397,9 @@ public class PlayerController : MonoBehaviour
 					m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
 				}
 
-				m_Grounded = false;
+                AudioManager.instance.Play("Jump", 0, 0, 0);
+
+                m_Grounded = false;
 			}
         }
 
@@ -386,13 +409,16 @@ public class PlayerController : MonoBehaviour
 
 	public void Flip()
 	{
-		// Switch the way the player is labelled as facing.
-		m_FacingRight = !m_FacingRight;
+		if (!wedgeState)
+		{
+            // Switch the way the player is labelled as facing.
+            m_FacingRight = !m_FacingRight;
 
-		// Multiply the player's x local scale by -1.
-		Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
+            // Multiply the player's x local scale by -1.
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+        }
 	}
 
 	public void Damage(int damage, float sourcePositionX, bool doKnockback = true, bool bypassInv = false)
@@ -418,10 +444,17 @@ public class PlayerController : MonoBehaviour
 			gameManager.DamagePlayer(damage);
 			AudioManager.instance.TempMute(2f, 1f);
 
+			// BADGE CODE: Flare
+			if (gameManager.currentBadges.Contains("Flare"))
+			{
+				animator.Play("flare", 6);
+			}
+
+
             damageParticles.Play();
 
 			gameManager.GetComponent<FreezeFrame>().Freeze(Mathf.Min(0.1f * damage, 0.5f));
-            CinemachineShake.instance.ShakeCamera(0.5f, 1f);
+            CinemachineShake.instance.ShakeCamera(0.5f, 4f);
 
             playerMovement.PlayAnimation("hurt");
 
@@ -445,6 +478,11 @@ public class PlayerController : MonoBehaviour
     {
 		playerMovement.PlayAnimation("unperish");
     }
+
+	public void Kablooie()
+	{
+		deathParticles.Play();
+	}
 
 	public void Attack(int button)
 	{
@@ -484,7 +522,27 @@ public class PlayerController : MonoBehaviour
 				}
 				break;
 
-			default:
+			case "Phaser":
+				attackType = 8;
+				break;
+
+			case "Seashell":
+				gameManager.AddTempBuff(TemporaryBuff.BuffType.Resilience, 15f);
+                EatItem("Seashell", button);
+                break;
+
+			case "Haddock":
+				gameManager.HealPlayer(4f);
+                EatItem("Haddock", button);
+                break;
+
+			case "friend":  // don't do it it's not worth it
+                gameManager.HealPlayer(1f);
+                EatItem("friend", button);
+				gameManager.GrantAchievement("Curiosity Killed The Rat");
+                break;
+
+            default:
 				if (button == 2 && Input.GetButton("Run"))
 				{
 					attackType = 1;
@@ -504,19 +562,31 @@ public class PlayerController : MonoBehaviour
 		attacking = true;
 	}
 
+	private void EatItem(string item, int button)
+	{
+        attackType = -1;
+        gameManager.currentItems[button] = "";
+        gameManager.Consume(item);
+        GameUI_Controller.instance.Reload();
+		AudioManager.instance.Play("SnowStep", fadeTime:0);
+    }
+
 	public void AttackHitboxes()
     {
 		Vector3 attackCenter;
 		Collider2D[] hitEnemies;
 		bool hitLiveEnemy = false;
+		int atk = 0;
 		switch (attackType)
         {
 			case 0:
 				hitEnemies = Physics2D.OverlapCircleAll(m_AttackPoint.position, attackRange, enemyLayers);
-				foreach (Collider2D enemy in hitEnemies)
+				atk = Mathf.RoundToInt(3f * gameManager.GetAttackModifiers());
+
+                foreach (Collider2D enemy in hitEnemies)
 				{
 					enemy.TryGetComponent(out ReceiveDamage hitbox);
-					if (hitbox) hitbox.Damage(3, transform.position.x);
+					if (hitbox) hitbox.Damage(atk, transform.position.x);
 					enemy.TryGetComponent(out AttackBounce atkBounce);
 					if (atkBounce && atkBounce.GetActive()) hitLiveEnemy = true;
                 }
@@ -532,10 +602,12 @@ public class PlayerController : MonoBehaviour
 			case 2:
 				attackCenter = m_AttackPoint.position + Vector3.right * 0.05f + Vector3.down * 0.1f;
 				hitEnemies = Physics2D.OverlapCircleAll(attackCenter, attackRange * 0.7f, enemyLayers + m_WhatIsGround);
-				foreach (Collider2D enemy in hitEnemies)
+                atk = Mathf.RoundToInt(5f * gameManager.GetAttackModifiers());
+
+                foreach (Collider2D enemy in hitEnemies)
 				{
                     enemy.TryGetComponent(out ReceiveDamage hitbox);
-                    if (hitbox) hitbox.Damage(5, transform.position.x);
+                    if (hitbox) hitbox.Damage(atk, transform.position.x);
                     enemy.TryGetComponent(out AttackBounce atkBounce);
                     if (atkBounce && atkBounce.GetActive()) hitLiveEnemy = true;
                 }
@@ -543,16 +615,35 @@ public class PlayerController : MonoBehaviour
 				{
                     CinemachineShake.instance.ShakeCamera(0.1f, 0.25f);
 
-                    // cancel velocity and start wall jump
-                    m_Rigidbody2D.velocity = Vector3.zero;
-					animator.SetTrigger("wallCling");
-					SetAttackHitboxes(-1);
+					if (!hitLiveEnemy && gameManager.currentBadges.Contains("Wedge"))
+					{
+                        m_Rigidbody2D.velocity = Vector3.zero;
+                        SetAttackHitboxes(-1);
+                        m_HasAirAttack = true;
+                        attacking = false;
 
-					// gives you 1 frame for a superjump
-					coyotePoints = Mathf.Min(coyotePoints, 1);
-                    m_HasAirAttack = true;
-                    attacking = false;
-                    ForceWallJump();
+                        // gives you 3 frames for a superjump
+                        coyotePoints = Mathf.Min(coyotePoints, 3);
+
+						m_Grounded = false;
+						SetGravityFraction(0);
+						wedgeState = true;
+                    } else
+					{
+
+                        // cancel velocity and start wall jump
+                        m_Rigidbody2D.velocity = Vector3.zero;
+                        animator.SetTrigger("wallCling");
+                        SetAttackHitboxes(-1);
+
+                        // gives you 3 frames for a superjump
+                        coyotePoints = Mathf.Min(coyotePoints, 3);
+                        m_HasAirAttack = true;
+                        attacking = false;
+                        ForceWallJump();
+                    }
+
+					AudioManager.instance.Play("IcePick", 0, 0, 0);
                 }
 				break;
 
@@ -562,10 +653,11 @@ public class PlayerController : MonoBehaviour
 
 			case 4:
 				hitEnemies = Physics2D.OverlapCircleAll(m_AttackPoint.position, attackRange, hammerLayers);
-				foreach (Collider2D enemy in hitEnemies)
+                atk = Mathf.RoundToInt(10f * gameManager.GetAttackModifiers());
+                foreach (Collider2D enemy in hitEnemies)
 				{
                     enemy.TryGetComponent(out ReceiveDamage hitbox);
-                    if (hitbox) hitbox.Damage(10, transform.position.x);
+                    if (hitbox) hitbox.Damage(atk, transform.position.x);
                     enemy.TryGetComponent(out AttackBounce atkBounce);
                     if (atkBounce && atkBounce.GetActive()) hitLiveEnemy = true;
                 }
@@ -579,10 +671,11 @@ public class PlayerController : MonoBehaviour
 			case 5:
 				attackCenter = transform.position + Vector3.right * 0.15f + Vector3.down * 0.4f;
 				hitEnemies = Physics2D.OverlapCircleAll(attackCenter, attackRange, hammerLayers);
-				foreach (Collider2D enemy in hitEnemies)
+                atk = Mathf.RoundToInt(10f * gameManager.GetAttackModifiers());
+                foreach (Collider2D enemy in hitEnemies)
 				{
                     enemy.TryGetComponent(out ReceiveDamage hitbox);
-                    if (hitbox) hitbox.Damage(10, transform.position.x);
+                    if (hitbox) hitbox.Damage(atk, transform.position.x);
                     enemy.TryGetComponent(out AttackBounce atkBounce);
                     if (atkBounce && atkBounce.GetActive()) hitLiveEnemy = true;
                 }
@@ -618,6 +711,29 @@ public class PlayerController : MonoBehaviour
 				GameUI_Controller.instance.Reload();
 				CheckLantern();
 				break;
+
+			case 8:  // phaser, 7 is for fire spear
+
+				if (gameManager.currentBadges.Contains("Phase Change"))
+				{
+					Flip();
+				}
+
+				Vector2 recoilForce = new(transform.localScale.x * -1000f, 80f);
+				doAttackHitbox = false;
+				m_HasAirAttack = true;  // allows spear-gun chaining
+
+				m_Rigidbody2D.velocity = Vector2.zero;
+                m_Rigidbody2D.AddForce(recoilForce);
+
+                moveRightDelay = Time.time + 0.25f;
+                moveLeftDelay = Time.time + 0.25f;
+
+                GameObject phaserProjectile = Instantiate(phaserBlast);
+                phaserProjectile.transform.position = transform.position;
+                Vector2 ppVel = new(transform.localScale.x * 20f, 0f);
+                phaserProjectile.GetComponent<Rigidbody2D>().velocity = ppVel;
+                break;
 		}
 	}
 
@@ -628,6 +744,12 @@ public class PlayerController : MonoBehaviour
 			Gizmos.DrawWireSphere(m_AttackPoint.position + Vector3.right * 0.15f + Vector3.down * 0.1f, attackRange);
 		}
 	}
+
+	public void PhaserPreemptiveFreeze()
+	{
+        moveRightDelay = Time.time + 0.25f;
+        moveLeftDelay = Time.time + 0.25f;
+    }
 
 	private void CheckWater()
     {
@@ -704,7 +826,8 @@ public class PlayerController : MonoBehaviour
 
 	private void ForceWallJump()
     {
-		jumping = false;
+        animator.SetTrigger("wallCling");
+        jumping = false;
 		float jumpXKick = 200f;
 		if (m_FacingRight) jumpXKick *= -1f;
 		SetGravityFraction(2f / 3f);
@@ -777,5 +900,18 @@ public class PlayerController : MonoBehaviour
 	public void SetGravityFraction(float gravityFraction)
     {
 		m_Rigidbody2D.gravityScale = gravityFraction * m_DefaultGravity;
+    }
+
+    private void LateUpdate()
+    {
+        if (m_Grounded && Mathf.Abs(m_Rigidbody2D.velocity.x) > 0.1f)
+        {
+            Vector3Int cellPos = collisionTilemap.WorldToCell(m_GroundCheck.position + new Vector3(0f, -0.2f, 0f));
+            if (collisionTilemap.GetTile(cellPos))
+            {
+                string tileType = collisionTilemap.GetTile(cellPos).name;
+                AudioManager.instance.Step(tileType, running);
+            }
+        }
     }
 }

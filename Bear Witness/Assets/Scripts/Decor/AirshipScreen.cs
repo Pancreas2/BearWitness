@@ -27,7 +27,6 @@ public class AirshipScreen : MonoBehaviour
             convertedTime.Add(0);
             rememberedTime.Add(0);
         }
-        Debug.Log(convertedTime.Count);
     }
 
     // Update is called once per frame
@@ -36,12 +35,12 @@ public class AirshipScreen : MonoBehaviour
         float gameTime = gameManager.gameTime;
         float displayTime = gameTime;
 
-        // disgusting spaghetti
         float testTime = AppearAtTime.EventMatch[AppearAtTime.Events.AirshipLeaveShore];
+
         if (gameTime < testTime)
         {
             displayTime = testTime - gameTime;
-            airshipIndicator.position = new Vector2(airshipIndicatorLeft, airshipIndicator.position.y);
+            airshipIndicator.localPosition = new Vector2(airshipIndicatorLeft, airshipIndicator.localPosition.y);
         } else
         {
             testTime = AppearAtTime.EventMatch[AppearAtTime.Events.AirshipArriveCity];
@@ -49,10 +48,10 @@ public class AirshipScreen : MonoBehaviour
             {
                 displayTime = testTime - gameTime;
                 float dist = displayTime / (AppearAtTime.EventMatch[AppearAtTime.Events.AirshipArriveCity] - AppearAtTime.EventMatch[AppearAtTime.Events.AirshipLeaveShore]);
-                airshipIndicator.position = new Vector2(airshipIndicatorLeft * dist + airshipIndicatorRight * (1 - dist), airshipIndicator.position.y);
+                airshipIndicator.localPosition = new Vector2(airshipIndicatorLeft * dist + airshipIndicatorRight * (1 - dist), airshipIndicator.localPosition.y);
             } else
             {
-                airshipIndicator.position = new Vector2(airshipIndicatorRight, airshipIndicator.position.y);
+                airshipIndicator.localPosition = new Vector2(airshipIndicatorRight, airshipIndicator.localPosition.y);
             }
         }
 

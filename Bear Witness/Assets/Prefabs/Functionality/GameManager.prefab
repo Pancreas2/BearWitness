@@ -51,6 +51,7 @@ MonoBehaviour:
   fileCompletion: 0
   loopNumber: 0
   plotProgress: 0
+  arcasProgressionDialogues: []
   pauseGameTime: 0
   gameTime: 0
   previousLevel: Start
@@ -60,6 +61,7 @@ MonoBehaviour:
   hourglassCapacity: 600
   panicMode: 0
   hourglassBroken: 0
+  timeMultiplier: 1
   inArktis: 1
   currentItems:
   - 
@@ -67,7 +69,7 @@ MonoBehaviour:
   - 
   tools: []
   items: []
-  nullItem: {fileID: 11400000, guid: fe15ec2c3f29daa49a770bceb3b50280, type: 2}
+  keys: []
   playedCutscenes: []
   playedLines: []
   currentStories:
@@ -108,30 +110,30 @@ MonoBehaviour:
     met: 0
     spokenTo: 0
     id: gom
-  - npc: Isabel
-    displayName: Isabel
+  - npc: Lyra
+    displayName: Lyra
     trust: 0
     met: 0
     spokenTo: 0
-    id: isa
-  - npc: Isley
-    displayName: Isley
+    id: lyr
+  - npc: Orion
+    displayName: Orion
     trust: 0
     met: 0
     spokenTo: 0
-    id: isl
+    id: ori
   - npc: Lucy
     displayName: Shopkeeper
     trust: 0
     met: 0
     spokenTo: 0
     id: luc
-  - npc: Quentin
-    displayName: Quentin
+  - npc: Perseus
+    displayName: Perseus
     trust: 0
     met: 0
     spokenTo: 0
-    id: que
+    id: per
   - npc: Seal
     displayName: Seal
     trust: 0
@@ -144,12 +146,12 @@ MonoBehaviour:
     met: 0
     spokenTo: 0
     id: sil
-  - npc: Tala
-    displayName: Tala
+  - npc: Andromeda
+    displayName: Andromeda
     trust: 0
     met: 0
     spokenTo: 0
-    id: tal
+    id: and
   - npc: Walrus
     displayName: Wise old walrus
     trust: 0
@@ -162,7 +164,11 @@ MonoBehaviour:
     armouredMollusk: 0
     mollusk: 0
   foundBadges: []
+  currentBadges: []
+  activeTempBuffs: []
   unlockedThemes: 0000000001000000
+  savedSegments: []
+  firstToolPopup: {fileID: 9181499818359681757, guid: 39729caff4d69b049b65a1cdf271992e, type: 3}
 --- !u!114 &3238552464832373722
 MonoBehaviour:
   m_ObjectHideFlags: 0

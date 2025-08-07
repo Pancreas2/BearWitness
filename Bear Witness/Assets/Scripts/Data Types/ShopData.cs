@@ -11,7 +11,17 @@ public class ShopData
 
     public void LoadFromBaseShop(NPCShop baseShop)
     {
-        stock = baseShop.startingStock;
+        foreach (ShopItem item in baseShop.startingStock)
+        {
+            ShopItem newItem = new();
+            newItem.stock = item.stock;
+            newItem.price = item.price;
+            newItem.name = item.name;
+            newItem.finiteStock = item.finiteStock;
+            newItem.item = item.item;
+
+            stock.Add(newItem);
+        }
         backgroundDialogue = baseShop.backgroundDialogue;
         name = baseShop.name;
     }

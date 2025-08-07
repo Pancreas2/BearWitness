@@ -14,6 +14,9 @@ public class Breakable_Wall : ReceiveDamage
 
     public UnityEvent OnBreakEvent;
 
+    public bool allowHitFromLeft = true;
+    public bool allowHitFromRight = true;
+
     private void Awake()
     {
         if (OnBreakEvent == null)
@@ -25,9 +28,12 @@ public class Breakable_Wall : ReceiveDamage
         currentHealth = maxHealth;
     }
 
-    public override void Damage(int damage, float sourceX = 0f)
+    public override void Damage(int damage, float sourceX = 0f, bool bypassInv = false)
     {
-        if (Time.time >= invTime)
+        if (!allowHitFromLeft && sourceX < transform.position.x) return;
+        if (!allowHitFromRight && sourceX > transform.position.x) return;
+
+        if (Time.time >= invTime || bypassInv)
         {
             if (wallState <= 2)
             {
@@ -45,7 +51,7 @@ public class Breakable_Wall : ReceiveDamage
             currentHealth -= damage;
             wallState = Mathf.CeilToInt(currentHealth * 3 / maxHealth);
             invTime = Time.time + 0.1f;
-            Debug.Log(currentHealth);
+            AudioManager.instance.Play("Hit", fadeTime: 0);
         }
     }
     public void Die()

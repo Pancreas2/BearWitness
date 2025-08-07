@@ -28,7 +28,7 @@ public class InventorySlot : MonoBehaviour
         if (slotType == SlotType.Tool)
             inventoryManager.toolSlots[index] = this;
         else
-            inventoryManager.itemSlots[index] = this;
+            inventoryManager.itemSlots[index-12] = this;
         
     }
 
@@ -43,9 +43,12 @@ public class InventorySlot : MonoBehaviour
         }
         else if (slotType == SlotType.Item)
         {
-            if (index < gameManager.items.Count)
-                heldItem = Resources.Load<Item>(gameManager.items[index]);
+            if (index - 12 < gameManager.items.Count)
+            {
+                heldItem = Resources.Load<Item>(gameManager.items[index - 12].item);
+            }
             else heldItem = null;
+
         }
     }
 

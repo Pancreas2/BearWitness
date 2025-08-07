@@ -8,10 +8,12 @@ public class ReceiveDamage : MonoBehaviour
     [SerializeField] private Renderer renderer;
     public float flashValue = 0f;
 
-    public virtual void Damage(int damage, float sourceX)
+    [SerializeField] private List<Renderer> otherRenderers;
+
+    public virtual void Damage(int damage, float sourceX, bool bypassInv = false)
     {
         flashValue = 2f;
-        if (passDamageTo) passDamageTo.Damage(damage, sourceX);
+        if (passDamageTo) passDamageTo.Damage(damage, sourceX, bypassInv);
     }
 
     private void FixedUpdate()
@@ -20,6 +22,11 @@ public class ReceiveDamage : MonoBehaviour
         {
             flashValue = Mathf.Max(flashValue - 10 * Time.deltaTime, 0);
             if (renderer) renderer.material.SetFloat("_FlashBrightness", flashValue);
+
+            foreach (Renderer r in otherRenderers)
+            {
+                r.material.SetFloat("_FlashBrightness", flashValue);
+            }
         }
     }
 

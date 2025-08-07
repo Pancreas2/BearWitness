@@ -23,7 +23,6 @@ public class UnstablePlatform : MonoBehaviour
     {
         player = FindObjectOfType<PlayerController>();
         tilemap.animationFrameRate = 3f / Mathf.Sqrt(length);
-        Debug.Log(tilemap.animationFrameRate);
 
         tilemap.SetTile(Vector3Int.right, leftTile);
         for (int i = 2; i <= length; i++)
@@ -69,7 +68,7 @@ public class UnstablePlatform : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (!breaking && collision.collider.CompareTag("Player") && player.m_Grounded)
         {
@@ -79,7 +78,7 @@ public class UnstablePlatform : MonoBehaviour
                 tilemap.SetAnimationFrame(new Vector3Int(i, 0), 0);
             }
 
-
+            AudioManager.instance.Play("UnstablePlat", 0, 0, 0);
             breaking = true;
         }
     }

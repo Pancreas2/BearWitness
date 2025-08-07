@@ -50,19 +50,20 @@ public class DialogueBranch : StateMachineBehaviour
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    { 
-        animator.SetTrigger(triggerOnEnd);
+    {
+        Debug.LogAssertion("StateMachine dialogue no longer supported");
+        //animator.SetTrigger(triggerOnEnd);
 
-        if (consumeOnEnd && gameManager.items.Contains(consumeOnEnd.name))
-        {
-            gameManager.items.Remove(consumeOnEnd.name);
-        }
+        //if (consumeOnEnd && gameManager.ContainsItem(consumeOnEnd.name))
+        //{
+        //    gameManager.items.Remove(consumeOnEnd.name);
+        //}
 
-        if (lastState)
-        {
-            dialogueManager.EndDialogue();
-            FindObjectOfType<PlayerMovement>().frozen = false;
-        }
+        //if (lastState)
+        //{
+        //    dialogueManager.EndDialogue();
+        //    FindObjectOfType<PlayerMovement>().frozen = false;
+        //}
     }
 
     public override void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

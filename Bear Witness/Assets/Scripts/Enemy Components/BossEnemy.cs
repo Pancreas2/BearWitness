@@ -32,7 +32,7 @@ public class BossEnemy : BaseEnemy
         if (bossMusic != "")
         {
             audioManager.StopAll(0f);
-            audioManager.Play(bossMusic, 0, 0.5f);
+            audioManager.Play(bossMusic, fadeTime: 0);
         }
         OnStart.Invoke();
     }
@@ -60,6 +60,9 @@ public class BossEnemy : BaseEnemy
         fightActive = false;
         uniqueEnemy.UniqueEnemySlain();
         audioManager.Stop(bossMusic, 1f);
+
+        audioManager.ReloadMusic();
+
         hpBar.SetVisibility(false);
         base.Perish();
     }
@@ -68,5 +71,10 @@ public class BossEnemy : BaseEnemy
     {
         base.DecreaseHealth(damageValue);
         hpBar.SetHPValue(Mathf.Max(currentHealth, 0));
+    }
+
+    public void NoSourceDamage(int damageValue)
+    {
+        base.Damage(damageValue, 0f, true);
     }
 }

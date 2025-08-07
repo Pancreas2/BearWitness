@@ -3,7 +3,6 @@
 -> start
 
 === start ===
-(SKIPPED)
 { stopping:
 - Ah. Yeah, this is the food stockpile. #arc_
     No wonder it was *SEALED* up. #arc_joke

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using static Gate;
 using System.Linq;
+using UnityEngine.Tilemaps;
 
 public class AudioManager : MonoBehaviour
 {
@@ -23,9 +24,12 @@ public class AudioManager : MonoBehaviour
     public float musicVolFactor = 1f;
     public float soundVolFactor = 1f;
 
+    private float lastStepTime = 0f;
+    private bool swingStep = true;
+
     private readonly string[] isMusic =
     {
-        "Arktis", "Airship", "Shores", "Stormy_Shores", "Overgrown_Hollow", "Lighthouse", "Village", "Sigil_Wake", "Sigil_Sleep", "Fragmentation", "Intemperance", "Blacksmith", "Crab", "Flying_Feathers", "Golden_City", "Intemperance_Intro", "Walrus", "Library", "Library_Isabel", "Crown", "Menu"
+        "Arktis", "Airship", "Shores", "Stormy_Shores", "Overgrown_Hollow", "Lighthouse", "Village", "Sigil_Wake", "Sigil_Sleep", "Fragmentation", "Intemperance", "Blacksmith", "Crab", "Flying_Feathers", "Golden_City", "Intemperance_Intro", "Walrus", "Library", "Library_Isabel", "Crown", "Menu", "Grasslands"
     };
 
     public string AreaMusicMatch(LevelLoader.LevelArea area)
@@ -61,6 +65,10 @@ public class AudioManager : MonoBehaviour
                 music = "Overgrown_Hollow";
                 break;
 
+            case LevelLoader.LevelArea.Grasslands:
+                music = "Grasslands";
+                break;
+
             case LevelLoader.LevelArea.Lighthouse:
                 music = "Lighthouse";
                 break;
@@ -78,6 +86,14 @@ public class AudioManager : MonoBehaviour
                 {
                     music = "Sigil_Sleep";
                 }
+                break;
+
+            case LevelLoader.LevelArea.Ruins:
+                music = "Sigil_Sleep";
+                break;
+
+            case LevelLoader.LevelArea.Twixt:
+                music = "Sigil_Sleep";
                 break;
         }
 
@@ -155,11 +171,13 @@ public class AudioManager : MonoBehaviour
         if (levelLoader.overrideLevelMusic != "")
         {
             levelMusic = levelLoader.overrideLevelMusic;
-        } else if (levelLoader.overrideLevelMusic == "None")
+        }
+        else if (levelLoader.overrideLevelMusic == "None")
         {
             Stop(currentBGMusic);
             return;
         }
+        else if (levelLoader.overrideLevelMusic == "Keep") return;
 
         // for overriding music during gameplay (e.g. Shores Storm)
         if (overrideMusic != "")
@@ -274,5 +292,62 @@ public class AudioManager : MonoBehaviour
         Sound sound = sounds.Find(sound => sound.name == name);
         if (sound == null) return 0f;
         else return sound.source.time;
+    }
+
+    public void InstantStopAll()
+    {
+        foreach (Sound sound in playingSounds)
+        {
+            sound.source.Stop();
+        }
+    }
+
+    public bool IsPlaying(string name)
+    {
+        return playingSounds.Contains(sounds.Find(sound => sound.name == name));
+    }
+
+    public void Step(string tileType, bool running)
+    {
+        if (Time.time - lastStepTime > 0.5f)
+        {
+            // play step sound!
+            lastStepTime = Time.time;
+
+            if (running)
+            {
+                lastStepTime -= 0.2f;
+                swingStep = !swingStep;
+                if (swingStep)
+                {
+                    lastStepTime -= 0.1f;
+                }
+            }
+
+            switch (tileType)
+            {
+                case "Grass_Rule_Tile":
+                    Play("GrassStep", 0, 0, 0);
+                    break;
+                case "Dirt_Rule_Tile":
+                    Play("GravelStep", 0, 0, 0);
+                    break;
+                case "Arktis_Rule_Tile_1":
+                    Play("SnowStep", 0, 0, 0);
+                    break;
+                case "Shores_Rule_Tile":
+                    Play("GravelStep", 0, 0, 0);
+                    break;
+                case "City_Rule_Tile":
+                    Play("MetalStep", 0, 0, 0);
+                    break;
+                case "Overgrown_Rule_Tile":
+                    Play("SnowStep", 0, 0, 0);
+                    break;
+                default:
+                    Play("StoneStep", 0, 0, 0);
+                    break;
+            }
+        }
     }
 }

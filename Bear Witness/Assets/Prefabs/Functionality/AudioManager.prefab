@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8160726984739113400
 MonoBehaviour:
@@ -81,6 +81,12 @@ MonoBehaviour:
     volume: 0.204
     pitch: 1
     loop: 1
+  - name: Grasslands
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: d0b0d0b78bb8b194da5ee75f6ad484e9, type: 3}
+    volume: 0.204
+    pitch: 1
+    loop: 1
   - name: Intemperance_Intro
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: 2343e648fbf2f644abe942d94ac1d954, type: 3}
@@ -121,6 +127,18 @@ MonoBehaviour:
     source: {fileID: 0}
     clip: {fileID: 8300000, guid: c835dc51d54925446bcfd825b62aaed1, type: 3}
     volume: 1
+    pitch: 1
+    loop: 1
+  - name: Erosion
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: a817efa7ca64b304c9fa974d1e8b1baa, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+  - name: Thief
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: c4b933da0944ab04a9c62c18ba05e6ef, type: 3}
+    volume: 0.602
     pitch: 1
     loop: 1
   - name: Select
@@ -207,3 +225,131 @@ MonoBehaviour:
     volume: 0.3
     pitch: 1
     loop: 1
+  - name: GrassStep
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 830275ce3d9c18a419f97d40585f5038, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+  - name: StoneStep
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 3fc4f58b2dd0d3847805e67b4191010f, type: 3}
+    volume: 0.19
+    pitch: 1
+    loop: 0
+  - name: SnowStep
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: cd98e77d52aaaf34faff5fea1d3f80c2, type: 3}
+    volume: 0.301
+    pitch: 1
+    loop: 0
+  - name: MetalStep
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 0d449f6a582429f418f42fd24019aa7c, type: 3}
+    volume: 0.301
+    pitch: 1
+    loop: 0
+  - name: GravelStep
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: ebb3031bc20b9344a950135ee76c07a4, type: 3}
+    volume: 0.157
+    pitch: 1
+    loop: 0
+  - name: GlassStep
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: daf41e9bfa7026a49b0ca304b3faf28c, type: 3}
+    volume: 0.301
+    pitch: 1
+    loop: 0
+  - name: WaterStep
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: e79122dba1a8d414d9d821a24cce2267, type: 3}
+    volume: 0.301
+    pitch: 1
+    loop: 0
+  - name: WoodStep
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 118c4eb17592a184fb3b1e48a98f7791, type: 3}
+    volume: 0.301
+    pitch: 1
+    loop: 0
+  - name: UnstablePlat
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 071966a48f7489242a3bae494d95eb2a, type: 3}
+    volume: 0.301
+    pitch: 1
+    loop: 0
+  - name: Jump
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 8658c5e75706aed489dd7273641d54ee, type: 3}
+    volume: 0.301
+    pitch: 1
+    loop: 0
+  - name: CollectCoin
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: a8e7a62de00db4442a48d8dffcafc490, type: 3}
+    volume: 0.301
+    pitch: 1
+    loop: 0
+  - name: TakeDamage
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 1a4b76ee348f3c24bafb8a1a416d0b65, type: 3}
+    volume: 0.301
+    pitch: 1
+    loop: 0
+  - name: Shatter
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 782278389332e924195408ef0185e550, type: 3}
+    volume: 0.301
+    pitch: 1
+    loop: 0
+  - name: Hit
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9b93dd699410ecd478f996e3d7341efa, type: 3}
+    volume: 0.301
+    pitch: 1
+    loop: 0
+  - name: HitInv
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 84b4b7b409493b24f8ad1fdfb8d160f1, type: 3}
+    volume: 0.301
+    pitch: 1
+    loop: 0
+  - name: IcePick
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 63e5b24930faa7045991b8d9107ceb76, type: 3}
+    volume: 0.301
+    pitch: 1
+    loop: 0
+  - name: Lever
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: 4ccaa2254046f44418b4f6dfad7cc537, type: 3}
+    volume: 0.301
+    pitch: 1
+    loop: 0
+  - name: GateOpen
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: af799db8804d4be49a5c5a8f47baddd0, type: 3}
+    volume: 0.301
+    pitch: 1
+    loop: 0
+  - name: GateClose
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: dd8b690b8744c5c4f934333868df4802, type: 3}
+    volume: 0.301
+    pitch: 1
+    loop: 0
+  - name: RKLand
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: dd4551cce0de7f447a931926a9f30279, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+  - name: RKSpear
+    source: {fileID: 0}
+    clip: {fileID: 8300000, guid: b42769500a608b94db77021b4b93c758, type: 3}
+    volume: 0.301
+    pitch: 1
+    loop: 0
+  musicVolFactor: 1
+  soundVolFactor: 1

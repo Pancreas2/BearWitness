@@ -29,7 +29,10 @@ public class Gate : MonoBehaviour
         CircleSigil,
         None,
         ShoresNexusShortcut,
-        AirshipShortcut
+        AirshipShortcut,
+        RampartEntrance,
+        ArrowSigil,
+        CrossSigil
     }
 
     public static readonly Dictionary<Gates, int> GateMatch = new Dictionary<Gates, int>
@@ -45,7 +48,10 @@ public class Gate : MonoBehaviour
         { Gates.CircleSigilDoor, 9 },
         { Gates.CircleSigil, 10 },
         { Gates.ShoresNexusShortcut, 11},
-        { Gates.AirshipShortcut, 12 }
+        { Gates.AirshipShortcut, 12 },
+        { Gates.RampartEntrance, 13 },
+        { Gates.ArrowSigil, 14 },
+        { Gates.CrossSigil, 15 }
     };
 
 
@@ -109,6 +115,7 @@ public class Gate : MonoBehaviour
     IEnumerator OpenGate()
     {
         float targetY = closedPoint + openingSize - gateRate;
+        AudioManager.instance.Play("GateOpen", fadeTime: 0);
         while (transform.localPosition.y < targetY)
         {
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + gateRate);
@@ -121,6 +128,7 @@ public class Gate : MonoBehaviour
     IEnumerator CloseGate()
     {
         float targetY = closedPoint + gateRate;
+        AudioManager.instance.Play("GateClose", fadeTime: 0);
         while (transform.localPosition.y > targetY)
         {
             transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - gateRate);

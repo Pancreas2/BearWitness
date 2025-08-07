@@ -92,6 +92,7 @@ public class SaveFile : MonoBehaviour
             gameManager.fileNumber = slotID;
             gameManager.ChangeScene(lastSavedSceneName);
         }
+        AudioManager.instance.StopAll(1);
     }
 
     private string TimeConverter(float time)

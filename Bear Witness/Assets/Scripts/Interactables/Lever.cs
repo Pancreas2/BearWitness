@@ -29,7 +29,7 @@ public class Lever : ReceiveDamage
         animator.SetBool("active", state);
     }
 
-    public override void Damage(int damage = 0, float sourceX = 0f)
+    public override void Damage(int damage = 0, float sourceX = 0f, bool bypassInv = false)
     {
         if (!state)
         {
@@ -41,12 +41,14 @@ public class Lever : ReceiveDamage
             {
                 GetComponent<Collider2D>().enabled = false;
             }
+            AudioManager.instance.Play("Lever", fadeTime: 0);
         } else if (!oneUse)
         {
             state = false;
             if (doorName != Gate.Gates.None)
                 gameManager.doorStates[doorID] = false;
             animator.SetBool("active", false);
+            AudioManager.instance.Play("Lever", fadeTime: 0);
         }
     }
 }

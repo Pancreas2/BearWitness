@@ -29,6 +29,7 @@ public class ItemInteractable : Interactable
     override public void OnInteract()
     {
         gameManager.PickupItem(item);
+
         if (renewsOnSave)
         {
             gameManager.foundItems.Add(id);

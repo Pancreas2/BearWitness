@@ -21,7 +21,9 @@ public class UniqueEnemy : MonoBehaviour
         ArmouredMollusk,
         CaptainCarlotta,
         RockCrab,
-        ShoresArena
+        ShoresArena,
+        RampartKnight,
+        Thief
     }
 
     public UniqueEnemyName name;

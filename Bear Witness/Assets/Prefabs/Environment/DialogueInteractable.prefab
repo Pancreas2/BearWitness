@@ -139,7 +139,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 41.200073, y: 1}
+  m_AnchoredPosition: {x: 0, y: -4}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &8723793950851361260
@@ -469,8 +469,12 @@ MonoBehaviour:
   animator: {fileID: 8430701396050110974}
   text: {fileID: 181481205685483685}
   interactText: LOOK
+  dialogue: {fileID: 0}
   dialogueStateMachine: {fileID: 0}
   dialogueTrigger: {fileID: 8838085657771519567}
+  OnDialogueStart:
+    m_PersistentCalls:
+      m_Calls: []
   OnDialogueEnd:
     m_PersistentCalls:
       m_Calls: []
@@ -488,8 +492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb2ed9e0f60f2224791b5328225a7037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    elements: []
+  dialogue: {fileID: 0}
 --- !u!61 &2107673399963597427
 BoxCollider2D:
   m_ObjectHideFlags: 0

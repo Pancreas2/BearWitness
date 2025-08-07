@@ -10,6 +10,9 @@ public class RockCrabBoss : BossEnemy
     [SerializeField] private CinemachineVirtualCamera arenaCamera;
     [SerializeField] private Gate entranceGate;
     [SerializeField] private Gate exitGate;
+    [SerializeField] private GameObject shockwave;
+    [SerializeField] private Transform leftShockwavePoint;
+    [SerializeField] private Transform rightShockwavePoint;
 
     public override void BeginFight()
     {
@@ -40,10 +43,10 @@ public class RockCrabBoss : BossEnemy
         base.BeginFight();
     }
 
-    public override void Damage(int damageValue, float sourcePosX)
+    public override void Damage(int damageValue, float sourcePosX, bool bypassInv = false)
     {
         if (!fightActive && uniqueEnemy.IsAlive()) BeginFight();
-        base.Damage(damageValue, sourcePosX);
+        base.Damage(damageValue, sourcePosX, bypassInv);
     }
 
     public override void Perish()
@@ -53,6 +56,7 @@ public class RockCrabBoss : BossEnemy
         doorOpener.SetDoorState(true);
         entranceGate.SetForceClose(true);
         exitGate.SetForceClose(true);
+        GameManager.instance.GrantAchievement("Shattered Stone");
         base.Perish();
     }
 
@@ -60,5 +64,21 @@ public class RockCrabBoss : BossEnemy
     {
         entranceGate.SetForceClose(false);
         exitGate.SetForceClose(false);
+    }
+
+    private void CreateShockWave(Transform creationPoint)
+    {
+        Instantiate(shockwave, creationPoint.position + new Vector3(0.5f, 0f, 0f), creationPoint.rotation).GetComponent<Shockwave>().SetSpeed(2);
+        Instantiate(shockwave, creationPoint.position - new Vector3(0.5f, 0f, 0f), creationPoint.rotation).GetComponent<Shockwave>().SetSpeed(-2);
+    }
+
+    public void ShockLeft()
+    {
+        CreateShockWave(leftShockwavePoint);
+    }
+
+    public void ShockRight()
+    {
+        CreateShockWave(rightShockwavePoint);
     }
 }

@@ -20,7 +20,8 @@ public class LevelLoader : MonoBehaviour
         Airship,
         Ruins,
         Sigilroom,
-        Twixt
+        Twixt,
+        Grasslands
     }
 
     public LevelArea area;

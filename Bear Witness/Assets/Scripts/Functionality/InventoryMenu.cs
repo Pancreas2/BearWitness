@@ -13,11 +13,14 @@ public class InventoryMenu : MonoBehaviour
     public InventorySlot[] toolSlots = new InventorySlot[12];
     public InventorySlot[] itemSlots = new InventorySlot[24];
     private GameManager gameManager;
-    public InventorySlot lastSelectedSlot = new();
+    public InventorySlot lastSelectedSlot;
 
     private List<int> equippedSlots = new();
 
+    [SerializeField] private GameObject selectOnOpen;
+
     [SerializeField] private MapMenu mapMenu;
+    [SerializeField] private ScrollRect mapScroll;
 
     private void Start()
     {
@@ -56,16 +59,21 @@ public class InventoryMenu : MonoBehaviour
         // if it's stupid and it works, it isn't stupid.
         if (invOpen)
         {
-            if (Input.GetButtonDown("AttackX"))
-            {
-                SetSlotEquipped(0);
-            } else if (Input.GetButtonDown("AttackY"))
-            {
-                SetSlotEquipped(1);
-            } else if (Input.GetButtonDown("AttackB"))
-            {
-                SetSlotEquipped(2);
-            }
+            //if (Input.GetButtonDown("AttackX"))
+            //{
+            //    SetSlotEquipped(0);
+            //} else if (Input.GetButtonDown("AttackY"))
+            //{
+            //    SetSlotEquipped(1);
+            //} else if (Input.GetButtonDown("AttackB"))
+            //{
+            //    SetSlotEquipped(2);
+            //}   // vestigial code from swapping tools in inventory
+
+
+            Vector2 mapMoveVect = new(Input.GetAxisRaw("Horizontal") * 0.001f, Input.GetAxisRaw("Vertical") * 0.001f);
+            mapScroll.normalizedPosition += mapMoveVect;
+            Debug.Log(mapMoveVect);
         }
     }
 
@@ -137,7 +145,7 @@ public class InventoryMenu : MonoBehaviour
         }
         Time.timeScale = 0f;
 
-        EventSystem.current.SetSelectedGameObject(toolSlots[0].gameObject);
+        EventSystem.current.SetSelectedGameObject(selectOnOpen);
 
         Debug.Log("TAB: " + PauseMenu.GameIsPaused);
 
@@ -171,7 +179,7 @@ public class InventoryMenu : MonoBehaviour
 
         } else
         {
-            string itemHolder = gameManager.items[a];
+            ItemStack itemHolder = gameManager.items[a];
             gameManager.items[a] = gameManager.items[b];
             gameManager.items[b] = itemHolder;
         }

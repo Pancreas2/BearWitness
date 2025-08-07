@@ -10,8 +10,7 @@ EXTERNAL changeMoney(int)
 EXTERNAL changeName(target, name)
 EXTERNAL giveItem(name)
 EXTERNAL openDoor(name)
-
-(THIS LINE WILL BE SKIPPED)
+EXTERNAL wearingBadge(name)
 
 -> dor_at_lighthouse
 
@@ -20,6 +19,7 @@ EXTERNAL openDoor(name)
 Hello and welcome to Topiary Airlines, the top-(i)-air-(y)-line in all of Corendia. #dor_bored
 {friend >= 1 and not dor_canned: -> dor_canned|-> dor_main}
 = dor_main
+{wearingBadge("Frequent Flyer"):-> dor_membership}
 {What can I do for you today?|Anything else I can help you with?} #dor_bored
 * What is Topiary Airlines? #arc_
     -> dor_airline
@@ -43,6 +43,16 @@ Topiary Airlines thanks you for your patronage. #dor_bored
 = dor_awkward_hi
 Oh! Well... hi! #dor_embar
 Hi! #arc_happy
+-> dor_end
+
+= dor_membership
+{ stopping:
+- Ah, I see you're one of our ^iElite^I members. Shall I carry your bag? #dor_bored
+    Oh, I don't have one. #arc_grin
+    Of course. Welcome aboard. #dor_bored
+    ~ openDoor("Lighthouse_Airship")
+- We'll be leaving soon, sir. You're welcome to wait on the ship. #dor_bored
+}
 -> dor_end
 
 = dor_buy_ticket
@@ -165,6 +175,5 @@ Unfortunately, yes. #dor_bored
 -> END
 
 === start ===
-(SKIP LINE)
 -> dor_at_lighthouse.dor_greet
 

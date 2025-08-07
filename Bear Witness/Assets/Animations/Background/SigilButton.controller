@@ -14,10 +14,10 @@ AnimatorStateMachine:
     m_Position: {x: 300, y: 10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5872808010415165249}
-    m_Position: {x: 250, y: 160, z: 0}
+    m_Position: {x: 300, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8019404855709725296}
-    m_Position: {x: 285, y: 225, z: 0}
+    m_Position: {x: 280, y: 230, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7403389364661464587}
     m_Position: {x: 320, y: 290, z: 0}
@@ -132,19 +132,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!114 &-6787905532353390398
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae89d5b1fcab2e54c969a42902a120d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorName: 10
 --- !u!1102 &-5872808010415165249
 AnimatorState:
   serializedVersion: 6
@@ -158,8 +145,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: 4728528386174565528}
   - {fileID: 6202225742552559035}
-  m_StateMachineBehaviours:
-  - {fileID: -6787905532353390398}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -211,14 +197,14 @@ AnimatorController:
   m_Name: SigilButton
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: VerifyDoor
-    m_Type: 4
+  - m_Name: Boop
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: Boop
-    m_Type: 9
+  - m_Name: SigilMatch
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -310,7 +296,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: VerifyDoor
+    m_ConditionEvent: SigilMatch
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 8937340515934928675}
@@ -386,7 +372,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: VerifyDoor
+    m_ConditionEvent: SigilMatch
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5912075873494829595}

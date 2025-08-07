@@ -9,10 +9,12 @@ public class TooltipFade : MonoBehaviour
     public string input;
     private float timeDestination;
     [SerializeField] private Animator animator;
+    [SerializeField] private bool freezePlayer = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (freezePlayer) FindObjectOfType<PlayerMovement>().Freeze("tutorial");
         timeDestination = Time.time + timeDelay;
     }
 
@@ -46,6 +48,7 @@ public class TooltipFade : MonoBehaviour
 
     public void ForceFadeOut()
     {
+        if (freezePlayer) FindObjectOfType<PlayerMovement>().Unfreeze("tutorial");
         active = false;
         animator.SetBool("visible", false);
     }
