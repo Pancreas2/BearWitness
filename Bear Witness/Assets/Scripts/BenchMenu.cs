@@ -10,6 +10,7 @@ public class BenchMenu : MonoBehaviour
 {
     public List<ToolSlot> tools;
     public List<ToolSlot> items;
+    public List<ToolSlot> keys;
     public bool menuOpen;
 
     [SerializeField] Animator animator;
@@ -112,6 +113,22 @@ public class BenchMenu : MonoBehaviour
             slot.FindItem();
             slot.ReloadImage();
             items[i].Reload();  // makes stack amount visible
+        }
+
+        for (int i = 0; i < keys.Count; i++)
+        {
+            InventorySlot slot = keys[i].GetComponent<InventorySlot>();
+            if (i < GameManager.instance.keys.Count)
+            {
+                slot.heldItem = Resources.Load<Item>(GameManager.instance.keys[i]);
+            }
+            else
+            {
+                slot.heldItem = Resources.Load<Item>("Null Item");
+            }
+
+            slot.FindItem();
+            slot.ReloadImage();
         }
 
         waitBtn.interactable = !(GameManager.instance.panicMode || GameManager.instance.inArktis);

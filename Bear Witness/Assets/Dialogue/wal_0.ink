@@ -25,7 +25,7 @@ Good morning, Arcas. #wal_
     -> mission
 * {not loopAdmission} [I'm looping through time.] I - #arc_nervo
     \( No, I can't tell Master about this. It's been... helpful, really. And I doubt he'd let me leave if he knew. ) #arc_nervo
-    {not seenLine("lyra_loop")} \( But nobody else would believe me... except maybe ^CBLyra^CX? She's probably holed up in the library as usual. ) #arc_skept
+    {not seenLine("lyra_loop"): \( But nobody else would believe me... except maybe ^CBLyra^CX? She's probably holed up in the library as usual. ) #arc_skept}
     ... I'm just excited to get started, sir! #arc_grin
     ~ rememberLine("master_looping_0")
     Very well. #wal_

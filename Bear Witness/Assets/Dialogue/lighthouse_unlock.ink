@@ -10,6 +10,7 @@ An old wooden door. #arc_
 - hasKey("Eyestone"): It's locked. #arc_conce
     -> use_key 
 - It's locked. #arc_conce
+    And the statue on the arch seems to be ^CYmissing an eye^CX. #arc_skept
     -> end
 }
 

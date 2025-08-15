@@ -10,7 +10,7 @@ public class InventorySlot : MonoBehaviour
     {
         Tool,
         Item,
-        Armor
+        Key
     }
 
     public SlotType slotType;
@@ -49,6 +49,13 @@ public class InventorySlot : MonoBehaviour
             }
             else heldItem = null;
 
+        } else if (slotType == SlotType.Key)
+        {
+            if (index - 24 < gameManager.keys.Count)
+            {
+                heldItem = Resources.Load<Item>(gameManager.keys[index - 24]);
+            }
+            else heldItem = null;
         }
     }
 

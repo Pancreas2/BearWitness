@@ -6,14 +6,13 @@
         Arcas! How's it going? #per_happy
         Hey, guys. #arc_conce
         Are you feeling ready for your first expedition? #and_happy
-        `( ...What? ) #arc_conce
-        I've... already gone. I just got back, actually, but something weird happened at the end ^B #arc_conce
+        I've... already gone. I just got back, actually, but something weird happened at the end -- #arc_conce
         Ha! Yeah, nice try, Arcas. I camped out here all night to make sure I didn't miss your big day. #per_happy
         What? Did you really? #and_happy
         Yeah! It's not weird! #per_guilt
         Also, not the point! We're here to support Arcas. #per_happy
         Look, I get it. I was pretty nervous on my first expedition. #per_
-        Heh. Yeah, remember when you -^B #and_happy
+        Heh. Yeah, remember when you -- #and_happy
         Not the time, Andromeda! #per_angry
         Okay, okay! Cool it! #and_angry
         Look, Arcas. You've spent a lot of time preparing for this, and you're ready. You'll be great. #per_

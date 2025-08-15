@@ -20,7 +20,7 @@ Arcas! How's it going? #per_happy
     But now look at you! You're one of the best hunters in the village! #per_happy
 * [I have no idea what I'm doing please help] I have no idea what I'm doing. This is going to go horribly. #arc_worry
     Hey, nobody's first expedition is easy. #and_sad
-    You remember Percy's? He had barely left the shore when-^B #and_happy
+    You remember Percy's? He had barely left the shore when-- #and_happy
     SHH! Don't listen to her, Arcas. #per_guilt
     Just take a deep breath and remember your mission. #per_
     ...and make sure to hold on to your iceberg. #per_guilt
